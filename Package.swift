@@ -11,7 +11,7 @@ let package = Package(
     ],
 
     products: [
-        .executable(name: "vps-db-tool", targets: ["vps-db-tool"]),
+        .executable(name: "vps-db-tool", targets: ["vps-db-tool"])
     ],
     dependencies: [
         .package(
@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.0.0-beta.1"),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.1"),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.0"),
-        
+
         .package(url: "https://github.com/SwiftyLab/MetaCodable.git", from: "1.0.0"),
     ],
     targets: [
@@ -35,6 +35,6 @@ let package = Package(
                 .product(name: "MetaCodable", package: "MetaCodable"),
                 .product(name: "HelperCoders", package: "MetaCodable"),
             ]
-        ),
+        )
     ]
 )

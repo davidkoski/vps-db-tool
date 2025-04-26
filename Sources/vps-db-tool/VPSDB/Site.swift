@@ -5,7 +5,7 @@ enum Site: Sendable {
     case vpforums
     case pinballnirvana
     case other
-    
+
     init?(_ url: URL?) {
         if let url {
             switch url.host() {

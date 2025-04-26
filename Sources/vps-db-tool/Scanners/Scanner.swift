@@ -12,11 +12,11 @@ struct SingleItem: Sendable {
 }
 
 struct ItemList: Sendable {
-    
+
     struct Item: Sendable {
         var url: URL
         var name: String
     }
-    
+
     var list: [Item]
 }
