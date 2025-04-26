@@ -9,16 +9,10 @@ struct QueryCommands: AsyncParsableCommand {
     )
 
     @OptionGroup var db: VPSDbArguments
+    
+    @Option var kind: GameResourceKind = .table
 
     mutating func run() async throws {
         let db = try db.database()
-        
-        for table in db.tables.all {
-            if table.site == .other {
-                if let game = db.games[table.gameId] {
-                    print("\(game.name)\t\(game.id)\t\(table.url?.description ?? "None")")
-                }
-            }
-        }
     }
 }

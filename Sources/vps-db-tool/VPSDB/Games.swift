@@ -2,26 +2,10 @@ import Foundation
 import MetaCodable
 import HelperCoders
 
-enum Site: Sendable {
-    case vpuniverse
-    case vpforums
-    case pinballnirvana
-    case other
-}
-
 @Codable
 struct Resource: Sendable {
     let url: URL
     @Default(false) let broken: Bool
-    
-    var site: Site {
-        switch url.host() {
-        case "vpuniverse.com": .vpuniverse
-        case "www.vpforums.org": .vpforums
-        case "pinballnirvana.com": .pinballnirvana
-        default: .other
-        }
-    }
 }
 
 @Codable
@@ -97,10 +81,11 @@ enum Kind: String, Codable, Hashable, Sendable {
     case EM
     case SS
     case PM
+    case DG
 }
 
 @Codable
-struct Metadata: Sendable {
+struct GameResourceCommon: Sendable {
     @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
     let createdAt: Date
     @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
@@ -120,35 +105,48 @@ struct Metadata: Sendable {
     let version: String?
 }
 
-protocol HasMetadata {
+protocol Metadata {
     var id: String { get }
-    var meta: Metadata { get set }
-    
-    var url: URL? { get }
-    var site: Site { get }
+    var createdAt: Date { get }
+    var updatedAt: Date { get }
     var gameId: String { get }
+    var gameName: String { get }
+    var url: URL? { get }
 }
 
-extension HasMetadata {
+protocol GameResource: Metadata {
+    var gameResource: GameResourceCommon { get set }
+}
+
+extension GameResource {
     var url: URL? {
-        meta.urls.first?.url
+        gameResource.urls.first?.url
     }
     
-    var site: Site {
-        meta.urls.first?.site ?? .other
+    var createdAt: Date {
+        gameResource.createdAt
+    }
+    
+    var updatedAt: Date {
+        gameResource.updatedAt
     }
     
     var gameId: String {
-        meta.game.id
+        gameResource.game.id
     }
+    
+    var gameName: String {
+        gameResource.game.name
+    }
+
 }
 
 @Codable
-struct Table: HasMetadata, Sendable {
+struct Table: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
     
     @Default([])
     let features: Set<Feature>
@@ -160,13 +158,13 @@ struct Table: HasMetadata, Sendable {
 }
 
 @Codable
-struct B2S: HasMetadata, Sendable {
+struct B2S: GameResource, Sendable {
     // Note: b2s for FX tables don't have an id
     @Default(ifMissing: UUID().uuidString)
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
     
     @Default([])
     let features: Set<Feature>?
@@ -174,86 +172,86 @@ struct B2S: HasMetadata, Sendable {
 }
 
 @Codable
-struct Tutorial: HasMetadata, Sendable {
+struct Tutorial: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 
     let youtubeId: String
     let title: String
 }
 
 @Codable
-struct ROM: HasMetadata, Sendable {
+struct ROM: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct PupPack: HasMetadata, Sendable {
+struct PupPack: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct AltColors: HasMetadata, Sendable {
+struct AltColors: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct AltSound: HasMetadata, Sendable {
+struct AltSound: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct POV: HasMetadata, Sendable {
+struct POV: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct WheelArt: HasMetadata, Sendable {
+struct WheelArt: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct Topper: HasMetadata, Sendable {
+struct Topper: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct MediaPack: HasMetadata, Sendable {
+struct MediaPack: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 @Codable
-struct Rules: HasMetadata, Sendable {
+struct Rules: GameResource, Sendable {
     let id: String
     
     @CodedAt
-    var meta: Metadata
+    var gameResource: GameResourceCommon
 }
 
 struct GameDecodeError: Error {
@@ -284,14 +282,14 @@ struct GameContainer: Decodable {
 }
 
 @Codable
-struct Game: Sendable {
+struct Game: Metadata, Sendable {
     let id: String
 
-    @CodedBy(Since1970DateCoder())
-    let lastCreatedAt: Date
-    @CodedBy(Since1970DateCoder())
+    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
+    let createdAt: Date
+    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
     let updatedAt: Date
-    
+
     let name: String
     let manufacturer: String
     let imageUrl: URL?
@@ -321,116 +319,42 @@ struct Game: Sendable {
     @CodedAt("ruleFiles") @Default(ifMissing: []) var rules: [Rules]
 
     @Default(false) let broken: Bool
-}
-
-struct Index<Element: Sendable & HasMetadata>: Sendable {
-    var byURL: [URL:Element]
-    var byId: [String:Element]
-    var all: [Element]
-
-    init(_ games: [String:Game], _ itemPath: KeyPath<Game, [Element]>) {
-        byURL = Dictionary(
-            games.values.flatMap { game in
-                let items = game[keyPath: itemPath]
-                return items.compactMap { item in
-                    if let url = item.meta.urls.first?.url {
-                        return (url, item)
-                    } else {
-                        return nil
-                    }
-                }
-            },
-            uniquingKeysWith: { a, b in a }
-        )
-        byId = Dictionary(
-            games.values.flatMap { game in
-                let items = game[keyPath: itemPath]
-                return items.compactMap { item in
-                    (item.id, item)
-                }
-            },
-            uniquingKeysWith: { a, b in a }
-        )
-        all = games.values.flatMap { $0[keyPath: itemPath] }
-    }
     
-    subscript(url: URL) -> Element? {
-        byURL[url]
-    }
+    var gameId: String { id }
+    var gameName: String { name }
+    var url: URL? { nil }
     
-    subscript(id: String) -> Element? {
-        byId[id]
-    }
-}
-
-struct Database: Codable, Sendable {
-    var games: [String:Game]
-
-    let tables: Index<Table>
-    let backglasses: Index<B2S>
-    let tutorials: Index<Tutorial>
-    let roms: Index<ROM>
-    let pupPacks: Index<PupPack>
-    let altColors: Index<AltColors>
-    let altSounds: Index<AltSound>
-    let povs: Index<POV>
-    let wheels: Index<WheelArt>
-    let toppers: Index<Topper>
-    let mediaPacks: Index<MediaPack>
-    let rules: Index<Rules>
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        
-        func connect<T: HasMetadata>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>) {
-            let id = GameRef(id: game.id, name: game.name)
-            game[keyPath: keyPath] = game[keyPath: keyPath].map { i in
-                var i = i
-                i.meta.game = id
-                return i
-            }
+    subscript(kind: GameResourceKind) -> [any GameResource] {
+        switch kind {
+        case .game: []
+        case .table: tables
+        case .b2s: backglasses
+        case .tutorial: tutorials
+        case .rom: roms
+        case .pupPack: pupPacks
+        case .altColor: altColors
+        case .altSound: altSounds
+        case .pov: povs
+        case .wheelArt: wheels
+        case .topper: toppers
+        case .mediaPack: mediaPacks
+        case .rule: rules
         }
-        
-        self.games = try Dictionary(
-            uniqueKeysWithValues: container.decode([GameContainer].self)
-                .map { $0.game }
-                .map { game in
-                    var game = game
-                    connect(&game, \.tables)
-                    connect(&game, \.backglasses)
-                    connect(&game, \.tutorials)
-                    connect(&game, \.roms)
-                    connect(&game, \.pupPacks)
-                    connect(&game, \.altColors)
-                    connect(&game, \.altSounds)
-                    connect(&game, \.povs)
-                    connect(&game, \.wheels)
-                    connect(&game, \.toppers)
-                    connect(&game, \.mediaPacks)
-                    connect(&game, \.rules)
-                    return game
-                }
-                .map {
-                    ($0.id, $0)
-                }
-            )
-        
-        self.tables = Index(games, \.tables)
-        self.backglasses = Index(games, \.backglasses)
-        self.tutorials = Index(games, \.tutorials)
-        self.roms = Index(games, \.roms)
-        self.pupPacks = Index(games, \.pupPacks)
-        self.altColors = Index(games, \.altColors)
-        self.altSounds = Index(games, \.altSounds)
-        self.povs = Index(games, \.povs)
-        self.wheels = Index(games, \.wheels)
-        self.toppers = Index(games, \.toppers)
-        self.mediaPacks = Index(games, \.mediaPacks)
-        self.rules = Index(games, \.rules)
     }
-    
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(Array(self.games.values))
-    }
+}
+
+enum GameResourceKind: String, Codable, Sendable {
+    case game
+    case table
+    case b2s
+    case tutorial
+    case rom
+    case pupPack
+    case altColor
+    case altSound
+    case pov
+    case wheelArt
+    case topper
+    case mediaPack
+    case rule
 }
