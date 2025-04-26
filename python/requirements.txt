@@ -1,0 +1,3 @@
+dataclasses-json
+beautifulsoup4
+httpx[http2]
