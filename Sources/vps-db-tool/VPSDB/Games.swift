@@ -2,86 +2,13 @@ import Foundation
 import HelperCoders
 import MetaCodable
 
-@Codable
-struct Resource: Sendable {
-    let url: URL
-    @Default(false) let broken: Bool
-}
-
-@Codable
-struct GameRef: Sendable {
-    let id: String
-    let name: String
-}
-
-struct Author: Codable, Sendable, Hashable, Comparable {
-    let name: String
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.name = try container.decode(String.self)
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(self.name)
-    }
-
-    static func < (lhs: Author, rhs: Author) -> Bool {
-        lhs.name < rhs.name
-    }
-}
-
-struct Theme: Codable, Sendable, Hashable, Comparable {
-    let name: String
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.name = try container.decode(String.self)
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(self.name)
-    }
-
-    static func < (lhs: Theme, rhs: Theme) -> Bool {
-        lhs.name < rhs.name
-    }
-}
-
-struct Feature: Codable, Sendable, Hashable, Comparable {
-    let name: String
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        self.name = try container.decode(String.self)
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encode(self.name)
-    }
-
-    static func < (lhs: Feature, rhs: Feature) -> Bool {
-        lhs.name < rhs.name
-    }
-}
-
-enum TableFormat: String, Codable, Hashable, Sendable {
-    case FP
-    case FX
-    case FX2
-    case FX3
-    case VP9
-    case VPX
-}
-
-enum Kind: String, Codable, Hashable, Sendable {
-    case EM
-    case SS
-    case PM
-    case DG
+protocol Metadata {
+    var id: String { get }
+    var createdAt: Date { get }
+    var updatedAt: Date { get }
+    var gameId: String { get }
+    var gameName: String { get }
+    var url: URL? { get }
 }
 
 @Codable
@@ -103,15 +30,6 @@ struct GameResourceCommon: Sendable {
     let authors: [Author]
 
     let version: String?
-}
-
-protocol Metadata {
-    var id: String { get }
-    var createdAt: Date { get }
-    var updatedAt: Date { get }
-    var gameId: String { get }
-    var gameName: String { get }
-    var url: URL? { get }
 }
 
 protocol GameResource: Metadata {
@@ -142,14 +60,25 @@ extension GameResource {
 }
 
 @Codable
+struct Resource: Sendable {
+    let url: URL
+    @Default(false) let broken: Bool
+}
+
+@Codable
+struct GameRef: Sendable {
+    let id: String
+    let name: String
+}
+
+@Codable
 struct Table: GameResource, Sendable {
     let id: String
 
     @CodedAt
     var gameResource: GameResourceCommon
 
-    @Default([])
-    let features: Set<Feature>
+    @Default(ifMissing: []) let features: Set<TableFeature>
     @Default<TableFormat?>(nil) let tableFormat: TableFormat?
     let edition: String?
 
@@ -166,8 +95,7 @@ struct B2S: GameResource, Sendable {
     @CodedAt
     var gameResource: GameResourceCommon
 
-    @Default([])
-    let features: Set<Feature>?
+    @Default(ifMissing: []) let features: Set<B2SFeature>?
     let imgUrl: URL?
 }
 
@@ -297,7 +225,7 @@ struct Game: Metadata, Sendable {
     @CodedAt("MPU") let mpu: String?
     let year: Int?
 
-    @Default([]) let theme: Set<Theme>
+    @Default(ifMissing: []) let theme: Set<Theme>
 
     @Default([]) let designers: Set<String>
 

@@ -5,7 +5,7 @@ struct SingleItem: Sendable {
     var author: String?
     var version: String?
     var ipdb: URL?
-    var features: Set<Feature>
+    var features: Set<TableFeature>
     var b2s: URL?
     var mediaPack: URL?
     var navigations: [String]
