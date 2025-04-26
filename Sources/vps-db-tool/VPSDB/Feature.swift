@@ -1,23 +1,17 @@
 import Foundation
 
+// TODO: suggested changes for master list
 // mr -> mixed reality
 // retheme
 // DOF
 // DT Only
 
-// 2screens
-// 3screens
-// FullDMD
-// incl. Table
-
 /// https://github.com/VirtualPinballSpreadsheet/vps-frontend/blob/master/src/lib/types/VPin.ts#L129
 enum TableFeature: String, Codable, Sendable {
     case fourK = "4k"
     case adult = "Adult"
-    case audio = "Audio"  // delete
     case bam = "BAM"
     case dof = "DOF"
-    case dt = "DT"  // delete
     case dtOnly = "DT only"
     case fss = "FSS"
     case fastFlips = "FastFlips"
