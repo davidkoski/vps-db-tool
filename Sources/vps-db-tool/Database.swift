@@ -256,6 +256,33 @@ struct Rules: HasMetadata, Sendable {
     var meta: Metadata
 }
 
+struct GameDecodeError: Error {
+    let id: String
+    let name: String
+    let error: Error
+}
+
+/// container to help find errors in decoding
+struct GameContainer: Decodable {
+    let game: Game
+    
+    init(from decoder: any Decoder) throws {
+        do {
+            self.game = try Game(from: decoder)
+        } catch {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            let id = try container.decodeIfPresent(String.self, forKey: .id) ?? "missing"
+            let name = try container.decodeIfPresent(String.self, forKey: .name) ?? "missing"
+            throw GameDecodeError(id: id, name: name, error: error)
+        }
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+    }
+}
+
 @Codable
 struct Game: Sendable {
     let id: String
@@ -365,7 +392,8 @@ struct Database: Codable, Sendable {
         }
         
         self.games = try Dictionary(
-            uniqueKeysWithValues: container.decode([Game].self)
+            uniqueKeysWithValues: container.decode([GameContainer].self)
+                .map { $0.game }
                 .map { game in
                     var game = game
                     connect(&game, \.tables)
