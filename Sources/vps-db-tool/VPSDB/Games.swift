@@ -210,7 +210,8 @@ struct GameContainer: Decodable {
 }
 
 @Codable
-struct Game: Metadata, Sendable {
+struct Game: Metadata, Sendable, Comparable {
+
     let id: String
 
     @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
@@ -219,7 +220,7 @@ struct Game: Metadata, Sendable {
     let updatedAt: Date
 
     let name: String
-    let manufacturer: String
+    let manufacturer: Manufacturer
     let imageUrl: URL?
 
     @CodedAt("MPU") let mpu: String?
@@ -252,6 +253,15 @@ struct Game: Metadata, Sendable {
     var gameName: String { name }
     var url: URL? { nil }
 
+    var ipdbId: String? {
+        // https://www.ipdb.org/machine.cgi?id=1654
+        ipdbUrl?.query()?.split(separator: "=").last?.description
+    }
+
+    var shouldHaveIPDBEntry: Bool {
+        manufacturer.shouldHaveIPDBEntry
+    }
+
     subscript(kind: GameResourceKind) -> [any GameResource] {
         switch kind {
         case .game: []
@@ -269,6 +279,15 @@ struct Game: Metadata, Sendable {
         case .rule: rules
         }
     }
+
+    static func < (lhs: Game, rhs: Game) -> Bool {
+        lhs.name < rhs.name
+    }
+
+    static func == (lhs: Game, rhs: Game) -> Bool {
+        lhs.id == rhs.id
+    }
+
 }
 
 enum GameResourceKind: String, Codable, Sendable {

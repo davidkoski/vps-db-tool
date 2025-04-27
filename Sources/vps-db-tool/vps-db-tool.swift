@@ -7,6 +7,7 @@ struct VPSDbTool: AsyncParsableCommand {
         abstract: "Command line tool to assist withvps-db",
         subcommands: [
             DownloadCommand.self, CheckVersionCommand.self, ExploreCommand.self,
+            IPDBCommands.self,
         ]
     )
 }
@@ -14,7 +15,7 @@ struct VPSDbTool: AsyncParsableCommand {
 struct VPSDbArguments: ParsableArguments, Sendable {
 
     @Option(name: .customLong("db"), help: "Path to vpsdb.json")
-    var path: URL = URL(filePath: "../db/vpsdb.json")
+    var path: URL
 
     private var db: Database?
 
