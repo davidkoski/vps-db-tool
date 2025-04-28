@@ -1,6 +1,23 @@
 import Foundation
 
-struct SingleItem: Sendable {
+enum ScanVariant: String, Codable {
+    case detail
+    case list
+}
+
+protocol ScanSources {
+    func source(kind: GameResourceKind, page: Int) -> String?
+}
+
+protocol DetailScanner {
+    func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult?
+}
+
+protocol ListScanner {
+    func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult
+}
+
+struct DetailResult: Sendable {
     var name: String?
     var author: String?
     var version: String?
@@ -11,11 +28,14 @@ struct SingleItem: Sendable {
     var navigations: [String]
 }
 
-struct ItemList: Sendable {
+struct ListResult: Sendable {
+
+    var pages: Int?
 
     struct Item: Sendable {
         var url: URL
         var name: String
+        var author: String?
     }
 
     var list: [Item]

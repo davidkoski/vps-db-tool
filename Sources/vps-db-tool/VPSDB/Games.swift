@@ -4,11 +4,13 @@ import MetaCodable
 
 protocol Metadata {
     var id: String { get }
+    var version: String? { get }
     var createdAt: Date { get }
     var updatedAt: Date { get }
     var gameId: String { get }
     var gameName: String { get }
     var url: URL? { get }
+    var urls: [URL] { get }
 }
 
 @Codable
@@ -37,8 +39,16 @@ protocol GameResource: Metadata {
 }
 
 extension GameResource {
+    var version: String? {
+        gameResource.version
+    }
+
     var url: URL? {
         gameResource.urls.first?.url
+    }
+
+    var urls: [URL] {
+        gameResource.urls.map { $0.url }
     }
 
     var createdAt: Date {
@@ -251,7 +261,10 @@ struct Game: Metadata, Sendable, Comparable {
 
     var gameId: String { id }
     var gameName: String { name }
+
     var url: URL? { nil }
+    var urls: [URL] { [] }
+    var version: String? { nil }
 
     var ipdbId: String? {
         // https://www.ipdb.org/machine.cgi?id=1654

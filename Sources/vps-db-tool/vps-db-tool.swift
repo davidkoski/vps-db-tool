@@ -7,7 +7,7 @@ struct VPSDbTool: AsyncParsableCommand {
         abstract: "Command line tool to assist withvps-db",
         subcommands: [
             DownloadCommand.self, CheckVersionCommand.self, ExploreCommand.self,
-            IPDBCommands.self,
+            IPDBCommands.self, ScanCommands.self,
         ]
     )
 }
@@ -27,22 +27,5 @@ struct VPSDbArguments: ParsableArguments, Sendable {
         let db = try JSONDecoder().decode(Database.self, from: Data(contentsOf: path))
         self.db = db
         return db
-    }
-}
-
-struct DownloadCommand: AsyncParsableCommand {
-
-    static let configuration = CommandConfiguration(
-        commandName: "download",
-        abstract: "XXX"
-    )
-
-    @OptionGroup var db: VPSDbArguments
-
-    mutating func run() async throws {
-        let db = try db.database()
-
-        //        print(db.games.reduce(0) { $0 + $1.tables.count })
-        //        print(db.games.map { "\($0.name) \($0.tables.count)" }.joined(separator: "\n"))
     }
 }

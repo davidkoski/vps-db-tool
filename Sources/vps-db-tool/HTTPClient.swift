@@ -31,14 +31,17 @@ class HTTPClient {
     }
 
     private func pathify(_ url: URL) -> String {
-        url.description
+        let s = url.description
             .replacingOccurrences(of: "://", with: ".")
             .replacingOccurrences(of: "/", with: ".")
+
+        return s.hasSuffix(".html") ? s : s + ".html"
     }
 
     func get(_ url: URL) async throws -> Data {
+        let cache = cache?.appending(path: pathify(url))
         if let cache {
-            if let data = try? Data(contentsOf: cache.appending(path: pathify(url))) {
+            if let data = try? Data(contentsOf: cache) {
                 return data
             }
         }
@@ -68,11 +71,15 @@ class HTTPClient {
 
         if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
             if let cache {
-                try? data.write(to: cache.appending(path: pathify(url)), options: .atomic)
+                try? data.write(to: cache, options: .atomic)
             }
             return data
         } else {
             throw HTTPError.unableToReadBody
         }
+    }
+
+    func getString(_ url: URL) async throws -> String {
+        try await String(data: get(url), encoding: .utf8)!
     }
 }

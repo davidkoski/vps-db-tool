@@ -6,19 +6,17 @@ struct Index<Element: Sendable & Metadata>: Sendable {
     var all: [Element]
 
     init(_ games: [String: Game], _ itemPath: KeyPath<Game, [Element]>) {
-        byURL = Dictionary(
-            grouping: games.values.flatMap { game in
-                let items = game[keyPath: itemPath]
-                return items.compactMap { item in
-                    if item.url != nil {
-                        return item
-                    } else {
-                        return nil
-                    }
+        var byURL = [URL: [Element]]()
+        for game in games.values {
+            for item in game[keyPath: itemPath] {
+                for url in item.urls {
+                    let url = Site(url).canonicalize(url)
+                    byURL[url, default: []].append(item)
                 }
-            },
-            by: { $0.url! }
-        )
+            }
+        }
+        self.byURL = byURL
+
         byId = Dictionary(
             games.values.flatMap { game in
                 let items = game[keyPath: itemPath]
@@ -31,8 +29,8 @@ struct Index<Element: Sendable & Metadata>: Sendable {
         all = games.values.flatMap { $0[keyPath: itemPath] }
     }
 
-    subscript(url: URL) -> [Element] {
-        byURL[url] ?? []
+    subscript(url: URL) -> [Element]? {
+        byURL[Site(url).canonicalize(url)]
     }
 
     subscript(id: String) -> Element? {
@@ -60,8 +58,8 @@ struct AnyIndex {
         all = index.all as [Metadata]
     }
 
-    subscript(url: URL) -> [Metadata] {
-        byURL[url] ?? []
+    subscript(url: URL) -> [Metadata]? {
+        byURL[Site(url).canonicalize(url)]
     }
 
     subscript(id: String) -> Metadata? {

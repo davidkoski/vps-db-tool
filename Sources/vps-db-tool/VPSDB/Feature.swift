@@ -36,6 +36,9 @@ enum TableFeature: String, Codable, Sendable {
     case inclVideo = "incl. Video"
     case nFozzy = "nFozzy"
     case noROM = "no ROM"
+
+    // to delete
+    case mod2 = "Mod"
 }
 
 enum B2SFeature: String, Codable, Sendable {
