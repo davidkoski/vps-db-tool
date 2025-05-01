@@ -2,6 +2,7 @@ import Foundation
 
 struct Database: Codable, Sendable {
     var games: Index<Game>
+    let gamesByName: [String: [Game]]
 
     let tables: Index<Table>
     let backglasses: Index<B2S>
@@ -52,6 +53,7 @@ struct Database: Codable, Sendable {
                 }
         )
         self.games = Index(games: games)
+        self.gamesByName = Dictionary(grouping: games.values, by: \.name)
 
         self.tables = Index(games, \.tables)
         self.backglasses = Index(games, \.backglasses)

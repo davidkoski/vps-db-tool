@@ -220,7 +220,7 @@ struct GameContainer: Decodable {
 }
 
 @Codable
-struct Game: Metadata, Sendable, Comparable {
+struct Game: Metadata, Sendable, Comparable, CustomStringConvertible {
 
     let id: String
 
@@ -301,6 +301,9 @@ struct Game: Metadata, Sendable, Comparable {
         lhs.id == rhs.id
     }
 
+    var description: String {
+        "\(self.name) \(self.manufacturer) (\(self.year ?? 0))"
+    }
 }
 
 enum GameResourceKind: String, Codable, Sendable {

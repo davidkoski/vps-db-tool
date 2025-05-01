@@ -4,7 +4,7 @@ import NIOHTTP1
 
 enum HTTPError: Error {
     case unableToReadBody
-    case response(HTTPResponseStatus, String)
+    case response(URL, HTTPResponseStatus, String)
 }
 
 class HTTPClient {
@@ -62,7 +62,7 @@ class HTTPClient {
         let response = try await client.execute(request, timeout: .seconds(10))
 
         if response.status != .ok {
-            throw HTTPError.response(response.status, response.status.reasonPhrase)
+            throw HTTPError.response(url, response.status, response.status.reasonPhrase)
         }
 
         let data = try await response.body.collect(upTo: 100 * 1024 * 1024)

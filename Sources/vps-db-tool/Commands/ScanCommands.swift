@@ -29,21 +29,22 @@ struct ScanArguments: ParsableArguments, Sendable {
     @Flag
     var follow = false
 
-    func urls(scanner: ScanSources) -> [(ScanVariant, URL)] {
+    func urls(scanner: ScanSources & ListScanner, client: HTTPClient) async throws -> [(
+        ScanVariant, URL
+    )] {
         var urls = [(ScanVariant, URL)]()
 
-        if let root = scanner.source(kind: kind, page: page), let root = URL(string: root) {
-            urls.append((.list, root))
-        }
-
         if pages > 0 {
-            for i in 1 ..< pages {
-                if let root = scanner.source(kind: kind, page: page + i),
-                    let root = URL(string: root)
-                {
-                    urls.append((.list, root))
+            for root in scanner.sources(kind: kind) {
+                let content = try await client.getString(root)
+                let list = try scanner.scanList(url: root, content: content, kind: kind)
+
+                for i in 0 ..< min(pages, list.pages ?? pages) {
+                    urls.append((.list, scanner.update(kind: kind, url: root, page: page + i)))
                 }
             }
+        } else {
+            urls.append(contentsOf: scanner.sources(kind: kind).map { (.list, $0) })
         }
 
         return urls
@@ -64,7 +65,7 @@ struct DownloadCommand: AsyncParsableCommand {
         let scanner = VPUniverseScanner()
 
         var first = true
-        var urls = scan.urls(scanner: scanner)
+        var urls = try await scan.urls(scanner: scanner, client: client)
 
         while !urls.isEmpty {
             let (variant, url) = urls.removeFirst()
@@ -110,7 +111,7 @@ struct CheckDownloadCommand: AsyncParsableCommand {
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = VPUniverseScanner()
 
-        var urls = scan.urls(scanner: scanner)
+        var urls = try await scan.urls(scanner: scanner, client: client)
 
         while !urls.isEmpty {
             let (variant, url) = urls.removeFirst()
@@ -132,6 +133,15 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                         }
                     } else {
                         print("Not Found: \(item.name) - \(item.url)")
+                        if let games = db.gamesByName[item.name] {
+                            for game in games {
+                                if game[scan.kind].isEmpty {
+                                    print(
+                                        "\t\(game.name) \(game.manufacturer) (\(game.year ?? 0)): empty \(scan.kind)"
+                                    )
+                                }
+                            }
+                        }
                         if scan.follow {
                             try await printDetails(client: client, scanner: scanner, url: item.url)
                             print("")

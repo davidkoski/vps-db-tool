@@ -6,7 +6,8 @@ enum ScanVariant: String, Codable {
 }
 
 protocol ScanSources {
-    func source(kind: GameResourceKind, page: Int) -> String?
+    func sources(kind: GameResourceKind) -> [URL]
+    func update(kind: GameResourceKind, url: URL, page: Int) -> URL
 }
 
 protocol DetailScanner {

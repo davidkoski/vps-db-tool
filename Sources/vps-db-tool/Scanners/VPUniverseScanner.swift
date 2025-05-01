@@ -7,34 +7,55 @@ struct VPUniverseScanner {
 }
 
 extension VPUniverseScanner: ScanSources {
-    func source(kind: GameResourceKind, page: Int) -> String? {
-        let base: String? =
+    func sources(kind: GameResourceKind) -> [URL] {
+        let urls: [String] =
             switch kind {
-            case .game: "https://vpuniverse.com/files/category/104-visual-pinball/"
+            case .game: ["https://vpuniverse.com/files/category/104-visual-pinball/"]
             case .table:
-                // in theory it should be
-                // "https://vpuniverse.com/files/category/82-vpx-pinball-tables/"
-                //
-                // but that has 64 pages vs 85 in this parent
-                "https://vpuniverse.com/files/category/104-visual-pinball/"
-            case .b2s: "https://vpuniverse.com/files/category/33-b2s-directb2s-backglass-downloads/"
-            case .tutorial: nil
-            case .rom: "https://vpuniverse.com/files/category/15-pinmame-roms/"
-            case .pupPack: "https://vpuniverse.com/files/category/120-pup-packs/"
+                [
+                    "https://vpuniverse.com/files/category/104-visual-pinball/",
+                    "https://vpuniverse.com/files/category/82-vpx-pinball-tables/",
+                    "https://vpuniverse.com/files/category/131-pup-pack-original-pup-original-game-creations/",
+                    "https://vpuniverse.com/files/category/123-modified-mod-games/",
+                    "https://vpuniverse.com/files/category/114-vpx-full-single-screen-tables-fss/",
+                    "https://vpuniverse.com/files/category/146-vpx-flipperless/",
+                ]
+            case .b2s:
+                [
+                    "https://vpuniverse.com/files/category/33-b2s-directb2s-backglass-downloads/",
+                    "https://vpuniverse.com/files/category/175-full-dmd-backglasses/",
+                ]
+            case .tutorial: []
+            case .rom: ["https://vpuniverse.com/files/category/15-pinmame-roms/"]
+            case .pupPack:
+                [
+                    "https://vpuniverse.com/files/category/120-pup-packs/",
+                    "https://vpuniverse.com/files/category/121-2-screen-4x3-pup-packs/",
+                    "https://vpuniverse.com/files/category/122-other-language-pup-packs/",
+                ]
             case .altColor:
-                "https://vpuniverse.com/files/category/101-pin2dmd-colorizations-virtual-pinball/"
-            case .altSound: "https://vpuniverse.com/files/category/113-altsound/"
+                ["https://vpuniverse.com/files/category/101-pin2dmd-colorizations-virtual-pinball/"]
+            case .altSound: ["https://vpuniverse.com/files/category/113-altsound/"]
             case .pov:
-                "https://vpuniverse.com/files/category/68-vpx-pov-point-of-view-physics-sets/"
-            case .wheelArt: "https://vpuniverse.com/files/category/70-wheel-images/"
-            case .topper: "https://vpuniverse.com/files/category/160-topper-videos/"
-            case .mediaPack: "https://vpuniverse.com/files/category/9-hyperpin-media-packs/"
-            case .rule: "https://vpuniverse.com/files/category/91-instruction-cards/"
+                ["https://vpuniverse.com/files/category/68-vpx-pov-point-of-view-physics-sets/"]
+            case .wheelArt:
+                [
+                    "https://vpuniverse.com/files/category/70-wheel-images/",
+                    "https://vpuniverse.com/files/category/127-tarcisio-style-wheels/",
+                    "https://vpuniverse.com/files/category/149-animated-wheel-images-apng/",
+                ]
+            case .topper: ["https://vpuniverse.com/files/category/160-topper-videos/"]
+            case .mediaPack: ["https://vpuniverse.com/files/category/9-hyperpin-media-packs/"]
+            case .rule: ["https://vpuniverse.com/files/category/91-instruction-cards/"]
             }
-        if let base, page > 1 {
-            return base + "page/\(page)"
+        return urls.compactMap { URL(string: $0) }
+    }
+
+    func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
+        if page > 1 {
+            return url.appending(components: "page", page.description)
         } else {
-            return base
+            return url
         }
     }
 }
