@@ -29,3 +29,17 @@ struct VPSDbArguments: ParsableArguments, Sendable {
         return db
     }
 }
+
+struct IssuesArguments: ParsableArguments, Sendable {
+
+    @Option(name: .customLong("issues"), help: "Path to issues.json")
+    var path: URL = URL(fileURLWithPath: "issues.json")
+
+    func database() throws -> IssueDatabase {
+        try JSONDecoder().decode(IssueDatabase.self, from: Data(contentsOf: path))
+    }
+
+    func save(db: IssueDatabase) throws {
+        try JSONEncoder().encode(db).write(to: path, options: .atomic)
+    }
+}

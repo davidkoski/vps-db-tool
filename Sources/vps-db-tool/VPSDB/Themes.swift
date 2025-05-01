@@ -228,6 +228,7 @@ enum Theme: String, Codable, Hashable, Sendable {
     case romance = "Romance"
     case ruralLiving = "Rural Living"
     case safari = "Safari"
+    case sailing = "Sailing"
     case school = "School"
     case scienceFiction = "Science Fiction"
     case scubaDiving = "Scuba Diving"

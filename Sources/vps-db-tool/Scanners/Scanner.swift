@@ -18,26 +18,34 @@ protocol ListScanner {
     func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult
 }
 
-struct DetailResult: Sendable {
+struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible {
+    var url: URL
     var name: String?
     var author: String?
     var version: String?
     var ipdb: URL?
-    var features: Set<TableFeature>
-    var b2s: URL?
-    var mediaPack: URL?
-    var navigations: [String]
+    var features = Set<TableFeature>()
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(url)
+        hasher.combine(name)
+        hasher.combine(author)
+        hasher.combine(version)
+    }
+
+    static func == (lhs: DetailResult, rhs: DetailResult) -> Bool {
+        lhs.url == rhs.url && lhs.name == rhs.name && lhs.author == rhs.author
+            && lhs.version == rhs.version
+    }
+
+    var description: String {
+        [name, author, version].compactMap { $0 }.joined(separator: ", ")
+    }
 }
 
 struct ListResult: Sendable {
 
     var pages: Int?
 
-    struct Item: Sendable {
-        var url: URL
-        var name: String
-        var author: String?
-    }
-
-    var list: [Item]
+    var list: [DetailResult]
 }

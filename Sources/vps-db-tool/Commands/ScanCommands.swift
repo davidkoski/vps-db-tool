@@ -103,10 +103,15 @@ struct CheckDownloadCommand: AsyncParsableCommand {
     )
 
     @OptionGroup var db: VPSDbArguments
+    @OptionGroup var issues: IssuesArguments
     @OptionGroup var scan: ScanArguments
+
+    @Flag(inversion: .prefixedEnableDisable)
+    var interactive = true
 
     mutating func run() async throws {
         let db = try db.database()
+        var issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = VPUniverseScanner()
@@ -126,72 +131,51 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                 let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
 
                 for item in result.list {
-                    if let match = db[scan.kind][item.url] {
-                        if scan.follow {
+                    if let match = db[scan.kind][item.url], let first = match.first {
+                        if scan.follow, let game = db[first] {
                             try await checkDetails(
-                                client: client, scanner: scanner, url: item.url, items: match)
+                                client: client, scanner: scanner, url: item.url,
+                                game: game, items: match, issues: &issues)
                         }
                     } else {
-                        print("Not Found: \(item.name) - \(item.url)")
-                        if let games = db.gamesByName[item.name] {
-                            for game in games {
-                                if game[scan.kind].isEmpty {
-                                    print(
-                                        "\t\(game.name) \(game.manufacturer) (\(game.year ?? 0)): empty \(scan.kind)"
-                                    )
-                                }
+                        var handled = false
+                        if scan.follow {
+                            let content = try await client.getString(item.url)
+                            if let detail = try scanner.scanDetail(
+                                url: item.url, content: content, kind: scan.kind)
+                            {
+                                let issue = URLIssue.entryNotFound(detail)
+                                issues.report(kind: scan.kind, url: item.url, issue: issue)
+                                handled = true
                             }
                         }
-                        if scan.follow {
-                            try await printDetails(client: client, scanner: scanner, url: item.url)
-                            print("")
+                        if !handled {
+                            let issue = URLIssue.entryNotFound(item)
+                            issues.report(kind: scan.kind, url: item.url, issue: issue)
                         }
                     }
                 }
                 print("")
             }
         }
+
+        try self.issues.save(db: issues)
     }
 
-    func printDetails(client: HTTPClient, scanner: DetailScanner, url: URL) async throws {
-        let content = try await client.getString(url)
-        if let detail = try scanner.scanDetail(url: url, content: content, kind: scan.kind) {
-            print("\t\(detail.name ?? "-"), \(detail.author ?? "-"), \(detail.version ?? "-")")
-            if let ipdb = detail.ipdb {
-                print("\t\(ipdb)")
-            }
-            if !detail.features.isEmpty {
-                print("\t\(detail.features.map { $0.rawValue }.sorted().joined(separator: ", "))")
-            }
-        }
-    }
-
-    func checkDetails(client: HTTPClient, scanner: DetailScanner, url: URL, items: [any Metadata])
+    func checkDetails(
+        client: HTTPClient, scanner: DetailScanner, url: URL, game: Game, items: [any Metadata],
+        issues: inout IssueDatabase
+    )
         async throws
     {
         let content = try await client.getString(url)
         let detail = try scanner.scanDetail(url: url, content: content, kind: scan.kind)
 
-        func canonicalVersion(_ string: String?) -> String {
-            (string ?? "")
-                .replacingOccurrences(of: "v", with: "")
-                .replacingOccurrences(of: " ", with: "")
-                .replacingOccurrences(of: ".0.0", with: ".0")
-        }
-
         if let detail {
             for item in items {
-                var messages = [String]()
                 if canonicalVersion(item.version) != canonicalVersion(detail.version) {
-                    messages.append("Version: \(item.version ?? "-") != \(detail.version ?? "-")")
-                }
-
-                if !messages.isEmpty {
-                    print(url)
-                    print(
-                        "\(item.gameName) - \(item.gameId) - \(detail.name ?? ""): \(messages.joined(separator: ", "))"
-                    )
-                    print("")
+                    let issue = ResourceIssue.versionMismatch(detail.version)
+                    issues.report(game: game, kind: scan.kind, gameResource: item, issue: issue)
                 }
             }
         } else {

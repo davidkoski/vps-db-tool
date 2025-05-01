@@ -160,12 +160,12 @@ extension VPUniverseScanner: DetailScanner {
             }
 
             return .init(
+                url: Site(url).canonicalize(url),
                 name: meta.name,
                 author: meta.author.name,
                 version: meta.softwareVersion,
                 ipdb: ipdbURL,
-                features: features,
-                navigations: []
+                features: features
             )
         }
 
@@ -178,7 +178,7 @@ extension VPUniverseScanner: ListScanner {
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?
-        var items = [ListResult.Item]()
+        var items = [DetailResult]()
 
         /*
          <li class=ipsPagination_pageJump>
