@@ -144,8 +144,9 @@ struct IssueDatabase: Codable, Sendable {
 
     @discardableResult
     mutating func report(
-        game: Game, kind: GameResourceKind, gameResource: Metadata, issue: ResourceIssue
+        game: Game, kind: GameResourceKind, gameResource: Metadata, url: URL, issue: ResourceIssue
     ) -> IssueDisposition {
+        print(url)
         print(issue.describe(game: game, kind: kind, gameResource: gameResource))
         if let found = self[kind, gameResource, issue] {
             print(found)

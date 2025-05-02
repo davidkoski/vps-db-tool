@@ -24,6 +24,12 @@ enum Site: Sendable {
     }
 
     func canonicalize(_ url: URL) -> URL {
+        var url = url
+        if url.scheme == "http" {
+            url = URL(
+                string: url.description.replacingOccurrences(of: "http://", with: "https://"))!
+        }
+
         switch self {
         case .vpuniverse:
             // any url of the form
@@ -32,7 +38,6 @@ enum Site: Sendable {
             // will redirect to the current one, e.g.:
             // https://vpuniverse.com/files/file/24527-rush-le-tribute-v104/
 
-            var url = url
             if url.path().hasPrefix("/forums/files/") {
                 url = URL(
                     string: "https://vpuniverse.com/"
@@ -47,7 +52,13 @@ enum Site: Sendable {
             } else {
                 return url
             }
-        case .vpforums: return url
+        case .vpforums:
+            // https://www.vpforums.org/index.php?s=1626316605b94c1502262391eba17e6a&app=downloads&showfile=17011
+            let string = url.description
+                .replacing(/s=[0-9a-f]+&/, with: "")
+                .replacing(/#$/, with: "")
+            return URL(string: string)!
+
         case .pinballnirvana: return url
         case .other: return url
         }

@@ -15,10 +15,25 @@ struct ScanCommands: AsyncParsableCommand {
 struct ScanArguments: ParsableArguments, Sendable {
 
     @Option
-    var cache: URL
+    var cache = URL(fileURLWithPath: "./cache")
 
     @Option
     var kind: GameResourceKind = .table
+
+    enum Site: String, ExpressibleByArgument {
+        case vpu
+        case vpf
+
+        var scanner: ScanSources & DetailScanner & ListScanner {
+            switch self {
+            case .vpu: VPUniverseScanner()
+            case .vpf: VPForumsScanner()
+            }
+        }
+    }
+
+    @Option
+    var site = Site.vpu
 
     @Option
     var page = 1
@@ -62,7 +77,7 @@ struct DownloadCommand: AsyncParsableCommand {
 
     mutating func run() async throws {
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = VPUniverseScanner()
+        let scanner = scan.site.scanner
 
         var first = true
         var urls = try await scan.urls(scanner: scanner, client: client)
@@ -114,7 +129,7 @@ struct CheckDownloadCommand: AsyncParsableCommand {
         var issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = VPUniverseScanner()
+        let scanner = scan.site.scanner
 
         var urls = try await scan.urls(scanner: scanner, client: client)
 
@@ -175,7 +190,8 @@ struct CheckDownloadCommand: AsyncParsableCommand {
             for item in items {
                 if canonicalVersion(item.version) != canonicalVersion(detail.version) {
                     let issue = ResourceIssue.versionMismatch(detail.version)
-                    issues.report(game: game, kind: scan.kind, gameResource: item, issue: issue)
+                    issues.report(
+                        game: game, kind: scan.kind, gameResource: item, url: url, issue: issue)
                 }
             }
         } else {

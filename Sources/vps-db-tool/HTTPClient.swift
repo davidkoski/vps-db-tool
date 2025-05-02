@@ -4,6 +4,7 @@ import NIOHTTP1
 
 enum HTTPError: Error {
     case unableToReadBody
+    case unableToDecodeString(URL)
     case response(URL, HTTPResponseStatus, String)
 }
 
@@ -80,6 +81,14 @@ class HTTPClient {
     }
 
     func getString(_ url: URL) async throws -> String {
-        try await String(data: get(url), encoding: .utf8)!
+        let data = try await get(url)
+        if let s = String(data: data, encoding: .utf8) {
+            return s
+        }
+        return data.withUnsafeBytes {
+            $0.withMemoryRebound(to: UInt8.self) { buffer in
+                String(cString: buffer.baseAddress!)
+            }
+        }
     }
 }
