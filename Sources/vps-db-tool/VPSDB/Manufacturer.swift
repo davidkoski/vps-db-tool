@@ -219,6 +219,7 @@ private let map: [String: Manufacturer] = [
     "Sega of America": .sega,
     "Creaciones e Investigaciones Electrónicas, Sociedad Limitada": .sleic,
     "Segasa d.b.a. Sonic": .sonic,
+    "Spinball": .spinball,
     "Spooky Pinball LLC": .spooky,
     "Sport matic, S.A.": .sportmatic,
     "Staal Society": .staal,
