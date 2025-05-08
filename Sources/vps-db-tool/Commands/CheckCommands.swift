@@ -8,7 +8,7 @@ struct CheckCommands: AsyncParsableCommand {
         abstract: "various check commands (local db)",
         subcommands: [
             CheckTableFormat.self, CheckYear.self,
-            CheckTheme.self, CheckMod.self,
+            CheckTheme.self, CheckMod.self, CheckRetheme.self,
         ]
     )
 }
@@ -91,6 +91,32 @@ struct CheckMod: AsyncParsableCommand {
             for t in g.tables {
                 if !t.features.contains(.mod) && t.gameResource.authors.count > 1 {
                     print("\(g) \(t.url)")
+                }
+            }
+        }
+    }
+}
+
+struct CheckRetheme: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "retheme",
+        abstract: "Check missing Retheme"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try db.database()
+
+        for g in db.games.all.sorted() {
+            for t in g.tables {
+                if let comment = t.gameResource.comment {
+                    if comment.contains("Retheme") || comment.contains("Reskin") {
+                        if !t.features.contains(.retheme) {
+                            print("\(g) \(t.url)")
+                        }
+                    }
                 }
             }
         }

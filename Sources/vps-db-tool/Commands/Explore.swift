@@ -14,8 +14,10 @@ struct ExploreCommand: AsyncParsableCommand {
         let db = try db.database()
 
         for game in db.games.all {
-            if game.manufacturer == .williams && game.designers.isEmpty {
-                print(game.name)
+            if let url = game.ipdbUrl {
+                if !url.host()!.contains("ipdb") {
+                    print(game.name)
+                }
             }
         }
     }

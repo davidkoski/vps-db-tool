@@ -100,6 +100,7 @@ enum Manufacturer: String, Codable, Sendable {
     case stoner = "Stoner"
     case taito = "Taito"
     case taitoBrasil = "Taito do Brasil"
+    case tecnoplay = "Tecnoplay"
     case tekhan = "Tekhan"
     case tiltMovie = "Tilt Movie"
     case unidesa = "Unidesa"

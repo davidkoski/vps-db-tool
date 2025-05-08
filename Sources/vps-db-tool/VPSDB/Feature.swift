@@ -22,6 +22,7 @@ enum TableFeature: String, Codable, Sendable {
     case kids = "Kids"
     case lut = "LUT"
     case mod = "MOD"
+    case retheme = "Retheme"
     case mr = "MR"
     case mixedReality = "Mixed Reality"
     case music = "Music"
