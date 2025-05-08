@@ -10,10 +10,6 @@ struct Index<Element: Sendable & Metadata>: Sendable {
         for game in games.values {
             for item in game[keyPath: itemPath] {
                 for url in item.urls {
-                    if item.id == "cWmQ_-7E" {
-                        print(url)
-                        print(Site(url).canonicalize(url))
-                    }
                     let url = Site(url).canonicalize(url)
                     byURL[url, default: []].append(item)
                 }

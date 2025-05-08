@@ -210,7 +210,7 @@ struct CheckMissingCommand: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
     @OptionGroup var issues: IssuesArguments
     @OptionGroup var scan: ScanArguments
-    
+
     @Flag var markdown = false
 
     mutating func run() async throws {
@@ -221,12 +221,12 @@ struct CheckMissingCommand: AsyncParsableCommand {
         let scanner = scan.site.scanner
 
         var urls = try await scan.urls(scanner: scanner, client: client)
-        
+
         if markdown {
             print(
                 """
                 **Missing \(scan.kind)**
-                
+
                 | Name | URL |
                 | ---- | --- |                
                 """

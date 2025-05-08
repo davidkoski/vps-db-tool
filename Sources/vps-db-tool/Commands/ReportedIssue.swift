@@ -178,7 +178,7 @@ struct IssueDatabase: Codable, Sendable {
             }
         }
     }
-    
+
     func check(game: Game, issue: GameIssue) -> Bool {
         self[game, issue] != nil
     }
