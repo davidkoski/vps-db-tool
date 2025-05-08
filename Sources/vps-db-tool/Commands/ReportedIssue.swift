@@ -178,4 +178,23 @@ struct IssueDatabase: Codable, Sendable {
             }
         }
     }
+    
+    func check(game: Game, issue: GameIssue) -> Bool {
+        self[game, issue] != nil
+    }
+
+    func check(game: Game, table: Table, issue: TableIssue) -> Bool {
+        self[table, issue] != nil
+    }
+
+    func check(
+        game: Game, kind: GameResourceKind, gameResource: Metadata, url: URL, issue: ResourceIssue
+    ) -> Bool {
+        self[kind, gameResource, issue] != nil
+    }
+
+    func check(kind: GameResourceKind, url: URL, issue: URLIssue) -> Bool {
+        self[kind, url, issue] != nil
+    }
+
 }

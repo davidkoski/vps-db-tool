@@ -7,7 +7,7 @@ struct ScanCommands: AsyncParsableCommand {
         commandName: "scan",
         abstract: "scanning related commands",
         subcommands: [
-            DownloadCommand.self, CheckDownloadCommand.self,
+            DownloadCommand.self, CheckDownloadCommand.self, CheckMissingCommand.self,
         ]
     )
 }
@@ -197,5 +197,68 @@ struct CheckDownloadCommand: AsyncParsableCommand {
         } else {
             print("\(url): not able to parse details")
         }
+    }
+}
+
+struct CheckMissingCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "check-missing",
+        abstract: "check resources"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+    @OptionGroup var issues: IssuesArguments
+    @OptionGroup var scan: ScanArguments
+    
+    @Flag var markdown = false
+
+    mutating func run() async throws {
+        let db = try db.database()
+        var issues = try issues.database()
+
+        let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
+        let scanner = scan.site.scanner
+
+        var urls = try await scan.urls(scanner: scanner, client: client)
+        
+        if markdown {
+            print(
+                """
+                **Missing \(scan.kind)**
+                
+                | Name | URL |
+                | ---- | --- |                
+                """
+            )
+        }
+
+        while !urls.isEmpty {
+            let (variant, url) = urls.removeFirst()
+
+            let content = try await client.getString(url)
+
+            switch variant {
+            case .detail:
+                break
+            case .list:
+                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
+
+                for item in result.list {
+                    if db[scan.kind][item.url] == nil {
+                        let issue = URLIssue.entryNotFound(item)
+                        if !issues.check(kind: scan.kind, url: item.url, issue: issue) {
+                            if markdown {
+                                print("| \(item.name ?? "unknown") | \(item.url) |")
+                            } else {
+                                print(issue.describe(kind: scan.kind, url: item.url))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        try self.issues.save(db: issues)
     }
 }
