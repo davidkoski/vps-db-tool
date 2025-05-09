@@ -2,14 +2,6 @@
 
 | Name | URL |
 | ---- | --- |                
-| Scramble (Tecnoplay 1987) JP 1.0.1 DT-FS-VR... 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=19088 |
-| Future Spa (Bally 1979) JP v5.5.4 DT-FS-VR-... 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=19086 |
-| Vortex Plunder | https://www.vpforums.org/index.php?app=downloads&showfile=18898 |
-| Big Indian (Gottlieb 1974) 5.5.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15655 |
-| Super Straight (Sonic 1977) JP 1.01 DT-FS-V... 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=18776 |
-| Prospector (Sonic 1977) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=18763 |
-| Surf'n Safari 1.3.5 | https://www.vpforums.org/index.php?app=downloads&showfile=18765 |
-| Ben Hur (Staal 1977) V1.1 DT-FS-VR-MR Ext2k... 1.1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=18751 |
 | Star Wars (Sonic 1987) mfuegemann DT-FS-VR-... 1.2 | https://www.vpforums.org/index.php?app=downloads&showfile=18711 |
 | CSI (Stern 2008)_Bigus(MOD) 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=18701 |
 | JP's World Joker Tour (Original 2024) J... 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=18671 |
@@ -35,4 +27,3 @@
 | James Bond (Gottlieb 1980) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=17922 |
 | Jets 1.1.VPX 10.7.0 | https://www.vpforums.org/index.php?app=downloads&showfile=17840 |
 | Transformers Pro (Stern 2011) with VR Room 2.0.1 | https://www.vpforums.org/index.php?app=downloads&showfile=17737 |
-| Circus (Bally 1973) 1.0c | https://www.vpforums.org/index.php?app=downloads&showfile=17551 |
