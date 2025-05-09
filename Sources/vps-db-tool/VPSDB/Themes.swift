@@ -179,6 +179,7 @@ enum Theme: String, Codable, Hashable, Sendable {
     case occult = "Occult"
     case oktoberfest = "Oktoberfest"
     case olympicGames = "Olympic Games"
+    case olympicCompetition = "Olympic Competition"
     case operetta = "Operetta"
     case outdoorActivities = "Outdoor Activities"
     case outerSpace = "Outer Space"
