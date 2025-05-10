@@ -22,7 +22,7 @@ let package = Package(
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.1"),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.0"),
 
-        .package(url: "https://github.com/SwiftyLab/MetaCodable.git", from: "1.0.0"),
+        .package(url: "https://github.com/reers/ReerCodable.git", from: "1.2.2"),
     ],
     targets: [
         .executableTarget(
@@ -32,8 +32,7 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "MetaCodable", package: "MetaCodable"),
-                .product(name: "HelperCoders", package: "MetaCodable"),
+                .product(name: "ReerCodable", package: "ReerCodable"),
             ]
         )
     ]

@@ -1,6 +1,5 @@
 import Foundation
-import HelperCoders
-import MetaCodable
+import ReerCodable
 import SwiftSoup
 
 struct VPUniverseScanner {
@@ -85,7 +84,7 @@ extension VPUniverseScanner: DetailScanner {
     struct Meta {
         let name: String
 
-        @Default(ifMissing: "") let description: String
+        let description: String
         let softwareVersion: String
 
         struct Author: Codable {
@@ -94,10 +93,10 @@ extension VPUniverseScanner: DetailScanner {
 
         let author: Author
 
-        @CodedBy(ISO8601DateCoder())
+        @DateCoding(.iso8601)
         let dateModified: Date?
 
-        @CodedBy(ISO8601DateCoder())
+        @DateCoding(.iso8601)
         let dateCreated: Date
     }
 

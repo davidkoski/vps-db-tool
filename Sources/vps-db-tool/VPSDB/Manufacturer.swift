@@ -1,5 +1,4 @@
 import Foundation
-import MetaCodable
 
 enum Manufacturer: String, Codable, Sendable {
 

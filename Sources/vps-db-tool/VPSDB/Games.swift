@@ -1,6 +1,5 @@
 import Foundation
-import HelperCoders
-import MetaCodable
+import ReerCodable
 
 func canonicalVersion(_ string: String?) -> String {
     (string ?? "")
@@ -21,65 +20,11 @@ protocol Metadata {
 }
 
 @Codable
-struct GameResourceCommon: Sendable {
-    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
-    let createdAt: Date
-    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
-    let updatedAt: Date
+struct Resource: Sendable, Codable {
+    var url: URL
 
-    let comment: String?
-
-    @Default(ifMissing: GameRef(id: "", name: ""))
-    var game: GameRef
-
-    @Default([])
-    let urls: [Resource]
-
-    @Default([])
-    let authors: [Author]
-
-    let version: String?
-}
-
-protocol GameResource: Metadata {
-    var gameResource: GameResourceCommon { get set }
-}
-
-extension GameResource {
-    var version: String? {
-        gameResource.version
-    }
-
-    var url: URL? {
-        gameResource.urls.first?.url
-    }
-
-    var urls: [URL] {
-        gameResource.urls.map { $0.url }
-    }
-
-    var createdAt: Date {
-        gameResource.createdAt
-    }
-
-    var updatedAt: Date {
-        gameResource.updatedAt
-    }
-
-    var gameId: String {
-        gameResource.game.id
-    }
-
-    var gameName: String {
-        gameResource.game.name
-    }
-
-}
-
-@Codable
-struct Resource: Sendable {
-    let url: URL
-    @Default(false) let broken: Bool
+    @CustomCoding(OmitIfFalse.self)
+    var broken: Bool
 }
 
 @Codable
@@ -92,46 +37,45 @@ struct GameRef: Sendable {
 struct Table: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 
-    @Default(ifMissing: []) let features: Set<TableFeature>
-    @Default<TableFormat?>(nil) let tableFormat: TableFormat?
+    @CustomCoding(OmitEmpty<Set<TableFeature>>.self) let features: Set<TableFeature>
+    let tableFormat: TableFormat?
     let edition: String?
 
-    @Default<URL?>(nil)
     let imgUrl: URL?
 }
 
 @Codable
 struct B2S: GameResource, Sendable {
     // Note: b2s for FX tables don't have an id
-    @Default(ifMissing: UUID().uuidString)
-    let id: String
+    @CodingKey("id")
+    var _id: String?
+    var id: String { _id ?? "" }
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 
-    @Default(ifMissing: []) let features: Set<B2SFeature>?
-    let imgUrl: URL?
+    var imgUrl: URL?
 }
 
 @Codable
 struct Tutorial: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 
-    let youtubeId: String
-    let title: String
+    var youtubeId: String
+    var title: String
 }
 
 @Codable
 struct ROM: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -139,7 +83,7 @@ struct ROM: GameResource, Sendable {
 struct PupPack: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -147,7 +91,7 @@ struct PupPack: GameResource, Sendable {
 struct AltColors: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -155,7 +99,7 @@ struct AltColors: GameResource, Sendable {
 struct AltSound: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -163,7 +107,7 @@ struct AltSound: GameResource, Sendable {
 struct POV: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -171,7 +115,7 @@ struct POV: GameResource, Sendable {
 struct WheelArt: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -179,7 +123,7 @@ struct WheelArt: GameResource, Sendable {
 struct Topper: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -187,7 +131,7 @@ struct Topper: GameResource, Sendable {
 struct MediaPack: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -195,7 +139,7 @@ struct MediaPack: GameResource, Sendable {
 struct Rules: GameResource, Sendable {
     let id: String
 
-    @CodedAt
+    @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 }
 
@@ -227,50 +171,53 @@ struct GameContainer: Decodable {
 }
 
 @Codable
-struct Game: Metadata, Sendable, Comparable, CustomStringConvertible {
+struct Game: Metadata, Sendable, CustomStringConvertible {
 
     let id: String
 
-    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
-    let createdAt: Date
-    @CodedBy(Since1970DateCoder()) @Default(ifMissing: Date())
-    let updatedAt: Date
+    @CustomCoding(OmitDateUnixEpoch.self) var createdAt: Date
+    @CustomCoding(OmitDateUnixEpoch.self) var updatedAt: Date
 
-    let name: String
-    let manufacturer: Manufacturer
-    let imageUrl: URL?
+    @CustomCoding(OmitDateUnixEpoch.self) var lastCreatedAt: Date
 
-    @CodedAt("MPU") let mpu: String?
-    let year: Int?
+    var name: String
+    var manufacturer: Manufacturer
+    var imageUrl: URL?
 
-    @Default(ifMissing: []) let theme: Set<Theme>
+    @CodingKey("MPU") let mpu: String?
+    var year: Int?
 
-    @Default([]) let designers: Set<String>
+    @CustomCoding(OmitEmpty<Set<Theme>>.self) var theme: Set<Theme>
 
-    let type: Kind?
-    let players: Int?
-    let ipdbUrl: URL?
+    @CustomCoding(OmitEmpty<Set<String>>.self) var designers: Set<String>
 
-    @CodedAt("tableFiles") @Default(ifMissing: []) var tables: [Table]
-    @CodedAt("b2sFiles") @Default(ifMissing: []) var backglasses: [B2S]
-    @CodedAt("tutorialFiles") @Default(ifMissing: []) var tutorials: [Tutorial]
-    @CodedAt("romFiles") @Default(ifMissing: []) var roms: [ROM]
-    @CodedAt("pupPackFiles") @Default(ifMissing: []) var pupPacks: [PupPack]
-    @CodedAt("altColorFiles") @Default(ifMissing: []) var altColors: [AltColors]
-    @CodedAt("altSoundFiles") @Default(ifMissing: []) var altSounds: [AltSound]
-    @CodedAt("povFiles") @Default(ifMissing: []) var povs: [POV]
-    @CodedAt("wheelArtFiles") @Default(ifMissing: []) var wheels: [WheelArt]
-    @CodedAt("topperFiles") @Default(ifMissing: []) var toppers: [Topper]
-    @CodedAt("mediaPackFiles") @Default(ifMissing: []) var mediaPacks: [MediaPack]
-    @CodedAt("ruleFiles") @Default(ifMissing: []) var rules: [Rules]
+    var type: Kind?
+    var players: Int?
+    var ipdbUrl: URL?
 
-    @Default(false) let broken: Bool
+    @CustomCoding(OmitEmpty<[Table]>.self) @CodingKey("tableFiles") var tables: [Table]
+    @CustomCoding(OmitEmpty<[B2S]>.self) @CodingKey("b2sFiles") var backglasses: [B2S]
+    @CustomCoding(OmitEmpty<[Tutorial]>.self) @CodingKey("tutorialFiles") var tutorials: [Tutorial]
+    @CustomCoding(OmitEmpty<[ROM]>.self) @CodingKey("romFiles") var roms: [ROM]
+    @CustomCoding(OmitEmpty<[PupPack]>.self) @CodingKey("pupPackFiles") var pupPacks: [PupPack]
+    @CustomCoding(OmitEmpty<[AltColors]>.self) @CodingKey("altColorFiles") var altColors:
+        [AltColors]
+    @CustomCoding(OmitEmpty<[AltSound]>.self) @CodingKey("altSoundFiles") var altSounds: [AltSound]
+    @CustomCoding(OmitEmpty<[POV]>.self) @CodingKey("povFiles") var povs: [POV]
+    @CustomCoding(OmitEmpty<[WheelArt]>.self) @CodingKey("wheelArtFiles") var wheels: [WheelArt]
+    @CustomCoding(OmitEmpty<[Topper]>.self) @CodingKey("topperFiles") var toppers: [Topper]
+    @CustomCoding(OmitEmpty<[MediaPack]>.self) @CodingKey("mediaPackFiles") var mediaPacks:
+        [MediaPack]
+    @CustomCoding(OmitEmpty<[Rules]>.self) @CodingKey("ruleFiles") var rules: [Rules]
+
+    @CustomCoding(OmitIfFalse.self)
+    var broken: Bool
 
     var gameId: String { id }
     var gameName: String { name }
 
     var url: URL? { nil }
-    var urls: [URL] { [] }
+    @CustomCoding(OmitEmpty<[URL]>.self) var urls: [URL]
     var version: String? { nil }
 
     var ipdbId: String? {
@@ -300,16 +247,18 @@ struct Game: Metadata, Sendable, Comparable, CustomStringConvertible {
         }
     }
 
+    var description: String {
+        "\(self.name) \(self.manufacturer) (\(self.year ?? 0))"
+    }
+}
+
+extension Game: Comparable {
     static func < (lhs: Game, rhs: Game) -> Bool {
         lhs.name < rhs.name
     }
 
     static func == (lhs: Game, rhs: Game) -> Bool {
         lhs.id == rhs.id
-    }
-
-    var description: String {
-        "\(self.name) \(self.manufacturer) (\(self.year ?? 0))"
     }
 }
 

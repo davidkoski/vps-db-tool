@@ -1,5 +1,4 @@
 import Foundation
-import MetaCodable
 import SwiftSoup
 
 struct IPDB: Sendable {
