@@ -23,6 +23,7 @@ enum Site: Sendable {
         }
     }
 
+    /// convert a URL into a canonical form -- remove any parts that can vary without consequence
     func canonicalize(_ url: URL) -> URL {
         var url = url
         if url.scheme == "http" {
@@ -52,6 +53,47 @@ enum Site: Sendable {
             } else {
                 return url
             }
+        case .vpforums:
+            // https://www.vpforums.org/index.php?s=1626316605b94c1502262391eba17e6a&app=downloads&showfile=17011
+            let string = url.description
+                .replacing(/s=[0-9a-f]+&/, with: "")
+                .replacing(/#$/, with: "")
+            return URL(string: string)!
+
+        case .pinballnirvana: return url
+        case .other: return url
+        }
+    }
+
+    /// convert a URL into its ideal form for use in the database -- remove any extra parts
+    func normalize(_ url: URL) -> URL {
+        var url = url
+        if url.scheme == "http" {
+            url = URL(
+                string: url.description.replacingOccurrences(of: "http://", with: "https://"))!
+        }
+
+        switch self {
+        case .vpuniverse:
+            // strip query params, e.g. tab and comment selections
+            if url.query() != nil,
+                var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            {
+                components.queryItems = nil
+                if let new = components.url {
+                    url = new
+                }
+            }
+
+            // remove the /formums links
+            if url.path().hasPrefix("/forums/files/") {
+                url = URL(
+                    string: "https://vpuniverse.com/"
+                        + url.pathComponents.dropFirst(2).joined(separator: "/") + "/")!
+            }
+
+            return url
+
         case .vpforums:
             // https://www.vpforums.org/index.php?s=1626316605b94c1502262391eba17e6a&app=downloads&showfile=17011
             let string = url.description

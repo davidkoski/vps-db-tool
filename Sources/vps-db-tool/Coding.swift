@@ -45,7 +45,8 @@ struct OmitEmpty<Container: Codable & Collection & ExpressibleByArrayLiteral>: C
 
     static func encode(by encoder: any Encoder, key: String, value: Container) throws {
         if !value.isEmpty {
-            try value.encode(to: encoder)
+            var container = encoder.container(keyedBy: AnyCodingKey.self)
+            try container.encode(value, forKey: .init(key))
         }
     }
 
@@ -59,7 +60,8 @@ struct OmitIfFalse: CodingCustomizable {
 
     static func encode(by encoder: any Encoder, key: String, value: Bool) throws {
         if value {
-            try value.encode(to: encoder)
+            var container = encoder.container(keyedBy: AnyCodingKey.self)
+            try container.encode(value, forKey: .init(key))
         }
     }
 
@@ -75,7 +77,8 @@ struct OmitDateUnixEpoch: CodingCustomizable {
 
     static func encode(by encoder: any Encoder, key: String, value: Date) throws {
         if value != Date.distantPast {
-            try value.encode(to: encoder)
+            var container = encoder.container(keyedBy: AnyCodingKey.self)
+            try container.encodeDate(value: value, key: key, strategy: .millisecondsSince1970)
         }
     }
 

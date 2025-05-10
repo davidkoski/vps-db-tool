@@ -2,7 +2,7 @@ import Foundation
 import ReerCodable
 
 @Codable
-struct GameResourceCommon: Sendable {
+struct GameResourceCommon: Sendable, Equatable {
     @CustomCoding(OmitDateUnixEpoch.self) var createdAt: Date
     @CustomCoding(OmitDateUnixEpoch.self) var updatedAt: Date
 
@@ -14,7 +14,7 @@ struct GameResourceCommon: Sendable {
     var version: String?
 }
 
-protocol GameResource: Metadata {
+protocol GameResource: Metadata, Equatable {
     var gameResource: GameResourceCommon { get set }
 }
 
@@ -84,7 +84,8 @@ struct OmitGameRef: CodingCustomizable {
 
     static func encode(by encoder: any Encoder, key: String, value: GameRef) throws {
         if !value.id.isEmpty {
-            try value.encode(to: encoder)
+            var container = encoder.container(keyedBy: AnyCodingKey.self)
+            try container.encode(value, forKey: .init(key))
         }
     }
 

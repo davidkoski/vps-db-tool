@@ -1,3 +1,4 @@
+import Collections
 import Foundation
 import ReerCodable
 
@@ -20,7 +21,7 @@ protocol Metadata {
 }
 
 @Codable
-struct Resource: Sendable, Codable {
+struct Resource: Sendable, Codable, Equatable {
     var url: URL
 
     @CustomCoding(OmitIfFalse.self)
@@ -28,9 +29,14 @@ struct Resource: Sendable, Codable {
 }
 
 @Codable
-struct GameRef: Sendable {
+struct GameRef: Sendable, Equatable {
     let id: String
     let name: String
+
+    init(game: Game) {
+        self.id = game.id
+        self.name = game.name
+    }
 }
 
 @Codable
@@ -40,9 +46,11 @@ struct Table: GameResource, Sendable {
     @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 
-    @CustomCoding(OmitEmpty<Set<TableFeature>>.self) let features: Set<TableFeature>
+    @CustomCoding(OmitEmpty<OrderedSet<TableFeature>>.self) let features: OrderedSet<TableFeature>
     let tableFormat: TableFormat?
     let edition: String?
+
+    let gameFileName: String?
 
     let imgUrl: URL?
 }
@@ -50,9 +58,9 @@ struct Table: GameResource, Sendable {
 @Codable
 struct B2S: GameResource, Sendable {
     // Note: b2s for FX tables don't have an id
-    @CodingKey("id")
-    var _id: String?
-    var id: String { _id ?? "" }
+    var id: String = newId()
+
+    @CustomCoding(OmitEmpty<OrderedSet<B2SFeature>>.self) let features: OrderedSet<B2SFeature>
 
     @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
@@ -93,11 +101,24 @@ struct AltColors: GameResource, Sendable {
 
     @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
+
+    var fileName: String?
+    var folder: String?
+    var type: String?
 }
 
 @Codable
 struct AltSound: GameResource, Sendable {
     let id: String
+
+    @CustomCoding(GameResourceCommonTransformer.self)
+    var gameResource: GameResourceCommon
+}
+
+@Codable
+struct Sound: GameResource, Sendable {
+    // Note: these are largely missing -- sound files look obsolete
+    var id: String = newId()
 
     @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
@@ -170,6 +191,26 @@ struct GameContainer: Decodable {
     }
 }
 
+struct IPDBURL: CodingCustomizable {
+
+    static func decode(by decoder: any Decoder, keys: [String]) throws -> URL? {
+        let url: URL? = try decoder.valueIfPresent(forKeys: keys)
+        if url?.path() == "Not%20Available" {
+            return nil
+        } else {
+            return url
+        }
+    }
+
+    static func encode(by encoder: any Encoder, key: String, value: URL?) throws {
+        if value != nil {
+            var container = encoder.container(keyedBy: AnyCodingKey.self)
+            try container.encode(value, forKey: .init(key))
+        }
+    }
+
+}
+
 @Codable
 struct Game: Metadata, Sendable, CustomStringConvertible {
 
@@ -187,13 +228,17 @@ struct Game: Metadata, Sendable, CustomStringConvertible {
     @CodingKey("MPU") let mpu: String?
     var year: Int?
 
-    @CustomCoding(OmitEmpty<Set<Theme>>.self) var theme: Set<Theme>
+    @CustomCoding(OmitEmpty<OrderedSet<Theme>>.self) var theme: OrderedSet<Theme>
 
-    @CustomCoding(OmitEmpty<Set<String>>.self) var designers: Set<String>
+    // empty designers array is still emitted (usually)
+    var designers: OrderedSet<String> = []
 
     var type: Kind?
     var players: Int?
+
+    @CustomCoding(IPDBURL.self)
     var ipdbUrl: URL?
+    var imgUrl: URL?
 
     @CustomCoding(OmitEmpty<[Table]>.self) @CodingKey("tableFiles") var tables: [Table]
     @CustomCoding(OmitEmpty<[B2S]>.self) @CodingKey("b2sFiles") var backglasses: [B2S]
@@ -210,8 +255,10 @@ struct Game: Metadata, Sendable, CustomStringConvertible {
         [MediaPack]
     @CustomCoding(OmitEmpty<[Rules]>.self) @CodingKey("ruleFiles") var rules: [Rules]
 
-    @CustomCoding(OmitIfFalse.self)
-    var broken: Bool
+    // these are semi-disabled
+    @CustomCoding(OmitEmpty<[Sound]>.self) @CodingKey("soundFiles") var sounds: [Sound]
+
+    var broken: Bool = false
 
     var gameId: String { id }
     var gameName: String { name }
@@ -244,6 +291,7 @@ struct Game: Metadata, Sendable, CustomStringConvertible {
         case .topper: toppers
         case .mediaPack: mediaPacks
         case .rule: rules
+        case .sound: sounds
         }
     }
 
@@ -255,10 +303,6 @@ struct Game: Metadata, Sendable, CustomStringConvertible {
 extension Game: Comparable {
     static func < (lhs: Game, rhs: Game) -> Bool {
         lhs.name < rhs.name
-    }
-
-    static func == (lhs: Game, rhs: Game) -> Bool {
-        lhs.id == rhs.id
     }
 }
 
@@ -276,4 +320,5 @@ enum GameResourceKind: String, Codable, Sendable {
     case topper
     case mediaPack
     case rule
+    case sound
 }

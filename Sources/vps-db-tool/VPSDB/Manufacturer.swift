@@ -1,6 +1,6 @@
 import Foundation
 
-enum Manufacturer: String, Codable, Sendable {
+enum Manufacturer: String, Codable, Sendable, Equatable {
 
     case aPirmischer = "A. Pirmischer"
     case abt = "A.B.T."

@@ -7,7 +7,7 @@ struct VPSDbTool: AsyncParsableCommand {
         abstract: "Command line tool to assist withvps-db",
         subcommands: [
             DownloadCommand.self, CheckCommands.self, ExploreCommand.self,
-            IPDBCommands.self, ScanCommands.self,
+            IPDBCommands.self, ScanCommands.self, EditCommands.self,
         ]
     )
 }

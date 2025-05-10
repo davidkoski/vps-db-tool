@@ -35,6 +35,7 @@ extension VPUniverseScanner: ScanSources {
             case .altColor:
                 ["https://vpuniverse.com/files/category/101-pin2dmd-colorizations-virtual-pinball/"]
             case .altSound: ["https://vpuniverse.com/files/category/113-altsound/"]
+            case .sound: []
             case .pov:
                 ["https://vpuniverse.com/files/category/68-vpx-pov-point-of-view-physics-sets/"]
             case .wheelArt:

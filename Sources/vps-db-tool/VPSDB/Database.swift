@@ -11,6 +11,7 @@ struct Database: Codable, Sendable {
     let pupPacks: Index<PupPack>
     let altColors: Index<AltColors>
     let altSounds: Index<AltSound>
+    let sounds: Index<Sound>
     let povs: Index<POV>
     let wheels: Index<WheelArt>
     let toppers: Index<Topper>
@@ -41,6 +42,7 @@ struct Database: Codable, Sendable {
                     connect(&game, \.pupPacks)
                     connect(&game, \.altColors)
                     connect(&game, \.altSounds)
+                    connect(&game, \.sounds)
                     connect(&game, \.povs)
                     connect(&game, \.wheels)
                     connect(&game, \.toppers)
@@ -62,6 +64,7 @@ struct Database: Codable, Sendable {
         self.pupPacks = Index(games, \.pupPacks)
         self.altColors = Index(games, \.altColors)
         self.altSounds = Index(games, \.altSounds)
+        self.sounds = Index(games, \.sounds)
         self.povs = Index(games, \.povs)
         self.wheels = Index(games, \.wheels)
         self.toppers = Index(games, \.toppers)
@@ -84,6 +87,7 @@ struct Database: Codable, Sendable {
         case .pupPack: AnyIndex(pupPacks)
         case .altColor: AnyIndex(altColors)
         case .altSound: AnyIndex(altSounds)
+        case .sound: AnyIndex(sounds)
         case .pov: AnyIndex(povs)
         case .wheelArt: AnyIndex(wheels)
         case .topper: AnyIndex(toppers)

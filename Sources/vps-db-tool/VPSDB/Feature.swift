@@ -7,7 +7,7 @@ import Foundation
 // DT Only
 
 /// https://github.com/VirtualPinballSpreadsheet/vps-frontend/blob/master/src/lib/types/VPin.ts#L129
-enum TableFeature: String, Codable, Sendable {
+enum TableFeature: String, Codable, Sendable, Equatable {
     case fourK = "4k"
     case adult = "Adult"
     case bam = "BAM"

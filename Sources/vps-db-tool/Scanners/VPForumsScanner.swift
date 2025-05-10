@@ -31,6 +31,7 @@ extension VPForumsScanner: ScanSources {
             case .altColor:
                 []
             case .altSound: []
+            case .sound: []
             case .pov:
                 []
             case .wheelArt:
