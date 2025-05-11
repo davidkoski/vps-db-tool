@@ -3,6 +3,10 @@ import Foundation
 struct Author: Codable, Sendable, Hashable, Comparable {
     let name: String
 
+    internal init(name: String) {
+        self.name = name
+    }
+
     init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         self.name = try container.decode(String.self)

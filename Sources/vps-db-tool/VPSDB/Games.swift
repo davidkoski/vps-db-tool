@@ -47,12 +47,12 @@ struct Table: GameResource, Sendable {
     var gameResource: GameResourceCommon
 
     @CustomCoding(OmitEmpty<OrderedSet<TableFeature>>.self) let features: OrderedSet<TableFeature>
-    let tableFormat: TableFormat?
-    let edition: String?
+    var tableFormat: TableFormat?
+    var edition: String?
 
-    let gameFileName: String?
+    var gameFileName: String?
 
-    let imgUrl: URL?
+    var imgUrl: URL?
 }
 
 @Codable
@@ -225,7 +225,7 @@ struct Game: Metadata, Sendable, CustomStringConvertible {
     var manufacturer: Manufacturer
     var imageUrl: URL?
 
-    @CodingKey("MPU") let mpu: String?
+    @CodingKey("MPU") var mpu: String?
     var year: Int?
 
     @CustomCoding(OmitEmpty<OrderedSet<Theme>>.self) var theme: OrderedSet<Theme>

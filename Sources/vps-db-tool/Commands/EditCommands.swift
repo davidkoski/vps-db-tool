@@ -7,7 +7,7 @@ struct EditCommands: AsyncParsableCommand {
         commandName: "edit",
         abstract: "scanning related commands",
         subcommands: [
-            EditURLsCommand.self, EditIdsCommand.self,
+            EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
         ]
     )
 }
@@ -128,6 +128,81 @@ struct EditIdsCommand: AsyncParsableCommand {
             game.toppers = game.toppers.map { update(game: game, $0) }
             game.mediaPacks = game.mediaPacks.map { update(game: game, $0) }
             game.rules = game.rules.map { update(game: game, $0) }
+
+            return game
+        }
+    }
+}
+
+struct EditTrimCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "trim",
+        abstract: "trim strings"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    func update<T: GameResource>(_ item: T) -> T {
+        var item = item
+        item.gameResource.comment = item.gameResource.comment?.trim()
+        item.gameResource.version = item.gameResource.version?.trim()
+        item.gameResource.authors = item.gameResource.authors
+            .map {
+                Author(name: $0.name.trim())
+            }
+        return item
+    }
+
+    func updateTable(_ item: Table) -> Table {
+        var item = item
+        item.edition = item.edition?.trim()
+        item.gameFileName = item.gameFileName?.trim()
+        return item
+    }
+
+    func updateTutorial(_ item: Tutorial) -> Tutorial {
+        var item = item
+        item.youtubeId = item.youtubeId.trim()
+        item.title = item.title.trim()
+        return item
+    }
+
+    func updateAltColors(_ item: AltColors) -> AltColors {
+        var item = item
+        item.fileName = item.fileName?.trim()
+        item.folder = item.folder?.trim()
+        item.type = item.type?.trim()
+        return item
+    }
+
+    func updateGame(_ item: Game) -> Game {
+        var item = item
+        item.name = item.name.trim()
+        item.mpu = item.mpu?.trim()
+        return item
+    }
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = updateGame(game)
+
+            game.tables = game.tables.map { update($0) }
+            game.tables = game.tables.map { updateTable($0) }
+            game.backglasses = game.backglasses.map { update($0) }
+            game.tutorials = game.tutorials.map { update($0) }
+            game.tutorials = game.tutorials.map { updateTutorial($0) }
+            game.roms = game.roms.map { update($0) }
+            game.pupPacks = game.pupPacks.map { update($0) }
+            game.altColors = game.altColors.map { update($0) }
+            game.altColors = game.altColors.map { updateAltColors($0) }
+            game.altSounds = game.altSounds.map { update($0) }
+            game.sounds = game.sounds.map { update($0) }
+            game.povs = game.povs.map { update($0) }
+            game.wheels = game.wheels.map { update($0) }
+            game.toppers = game.toppers.map { update($0) }
+            game.mediaPacks = game.mediaPacks.map { update($0) }
+            game.rules = game.rules.map { update($0) }
 
             return game
         }
