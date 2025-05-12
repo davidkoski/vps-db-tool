@@ -139,8 +139,8 @@ private struct Report {
 
     let header =
         """
-        <script src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
         <link href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css" rel="stylesheet"></link>
         """
 
@@ -160,10 +160,12 @@ private struct Report {
                 </table>
                 <script>
                 $("#report").DataTable({
-                    "paging":   false,
-                    "info":     false,
+                    paging:   false,
+                    info:     false,
                     searching: true,
-                });        
+                    order: [],
+                });
+                </script>
                 """
     }
 
