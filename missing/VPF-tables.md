@@ -2,6 +2,8 @@
 
 | Name | URL |
 | ---- | --- |                
+| Fair Fight (Recel 1978) JP 5.5 DT-FS-VR-MR... 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=19095 |
+| Vampire (Bally 1971) 1.0.0 | https://www.vpforums.org/index.php?app=downloads&showfile=19092 |
 | plasticos alternativo vpx | https://www.vpforums.org/index.php?app=downloads&showfile=18359 |
 | Beavis and Butt-head: Pinballed (Bally 1993... | https://www.vpforums.org/index.php?app=downloads&showfile=18204 |
 | Spider-man VE 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=17323 |
