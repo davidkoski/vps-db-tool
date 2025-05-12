@@ -39,9 +39,9 @@ class HTTPClient {
         return s.hasSuffix(".html") ? s : s + ".html"
     }
 
-    func get(_ url: URL) async throws -> Data {
+    func get(_ url: URL, bypassCache: Bool = false) async throws -> Data {
         let cache = cache?.appending(path: pathify(url))
-        if let cache {
+        if !bypassCache, let cache {
             if let data = try? Data(contentsOf: cache) {
                 return data
             }
@@ -80,8 +80,8 @@ class HTTPClient {
         }
     }
 
-    func getString(_ url: URL) async throws -> String {
-        let data = try await get(url)
+    func getString(_ url: URL, bypassCache: Bool = false) async throws -> String {
+        let data = try await get(url, bypassCache: bypassCache)
         if let s = String(data: data, encoding: .utf8) {
             return s
         }

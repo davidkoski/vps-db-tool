@@ -45,6 +45,24 @@ enum URLIssue: Codable, Sendable, Hashable {
         }
     }
 
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case .entryNotFound(let detailResult):
+            // match on tag only
+            hasher.combine("entryNotFound")
+            break
+        }
+    }
+
+    static func == (lhs: URLIssue, rhs: URLIssue) -> Bool {
+        switch (lhs, rhs) {
+        case (.entryNotFound(let l), .entryNotFound(let r)):
+            // match on tag only
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 struct IssueMetadata: Codable, Sendable, CustomStringConvertible {
@@ -95,10 +113,11 @@ struct IssueDatabase: Codable, Sendable {
 
     subscript(resourceKind: GameResourceKind, url: URL, issue: URLIssue) -> IssueMetadata? {
         get {
-            urlIssue[resourceKind]?[url]?[issue]
+            urlIssue[resourceKind]?[Site.canonical(url)]?[issue]
         }
         set {
-            urlIssue[resourceKind, default: [:]][url, default: [:]][issue] = newValue
+            urlIssue[resourceKind, default: [:]][Site.canonical(url), default: [:]][issue] =
+                newValue
         }
     }
 
@@ -163,20 +182,32 @@ struct IssueDatabase: Codable, Sendable {
     }
 
     @discardableResult
-    mutating func report(kind: GameResourceKind, url: URL, issue: URLIssue) -> IssueDisposition {
+    mutating func report(kind: GameResourceKind, url: URL, issue: URLIssue, comment: String? = nil)
+        -> IssueDisposition
+    {
         print(issue.describe(kind: kind, url: url))
         if let found = self[kind, url, issue] {
             print(found)
             return .existant
         } else {
-            print("Comment or <return> to skip")
-            if let line = readLine(), !line.isEmpty {
-                self[kind, url, issue] = .init(comment: line)
+            if let comment = resolveComment(comment) {
+                self[kind, url, issue] = .init(comment: comment)
                 return .recorded
             } else {
                 return .willFix
             }
         }
+    }
+
+    func resolveComment(_ comment: String?) -> String? {
+        if let comment {
+            return comment
+        }
+        print("Comment or <return> to skip")
+        if let line = readLine(), !line.isEmpty {
+            return line
+        }
+        return nil
     }
 
     func check(game: Game, issue: GameIssue) -> Bool {

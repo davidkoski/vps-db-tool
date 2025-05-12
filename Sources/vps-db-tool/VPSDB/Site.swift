@@ -23,6 +23,10 @@ enum Site: Sendable {
         }
     }
 
+    static func canonical(_ url: URL) -> URL {
+        Site(url).canonicalize(url)
+    }
+
     /// convert a URL into a canonical form -- remove any parts that can vary without consequence
     func canonicalize(_ url: URL) -> URL {
         var url = url

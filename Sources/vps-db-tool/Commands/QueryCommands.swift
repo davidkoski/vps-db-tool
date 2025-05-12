@@ -13,6 +13,5 @@ struct QueryCommands: AsyncParsableCommand {
     @Option var kind: GameResourceKind = .table
 
     mutating func run() async throws {
-        let db = try db.database()
     }
 }

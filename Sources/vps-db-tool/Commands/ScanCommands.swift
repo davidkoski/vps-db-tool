@@ -215,7 +215,7 @@ struct CheckMissingCommand: AsyncParsableCommand {
 
     mutating func run() async throws {
         let db = try db.database()
-        var issues = try issues.database()
+        let issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = scan.site.scanner

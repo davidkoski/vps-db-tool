@@ -1,6 +1,6 @@
 import ArgumentParser
-import Foundation
 import Collections
+import Foundation
 
 struct EditCommands: AsyncParsableCommand {
 
