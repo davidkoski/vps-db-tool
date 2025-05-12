@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import Collections
 
 struct EditCommands: AsyncParsableCommand {
 
@@ -180,6 +181,7 @@ struct EditTrimCommand: AsyncParsableCommand {
         var item = item
         item.name = item.name.trim()
         item.mpu = item.mpu?.trim()
+        item.designers = OrderedSet(item.designers.map { $0.trim() })
         return item
     }
 
