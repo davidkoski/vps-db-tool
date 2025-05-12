@@ -1,10 +1,10 @@
 import Foundation
 
-enum Site: Sendable {
-    case vpuniverse
-    case vpforums
-    case pinballnirvana
-    case other
+enum Site: String, Sendable {
+    case vpu = "VPU"
+    case vpf = "VPF"
+    case pinballnirvana = "Nirvana"
+    case other = "Other"
 
     init?(_ url: URL?) {
         if let url {
@@ -16,8 +16,8 @@ enum Site: Sendable {
 
     init(_ url: URL) {
         switch url.host() {
-        case "vpuniverse.com": self = .vpuniverse
-        case "www.vpforums.org": self = .vpforums
+        case "vpuniverse.com": self = .vpu
+        case "www.vpforums.org": self = .vpf
         case "pinballnirvana.com": self = .pinballnirvana
         default: self = .other
         }
@@ -36,7 +36,7 @@ enum Site: Sendable {
         }
 
         switch self {
-        case .vpuniverse:
+        case .vpu:
             // any url of the form
             // https://vpuniverse.com/files/file/24527-any/
             //
@@ -57,7 +57,7 @@ enum Site: Sendable {
             } else {
                 return url
             }
-        case .vpforums:
+        case .vpf:
             // https://www.vpforums.org/index.php?s=1626316605b94c1502262391eba17e6a&app=downloads&showfile=17011
             let string = url.description
                 .replacing(/s=[0-9a-f]+&/, with: "")
@@ -78,7 +78,7 @@ enum Site: Sendable {
         }
 
         switch self {
-        case .vpuniverse:
+        case .vpu:
             // strip query params, e.g. tab and comment selections
             if url.query() != nil,
                 var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
@@ -98,7 +98,7 @@ enum Site: Sendable {
 
             return url
 
-        case .vpforums:
+        case .vpf:
             // https://www.vpforums.org/index.php?s=1626316605b94c1502262391eba17e6a&app=downloads&showfile=17011
             let string = url.description
                 .replacing(/s=[0-9a-f]+&/, with: "")

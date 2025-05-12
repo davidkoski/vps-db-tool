@@ -1,131 +1,130 @@
 import ArgumentParser
 import Foundation
 
-struct ReportCommands: AsyncParsableCommand {
-
-    static let configuration = CommandConfiguration(
-        commandName: "scan",
-        abstract: "scanning related commands",
-        subcommands: [
-            DownloadCommand.self, CheckDownloadCommand.self, CheckMissingCommand.self,
-        ]
-    )
-}
-
-struct ReportArguments: ParsableArguments, Sendable {
-
-    @Option
-    var cache = URL(fileURLWithPath: "./cache")
-
-    @Option
-    var kind: GameResourceKind = .table
-
-    enum Site: String, ExpressibleByArgument {
-        case vpu
-        case vpf
-
-        var scanner: ScanSources & DetailScanner & ListScanner {
-            switch self {
-            case .vpu: VPUniverseScanner()
-            case .vpf: VPForumsScanner()
-            }
-        }
-    }
-
-    @Option
-    var site = Site.vpu
-
-    @Option
-    var page = 1
-
-    @Option
-    var pages = 0
-
-    @Flag
-    var follow = false
-
-    func urls(scanner: ScanSources & ListScanner, client: HTTPClient) async throws -> [(
-        ScanVariant, URL
-    )] {
-        var urls = [(ScanVariant, URL)]()
-
-        if pages > 0 {
-            for root in scanner.sources(kind: kind) {
-                let content = try await client.getString(root)
-                let list = try scanner.scanList(url: root, content: content, kind: kind)
-
-                for i in 0 ..< min(pages, list.pages ?? pages) {
-                    urls.append((.list, scanner.update(kind: kind, url: root, page: page + i)))
-                }
-            }
-        } else {
-            urls.append(contentsOf: scanner.sources(kind: kind).map { (.list, $0) })
-        }
-
-        return urls
-    }
-}
-
 struct ReportCommand: AsyncParsableCommand {
 
     static let configuration = CommandConfiguration(
-        commandName: "check-missing",
-        abstract: "check resources"
+        commandName: "report",
+        abstract: "write missing resource report"
     )
 
     @OptionGroup var db: VPSDbArguments
     @OptionGroup var issues: IssuesArguments
-    @OptionGroup var scan: ReportArguments
 
-    @Flag var markdown = false
+    @Option var cache = URL(fileURLWithPath: "./cache-report")
+
+    @Option var output = URL(fileURLWithPath: "./report/index.html")
+
+    @Flag var recordIssues = false
 
     mutating func run() async throws {
-        let db = try db.database()
-        var issues = try issues.database()
+        let scans: [(Site, GameResourceKind, Bool)] = [
+            (.vpu, .table, true),
+            (.vpf, .table, true),
+            (.vpu, .b2s, false),
+            (.vpf, .b2s, false),
+            (.vpu, .rom, false),
+            (.vpf, .rom, false),
+            (.vpu, .pupPack, false),
+            (.vpu, .altColor, false),
+            (.vpu, .altSound, false),
+            (.vpu, .pov, false),
+            (.vpu, .wheelArt, false),
+            (.vpf, .wheelArt, false),
+            (.vpu, .topper, false),
+            (.vpf, .topper, false),
+            (.vpu, .mediaPack, false),
+            (.vpf, .mediaPack, false),
+            (.vpu, .rule, false),
+        ]
 
-        let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = scan.site.scanner
+        var items = [Item]()
 
-        var urls = try await scan.urls(scanner: scanner, client: client)
-
-        if markdown {
-            print(
-                """
-                **Missing \(scan.kind)**
-
-                | Name | URL |
-                | ---- | --- |                
-                """
-            )
+        for s in scans {
+            try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
         }
 
-        while !urls.isEmpty {
-            let (variant, url) = urls.removeFirst()
+        if !items.isEmpty {
+            try Report().emit(items: items).write(to: output, atomically: true, encoding: .utf8)
+        }
+    }
 
-            let content = try await client.getString(url)
+    private mutating func scan(
+        site: Site, kind: GameResourceKind, follow: Bool = false
+    ) async throws -> [Item] {
+        let db = try db.database()
+        var issues = try issues.database()
+        let client = HTTPClient(cache: cache, throttle: .seconds(3))
 
-            switch variant {
-            case .detail:
-                break
-            case .list:
-                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
+        let scanner: ScanSources & DetailScanner & ListScanner =
+            switch site {
+            case .vpu: VPUniverseScanner()
+            case .vpf: VPForumsScanner()
+            case .pinballnirvana, .other: fatalError()
+            }
 
-                for item in result.list {
-                    if db[scan.kind][item.url] == nil {
-                        let issue = URLIssue.entryNotFound(item)
-                        if !issues.check(kind: scan.kind, url: item.url, issue: issue) {
-                            if markdown {
-                                print("| \(item.name ?? "unknown") | \(item.url) |")
-                            } else {
-                                print(issue.describe(kind: scan.kind, url: item.url))
+        print(site, kind)
+
+        var result = [Item]()
+
+        for listURL in scanner.sources(kind: kind) {
+            print(listURL)
+
+            let content = try await client.getString(listURL, bypassCache: true)
+
+            let scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+
+            for item in scanResult.list {
+                print(item.name ?? "unknown")
+                if let match = db[kind][item.url], let file = match.first, let game = db[file] {
+                    if follow {
+                        print(item.url)
+                        let content = try await client.getString(item.url)
+                        if let detail = try scanner.scanDetail(
+                            url: item.url, content: content, kind: kind)
+                        {
+
+                            if canonicalVersion(file.version) != canonicalVersion(detail.version) {
+                                let issue = ResourceIssue.versionMismatch(detail.version)
+
+                                var report = !issues.check(
+                                    game: game, kind: kind, gameResource: file, url: item.url,
+                                    issue: issue)
+
+                                if report && recordIssues {
+                                    report =
+                                        issues.report(
+                                            game: game, kind: kind, gameResource: file,
+                                            url: item.url, issue: issue) == .willFix
+                                }
+
+                                if report {
+                                    result.append(
+                                        .init(
+                                            url: item.url, name: item.name ?? "unknown", kind: kind,
+                                            issue:
+                                                "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(detail.version))"
+                                        ))
+                                }
                             }
                         }
+                    }
+                } else {
+                    let issue = URLIssue.entryNotFound(item)
+                    if !issues.check(kind: kind, url: item.url, issue: issue) {
+                        result.append(
+                            .init(
+                                url: item.url, name: item.name ?? "unknown", kind: kind,
+                                issue: "missing"
+                            ))
                     }
                 }
             }
         }
 
-        try self.issues.save(db: issues)
+        self.issues.update(issues)
+
+        return result
     }
 }
 
@@ -145,4 +144,38 @@ private struct Report {
         <link href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css" rel="stylesheet"></link>
         """
 
+    func emit(items: [Item]) -> String {
+        header + """
+            <table id="report" class="display">
+            <thead>
+                <tr>
+                    <th>URL</th>
+                    <th>Site</th>
+                    <th>Kind</th>
+                    <th>Name</th>
+                    <th>Issue</th>
+                </tr>
+            </thead>
+            """ + items.map { emitRow($0) }.joined(separator: "\n") + """
+                </table>
+                <script>
+                $("#report").DataTable({
+                    "paging":   false,
+                    "info":     false,
+                    searching: true,
+                });        
+                """
+    }
+
+    private func emitRow(_ item: Item) -> String {
+        """
+        <tr>
+            <td><a href="\(item.url)">\(item.url)</a></td>
+            <td>\(Site(item.url).rawValue)</td>
+            <td>\(item.kind.rawValue)</td>
+            <td>\(item.name)</td>
+            <td>\(item.issue)</td>
+        </tr>
+        """
+    }
 }

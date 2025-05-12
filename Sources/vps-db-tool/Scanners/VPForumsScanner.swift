@@ -111,6 +111,23 @@ extension VPForumsScanner: DetailScanner {
         let dateCreated: Date
     }
 
+    func splitName(_ text: String) -> (name: String, version: String) {
+        var name: String
+
+        // Count-Down (Gottlieb 1978) JP v5.5 DT-FS-VR-MR Ext2k Conversion 2.0
+        let pieces = text.split(separator: ") ")
+        let pieces2 = text.split(separator: " ")
+
+        if pieces.count == 2 {
+            name = pieces[0] + ")"
+        } else {
+            name = pieces2.dropLast().joined(separator: " ")
+        }
+
+        let version2 = String(pieces2.last ?? "")
+        return (name, version2)
+    }
+
     func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
         let html = try SwiftSoup.parse(content)
 
@@ -123,25 +140,14 @@ extension VPForumsScanner: DetailScanner {
         if let titleVersion = try html.select("h1.ipsType_pagetitle").first() {
             let text = try titleVersion.text()
                 .replacingOccurrences(of: "Download ", with: "")
-            let pieces = text.split(separator: ") ")
-            if pieces.count == 2 {
-                return .init(
-                    url: Site(url).canonicalize(url),
-                    name: pieces[0] + ")",
-                    author: nil,
-                    version: String(pieces[1])
-                )
-            }
 
-            let pieces2 = text.split(separator: " ")
-            let version2 = String(pieces2.last ?? "")
-            let name2 = pieces2.dropLast().joined(separator: " ")
+            let (name, version) = splitName(text)
 
             return .init(
                 url: Site(url).canonicalize(url),
-                name: name2,
+                name: name,
                 author: nil,
-                version: version2
+                version: version
             )
         }
 

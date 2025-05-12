@@ -8,7 +8,7 @@ struct VPSDbTool: AsyncParsableCommand {
         subcommands: [
             DownloadCommand.self, CheckCommands.self, ExploreCommand.self,
             IPDBCommands.self, ScanCommands.self, EditCommands.self,
-            IssueCommands.self,
+            IssueCommands.self, ReportCommand.self,
         ]
     )
 }
@@ -36,8 +36,20 @@ struct IssuesArguments: ParsableArguments, Sendable {
     @Option(name: .customLong("issues"), help: "Path to issues.json")
     var path: URL = URL(fileURLWithPath: "issues.json")
 
-    func database() throws -> IssueDatabase {
-        try JSONDecoder().decode(IssueDatabase.self, from: Data(contentsOf: path))
+    private var db: IssueDatabase?
+
+    mutating func database() throws -> IssueDatabase {
+        if let db {
+            return db
+        }
+
+        let db = try JSONDecoder().decode(IssueDatabase.self, from: Data(contentsOf: path))
+        self.db = db
+        return db
+    }
+
+    mutating func update(_ db: IssueDatabase) {
+        self.db = db
     }
 
     func save(db: IssueDatabase) throws {
