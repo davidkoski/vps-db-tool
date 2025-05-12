@@ -4,7 +4,6 @@
 | ---- | --- |                
 | Fair Fight (Recel 1978) JP 5.5 DT-FS-VR-MR... 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=19095 |
 | Vampire (Bally 1971) 1.0.0 | https://www.vpforums.org/index.php?app=downloads&showfile=19092 |
-| plasticos alternativo vpx | https://www.vpforums.org/index.php?app=downloads&showfile=18359 |
 | Beavis and Butt-head: Pinballed (Bally 1993... | https://www.vpforums.org/index.php?app=downloads&showfile=18204 |
 | Spider-man VE 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=17323 |
 | From Dusk Till Dawn - slim DMD (4:1) image | https://www.vpforums.org/index.php?app=downloads&showfile=17271 |
@@ -13,33 +12,22 @@
 | Bond 60th - DMD Image 4:1 | https://www.vpforums.org/index.php?app=downloads&showfile=17240 |
 | VR 360 Skybox - Water Dungeon | https://www.vpforums.org/index.php?app=downloads&showfile=17155 |
 | Flash Gordon (Bally 1981) Sound Mod v2.1 VPX7.2 | https://www.vpforums.org/index.php?app=downloads&showfile=13111 |
-| Jacks Open (Gottlieb 1977)_Bigus(MOD) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16946 |
-| High Hand (Gottlieb 1973)_Bigus(MOD) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16945 |
-| Feiseanna 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16913 |
-| Floopy Bat 1.1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16884 |
-| Ice Fever (Gottlieb 1985) NHL Mod.vpx 2.2 | https://www.vpforums.org/index.php?app=downloads&showfile=16814 |
 | Bram Stokers Dracula (Williams 1993) [Csilk... 1.3 | https://www.vpforums.org/index.php?app=downloads&showfile=16839 |
 | Lost in Space Retro 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=16513 |
-| Trick Shooter (LTD 1983) Whitewood #3 0.1 | https://www.vpforums.org/index.php?app=downloads&showfile=16858 |
 | The Price is Right Cats 1976 Extended MP3 | https://www.vpforums.org/index.php?app=downloads&showfile=16832 |
 | The Price is Right: 50 Years 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16829 |
 | The Rocky Horror Picture Show Edition 1.00... 1.00 | https://www.vpforums.org/index.php?app=downloads&showfile=16748 |
 | Bonanza Edition 1.00 Reskin (I... 1.00 | https://www.vpforums.org/index.php?app=downloads&showfile=16719 |
 | Terrific Lake (Sportmatic 1987) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16667 |
-| Terrific Lake (Sportmatic 1987) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16666 |
 | Harley Davidson (Sega 1999)MOD 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=16545 |
 | Alien Nostromo (Ultimate Edition) Version 3.02 | https://www.vpforums.org/index.php?app=downloads&showfile=16490 |
-| The BeastMaster v2 with Movie Sound FX | https://www.vpforums.org/index.php?app=downloads&showfile=16215 |
 | Transporter the Rescue (Bally 1989) Topper 1 | https://www.vpforums.org/index.php?app=downloads&showfile=16255 |
 | Game Of Thrones V1 With Puppack | https://www.vpforums.org/index.php?app=downloads&showfile=16229 |
 | Triumph table wheel image for front end 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16208 |
-| Wolf Man (Peyper 1987) 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15149 |
 | Bow and Arrow EM (Bally 1975) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=16197 |
-| Bow And Arrow (Bally 1974) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16189 |
 | Big Chief (Williams 1965) 1.0c | https://www.vpforums.org/index.php?app=downloads&showfile=16074 |
 | Black Gold (Williams 1975) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16109 |
 | Flying Chariots (Gottlieb 1963) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16108 |
-| Eight Ball Champ (Bally 1985) 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=15878 |
 | Star Action (Williams 1973) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16036 |
 | Triple Action (Williams 1973) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16035 |
 | Star Pool (Williams 1974) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16073 |
@@ -72,10 +60,8 @@
 | Mary Shelley's Frankenstein (Sega 1995) 1.2.1 | https://www.vpforums.org/index.php?app=downloads&showfile=15682 |
 | Dready 4-Bushes (Horsepin, Balater 2021) 0.99 | https://www.vpforums.org/index.php?app=downloads&showfile=15648 |
 | Metallica Premium Monsters (Stern 2013) VPW... 1.0.6 | https://www.vpforums.org/index.php?app=downloads&showfile=15453 |
-| City Slicker Desktop 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15499 |
 | Remdwaas pokemon pinball 1.2 | https://www.vpforums.org/index.php?app=downloads&showfile=15455 |
 | Hang Glider (Bally 1976) 1.0c | https://www.vpforums.org/index.php?app=downloads&showfile=15373 |
-| Corinthian Master 1.3 | https://www.vpforums.org/index.php?app=downloads&showfile=15425 |
 | NBA Fastbreak (Bally 1997) VPW Mod 1.17.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15402 |
 | Sweet Hearts (Gottlieb 1963) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=15378 |
 | Hi-Deal (Bally 1975) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15374 |
@@ -85,7 +71,6 @@
 | Queen of Hearts (Gottlieb 1952) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15376 |
 | Joker (Gottlieb 1950) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15375 |
 | Rolling Stones (Bally 1980) Complete Re-Bui... 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=15349 |
-| Cue Ball Wizard (Gottlieb 1992) 0.7 | https://www.vpforums.org/index.php?app=downloads&showfile=15338 |
 | Fog, The (Gottlieb 1979) Complete VPX Package 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15334 |
 | Grand Prix (Williams 1976) EM 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15324 |
 | Super-Flite (Williams 1974) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=15305 |
@@ -97,7 +82,6 @@
 | Rainbow (Gottlieb 1956) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15309 |
 | Big Valley (Bally 1970) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15308 |
 | North Star (Gottlieb 1964) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15307 |
-| King Kong -proto (Data East 1990) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15262 |
 | Bon Voyage (Bally 1974) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15244 |
 | super mario galaxy pinball 1.2 | https://www.vpforums.org/index.php?app=downloads&showfile=15236 |
 | Bad Cats (Williams 1989) VPin Workshop 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15231 |
