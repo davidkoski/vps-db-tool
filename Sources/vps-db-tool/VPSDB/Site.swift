@@ -89,6 +89,10 @@ enum Site: String, Sendable {
                 }
             }
 
+            if !url.path().hasSuffix("/") {
+                url = URL(string: url.description + "/")!
+            }
+
             // remove the /formums links
             if url.path().hasPrefix("/forums/files/") {
                 url = URL(
