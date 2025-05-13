@@ -3,12 +3,10 @@
 | Name | URL |
 | ---- | --- |                
 | Beavis and Butt-head: Pinballed (Bally 1993... | https://www.vpforums.org/index.php?app=downloads&showfile=18204 |
-| The Price is Right: 50 Years 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16829 |
 | The Rocky Horror Picture Show Edition 1.00... 1.00 | https://www.vpforums.org/index.php?app=downloads&showfile=16748 |
-| Terrific Lake (Sportmatic 1987) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16667 |
+| Terrific Lake (Sportmatic 1987) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16666 |
 | Transporter the Rescue (Bally 1989) Topper 1 | https://www.vpforums.org/index.php?app=downloads&showfile=16255 |
 | Triumph table wheel image for front end 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16208 |
-| Bow and Arrow EM (Bally 1975) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=16197 |
 | Big Chief (Williams 1965) 1.0c | https://www.vpforums.org/index.php?app=downloads&showfile=16074 |
 | Black Gold (Williams 1975) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16109 |
 | Flying Chariots (Gottlieb 1963) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16108 |
@@ -29,17 +27,14 @@
 | Watchmen 1.0.2 | https://www.vpforums.org/index.php?app=downloads&showfile=14418 |
 | Triple Action (Williams 1973) rev 1.00 VPX 10.7 | https://www.vpforums.org/index.php?app=downloads&showfile=15984 |
 | Cheech & Chong: Road-Trip'pin (Ball... | https://www.vpforums.org/index.php?app=downloads&showfile=15971 |
-| Monday Night Football (Data East 1989) SG1b... | https://www.vpforums.org/index.php?app=downloads&showfile=15947 |
 | Terminator Genisys (TBA 2019) 1.1m | https://www.vpforums.org/index.php?app=downloads&showfile=15827 |
 | Rolling Stones (Bally 1980)_Bigus(MOD) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15926 |
 | Shovel Knight RusstyTMod1.0_DeskTop | https://www.vpforums.org/index.php?app=downloads&showfile=15916 |
-| Devil's Dare (Gottlieb 1992) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=15871 |
 | Odds & Evens - Bud Spencer & Terenc... 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15828 |
 | Starwars Bountyhunter 2.1 | https://www.vpforums.org/index.php?app=downloads&showfile=15528 |
 | Labyrinth 1.01 | https://www.vpforums.org/index.php?app=downloads&showfile=15772 |
 | TALES FROM THE CRYPT MOD | https://www.vpforums.org/index.php?app=downloads&showfile=15778 |
 | Dolly Parton 1979 | https://www.vpforums.org/index.php?app=downloads&showfile=15744 |
-| The Addams Family (Bally 1992) BW MOD V1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15685 |
 | Michael jackson ver 3.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14935 |
 | Mary Shelley's Frankenstein (Sega 1995) 1.2.1 | https://www.vpforums.org/index.php?app=downloads&showfile=15682 |
 | Dready 4-Bushes (Horsepin, Balater 2021) 0.99 | https://www.vpforums.org/index.php?app=downloads&showfile=15648 |
@@ -56,7 +51,6 @@
 | Joker (Gottlieb 1950) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15375 |
 | Rolling Stones (Bally 1980) Complete Re-Bui... 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=15349 |
 | Fog, The (Gottlieb 1979) Complete VPX Package 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15334 |
-| Grand Prix (Williams 1976) EM 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15324 |
 | Super-Flite (Williams 1974) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=15305 |
 | Strato-Flite (Williams 1974) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=15304 |
 | Space Odyssey (Williams 1976) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=15303 |
