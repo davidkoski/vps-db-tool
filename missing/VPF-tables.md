@@ -2,34 +2,8 @@
 
 | Name | URL |
 | ---- | --- |                
-| Beavis and Butt-head: Pinballed (Bally 1993... | https://www.vpforums.org/index.php?app=downloads&showfile=18204 |
-| The Rocky Horror Picture Show Edition 1.00... 1.00 | https://www.vpforums.org/index.php?app=downloads&showfile=16748 |
-| Terrific Lake (Sportmatic 1987) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16666 |
-| Transporter the Rescue (Bally 1989) Topper 1 | https://www.vpforums.org/index.php?app=downloads&showfile=16255 |
 | Triumph table wheel image for front end 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16208 |
-| Big Chief (Williams 1965) 1.0c | https://www.vpforums.org/index.php?app=downloads&showfile=16074 |
-| Black Gold (Williams 1975) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16109 |
-| Flying Chariots (Gottlieb 1963) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16108 |
-| Star Action (Williams 1973) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16036 |
-| Triple Action (Williams 1973) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16035 |
-| Star Pool (Williams 1974) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16073 |
-| Cleopatra (Gottlieb 1977) 1.0b | https://www.vpforums.org/index.php?app=downloads&showfile=16062 |
-| Eight Ball Deluxe (Bally 1981) 1.1c | https://www.vpforums.org/index.php?app=downloads&showfile=15890 |
-| Lucky Ace (Williams 1974) User42mod | https://www.vpforums.org/index.php?app=downloads&showfile=16060 |
-| Dragon (Interflip 1977) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16025 |
-| Phase II (J. Esteban 1975) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16027 |
-| Circus (Bally 1973) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16028 |
-| Big Show (Bally 1974) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=16029 |
-| Lucky Ace (Williams 1974) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16033 |
-| Dealers Choice (Williams 1973) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16032 |
-| Gaucho (Gottlieb 1963) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16030 |
-| Full (Recreativos Franco 1977) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=16026 |
-| Watchmen 1.0.2 | https://www.vpforums.org/index.php?app=downloads&showfile=14418 |
-| Triple Action (Williams 1973) rev 1.00 VPX 10.7 | https://www.vpforums.org/index.php?app=downloads&showfile=15984 |
-| Cheech & Chong: Road-Trip'pin (Ball... | https://www.vpforums.org/index.php?app=downloads&showfile=15971 |
-| Terminator Genisys (TBA 2019) 1.1m | https://www.vpforums.org/index.php?app=downloads&showfile=15827 |
 | Rolling Stones (Bally 1980)_Bigus(MOD) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15926 |
-| Shovel Knight RusstyTMod1.0_DeskTop | https://www.vpforums.org/index.php?app=downloads&showfile=15916 |
 | Odds & Evens - Bud Spencer & Terenc... 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=15828 |
 | Starwars Bountyhunter 2.1 | https://www.vpforums.org/index.php?app=downloads&showfile=15528 |
 | Labyrinth 1.01 | https://www.vpforums.org/index.php?app=downloads&showfile=15772 |
@@ -88,7 +62,6 @@
 | TX-Sector (Dozer MOD) 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=14575 |
 | Lightning Ball (Gottlieb 1959) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14567 |
 | Flipper Fair (Gottlieb 1961) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14566 |
-| Pharaoh - Dead Rise 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=14495 |
 | Freedom EM (Bally 1976) 1.0a | https://www.vpforums.org/index.php?app=downloads&showfile=14486 |
 | Hot Tip (Williams 1977) � v1.0 � S34 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14485 |
 | Flying Turns - Midway 1964 - VPX - vpPlus 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14483 |
@@ -102,7 +75,6 @@
 | Concorde (EMAGAR 1975) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14451 |
 | Caddie (Playmatic 1970) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14450 |
 | 8 Ball (Williams 1966) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14448 |
-| VPX Foosball 2019 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14447 |
 | sword of fury 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14437 |
 | Robo-War (Gottlieb 1988) full screen v 1.00 | https://www.vpforums.org/index.php?app=downloads&showfile=14427 |
 | Sharpshooter - Bally 1961 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14428 |
@@ -111,7 +83,6 @@
 | King Tut (Williams 1979) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14383 |
 | Top Dawg (Williams 1988) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14375 |
 | Shuffle Inn (Williams 1989) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14380 |
-| Gold Mine - Williams 1988 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14373 |
 | Striker Xtreme 2.0 | https://www.vpforums.org/index.php?app=downloads&showfile=13177 |
 | League Champ - Williams 1996 1.1 | https://www.vpforums.org/index.php?app=downloads&showfile=14366 |
 | The Goonies Pinball Adventure 1.03 | https://www.vpforums.org/index.php?app=downloads&showfile=14369 |
@@ -136,9 +107,7 @@
 | Psychedelic (Gottlieb 1970) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14223 |
 | Grand Slam (Gottlieb 1972) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14220 |
 | King Kong (Data East 1990) Javier Mod 1.03 | https://www.vpforums.org/index.php?app=downloads&showfile=14146 |
-| Rack Em Up (Gottlieb 1983) 1.0.3 | https://www.vpforums.org/index.php?app=downloads&showfile=13822 |
 | Rack-A-Ball (Gottlieb 1962) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14194 |
-| Totem (Gottlieb 1979) 1.3 | https://www.vpforums.org/index.php?app=downloads&showfile=14193 |
 | Ice Fever (Gottlieb 1985) | https://www.vpforums.org/index.php?app=downloads&showfile=14192 |
 | Hot Hand (Stern 1979) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14191 |
 | Bumper Pool (Gottlieb 1969) 1.0 | https://www.vpforums.org/index.php?app=downloads&showfile=14190 |
