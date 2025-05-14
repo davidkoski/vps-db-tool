@@ -30,7 +30,6 @@ extension VPUniverseScanner: ScanSources {
                 [
                     "https://vpuniverse.com/files/category/120-pup-packs/",
                     "https://vpuniverse.com/files/category/121-2-screen-4x3-pup-packs/",
-                    "https://vpuniverse.com/files/category/122-other-language-pup-packs/",
                 ]
             case .altColor:
                 ["https://vpuniverse.com/files/category/101-pin2dmd-colorizations-virtual-pinball/"]

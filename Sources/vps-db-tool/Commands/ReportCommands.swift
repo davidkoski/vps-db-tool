@@ -137,45 +137,137 @@ private struct Item {
 
 private struct Report {
 
+    // tabs from: https://www.w3schools.com/howto/howto_js_tabs.asp
+
     let header =
         """
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"></script>
         <link href="https://cdn.datatables.net/2.3.0/css/dataTables.dataTables.min.css" rel="stylesheet"></link>
+        <style>
+        /* Style the tab */
+        .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+          background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+          background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+          display: none;
+          padding: 6px 12px;
+          border: 1px solid #ccc;
+          border-top: none;
+        }
+        </style>
+        <script>
+        function switchTab(evt, tabName) {
+          // Declare all variables
+          var i, tabcontent, tablinks;
+
+          // Get all elements with class="tabcontent" and hide them
+          tabcontent = document.getElementsByClassName("tabcontent");
+          for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+          }
+
+          // Get all elements with class="tablinks" and remove the class "active"
+          tablinks = document.getElementsByClassName("tablinks");
+          for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+          }
+
+          // Show the current tab, and add an "active" class to the button that opened the tab
+          document.getElementById(tabName).style.display = "block";
+          evt.currentTarget.className += " active";
+        }
+        </script>
         """
 
     func emit(items: [Item]) -> String {
-        header + """
-            <table id="report" class="display">
-            <thead>
-                <tr>
-                    <th>URL</th>
-                    <th>Site</th>
-                    <th>Kind</th>
-                    <th>Name</th>
-                    <th>Issue</th>
-                </tr>
-            </thead>
-            """ + items.map { emitRow($0) }.joined(separator: "\n") + """
-                </table>
-                <script>
-                $("#report").DataTable({
-                    paging:   false,
-                    info:     false,
-                    searching: true,
-                    order: [],
-                });
-                </script>
+        var result = header
+        let itemsByKind = Dictionary(grouping: items, by: \.kind)
+
+        result +=
+            """
+            <div class="tab">
+
+            """
+        for (i, (kind, items)) in itemsByKind.sorted(by: { $0.key < $1.key }).enumerated() {
+            result +=
                 """
+                <button class="tablinks\(i == 0 ? " active" : "")" onclick="switchTab(event, '\(kind)')">\(kind) (\(items.count))</button>
+
+                """
+        }
+        result +=
+            """
+            </div>
+
+            """
+
+        for (i, (kind, items)) in itemsByKind.sorted(by: { $0.key < $1.key }).enumerated() {
+            result +=
+                """
+                <div id="\(kind)" class="tabcontent"\(i == 0 ? " style=\"display: block;\"" : "")>
+                <h3>\(kind)</h3>
+                <table id="report\(kind)" class="display">
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Name</th>
+                        <th>Site</th>
+                        <th>Kind</th>
+                        <th>Issue</th>
+                    </tr>
+                </thead>
+                """ + items.map { emitRow($0) }.joined(separator: "\n") + """
+                    </table>
+                    <script>
+                    $("#report\(kind)").DataTable({
+                        paging:   false,
+                        info:     false,
+                        searching: true,
+                        order: [],
+                    });
+                    </script>
+                    </div>
+
+                    """
+
+        }
+
+        return result
     }
 
     private func emitRow(_ item: Item) -> String {
         """
         <tr>
             <td><a href="\(item.url)">\(item.url)</a></td>
+            <td>\(item.name)</td>
             <td>\(Site(item.url).rawValue)</td>
             <td>\(item.kind.rawValue)</td>
-            <td>\(item.name)</td>
             <td>\(item.issue)</td>
         </tr>
         """

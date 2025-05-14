@@ -306,7 +306,7 @@ extension Game: Comparable {
     }
 }
 
-enum GameResourceKind: String, Codable, Sendable {
+enum GameResourceKind: String, Codable, Sendable, Comparable {
     case game
     case table
     case b2s
@@ -321,4 +321,27 @@ enum GameResourceKind: String, Codable, Sendable {
     case mediaPack
     case rule
     case sound
+
+    var sortOrder: Int {
+        switch self {
+        case .game: 0
+        case .table: 1
+        case .b2s: 2
+        case .tutorial: 3
+        case .rom: 4
+        case .pupPack: 5
+        case .altColor: 6
+        case .altSound: 7
+        case .pov: 8
+        case .wheelArt: 9
+        case .topper: 10
+        case .mediaPack: 11
+        case .rule: 12
+        case .sound: 13
+        }
+    }
+
+    static func < (lhs: GameResourceKind, rhs: GameResourceKind) -> Bool {
+        lhs.sortOrder < rhs.sortOrder
+    }
 }

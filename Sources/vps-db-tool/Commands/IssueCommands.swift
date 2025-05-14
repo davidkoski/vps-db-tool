@@ -19,20 +19,20 @@ private struct IgnoreCommand: AsyncParsableCommand {
         abstract: "ignore a url"
     )
 
-    @OptionGroup var db: VPSDbArguments
     @OptionGroup var issues: IssuesArguments
     @Option var kind: GameResourceKind = .table
 
-    @Option var url: URL
+    @Option(parsing: .upToNextOption) var url: [URL]
     @Option var comment = "Obsolete"
 
     mutating func run() async throws {
-        let db = try db.database()
         var issues = try issues.database()
 
-        let detail = DetailResult(url: url)
-        let issue = URLIssue.entryNotFound(detail)
-        issues.report(kind: kind, url: url, issue: issue, comment: comment)
+        for url in url {
+            let detail = DetailResult(url: url)
+            let issue = URLIssue.entryNotFound(detail)
+            issues.report(kind: kind, url: url, issue: issue, comment: comment)
+        }
 
         try self.issues.save(db: issues)
     }

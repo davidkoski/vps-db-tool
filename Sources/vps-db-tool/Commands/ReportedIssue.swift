@@ -47,7 +47,7 @@ enum URLIssue: Codable, Sendable, Hashable {
 
     func hash(into hasher: inout Hasher) {
         switch self {
-        case .entryNotFound(let detailResult):
+        case .entryNotFound(_):
             // match on tag only
             hasher.combine("entryNotFound")
             break
@@ -56,11 +56,9 @@ enum URLIssue: Codable, Sendable, Hashable {
 
     static func == (lhs: URLIssue, rhs: URLIssue) -> Bool {
         switch (lhs, rhs) {
-        case (.entryNotFound(let l), .entryNotFound(let r)):
+        case (.entryNotFound(_), .entryNotFound(_)):
             // match on tag only
             return true
-        default:
-            return false
         }
     }
 }
