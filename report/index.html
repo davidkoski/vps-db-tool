@@ -60,10 +60,9 @@ function switchTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 </script><div class="tab">
-<button class="tablinks active" onclick="switchTab(event, 'table')">table (1)</button>
-<button class="tablinks" onclick="switchTab(event, 'b2s')">b2s (12)</button>
+<button class="tablinks active" onclick="switchTab(event, 'b2s')">b2s (12)</button>
 <button class="tablinks" onclick="switchTab(event, 'rom')">rom (17)</button>
-<button class="tablinks" onclick="switchTab(event, 'pupPack')">pupPack (20)</button>
+<button class="tablinks" onclick="switchTab(event, 'pupPack')">pupPack (18)</button>
 <button class="tablinks" onclick="switchTab(event, 'altSound')">altSound (5)</button>
 <button class="tablinks" onclick="switchTab(event, 'pov')">pov (17)</button>
 <button class="tablinks" onclick="switchTab(event, 'wheelArt')">wheelArt (83)</button>
@@ -71,40 +70,14 @@ function switchTab(evt, tabName) {
 <button class="tablinks" onclick="switchTab(event, 'mediaPack')">mediaPack (17)</button>
 <button class="tablinks" onclick="switchTab(event, 'rule')">rule (1)</button>
 </div>
-<div id="table" class="tabcontent" style="display: block;">
-<h3>table</h3>
-<table id="reporttable" class="display">
-<thead>
-    <tr>
-        <th>URL</th>
-        <th>Name</th>
-        <th>Site</th>
-        <th>Kind</th>
-        <th>Issue</th>
-    </tr>
-</thead><tr>
-    <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19092">https://www.vpforums.org/index.php?app=downloads&showfile=19092</a></td>
-    <td>Vampire (Bally 1971) 1.0.1</td>
-    <td>VPF</td>
-    <td>table</td>
-    <td>version mismatch: 1.0.1 vs 1.0</td>
-</tr></table>
-<script>
-$("#reporttable").DataTable({
-    paging:   false,
-    info:     false,
-    searching: true,
-    order: [],
-});
-</script>
-</div>
-<div id="b2s" class="tabcontent">
+<div id="b2s" class="tabcontent" style="display: block;">
 <h3>b2s</h3>
 <table id="reportb2s" class="display">
 <thead>
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -112,6 +85,7 @@ $("#reporttable").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/25358-stranger-things-premium/">https://vpuniverse.com/files/file/25358-stranger-things-premium/</a></td>
     <td>Stranger Things (Premium)</td>
+    <td>masonm</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -119,6 +93,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25248-tam-tam-playmatic-1975-b2s-backglass/">https://vpuniverse.com/files/file/25248-tam-tam-playmatic-1975-b2s-backglass/</a></td>
     <td>Tam-Tam (Playmatic 1975) B2S backglass</td>
+    <td>Protomech</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -126,6 +101,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24245-rack-em-up-gottlieb-1983/">https://vpuniverse.com/files/file/24245-rack-em-up-gottlieb-1983/</a></td>
     <td>Rack Em Up (Gottlieb 1983)</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -133,6 +109,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24234-xenon-bally-1980/">https://vpuniverse.com/files/file/24234-xenon-bally-1980/</a></td>
     <td>XENON (Bally 1980)</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -140,6 +117,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24196-dragon-gottlieb-1978/">https://vpuniverse.com/files/file/24196-dragon-gottlieb-1978/</a></td>
     <td>Dragon (Gottlieb 1978)</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -147,6 +125,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24129-buck-rogers-gottlieb-1980-6-digits/">https://vpuniverse.com/files/file/24129-buck-rogers-gottlieb-1980-6-digits/</a></td>
     <td>Buck Rogers Gottlieb 1980 6-Digits</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -154,6 +133,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24101-counterforce-gottlieb-1980/">https://vpuniverse.com/files/file/24101-counterforce-gottlieb-1980/</a></td>
     <td>CounterForce Gottlieb 1980</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -161,6 +141,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24040-solar-ride-gottlieb-1979/">https://vpuniverse.com/files/file/24040-solar-ride-gottlieb-1979/</a></td>
     <td>SOLAR RIDE Gottlieb 1979</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -168,6 +149,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24012-spirit-gottlieb-1982/">https://vpuniverse.com/files/file/24012-spirit-gottlieb-1982/</a></td>
     <td>SPIRIT (Gottlieb 1982)</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -175,6 +157,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23865-count-down-gottlieb-1979-backglass-full-dmd/">https://vpuniverse.com/files/file/23865-count-down-gottlieb-1979-backglass-full-dmd/</a></td>
     <td>COUNT DOWN Gottlieb 1979 backglass (full dmd)</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -182,6 +165,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23525-black-hole-gottlieb-1981-full-dmd-6-and-7-digits/">https://vpuniverse.com/files/file/23525-black-hole-gottlieb-1981-full-dmd-6-and-7-digits/</a></td>
     <td>Black Hole (Gottlieb 1981) Full Dmd 6 and 7 Digits</td>
+    <td>khalidibn</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -189,6 +173,7 @@ $("#reporttable").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22956-john-rambo-original-2024-b2b-with-full-dmd/">https://vpuniverse.com/files/file/22956-john-rambo-original-2024-b2b-with-full-dmd/</a></td>
     <td>John Rambo (Original 2024) b2b with full dmd</td>
+    <td>Goldengames320</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -209,6 +194,7 @@ $("#reportb2s").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -216,6 +202,7 @@ $("#reportb2s").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/25102-bad-cats-the-cats-meow-13/">https://vpuniverse.com/files/file/25102-bad-cats-the-cats-meow-13/</a></td>
     <td>Bad Cats (The Cat's Meow 1.3)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -223,6 +210,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25101-bad-cats-the-cats-meow-12/">https://vpuniverse.com/files/file/25101-bad-cats-the-cats-meow-12/</a></td>
     <td>Bad Cats (The Cat's Meow 1.2)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -230,6 +218,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23299-pentacup-rev-s/">https://vpuniverse.com/files/file/23299-pentacup-rev-s/</a></td>
     <td>Pentacup (rev. S)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -237,6 +226,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22659-lightning-free-play-mod-rev-27/">https://vpuniverse.com/files/file/22659-lightning-free-play-mod-rev-27/</a></td>
     <td>Lightning (Free Play & MOD rev. 27)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -244,6 +234,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22270-big-game-mod-rev-13/">https://vpuniverse.com/files/file/22270-big-game-mod-rev-13/</a></td>
     <td>Big Game (MOD rev. 13)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -251,6 +242,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22125-mustang-stern-alternate-soundtracks/">https://vpuniverse.com/files/file/22125-mustang-stern-alternate-soundtracks/</a></td>
     <td>Mustang Stern Alternate Soundtracks</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -258,6 +250,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22023-seawitch-mod-rev-93/">https://vpuniverse.com/files/file/22023-seawitch-mod-rev-93/</a></td>
     <td>Seawitch (MOD rev. 9.3)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -265,6 +258,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22022-seawitch-mod-rev-9/">https://vpuniverse.com/files/file/22022-seawitch-mod-rev-9/</a></td>
     <td>Seawitch (MOD rev. 9)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -272,6 +266,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22021-quicksilver-free-play-modified-rules-rev-81/">https://vpuniverse.com/files/file/22021-quicksilver-free-play-modified-rules-rev-81/</a></td>
     <td>Quicksilver (Free Play & modified rules rev. 8.1)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -279,6 +274,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22020-cheetah-prototype-sounds-mod-84/">https://vpuniverse.com/files/file/22020-cheetah-prototype-sounds-mod-84/</a></td>
     <td>Cheetah (Prototype Sounds + MOD 84)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -286,6 +282,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22019-ali-7-digit-conversion-free-play-rev-85/">https://vpuniverse.com/files/file/22019-ali-7-digit-conversion-free-play-rev-85/</a></td>
     <td>Ali (7-digit conversion Free Play rev. 85)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -293,6 +290,7 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22016-dragonfist-mod-15/">https://vpuniverse.com/files/file/22016-dragonfist-mod-15/</a></td>
     <td>Dragonfist (MOD 15)</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>rom</td>
     <td>missing</td>
@@ -300,6 +298,8 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=8735">https://www.vpforums.org/index.php?app=downloads&showfile=8735</a></td>
     <td>Centaur (Inder 1979) - ROM - centauri.zip</td>
+    <td>destruk   
+</td>
     <td>VPF</td>
     <td>rom</td>
     <td>missing</td>
@@ -307,6 +307,8 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=13940">https://www.vpforums.org/index.php?app=downloads&showfile=13940</a></td>
     <td>White Force - ROM - whtforce.zip</td>
+    <td>destruk   
+</td>
     <td>VPF</td>
     <td>rom</td>
     <td>missing</td>
@@ -314,6 +316,8 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=13939">https://www.vpforums.org/index.php?app=downloads&showfile=13939</a></td>
     <td>Slalom Code 0.3 - ROM - slalom03.zip</td>
+    <td>destruk   
+</td>
     <td>VPF</td>
     <td>rom</td>
     <td>missing</td>
@@ -321,6 +325,8 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=13938">https://www.vpforums.org/index.php?app=downloads&showfile=13938</a></td>
     <td>Space Ship - ROM - spcship.zip</td>
+    <td>destruk   
+</td>
     <td>VPF</td>
     <td>rom</td>
     <td>missing</td>
@@ -328,6 +334,8 @@ $("#reportb2s").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=13937">https://www.vpforums.org/index.php?app=downloads&showfile=13937</a></td>
     <td>Iron Balls - ROM - ironball.zip</td>
+    <td>destruk   
+</td>
     <td>VPF</td>
     <td>rom</td>
     <td>missing</td>
@@ -348,6 +356,7 @@ $("#reportrom").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -355,13 +364,7 @@ $("#reportrom").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/24276-goldeneye-64-hybrid-pup-pack/">https://vpuniverse.com/files/file/24276-goldeneye-64-hybrid-pup-pack/</a></td>
     <td>Goldeneye 64 Hybrid Pup Pack</td>
-    <td>VPU</td>
-    <td>pupPack</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/24222-elvira-and-the-party-monsters-mini-pup-pack-and-custom-b2s/">https://vpuniverse.com/files/file/24222-elvira-and-the-party-monsters-mini-pup-pack-and-custom-b2s/</a></td>
-    <td>Elvira and The Party Monsters Mini Pup Pack and custom B2s</td>
+    <td>GtecArcade</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -369,6 +372,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23628-big-lebowski-pup-pack/">https://vpuniverse.com/files/file/23628-big-lebowski-pup-pack/</a></td>
     <td>Big Lebowski Pup Pack</td>
+    <td>GtecArcade</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -376,13 +380,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23242-batman-the-dark-knight-stern-2008-pup-pack-w-fulldmd-ltek/">https://vpuniverse.com/files/file/23242-batman-the-dark-knight-stern-2008-pup-pack-w-fulldmd-ltek/</a></td>
     <td>Batman The Dark Knight (Stern 2008) PuP Pack w/ FullDMD - LTek</td>
-    <td>VPU</td>
-    <td>pupPack</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/23001-spirit-1983-gottlieb-hybrid-backglass-and-dmd/">https://vpuniverse.com/files/file/23001-spirit-1983-gottlieb-hybrid-backglass-and-dmd/</a></td>
-    <td>Spirit 1983 Gottlieb Hybrid Backglass and DMD</td>
+    <td>LTek</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -390,6 +388,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22885-theatre-of-magic-bally-1995-pup-topper/">https://vpuniverse.com/files/file/22885-theatre-of-magic-bally-1995-pup-topper/</a></td>
     <td>Theatre of Magic (Bally 1995) PUP Topper</td>
+    <td>Migs</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -397,6 +396,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22493-star-wars-multi-table-pup-pack/">https://vpuniverse.com/files/file/22493-star-wars-multi-table-pup-pack/</a></td>
     <td>Star Wars Multi-Table Pup Pack</td>
+    <td>GtecArcade</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -404,6 +404,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22011-bram-stokers-dracula-pup-pack-add-on-mod-and-pinup-popper-media-ltek/">https://vpuniverse.com/files/file/22011-bram-stokers-dracula-pup-pack-add-on-mod-and-pinup-popper-media-ltek/</a></td>
     <td>Bram Stokers Dracula PuP-Pack Add-On Mod and Pinup Popper Media - LTek</td>
+    <td>LTek</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -411,6 +412,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/21765-indochine-central-tour-tuga%E2%80%99s-edition/">https://vpuniverse.com/files/file/21765-indochine-central-tour-tuga%E2%80%99s-edition/</a></td>
     <td>Indochine Central Tour (Tuga’s Edition)</td>
+    <td>TeamTuga</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -418,6 +420,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23108-transformers-maracade-mod-pup-pack-20-ltek/">https://vpuniverse.com/files/file/23108-transformers-maracade-mod-pup-pack-20-ltek/</a></td>
     <td>Transformers Maracade Mod PuP Pack 2.0 - LTek</td>
+    <td>LTek</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -425,6 +428,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/21095-evil-dead-2-alt-2scream/">https://vpuniverse.com/files/file/21095-evil-dead-2-alt-2scream/</a></td>
     <td>Evil Dead 2 ALT 2SCREAM</td>
+    <td>PinballLizard</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -432,6 +436,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/20958-flintstones-alternate-overlays/">https://vpuniverse.com/files/file/20958-flintstones-alternate-overlays/</a></td>
     <td>Flintstones Alternate Overlays</td>
+    <td>PinballLizard</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -439,6 +444,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/8941-greaserar/">https://vpuniverse.com/files/file/8941-greaserar/</a></td>
     <td>grease.rar</td>
+    <td>richiep1</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -446,6 +452,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/7763-frankenstein-4x3-puppack/">https://vpuniverse.com/files/file/7763-frankenstein-4x3-puppack/</a></td>
     <td>Frankenstein 4x3 PuPPack</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -453,6 +460,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/7218-nfl-chiefs-4x3-puppack/">https://vpuniverse.com/files/file/7218-nfl-chiefs-4x3-puppack/</a></td>
     <td>NFL Chiefs 4x3 PuPPack</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -460,6 +468,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/7217-nfl-bucs-4x3-puppack/">https://vpuniverse.com/files/file/7217-nfl-bucs-4x3-puppack/</a></td>
     <td>NFL Bucs 4x3 PuPPack</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -467,6 +476,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/6442-nfl-default-4x3-puppack/">https://vpuniverse.com/files/file/6442-nfl-default-4x3-puppack/</a></td>
     <td>NFL Default 4x3 PuPPack</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -474,6 +484,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/6041-simpsons-pinball-party-4x3-puppack/">https://vpuniverse.com/files/file/6041-simpsons-pinball-party-4x3-puppack/</a></td>
     <td>Simpsons Pinball Party 4x3 PuPPack</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -481,6 +492,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/6597-2-screen-pup-pack-conversions/">https://vpuniverse.com/files/file/6597-2-screen-pup-pack-conversions/</a></td>
     <td>2 Screen Pup Pack Conversions</td>
+    <td>PEandS1Ws</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -488,6 +500,7 @@ $("#reportrom").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/6263-austin-powers-puppack-4x3/">https://vpuniverse.com/files/file/6263-austin-powers-puppack-4x3/</a></td>
     <td>Austin Powers PuPPack 4x3</td>
+    <td>hawkeyez88</td>
     <td>VPU</td>
     <td>pupPack</td>
     <td>missing</td>
@@ -508,6 +521,7 @@ $("#reportpupPack").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -515,6 +529,7 @@ $("#reportpupPack").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/23731-attack-from-mars-midway-1995-german-altsound-pinballpunks/">https://vpuniverse.com/files/file/23731-attack-from-mars-midway-1995-german-altsound-pinballpunks/</a></td>
     <td>Attack From Mars (Midway 1995) German Altsound - Pinballpunks</td>
+    <td>Blahblah</td>
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
@@ -522,6 +537,7 @@ $("#reportpupPack").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22908-viper-night-drivin-sega-1998-german-altsound-pinballpunks/">https://vpuniverse.com/files/file/22908-viper-night-drivin-sega-1998-german-altsound-pinballpunks/</a></td>
     <td>Viper Night Drivin (SEGA 1998) German Altsound - Pinballpunks</td>
+    <td>Blahblah</td>
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
@@ -529,6 +545,7 @@ $("#reportpupPack").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22907-baywatch-sega-1995-german-altsound-pinballpunks/">https://vpuniverse.com/files/file/22907-baywatch-sega-1995-german-altsound-pinballpunks/</a></td>
     <td>Baywatch (SEGA 1995) German Altsound - Pinballpunks</td>
+    <td>Blahblah</td>
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
@@ -536,6 +553,7 @@ $("#reportpupPack").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22876-austin-powers-stern-2001-spanish-altsound/">https://vpuniverse.com/files/file/22876-austin-powers-stern-2001-spanish-altsound/</a></td>
     <td>Austin Powers (Stern 2001) Spanish Altsound</td>
+    <td>Darkangel60</td>
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
@@ -543,6 +561,7 @@ $("#reportpupPack").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22103-nba-fastbreak-sega-1995-german-altsound-pinballpunks/">https://vpuniverse.com/files/file/22103-nba-fastbreak-sega-1995-german-altsound-pinballpunks/</a></td>
     <td>NBA Fastbreak (SEGA 1995) German Altsound - Pinballpunks</td>
+    <td>Blahblah</td>
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
@@ -563,6 +582,7 @@ $("#reportaltSound").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -570,6 +590,7 @@ $("#reportaltSound").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/22883-big-bang-bar-cabinet-pov/">https://vpuniverse.com/files/file/22883-big-bang-bar-cabinet-pov/</a></td>
     <td>Big Bang Bar Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -577,6 +598,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22520-world-cup-soccer-cabinet-pov/">https://vpuniverse.com/files/file/22520-world-cup-soccer-cabinet-pov/</a></td>
     <td>World Cup Soccer Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -584,6 +606,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22508-beat-the-clock-cabinet-pov/">https://vpuniverse.com/files/file/22508-beat-the-clock-cabinet-pov/</a></td>
     <td>Beat The Clock Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -591,6 +614,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22507-sorcerer-cabinet-pov/">https://vpuniverse.com/files/file/22507-sorcerer-cabinet-pov/</a></td>
     <td>Sorcerer Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -598,6 +622,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22503-die-hard-trilogy-cabinet-pov/">https://vpuniverse.com/files/file/22503-die-hard-trilogy-cabinet-pov/</a></td>
     <td>Die Hard Trilogy Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -605,6 +630,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22322-police-force-vpw-v11-cabinet-pov/">https://vpuniverse.com/files/file/22322-police-force-vpw-v11-cabinet-pov/</a></td>
     <td>Police Force VPW v1.1 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -612,6 +638,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22260-gorillaz-cabinet-pov/">https://vpuniverse.com/files/file/22260-gorillaz-cabinet-pov/</a></td>
     <td>GORILLAZ Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -619,6 +646,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22251-cirqus-voltaire-vpw-11-cabinet-pov/">https://vpuniverse.com/files/file/22251-cirqus-voltaire-vpw-11-cabinet-pov/</a></td>
     <td>Cirqus Voltaire VPW 1.1 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -626,6 +654,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22245-tales-of-the-arabian-nights-4k-cabinet-pov/">https://vpuniverse.com/files/file/22245-tales-of-the-arabian-nights-4k-cabinet-pov/</a></td>
     <td>Tales of the Arabian Nights 4k Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -633,6 +662,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22244-tales-from-the-crypt-cabinet-pov/">https://vpuniverse.com/files/file/22244-tales-from-the-crypt-cabinet-pov/</a></td>
     <td>Tales from the Crypt Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -640,6 +670,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22242-blood-machines-vpw-20-cabinet-pov/">https://vpuniverse.com/files/file/22242-blood-machines-vpw-20-cabinet-pov/</a></td>
     <td>Blood Machines VPW 2.0 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -647,6 +678,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22213-big-trouble-in-little-china-cabinet-pov/">https://vpuniverse.com/files/file/22213-big-trouble-in-little-china-cabinet-pov/</a></td>
     <td>Big Trouble In Little China Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -654,6 +686,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22209-johnny-mnemonic-williams-1995-vpw-v122-cabinet-pov/">https://vpuniverse.com/files/file/22209-johnny-mnemonic-williams-1995-vpw-v122-cabinet-pov/</a></td>
     <td>Johnny Mnemonic (Williams 1995) VPW v1.2.2 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -661,6 +694,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22208-street-fighter-ii-gottlieb-1993-vpw-11-cabinet-pov/">https://vpuniverse.com/files/file/22208-street-fighter-ii-gottlieb-1993-vpw-11-cabinet-pov/</a></td>
     <td>Street Fighter II (Gottlieb 1993) VPW 1.1 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -668,6 +702,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22207-bram-stokers-dracula-williams-1993-vpw-10-cabinet-pov/">https://vpuniverse.com/files/file/22207-bram-stokers-dracula-williams-1993-vpw-10-cabinet-pov/</a></td>
     <td>Bram Stokers Dracula (Williams 1993) VPW 1.0 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -675,6 +710,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/22206-spongebobs-bikini-bottom-pinball-vpw-v21-cabinet-pov/">https://vpuniverse.com/files/file/22206-spongebobs-bikini-bottom-pinball-vpw-v21-cabinet-pov/</a></td>
     <td>SpongeBob's Bikini Bottom Pinball VPW V2.1 Cabinet POV</td>
+    <td>LoadedWeapon</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -682,6 +718,7 @@ $("#reportaltSound").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/7799-my-global-physics-settings/">https://vpuniverse.com/files/file/7799-my-global-physics-settings/</a></td>
     <td>My Global Physics Settings</td>
+    <td>aladin112</td>
     <td>VPU</td>
     <td>pov</td>
     <td>missing</td>
@@ -702,6 +739,7 @@ $("#reportpov").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -709,6 +747,7 @@ $("#reportpov").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/5548-pinup-popper-wheel-images-mega-link/">https://vpuniverse.com/files/file/5548-pinup-popper-wheel-images-mega-link/</a></td>
     <td>Pinup Popper Wheel images - MEGA Link</td>
+    <td>RajoJoey</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -716,6 +755,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25402-beastie-boys-neon-wheel/">https://vpuniverse.com/files/file/25402-beastie-boys-neon-wheel/</a></td>
     <td>BEASTIE BOYS Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -723,6 +763,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25403-beastie-boys-diagonal-wheel/">https://vpuniverse.com/files/file/25403-beastie-boys-diagonal-wheel/</a></td>
     <td>BEASTIE BOYS Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -730,6 +771,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25404-vampire-bally-1971-clear-logo/">https://vpuniverse.com/files/file/25404-vampire-bally-1971-clear-logo/</a></td>
     <td>Vampire (Bally 1971) clear logo</td>
+    <td>Cliffy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -737,6 +779,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25398-vampire-bally-1971-diagonal-wheel/">https://vpuniverse.com/files/file/25398-vampire-bally-1971-diagonal-wheel/</a></td>
     <td>Vampire (Bally 1971) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -744,6 +787,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25397-vampire-bally-1971-neon-wheel/">https://vpuniverse.com/files/file/25397-vampire-bally-1971-neon-wheel/</a></td>
     <td>Vampire (Bally 1971) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -751,6 +795,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25390-big-hit-gottlieb-1977-wheels/">https://vpuniverse.com/files/file/25390-big-hit-gottlieb-1977-wheels/</a></td>
     <td>Big Hit (Gottlieb 1977) Wheels</td>
+    <td>KFIguana</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -758,6 +803,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25384-space-gambler-playmatic-1978-diagonal-wheel/">https://vpuniverse.com/files/file/25384-space-gambler-playmatic-1978-diagonal-wheel/</a></td>
     <td>Space Gambler (playmatic 1978) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -765,6 +811,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25383-space-gambler-playmatic-1978-neon-wheel/">https://vpuniverse.com/files/file/25383-space-gambler-playmatic-1978-neon-wheel/</a></td>
     <td>Space Gambler (playmatic 1978) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -772,6 +819,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25386-beat-time-williams-1967-diagonal-wheel/">https://vpuniverse.com/files/file/25386-beat-time-williams-1967-diagonal-wheel/</a></td>
     <td>Beat Time (Williams 1967) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -779,6 +827,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25385-beat-time-williams-1967-neon-wheel/">https://vpuniverse.com/files/file/25385-beat-time-williams-1967-neon-wheel/</a></td>
     <td>Beat Time (Williams 1967) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -786,6 +835,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25294-aliens-legendary-edition-original-2025-slamt1lt-wheels/">https://vpuniverse.com/files/file/25294-aliens-legendary-edition-original-2025-slamt1lt-wheels/</a></td>
     <td>ALIENS Legendary Edition (Original 2025) (SLAMT1LT) (Wheels)</td>
+    <td>KFIguana</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -793,6 +843,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25381-beat-time-williams-1967-clear-logo/">https://vpuniverse.com/files/file/25381-beat-time-williams-1967-clear-logo/</a></td>
     <td>Beat Time (Williams 1967) clear logo</td>
+    <td>Cliffy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -800,6 +851,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25380-disco-dancing-ltd-do-brasil-1979-diagonal-wheel/">https://vpuniverse.com/files/file/25380-disco-dancing-ltd-do-brasil-1979-diagonal-wheel/</a></td>
     <td>Disco Dancing (LTD Do Brasil 1979) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -807,6 +859,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25379-disco-dancing-ltd-do-brasil-1979-neon-wheel/">https://vpuniverse.com/files/file/25379-disco-dancing-ltd-do-brasil-1979-neon-wheel/</a></td>
     <td>Disco Dancing (LTD Do Brasil 1979) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -814,6 +867,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25371-punchy-the-clown-alvin-g-and-co-1993-neon-wheel/">https://vpuniverse.com/files/file/25371-punchy-the-clown-alvin-g-and-co-1993-neon-wheel/</a></td>
     <td>Punchy the Clown (Alvin G and Co 1993) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -821,6 +875,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25372-punchy-the-clown-alvin-g-and-co-1993-diagonal-wheel/">https://vpuniverse.com/files/file/25372-punchy-the-clown-alvin-g-and-co-1993-diagonal-wheel/</a></td>
     <td>Punchy the Clown (Alvin G and Co 1993) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -828,6 +883,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25373-count-down-gottlieb-1978-neon-wheel/">https://vpuniverse.com/files/file/25373-count-down-gottlieb-1978-neon-wheel/</a></td>
     <td>Count - Down (Gottlieb 1978) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -835,6 +891,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25374-count-down-gottlieb-1978-diagonal-wheel/">https://vpuniverse.com/files/file/25374-count-down-gottlieb-1978-diagonal-wheel/</a></td>
     <td>Count - Down (Gottlieb 1978) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -842,6 +899,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25366-zonderik-belgamco-1980-diagonal-wheel/">https://vpuniverse.com/files/file/25366-zonderik-belgamco-1980-diagonal-wheel/</a></td>
     <td>Zonderik (Belgamco 1980) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -849,6 +907,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25365-zonderik-belgamco-1980-neon-wheel/">https://vpuniverse.com/files/file/25365-zonderik-belgamco-1980-neon-wheel/</a></td>
     <td>Zonderik (Belgamco 1980) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -856,6 +915,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25350-saucerer-williams-1985-neon-wheel/">https://vpuniverse.com/files/file/25350-saucerer-williams-1985-neon-wheel/</a></td>
     <td>Saucerer (Williams 1985) Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -863,6 +923,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25351-saucerer-williams-1985-diagonal-wheel/">https://vpuniverse.com/files/file/25351-saucerer-williams-1985-diagonal-wheel/</a></td>
     <td>Saucerer (Williams 1985) Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -870,6 +931,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25347-pirates-life-neon-wheel/">https://vpuniverse.com/files/file/25347-pirates-life-neon-wheel/</a></td>
     <td>Pirates Life Neon Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -877,6 +939,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25346-pirates-life-diagonal-wheel/">https://vpuniverse.com/files/file/25346-pirates-life-diagonal-wheel/</a></td>
     <td>Pirates Life Diagonal Wheel</td>
+    <td>Harley-Boy</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -884,6 +947,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25425-geega-wheel/">https://vpuniverse.com/files/file/25425-geega-wheel/</a></td>
     <td>Geega Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -891,6 +955,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25420-wheel-diagonale-totem-gottlieb-1979/">https://vpuniverse.com/files/file/25420-wheel-diagonale-totem-gottlieb-1979/</a></td>
     <td>Wheel Diagonale - Totem (Gottlieb 1979)</td>
+    <td>Goldengames320</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -898,6 +963,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25415-britney-spears-its-britney-bitch-edition-imagem-wheel/">https://vpuniverse.com/files/file/25415-britney-spears-its-britney-bitch-edition-imagem-wheel/</a></td>
     <td>Britney Spears-it's Britney Bitch Edition - Imagem Wheel</td>
+    <td>SERGIOSOUZA</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -905,6 +971,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25408-universe-zaccaria-1977-wheel/">https://vpuniverse.com/files/file/25408-universe-zaccaria-1977-wheel/</a></td>
     <td>Universe (Zaccaria 1977) Wheel</td>
+    <td>MasonStorm</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -912,6 +979,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25406-beastie-boys-original-2025-wheel/">https://vpuniverse.com/files/file/25406-beastie-boys-original-2025-wheel/</a></td>
     <td>Beastie Boys (Original 2025) Wheel</td>
+    <td>MasonStorm</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -919,6 +987,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25401-space-gambler-wheel/">https://vpuniverse.com/files/file/25401-space-gambler-wheel/</a></td>
     <td>Space Gambler Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -926,6 +995,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25394-space-gambler-playmatic-1978-wheel/">https://vpuniverse.com/files/file/25394-space-gambler-playmatic-1978-wheel/</a></td>
     <td>Space Gambler (Playmatic 1978) Wheel</td>
+    <td>planetxplanetx</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -933,6 +1003,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25392-vampire-bally-1971-wheel/">https://vpuniverse.com/files/file/25392-vampire-bally-1971-wheel/</a></td>
     <td>Vampire (Bally 1971) Wheel</td>
+    <td>planetxplanetx</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -940,6 +1011,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25391-count-down-wheel/">https://vpuniverse.com/files/file/25391-count-down-wheel/</a></td>
     <td>Count Down Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -947,6 +1019,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25377-fleet-wheel/">https://vpuniverse.com/files/file/25377-fleet-wheel/</a></td>
     <td>Fleet Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -954,6 +1027,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25353-fleet-bally-1934-wheel/">https://vpuniverse.com/files/file/25353-fleet-bally-1934-wheel/</a></td>
     <td>Fleet (Bally 1934) Wheel</td>
+    <td>MasonStorm</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -961,6 +1035,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/16822-chance-playmatic-1971-wheel/">https://vpuniverse.com/files/file/16822-chance-playmatic-1971-wheel/</a></td>
     <td>Chance (Playmatic 1971) Wheel</td>
+    <td>Protomech</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -968,6 +1043,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25343-scramble-imagem-wheel/">https://vpuniverse.com/files/file/25343-scramble-imagem-wheel/</a></td>
     <td>Scramble - Imagem Wheel</td>
+    <td>SERGIOSOUZA</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -975,6 +1051,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25301-pinball-fx3-playlist-wheels/">https://vpuniverse.com/files/file/25301-pinball-fx3-playlist-wheels/</a></td>
     <td>Pinball FX3 Playlist Wheels</td>
+    <td>A1exR0gan</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -982,6 +1059,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25300-pinball-fx-playlist-wheels/">https://vpuniverse.com/files/file/25300-pinball-fx-playlist-wheels/</a></td>
     <td>Pinball FX Playlist Wheels</td>
+    <td>A1exR0gan</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -989,6 +1067,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25285-scramble-wheel/">https://vpuniverse.com/files/file/25285-scramble-wheel/</a></td>
     <td>Scramble wheel</td>
+    <td>cdcrowell</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -996,6 +1075,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25281-cod-wheel/">https://vpuniverse.com/files/file/25281-cod-wheel/</a></td>
     <td>C.O.D. Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1003,6 +1083,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25230-gold-star-wheel/">https://vpuniverse.com/files/file/25230-gold-star-wheel/</a></td>
     <td>Gold Star Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1010,6 +1091,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25227-silver-cup-genco-1933-wheel/">https://vpuniverse.com/files/file/25227-silver-cup-genco-1933-wheel/</a></td>
     <td>Silver Cup (Genco 1933) Wheel</td>
+    <td>MasonStorm</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1017,6 +1099,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25222-future-spa-wheel/">https://vpuniverse.com/files/file/25222-future-spa-wheel/</a></td>
     <td>Future Spa WHEEL</td>
+    <td>TallThin1</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1024,6 +1107,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25204-grand-slam-wheel/">https://vpuniverse.com/files/file/25204-grand-slam-wheel/</a></td>
     <td>Grand Slam Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1031,6 +1115,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25203-maisie-wheel/">https://vpuniverse.com/files/file/25203-maisie-wheel/</a></td>
     <td>Maisie Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1038,6 +1123,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25201-big-hit-wheel/">https://vpuniverse.com/files/file/25201-big-hit-wheel/</a></td>
     <td>Big Hit Wheel</td>
+    <td>Animusan2</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1045,6 +1131,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25146-iron-eagle-wheel/">https://vpuniverse.com/files/file/25146-iron-eagle-wheel/</a></td>
     <td>Iron Eagle WHEEL</td>
+    <td>TallThin1</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1052,6 +1139,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25209-unreal-tournament-animated/">https://vpuniverse.com/files/file/25209-unreal-tournament-animated/</a></td>
     <td>Unreal Tournament Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1059,6 +1147,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24883-dark-chaos-animated/">https://vpuniverse.com/files/file/24883-dark-chaos-animated/</a></td>
     <td>Dark Chaos (ANIMATED)</td>
+    <td>pritch33</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1066,6 +1155,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24879-dark-chaos/">https://vpuniverse.com/files/file/24879-dark-chaos/</a></td>
     <td>Dark Chaos</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1073,6 +1163,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24849-the-walking-dead/">https://vpuniverse.com/files/file/24849-the-walking-dead/</a></td>
     <td>The Walking Dead</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1080,6 +1171,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24848-daredevil-and-the-defenders/">https://vpuniverse.com/files/file/24848-daredevil-and-the-defenders/</a></td>
     <td>Daredevil and the Defenders</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1087,6 +1179,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24819-daredevil-animated/">https://vpuniverse.com/files/file/24819-daredevil-animated/</a></td>
     <td>Daredevil Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1094,6 +1187,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24811-ripley-believe-it-or-not-animated/">https://vpuniverse.com/files/file/24811-ripley-believe-it-or-not-animated/</a></td>
     <td>Ripley Believe it or not Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1101,6 +1195,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24810-time-lord-animated/">https://vpuniverse.com/files/file/24810-time-lord-animated/</a></td>
     <td>Time lord Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1108,6 +1203,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24809-wrath-of-olympus-animated/">https://vpuniverse.com/files/file/24809-wrath-of-olympus-animated/</a></td>
     <td>wrath of olympus Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1115,6 +1211,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24808-theatre-of-magic-animated/">https://vpuniverse.com/files/file/24808-theatre-of-magic-animated/</a></td>
     <td>theatre of magic Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1122,6 +1219,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24807-who-dunnit-1947/">https://vpuniverse.com/files/file/24807-who-dunnit-1947/</a></td>
     <td>Who Dunnit 1947</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1129,6 +1227,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24806-world-cup-animated/">https://vpuniverse.com/files/file/24806-world-cup-animated/</a></td>
     <td>World Cup Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1136,6 +1235,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24805-star-wars-trilogy-animated/">https://vpuniverse.com/files/file/24805-star-wars-trilogy-animated/</a></td>
     <td>Star Wars Trilogy Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1143,6 +1243,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24804-die-hard-trilogy/">https://vpuniverse.com/files/file/24804-die-hard-trilogy/</a></td>
     <td>Die Hard Trilogy</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1150,6 +1251,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24803-futurama/">https://vpuniverse.com/files/file/24803-futurama/</a></td>
     <td>Futurama</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1157,6 +1259,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24802-john-wick/">https://vpuniverse.com/files/file/24802-john-wick/</a></td>
     <td>John Wick</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1164,6 +1267,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24801-pirates-life-animated/">https://vpuniverse.com/files/file/24801-pirates-life-animated/</a></td>
     <td>Pirates Life Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1171,6 +1275,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24800-spongebob-animated/">https://vpuniverse.com/files/file/24800-spongebob-animated/</a></td>
     <td>SpongeBob Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1178,6 +1283,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24799-street-fighter-2-animated/">https://vpuniverse.com/files/file/24799-street-fighter-2-animated/</a></td>
     <td>Street Fighter 2 Animated</td>
+    <td>sharkman68</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1185,6 +1291,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24513-silver-bullet-animated/">https://vpuniverse.com/files/file/24513-silver-bullet-animated/</a></td>
     <td>Silver Bullet (Animated)</td>
+    <td>pritch33</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1192,6 +1299,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24250-skateball/">https://vpuniverse.com/files/file/24250-skateball/</a></td>
     <td>SKATEBALL</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1199,6 +1307,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24249-f14-tomcat/">https://vpuniverse.com/files/file/24249-f14-tomcat/</a></td>
     <td>F14 TOMCAT</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1206,6 +1315,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24238-roller-coaster-tycoon/">https://vpuniverse.com/files/file/24238-roller-coaster-tycoon/</a></td>
     <td>ROLLER COASTER TYCOON</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1213,6 +1323,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24236-nightmare-before-christmas/">https://vpuniverse.com/files/file/24236-nightmare-before-christmas/</a></td>
     <td>NIGHTMARE BEFORE CHRISTMAS</td>
+    <td>Pinballfan2018</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1220,6 +1331,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19099">https://www.vpforums.org/index.php?app=downloads&showfile=19099</a></td>
     <td>Count Down Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1227,6 +1339,8 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19094">https://www.vpforums.org/index.php?app=downloads&showfile=19094</a></td>
     <td>Tag-Team Pinball (Premier 1985) 1.0</td>
+    <td>Piggei   
+</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1234,6 +1348,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19093">https://www.vpforums.org/index.php?app=downloads&showfile=19093</a></td>
     <td>Fleet Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1241,6 +1356,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19087">https://www.vpforums.org/index.php?app=downloads&showfile=19087</a></td>
     <td>Scramble (Tecnoplay) wheel logo 1.1</td>
+    <td>deadmanworking</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1248,6 +1364,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19084">https://www.vpforums.org/index.php?app=downloads&showfile=19084</a></td>
     <td>C.O.D. Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1255,6 +1372,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19081">https://www.vpforums.org/index.php?app=downloads&showfile=19081</a></td>
     <td>Gold Star Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1262,6 +1380,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19079">https://www.vpforums.org/index.php?app=downloads&showfile=19079</a></td>
     <td>Nags (Williams 1960) logo wheel</td>
+    <td>deadmanworking</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1269,6 +1388,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19078">https://www.vpforums.org/index.php?app=downloads&showfile=19078</a></td>
     <td>Grand Slam Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1276,6 +1396,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19077">https://www.vpforums.org/index.php?app=downloads&showfile=19077</a></td>
     <td>Maisie Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1283,6 +1404,7 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19076">https://www.vpforums.org/index.php?app=downloads&showfile=19076</a></td>
     <td>Big Hit Wheel 1.0</td>
+    <td>animusan</td>
     <td>VPF</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1303,6 +1425,7 @@ $("#reportwheelArt").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -1310,6 +1433,7 @@ $("#reportwheelArt").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/25427-britney-spears-its-britney-bitch-edition-hursty-toppers/">https://vpuniverse.com/files/file/25427-britney-spears-its-britney-bitch-edition-hursty-toppers/</a></td>
     <td>Britney Spears its Britney Bitch Edition (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1317,6 +1441,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25426-monte-carlo-bally-1973-hursty-toppers/">https://vpuniverse.com/files/file/25426-monte-carlo-bally-1973-hursty-toppers/</a></td>
     <td>Monte Carlo (Bally 1973) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1324,6 +1449,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25424-monte-carlo-gottlieb-1987-hursty-toppers/">https://vpuniverse.com/files/file/25424-monte-carlo-gottlieb-1987-hursty-toppers/</a></td>
     <td>Monte Carlo (Gottlieb 1987) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1331,6 +1457,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25423-beastie-boys-hursty-toppers/">https://vpuniverse.com/files/file/25423-beastie-boys-hursty-toppers/</a></td>
     <td>Beastie Boys (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1338,6 +1465,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25422-vector-bally-1982-hursty-toppers/">https://vpuniverse.com/files/file/25422-vector-bally-1982-hursty-toppers/</a></td>
     <td>Vector (Bally 1982) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1345,6 +1473,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25421-tx-sector-hursty-toppers/">https://vpuniverse.com/files/file/25421-tx-sector-hursty-toppers/</a></td>
     <td>TX-Sector (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1352,6 +1481,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23377-quicksilver-stern-1980-hursty-toppers/">https://vpuniverse.com/files/file/23377-quicksilver-stern-1980-hursty-toppers/</a></td>
     <td>Quicksilver (Stern 1980) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1359,6 +1489,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23409-stranger-things-hursty-toppers/">https://vpuniverse.com/files/file/23409-stranger-things-hursty-toppers/</a></td>
     <td>Stranger Things (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1366,6 +1497,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23342-king-kong-data-east-1990-hursty-toppers/">https://vpuniverse.com/files/file/23342-king-kong-data-east-1990-hursty-toppers/</a></td>
     <td>King Kong (Data East 1990) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1373,6 +1505,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24025-corvette-bally-1994-hursty-toppers/">https://vpuniverse.com/files/file/24025-corvette-bally-1994-hursty-toppers/</a></td>
     <td>Corvette (Bally 1994) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1380,6 +1513,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25411-britney-spears-its-britney-bitch-edition-video-topper/">https://vpuniverse.com/files/file/25411-britney-spears-its-britney-bitch-edition-video-topper/</a></td>
     <td>Britney Spears-it's Britney Bitch Edition - Video Topper</td>
+    <td>SERGIOSOUZA</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1387,6 +1521,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25410-beastie-boys-topper-video/">https://vpuniverse.com/files/file/25410-beastie-boys-topper-video/</a></td>
     <td>Beastie boys Topper Video</td>
+    <td>guet35</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1394,6 +1529,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25395-fair-fight-recel-1978-hursty-toppers/">https://vpuniverse.com/files/file/25395-fair-fight-recel-1978-hursty-toppers/</a></td>
     <td>Fair Fight (Recel 1978) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1401,6 +1537,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25388-space-gambler-playmatic-1978-hursty-toppers/">https://vpuniverse.com/files/file/25388-space-gambler-playmatic-1978-hursty-toppers/</a></td>
     <td>Space Gambler (Playmatic 1978) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1408,6 +1545,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25387-buffy-the-vampire-slayer-hursty-toppers/">https://vpuniverse.com/files/file/25387-buffy-the-vampire-slayer-hursty-toppers/</a></td>
     <td>Buffy The Vampire Slayer (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1415,6 +1553,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25375-popeye-saves-the-earth-bally-1994-topper-video/">https://vpuniverse.com/files/file/25375-popeye-saves-the-earth-bally-1994-topper-video/</a></td>
     <td>Popeye Saves The Earth (Bally 1994) Topper Video</td>
+    <td>purcho</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1422,6 +1561,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25364-cross-town-gottlieb-1966-hursty-toppers/">https://vpuniverse.com/files/file/25364-cross-town-gottlieb-1966-hursty-toppers/</a></td>
     <td>Cross Town (Gottlieb 1966) (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1429,6 +1569,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25356-cross-town-gottlieb-1966-topper-video/">https://vpuniverse.com/files/file/25356-cross-town-gottlieb-1966-topper-video/</a></td>
     <td>Cross Town (Gottlieb 1966) Topper Video</td>
+    <td>guet35</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1436,6 +1577,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25336-scramble-video-topper/">https://vpuniverse.com/files/file/25336-scramble-video-topper/</a></td>
     <td>Scramble - Video Topper</td>
+    <td>SERGIOSOUZA</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1443,6 +1585,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25332-fleet-jr-hursty-toppers/">https://vpuniverse.com/files/file/25332-fleet-jr-hursty-toppers/</a></td>
     <td>FLEET Jr (Hursty Toppers)</td>
+    <td>Hursty</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1450,6 +1593,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25324-transformers-stern-2011-topper-video/">https://vpuniverse.com/files/file/25324-transformers-stern-2011-topper-video/</a></td>
     <td>Transformers (Stern 2011) Topper Video</td>
+    <td>purcho</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1457,6 +1601,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25323-the-sopranos-stern-2005-topper-video/">https://vpuniverse.com/files/file/25323-the-sopranos-stern-2005-topper-video/</a></td>
     <td>The Sopranos (Stern 2005) Topper Video</td>
+    <td>purcho</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
@@ -1464,6 +1609,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19097">https://www.vpforums.org/index.php?app=downloads&showfile=19097</a></td>
     <td>Vampire (Bally 1970)</td>
+    <td>RepairDan57</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1471,6 +1617,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19096">https://www.vpforums.org/index.php?app=downloads&showfile=19096</a></td>
     <td>Vampire (Bally 1970) 1.0.0</td>
+    <td>RepairDan57</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1478,6 +1625,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19043">https://www.vpforums.org/index.php?app=downloads&showfile=19043</a></td>
     <td>Sound Stage (Chicago Coin 1976)</td>
+    <td>RepairDan57</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1485,6 +1633,8 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=18477">https://www.vpforums.org/index.php?app=downloads&showfile=18477</a></td>
     <td>Battlestar Galactica - Cylon Topper (Video) 1.0</td>
+    <td>Kayfabe   
+</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1492,6 +1642,8 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=18476">https://www.vpforums.org/index.php?app=downloads&showfile=18476</a></td>
     <td>Knight Rider KITT "Eye" Topper (Video) 1.0</td>
+    <td>Kayfabe   
+</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1499,6 +1651,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=17250">https://www.vpforums.org/index.php?app=downloads&showfile=17250</a></td>
     <td>Space Cadet Pinball Backglass, DMD or Topper v2</td>
+    <td>mattarcadeguy</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1506,6 +1659,7 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=17102">https://www.vpforums.org/index.php?app=downloads&showfile=17102</a></td>
     <td>Rancho dmmmd image 1.0</td>
+    <td>pasla</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1513,6 +1667,8 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=15747">https://www.vpforums.org/index.php?app=downloads&showfile=15747</a></td>
     <td>Pistol Poker 1</td>
+    <td>Manbearpig   
+</td>
     <td>VPF</td>
     <td>topper</td>
     <td>missing</td>
@@ -1533,6 +1689,7 @@ $("#reporttopper").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -1540,6 +1697,7 @@ $("#reporttopper").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/25261-star-wars-the-mandalorian-stern-2021-hpmp/">https://vpuniverse.com/files/file/25261-star-wars-the-mandalorian-stern-2021-hpmp/</a></td>
     <td>Star Wars The Mandalorian (Stern 2021) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1547,6 +1705,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25260-star-wars-stern-2017-hpmp/">https://vpuniverse.com/files/file/25260-star-wars-stern-2017-hpmp/</a></td>
     <td>Star Wars (Stern 2017) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1554,6 +1713,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24719-james-bond-007-stern-2022-hpmp/">https://vpuniverse.com/files/file/24719-james-bond-007-stern-2022-hpmp/</a></td>
     <td>James Bond 007 (Stern 2022) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1561,6 +1721,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24718-metallica-remastered-stern-2024-hpmp/">https://vpuniverse.com/files/file/24718-metallica-remastered-stern-2024-hpmp/</a></td>
     <td>Metallica Remastered (Stern 2024) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1568,6 +1729,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24715-led-zeppelin-stern-2020-hpmp/">https://vpuniverse.com/files/file/24715-led-zeppelin-stern-2020-hpmp/</a></td>
     <td>Led Zeppelin (Stern 2020) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1575,6 +1737,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24714-netflix-stranger-things-stern-2020-hpmp/">https://vpuniverse.com/files/file/24714-netflix-stranger-things-stern-2020-hpmp/</a></td>
     <td>Netflix Stranger Things (Stern 2020) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1582,6 +1745,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24713-teenage-mutant-ninja-turtles-stern-2020-hpmp/">https://vpuniverse.com/files/file/24713-teenage-mutant-ninja-turtles-stern-2020-hpmp/</a></td>
     <td>Teenage Mutant Ninja Turtles (Stern 2020) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1589,6 +1753,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/24712-elviras-house-of-horrors-stern-2019-hpmp/">https://vpuniverse.com/files/file/24712-elviras-house-of-horrors-stern-2019-hpmp/</a></td>
     <td>Elvira's House of Horrors (Stern 2019) HPMP</td>
+    <td>CarnyPriest</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1596,6 +1761,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/18355-media-pack-oktoberfest-jolly-park-ed/">https://vpuniverse.com/files/file/18355-media-pack-oktoberfest-jolly-park-ed/</a></td>
     <td>Media Pack Oktoberfest Jolly Park Ed.</td>
+    <td>ilveropaolone</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1603,6 +1769,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/17447-pinball-fx-star-trek-pinball-media-bg-pf-dmd-logo-wheel-audio/">https://vpuniverse.com/files/file/17447-pinball-fx-star-trek-pinball-media-bg-pf-dmd-logo-wheel-audio/</a></td>
     <td>Pinball FX - Star Trek Pinball Media (BG, PF, DMD, Logo, Wheel, Audio)</td>
+    <td>doivelspack</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1610,6 +1777,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/17311-pinball-m-media-bg-pf-dmd-logo-wheel/">https://vpuniverse.com/files/file/17311-pinball-m-media-bg-pf-dmd-logo-wheel/</a></td>
     <td>Pinball M Media (BG, PF, DMD, Logo, Wheel)</td>
+    <td>doivelspack</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1617,6 +1785,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/9723-worms-pinball-media-pack-for-pincabview-users/">https://vpuniverse.com/files/file/9723-worms-pinball-media-pack-for-pincabview-users/</a></td>
     <td>Worms Pinball Media Pack for PinCabView users</td>
+    <td>SixOfTwelve</td>
     <td>VPU</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1624,6 +1793,8 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=16493">https://www.vpforums.org/index.php?app=downloads&showfile=16493</a></td>
     <td>3D Pinball Manufacturer Logos 1.1</td>
+    <td>Vanlon   
+</td>
     <td>VPF</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1631,6 +1802,7 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=15382">https://www.vpforums.org/index.php?app=downloads&showfile=15382</a></td>
     <td>DMD Images 1.1</td>
+    <td>bpjacobsen</td>
     <td>VPF</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1638,6 +1810,8 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=15337">https://www.vpforums.org/index.php?app=downloads&showfile=15337</a></td>
     <td>Zaccaria Backglass Template 1.0</td>
+    <td>topper2k   
+</td>
     <td>VPF</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1645,6 +1819,8 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=15299">https://www.vpforums.org/index.php?app=downloads&showfile=15299</a></td>
     <td>Black Flaggers - Pinball Wicked Media Pack 1.0</td>
+    <td>topper2k   
+</td>
     <td>VPF</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1652,6 +1828,8 @@ $("#reporttopper").DataTable({
 <tr>
     <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=15022">https://www.vpforums.org/index.php?app=downloads&showfile=15022</a></td>
     <td>The Magnificant Seven 1.0</td>
+    <td>Ruud56   
+</td>
     <td>VPF</td>
     <td>mediaPack</td>
     <td>missing</td>
@@ -1672,6 +1850,7 @@ $("#reportmediaPack").DataTable({
     <tr>
         <th>URL</th>
         <th>Name</th>
+        <th>Author</th>
         <th>Site</th>
         <th>Kind</th>
         <th>Issue</th>
@@ -1679,6 +1858,7 @@ $("#reportmediaPack").DataTable({
 </thead><tr>
     <td><a href="https://vpuniverse.com/files/file/25316-supreme-stern-2018-instruction-card/">https://vpuniverse.com/files/file/25316-supreme-stern-2018-instruction-card/</a></td>
     <td>Supreme (Stern 2018) instruction card</td>
+    <td>PinballWizardBMR</td>
     <td>VPU</td>
     <td>rule</td>
     <td>missing</td>
