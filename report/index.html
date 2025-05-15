@@ -60,17 +60,45 @@ function switchTab(evt, tabName) {
   evt.currentTarget.className += " active";
 }
 </script><div class="tab">
-<button class="tablinks active" onclick="switchTab(event, 'b2s')">b2s (16)</button>
+<button class="tablinks active" onclick="switchTab(event, 'table')">table (1)</button>
+<button class="tablinks" onclick="switchTab(event, 'b2s')">b2s (12)</button>
 <button class="tablinks" onclick="switchTab(event, 'rom')">rom (17)</button>
 <button class="tablinks" onclick="switchTab(event, 'pupPack')">pupPack (20)</button>
-<button class="tablinks" onclick="switchTab(event, 'altSound')">altSound (7)</button>
+<button class="tablinks" onclick="switchTab(event, 'altSound')">altSound (5)</button>
 <button class="tablinks" onclick="switchTab(event, 'pov')">pov (17)</button>
-<button class="tablinks" onclick="switchTab(event, 'wheelArt')">wheelArt (84)</button>
+<button class="tablinks" onclick="switchTab(event, 'wheelArt')">wheelArt (83)</button>
 <button class="tablinks" onclick="switchTab(event, 'topper')">topper (30)</button>
 <button class="tablinks" onclick="switchTab(event, 'mediaPack')">mediaPack (17)</button>
 <button class="tablinks" onclick="switchTab(event, 'rule')">rule (1)</button>
 </div>
-<div id="b2s" class="tabcontent" style="display: block;">
+<div id="table" class="tabcontent" style="display: block;">
+<h3>table</h3>
+<table id="reporttable" class="display">
+<thead>
+    <tr>
+        <th>URL</th>
+        <th>Name</th>
+        <th>Site</th>
+        <th>Kind</th>
+        <th>Issue</th>
+    </tr>
+</thead><tr>
+    <td><a href="https://www.vpforums.org/index.php?app=downloads&showfile=19092">https://www.vpforums.org/index.php?app=downloads&showfile=19092</a></td>
+    <td>Vampire (Bally 1971) 1.0.1</td>
+    <td>VPF</td>
+    <td>table</td>
+    <td>version mismatch: 1.0.1 vs 1.0</td>
+</tr></table>
+<script>
+$("#reporttable").DataTable({
+    paging:   false,
+    info:     false,
+    searching: true,
+    order: [],
+});
+</script>
+</div>
+<div id="b2s" class="tabcontent">
 <h3>b2s</h3>
 <table id="reportb2s" class="display">
 <thead>
@@ -82,27 +110,6 @@ function switchTab(evt, tabName) {
         <th>Issue</th>
     </tr>
 </thead><tr>
-    <td><a href="https://vpuniverse.com/files/file/25409-beastie-boys-zandysarcade-2025-b2s-with-full-dmd/">https://vpuniverse.com/files/file/25409-beastie-boys-zandysarcade-2025-b2s-with-full-dmd/</a></td>
-    <td>Beastie Boys (ZandysArcade 2025) b2s with full dmd</td>
-    <td>VPU</td>
-    <td>b2s</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25399-vampire-bally-1971-b2s-with-full-dmd/">https://vpuniverse.com/files/file/25399-vampire-bally-1971-b2s-with-full-dmd/</a></td>
-    <td>Vampire (Bally 1971) b2s with full dmd</td>
-    <td>VPU</td>
-    <td>b2s</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25393-vampire-bally-1971/">https://vpuniverse.com/files/file/25393-vampire-bally-1971/</a></td>
-    <td>Vampire (Bally 1971)</td>
-    <td>VPU</td>
-    <td>b2s</td>
-    <td>missing</td>
-</tr>
-<tr>
     <td><a href="https://vpuniverse.com/files/file/25358-stranger-things-premium/">https://vpuniverse.com/files/file/25358-stranger-things-premium/</a></td>
     <td>Stranger Things (Premium)</td>
     <td>VPU</td>
@@ -168,13 +175,6 @@ function switchTab(evt, tabName) {
 <tr>
     <td><a href="https://vpuniverse.com/files/file/23865-count-down-gottlieb-1979-backglass-full-dmd/">https://vpuniverse.com/files/file/23865-count-down-gottlieb-1979-backglass-full-dmd/</a></td>
     <td>COUNT DOWN Gottlieb 1979 backglass (full dmd)</td>
-    <td>VPU</td>
-    <td>b2s</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/23677-big-lebowski/">https://vpuniverse.com/files/file/23677-big-lebowski/</a></td>
-    <td>Big Lebowski</td>
     <td>VPU</td>
     <td>b2s</td>
     <td>missing</td>
@@ -546,20 +546,6 @@ $("#reportpupPack").DataTable({
     <td>VPU</td>
     <td>altSound</td>
     <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/22096-pharaoh-williams-1981-altsound-20-gsound/">https://vpuniverse.com/files/file/22096-pharaoh-williams-1981-altsound-20-gsound/</a></td>
-    <td>Pharaoh (Williams 1981) AltSound 2.0 Gsound</td>
-    <td>VPU</td>
-    <td>altSound</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/22086-bounty-hunter-gottlieb-1985-altsound-20-gsound/">https://vpuniverse.com/files/file/22086-bounty-hunter-gottlieb-1985-altsound-20-gsound/</a></td>
-    <td>Bounty Hunter (Gottlieb 1985) AltSound 2.0 Gsound</td>
-    <td>VPU</td>
-    <td>altSound</td>
-    <td>missing</td>
 </tr></table>
 <script>
 $("#reportaltSound").DataTable({
@@ -896,6 +882,27 @@ $("#reportpov").DataTable({
     <td>missing</td>
 </tr>
 <tr>
+    <td><a href="https://vpuniverse.com/files/file/25425-geega-wheel/">https://vpuniverse.com/files/file/25425-geega-wheel/</a></td>
+    <td>Geega Wheel</td>
+    <td>VPU</td>
+    <td>wheelArt</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25420-wheel-diagonale-totem-gottlieb-1979/">https://vpuniverse.com/files/file/25420-wheel-diagonale-totem-gottlieb-1979/</a></td>
+    <td>Wheel Diagonale - Totem (Gottlieb 1979)</td>
+    <td>VPU</td>
+    <td>wheelArt</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25415-britney-spears-its-britney-bitch-edition-imagem-wheel/">https://vpuniverse.com/files/file/25415-britney-spears-its-britney-bitch-edition-imagem-wheel/</a></td>
+    <td>Britney Spears-it's Britney Bitch Edition - Imagem Wheel</td>
+    <td>VPU</td>
+    <td>wheelArt</td>
+    <td>missing</td>
+</tr>
+<tr>
     <td><a href="https://vpuniverse.com/files/file/25408-universe-zaccaria-1977-wheel/">https://vpuniverse.com/files/file/25408-universe-zaccaria-1977-wheel/</a></td>
     <td>Universe (Zaccaria 1977) Wheel</td>
     <td>VPU</td>
@@ -1038,34 +1045,6 @@ $("#reportpov").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25146-iron-eagle-wheel/">https://vpuniverse.com/files/file/25146-iron-eagle-wheel/</a></td>
     <td>Iron Eagle WHEEL</td>
-    <td>VPU</td>
-    <td>wheelArt</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25144-nags-wheel/">https://vpuniverse.com/files/file/25144-nags-wheel/</a></td>
-    <td>NAGS Wheel</td>
-    <td>VPU</td>
-    <td>wheelArt</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25137-lenny-kravitz-wheel/">https://vpuniverse.com/files/file/25137-lenny-kravitz-wheel/</a></td>
-    <td>Lenny Kravitz Wheel</td>
-    <td>VPU</td>
-    <td>wheelArt</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25127-nags-williams-1960-wheel/">https://vpuniverse.com/files/file/25127-nags-williams-1960-wheel/</a></td>
-    <td>Nags (Williams 1960) Wheel</td>
-    <td>VPU</td>
-    <td>wheelArt</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25097-wonderland-wheel/">https://vpuniverse.com/files/file/25097-wonderland-wheel/</a></td>
-    <td>Wonderland Wheel</td>
     <td>VPU</td>
     <td>wheelArt</td>
     <td>missing</td>
@@ -1329,6 +1308,76 @@ $("#reportwheelArt").DataTable({
         <th>Issue</th>
     </tr>
 </thead><tr>
+    <td><a href="https://vpuniverse.com/files/file/25427-britney-spears-its-britney-bitch-edition-hursty-toppers/">https://vpuniverse.com/files/file/25427-britney-spears-its-britney-bitch-edition-hursty-toppers/</a></td>
+    <td>Britney Spears its Britney Bitch Edition (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25426-monte-carlo-bally-1973-hursty-toppers/">https://vpuniverse.com/files/file/25426-monte-carlo-bally-1973-hursty-toppers/</a></td>
+    <td>Monte Carlo (Bally 1973) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25424-monte-carlo-gottlieb-1987-hursty-toppers/">https://vpuniverse.com/files/file/25424-monte-carlo-gottlieb-1987-hursty-toppers/</a></td>
+    <td>Monte Carlo (Gottlieb 1987) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25423-beastie-boys-hursty-toppers/">https://vpuniverse.com/files/file/25423-beastie-boys-hursty-toppers/</a></td>
+    <td>Beastie Boys (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25422-vector-bally-1982-hursty-toppers/">https://vpuniverse.com/files/file/25422-vector-bally-1982-hursty-toppers/</a></td>
+    <td>Vector (Bally 1982) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/25421-tx-sector-hursty-toppers/">https://vpuniverse.com/files/file/25421-tx-sector-hursty-toppers/</a></td>
+    <td>TX-Sector (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/23377-quicksilver-stern-1980-hursty-toppers/">https://vpuniverse.com/files/file/23377-quicksilver-stern-1980-hursty-toppers/</a></td>
+    <td>Quicksilver (Stern 1980) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/23409-stranger-things-hursty-toppers/">https://vpuniverse.com/files/file/23409-stranger-things-hursty-toppers/</a></td>
+    <td>Stranger Things (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/23342-king-kong-data-east-1990-hursty-toppers/">https://vpuniverse.com/files/file/23342-king-kong-data-east-1990-hursty-toppers/</a></td>
+    <td>King Kong (Data East 1990) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
+    <td><a href="https://vpuniverse.com/files/file/24025-corvette-bally-1994-hursty-toppers/">https://vpuniverse.com/files/file/24025-corvette-bally-1994-hursty-toppers/</a></td>
+    <td>Corvette (Bally 1994) (Hursty Toppers)</td>
+    <td>VPU</td>
+    <td>topper</td>
+    <td>missing</td>
+</tr>
+<tr>
     <td><a href="https://vpuniverse.com/files/file/25411-britney-spears-its-britney-bitch-edition-video-topper/">https://vpuniverse.com/files/file/25411-britney-spears-its-britney-bitch-edition-video-topper/</a></td>
     <td>Britney Spears-it's Britney Bitch Edition - Video Topper</td>
     <td>VPU</td>
@@ -1408,76 +1457,6 @@ $("#reportwheelArt").DataTable({
 <tr>
     <td><a href="https://vpuniverse.com/files/file/25323-the-sopranos-stern-2005-topper-video/">https://vpuniverse.com/files/file/25323-the-sopranos-stern-2005-topper-video/</a></td>
     <td>The Sopranos (Stern 2005) Topper Video</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25322-nightmare-before-christmas-hursty-toppers/">https://vpuniverse.com/files/file/25322-nightmare-before-christmas-hursty-toppers/</a></td>
-    <td>Nightmare Before Christmas (Hursty Toppers)</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25321-dragonfist-hursty-toppers/">https://vpuniverse.com/files/file/25321-dragonfist-hursty-toppers/</a></td>
-    <td>Dragonfist (Hursty Toppers)</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25320-future-spa-bally-1979-topper-video/">https://vpuniverse.com/files/file/25320-future-spa-bally-1979-topper-video/</a></td>
-    <td>Future Spa (Bally 1979) Topper Video</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25303-meat-loaf-hursty-toppers/">https://vpuniverse.com/files/file/25303-meat-loaf-hursty-toppers/</a></td>
-    <td>Meat Loaf (Hursty Toppers)</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25306-tam-tam-playmatic-1975-topper-video/">https://vpuniverse.com/files/file/25306-tam-tam-playmatic-1975-topper-video/</a></td>
-    <td>Tam-Tam (Playmatic 1975) Topper Video</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25304-scramble-hursty-toppers/">https://vpuniverse.com/files/file/25304-scramble-hursty-toppers/</a></td>
-    <td>Scramble (Hursty Toppers)</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25297-scramble-tecnoplay-1987-topper-video/">https://vpuniverse.com/files/file/25297-scramble-tecnoplay-1987-topper-video/</a></td>
-    <td>Scramble (Tecnoplay 1987) Topper Video</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25293-texas-chainsaw-massacre-video-topper-pinball-m/">https://vpuniverse.com/files/file/25293-texas-chainsaw-massacre-video-topper-pinball-m/</a></td>
-    <td>Texas Chainsaw Massacre - Video Topper - Pinball M</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25292-camp-bloodbrook-video-topper-pinball-m/">https://vpuniverse.com/files/file/25292-camp-bloodbrook-video-topper-pinball-m/</a></td>
-    <td>Camp Bloodbrook - Video Topper - Pinball M</td>
-    <td>VPU</td>
-    <td>topper</td>
-    <td>missing</td>
-</tr>
-<tr>
-    <td><a href="https://vpuniverse.com/files/file/25291-system-shock-pinball-video-topper-pinball-m/">https://vpuniverse.com/files/file/25291-system-shock-pinball-video-topper-pinball-m/</a></td>
-    <td>System Shock Pinball - Video Topper - Pinball M</td>
     <td>VPU</td>
     <td>topper</td>
     <td>missing</td>
