@@ -227,8 +227,8 @@ struct CheckMissingCommand: AsyncParsableCommand {
                 """
                 **Missing \(scan.kind)**
 
-                | Name | URL |
-                | ---- | --- |                
+                | Name | Author | URL |
+                | ---- | ------ | --- |                
                 """
             )
         }
@@ -249,7 +249,9 @@ struct CheckMissingCommand: AsyncParsableCommand {
                         let issue = URLIssue.entryNotFound(item)
                         if !issues.check(kind: scan.kind, url: item.url, issue: issue) {
                             if markdown {
-                                print("| \(item.name ?? "unknown") | \(item.url) |")
+                                print(
+                                    "| \(item.name ?? "unknown") | \(item.author ?? "unknown" ) | \(item.url) |"
+                                )
                             } else {
                                 print(issue.describe(kind: scan.kind, url: item.url))
                             }

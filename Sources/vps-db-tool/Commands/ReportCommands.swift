@@ -101,7 +101,8 @@ struct ReportCommand: AsyncParsableCommand {
                                 if report {
                                     result.append(
                                         .init(
-                                            url: item.url, name: item.name ?? "unknown", kind: kind,
+                                            url: item.url, name: item.name ?? "unknown",
+                                            author: item.author ?? "unknown", kind: kind,
                                             issue:
                                                 "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(detail.version))"
                                         ))
@@ -114,7 +115,8 @@ struct ReportCommand: AsyncParsableCommand {
                     if !issues.check(kind: kind, url: item.url, issue: issue) {
                         result.append(
                             .init(
-                                url: item.url, name: item.name ?? "unknown", kind: kind,
+                                url: item.url, name: item.name ?? "unknown",
+                                author: item.author ?? "unknown", kind: kind,
                                 issue: "missing"
                             ))
                     }
@@ -131,6 +133,7 @@ struct ReportCommand: AsyncParsableCommand {
 private struct Item {
     let url: URL
     let name: String
+    let author: String
     let kind: GameResourceKind
     let issue: String
 }
@@ -237,6 +240,7 @@ private struct Report {
                     <tr>
                         <th>URL</th>
                         <th>Name</th>
+                        <th>Author</th>
                         <th>Site</th>
                         <th>Kind</th>
                         <th>Issue</th>
@@ -266,6 +270,7 @@ private struct Report {
         <tr>
             <td><a href="\(item.url)">\(item.url)</a></td>
             <td>\(item.name)</td>
+            <td>\(item.author)</td>
             <td>\(Site(item.url).rawValue)</td>
             <td>\(item.kind.rawValue)</td>
             <td>\(item.issue)</td>

@@ -195,17 +195,25 @@ extension VPUniverseScanner: ListScanner {
          <h4>
          <span class="ipsType_break ipsContained"><a href="https://vpuniverse.com/files/file/25136-iron-eagle-original-2025/" title="View the file Iron Eagle (Original 2025) " >Iron Eagle (Original 2025)</a></span>
          */
-        for item in try html.select("div.ipsDataItem_main h4 a") {
-            let url = try item.attr("href")
-            let title = try item.text()
+        for item in try html.select("div.ipsDataItem_main") {
+            var url = ""
+            var title = ""
+            var author = ""
+
+            let a = try item.select("h4 a")
+            url = try a.attr("href")
+            title = try a.text()
 
             if url.contains("/tags/") {
                 // sometimes they have nav by tag
                 continue
             }
 
+            let span = try item.select("p.ipsType_reset a")
+            author = try span.text()
+
             if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
-                items.append(.init(url: url, name: title))
+                items.append(.init(url: url, name: title, author: author))
             }
         }
 

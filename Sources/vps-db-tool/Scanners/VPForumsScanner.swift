@@ -180,15 +180,22 @@ extension VPForumsScanner: ListScanner {
         }
 
         /*
+
          <h3 class="ipsType_subtitle">
          <a href="https://www.vpforums.org/index.php?app=downloads&amp;showfile=18336" title="View file named Close Encounters">Close Encounters <span class="ipsType_small">1.4.3</span></a>
          */
-        for item in try html.select("h3.ipsType_subtitle a") {
-            let url = try item.attr("href")
-            let title = try item.text()
+        for item in try html.select("div.idm_category_row") {
+            let a = try item.select("h3.ipsType_subtitle a")
+            let url = try a.attr("href")
+            let title = try a.text()
+
+            // By xxx
+            let div = try item.select("div.lighter").html()
+            let author = String(div.split(separator: "<")[0].dropFirst(3)).trimmingCharacters(
+                in: .whitespacesAndNewlines)
 
             if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
-                items.append(.init(url: Site(url).canonicalize(url), name: title))
+                items.append(.init(url: Site(url).canonicalize(url), name: title, author: author))
             }
         }
 
