@@ -46,7 +46,7 @@ struct Table: GameResource, Sendable {
     @CustomCoding(GameResourceCommonTransformer.self)
     var gameResource: GameResourceCommon
 
-    @CustomCoding(OmitEmpty<OrderedSet<TableFeature>>.self) let features: OrderedSet<TableFeature>
+    @CustomCoding(OmitEmpty<OrderedSet<TableFeature>>.self) var features: OrderedSet<TableFeature>
     var tableFormat: TableFormat?
     var edition: String?
 

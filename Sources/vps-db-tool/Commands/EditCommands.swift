@@ -9,6 +9,7 @@ struct EditCommands: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
+            EditTagFeaturesCommand.self,
         ]
     )
 }
@@ -206,6 +207,50 @@ struct EditTrimCommand: AsyncParsableCommand {
             game.mediaPacks = game.mediaPacks.map { update($0) }
             game.rules = game.rules.map { update($0) }
 
+            return game
+        }
+    }
+}
+
+struct EditTagFeaturesCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "tag-feature",
+        abstract: "remove tableFormat from features"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    @Option(parsing: .upToNextOption)
+    var ids: [String]
+
+    @Option
+    var feature: TableFeature
+
+    mutating func run() async throws {
+        let ids = try Set(
+            ids
+                .flatMap {
+                    if $0.hasPrefix("/") {
+                        try String(contentsOf: URL(fileURLWithPath: $0), encoding: .utf8)
+                            .split(separator: "\n")
+                            .map { String($0) }
+                    } else {
+                        [$0]
+                    }
+                })
+
+        try await edit.visitGames { game in
+            var game = game
+            game.tables = game.tables.map {
+                var t = $0
+                if ids.contains(t.id) {
+                    if !t.features.contains(feature) {
+                        t.features.append(feature)
+                    }
+                }
+                return t
+            }
             return game
         }
     }

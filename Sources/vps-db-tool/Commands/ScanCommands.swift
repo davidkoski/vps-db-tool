@@ -8,6 +8,7 @@ struct ScanCommands: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             DownloadCommand.self, CheckDownloadCommand.self, CheckMissingCommand.self,
+            ScanPagesCommand.self,
         ]
     )
 }
@@ -36,6 +37,9 @@ struct ScanArguments: ParsableArguments, Sendable {
     var site = Site.vpu
 
     @Option
+    var url: URL?
+
+    @Option
     var page = 1
 
     @Option
@@ -44,12 +48,29 @@ struct ScanArguments: ParsableArguments, Sendable {
     @Flag
     var follow = false
 
-    func urls(scanner: ScanSources & ListScanner, client: HTTPClient) async throws -> [(
+    mutating func urls(scanner: ScanSources & ListScanner, client: HTTPClient) async throws -> [(
         ScanVariant, URL
     )] {
         var urls = [(ScanVariant, URL)]()
 
-        if pages > 0 {
+        if let url {
+            self.site =
+                switch vps_db_tool.Site(url) {
+                case .vpu: .vpu
+                case .vpf: .vpf
+                default:
+                    fatalError("site for \(url) not supported for scan")
+                }
+
+            if pages > 0 {
+                for i in 0 ..< pages {
+                    urls.append((.list, scanner.update(kind: kind, url: url, page: page + i)))
+                }
+            } else {
+                urls.append((.list, url))
+            }
+
+        } else if pages > 0 {
             for root in scanner.sources(kind: kind) {
                 let content = try await client.getString(root)
                 let list = try scanner.scanList(url: root, content: content, kind: kind)
@@ -262,5 +283,59 @@ struct CheckMissingCommand: AsyncParsableCommand {
         }
 
         try self.issues.save(db: issues)
+    }
+}
+
+struct ScanPagesCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "pages",
+        abstract: "scan pages and print matched resources"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+    @OptionGroup var scan: ScanArguments
+
+    enum Output: String, Codable, ExpressibleByArgument {
+        case url
+        case game
+        case file
+    }
+
+    @Option var output = Output.file
+
+    mutating func run() async throws {
+        let db = try db.database()
+
+        let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
+        let scanner = scan.site.scanner
+
+        var urls = try await scan.urls(scanner: scanner, client: client)
+
+        while !urls.isEmpty {
+            let (variant, url) = urls.removeFirst()
+
+            let content = try await client.getString(url)
+
+            switch variant {
+            case .detail:
+                break
+            case .list:
+                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
+
+                for item in result.list {
+                    if let files = db[scan.kind][item.url], let first = files.first {
+                        switch output {
+                        case .url:
+                            print(item.url)
+                        case .game:
+                            print(first.gameId)
+                        case .file:
+                            print(first.id)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

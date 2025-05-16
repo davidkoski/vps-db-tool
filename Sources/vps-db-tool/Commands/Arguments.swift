@@ -13,3 +13,6 @@ extension URL: @retroactive ExpressibleByArgument {
 
 extension GameResourceKind: ExpressibleByArgument {
 }
+
+extension TableFeature: ExpressibleByArgument {
+}
