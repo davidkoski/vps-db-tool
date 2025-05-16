@@ -26,7 +26,7 @@ enum TableFeature: String, Codable, Sendable, Equatable {
     case mr = "MR"
     case mixedReality = "Mixed Reality"
     case music = "Music"
-    case patch = "Patch"
+    case patch = "VPU Patch"
     case proc = "P-ROC"
     case ssf = "SSF"
     case scorbit = "Scorbit"
@@ -41,7 +41,7 @@ enum TableFeature: String, Codable, Sendable, Equatable {
 
     // to delete
     case mod2 = "Mod"
-    case mod3 = "VPU Patch"
+    case oldPatch = "Patch"
 }
 
 enum B2SFeature: String, Codable, Sendable {

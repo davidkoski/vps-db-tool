@@ -9,7 +9,7 @@ struct EditCommands: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
-            EditTagFeaturesCommand.self,
+            EditTagFeaturesCommand.self, OneOffCommand.self,
         ]
     )
 }
@@ -251,6 +251,33 @@ struct EditTagFeaturesCommand: AsyncParsableCommand {
                 }
                 return t
             }
+            return game
+        }
+    }
+}
+
+struct OneOffCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "one-off",
+        abstract: "random one-off command"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = game
+
+            game.tables = game.tables.map {
+                var t = $0
+                if t.features.contains(.oldPatch) {
+                    t.features.remove(.oldPatch)
+                    t.features.append(.patch)
+                }
+                return t
+            }
+
             return game
         }
     }

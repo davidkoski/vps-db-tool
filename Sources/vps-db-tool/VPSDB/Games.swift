@@ -7,6 +7,7 @@ func canonicalVersion(_ string: String?) -> String {
         .replacingOccurrences(of: "v", with: "")
         .replacingOccurrences(of: " ", with: "")
         .replacingOccurrences(of: ".0.0", with: ".0")
+        .replacing(/.0$/, with: { _ in "" })
 }
 
 protocol Metadata {
