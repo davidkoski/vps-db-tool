@@ -2,66 +2,6 @@
 
 | Name | Author | URL |
 | ---- | ------ | --- |                
-| Old Chicago (Bally 1975) | loserman76 | https://vpuniverse.com/files/file/8316-old-chicago-bally-1975/ |
-| Jungle (Gottlieb 1972) | loserman76 | https://vpuniverse.com/files/file/8285-jungle-gottlieb-1972/ |
-| Sing Along (Gottlieb 1967) | loserman76 | https://vpuniverse.com/files/file/8255-sing-along-gottlieb-1967/ |
-| Sky Jump (Gottlieb 1974) | loserman76 | https://vpuniverse.com/files/file/8253-sky-jump-gottlieb-1974/ |
-| Slick Chick (Gottlieb 1963) | loserman76 | https://vpuniverse.com/files/file/8252-slick-chick-gottlieb-1963/ |
-| Snow Queen (Gottlieb 1970) | loserman76 | https://vpuniverse.com/files/file/8250-snow-queen-gottlieb-1970/ |
-| Grande Domino (Gottlieb 1968) | loserman76 | https://vpuniverse.com/files/file/8248-grande-domino-gottlieb-1968/ |
-| Solar City (Gottlieb 1977) | loserman76 | https://vpuniverse.com/files/file/8236-solar-city-gottlieb-1977/ |
-| Solitaire (Gottlieb 1967) | loserman76 | https://vpuniverse.com/files/file/8233-solitaire-gottlieb-1967/ |
-| Spin-A-Card (Gottlieb 1969) | loserman76 | https://vpuniverse.com/files/file/8230-spin-a-card-gottlieb-1969/ |
-| Spin Out (Gottlieb 1975) | loserman76 | https://vpuniverse.com/files/file/8229-spin-out-gottlieb-1975/ |
-| Full (Recreativos Franco 1977) | loserman76 | https://vpuniverse.com/files/file/8226-full-recreativos-franco-1977/ |
-| Roller Coaster Reverse (Gottlieb 1971) | ARMYAVIATION | https://vpuniverse.com/files/file/8158-roller-coaster-reverse-gottlieb-1971/ |
-| WWF Royal Rumble (Data East 1994) DT/FS/VR | hauntfreaks | https://vpuniverse.com/files/file/8044-wwf-royal-rumble-data-east-1994-dtfsvr/ |
-| Aliens 2.0 | Delta23 | https://vpuniverse.com/files/file/7550-aliens-20/ |
-| BatmanTAS | dunriwikan45 | https://vpuniverse.com/files/file/7500-batmantas/ |
-| Lucky Ace (Williams 1974) | loserman76 | https://vpuniverse.com/files/file/7239-lucky-ace-williams-1974/ |
-| Cheech & Chong: Road-Trip'pin (Bally 2021) | watacaractr | https://vpuniverse.com/files/file/7061-cheech-chong-road-trippin-bally-2021/ |
-| chuck berry 1.0 VPX | john22 | https://vpuniverse.com/files/file/6437-chuck-berry-10-vpx/ |
-| Star Trek (Gottlieb 1971) | BorgDog | https://vpuniverse.com/files/file/6302-star-trek-gottlieb-1971/ |
-| Big Brave (Gottlieb 1974) | hauntfreaks | https://vpuniverse.com/files/file/6293-big-brave-gottlieb-1974/ |
-| Loch Ness Monster (Game Plan 1985) | jino0372 | https://vpuniverse.com/files/file/5996-loch-ness-monster-game-plan-1985/ |
-| TikiTime | TikiGoon | https://vpuniverse.com/files/file/5888-tikitime/ |
-| Michael Jordan (Data East, 1992) | Rascal | https://vpuniverse.com/files/file/5830-michael-jordan-data-east-1992/ |
-| Aliens | Delta23 | https://vpuniverse.com/files/file/5779-aliens/ |
-| Lost in Space (Sega 1998) | Goldchicco | https://vpuniverse.com/files/file/5753-lost-in-space-sega-1998/ |
-| Soul Reaver | Delta23 | https://vpuniverse.com/files/file/5652-soul-reaver/ |
-| The Goonies Pinball Adventure | Javier15 | https://vpuniverse.com/files/file/5607-the-goonies-pinball-adventure/ |
-| Sonic The Hedgehog 2 (Brendan Bailey 2005) | Javier15 | https://vpuniverse.com/files/file/5579-sonic-the-hedgehog-2-brendan-bailey-2005/ |
-| King Kong (Data East 1990) | Javier15 | https://vpuniverse.com/files/file/5528-king-kong-data-east-1990/ |
-| Fathom (Bally 1981) LED Mod | vogliadicane | https://vpuniverse.com/files/file/4897-fathom-bally-1981-led-mod/ |
-| Junkyard Cats (Bailey 2012) | Javier15 | https://vpuniverse.com/files/file/5508-junkyard-cats-bailey-2012/ |
-| Mario Andretti (Gottlieb/Premier 1995) | Rascal | https://vpuniverse.com/files/file/5482-mario-andretti-gottliebpremier-1995/ |
-| Raven (Gottlieb/Premier 1986) | Rascal | https://vpuniverse.com/files/file/5481-raven-gottliebpremier-1986/ |
-| Laser Ball (Williams 1979) | Javier15 | https://vpuniverse.com/files/file/5479-laser-ball-williams-1979/ |
-| Gottlieb Monte Carlo - 1987 - VPX | Rascal | https://vpuniverse.com/files/file/5473-gottlieb-monte-carlo-1987-vpx/ |
-| Krull (Gottlieb 1983) | Rascal | https://vpuniverse.com/files/file/5455-krull-gottlieb-1983/ |
-| Jacks to Open (Mylstar/Gottlieb 1984) | Rascal | https://vpuniverse.com/files/file/5454-jacks-to-open-mylstargottlieb-1984/ |
-| Ice Fever (Premier 1985) | Rascal | https://vpuniverse.com/files/file/5452-ice-fever-premier-1985/ |
-| Force II (Gottlieb 1981) | Rascal | https://vpuniverse.com/files/file/5447-force-ii-gottlieb-1981/ |
-| Excalibur (1988 Premier) | Rascal | https://vpuniverse.com/files/file/5439-excalibur-1988-premier/ |
-| Counterforce | Rascal | https://vpuniverse.com/files/file/5323-counterforce/ |
-| Big House (Gottlieb/Premier 1989) | Rascal | https://vpuniverse.com/files/file/5278-big-house-gottliebpremier-1989/ |
-| Cactus Jack's (Premier 1991) | Rascal | https://vpuniverse.com/files/file/5280-cactus-jacks-premier-1991/ |
-| Bounty Hunter (Gottlieb 1985) | Rascal | https://vpuniverse.com/files/file/5279-bounty-hunter-gottlieb-1985/ |
-| Cue Ball Wizard - Premier 1992 | Rascal | https://vpuniverse.com/files/file/5438-cue-ball-wizard-premier-1992/ |
-| Apache! (Taito 1978) full pack | editoy | https://vpuniverse.com/files/file/5244-apache-taito-1978-full-pack/ |
-| Hot Ball (Taito 1979) | editoy | https://vpuniverse.com/files/file/5201-hot-ball-taito-1979/ |
-| Ufo Robot Goldrake (Original 2017)RHP.zip | editoy | https://vpuniverse.com/files/file/4942-ufo-robot-goldrake-original-2017rhpzip/ |
-| Goldorak VPX Edition | Javier15 | https://vpuniverse.com/files/file/4916-goldorak-vpx-edition/ |
-| Fathom (Bally 1981) Vintage Mod | vogliadicane | https://vpuniverse.com/files/file/4650-fathom-bally-1981-vintage-mod/ |
-| Hook (Data East 1992) | Javier15 | https://vpuniverse.com/files/file/4894-hook-data-east-1992/ |
-| Solar Ride (Gottlieb, 1979) | LynnInDenver | https://vpuniverse.com/files/file/4870-solar-ride-gottlieb-1979/ |
-| Austin Powers (Stern 2001) | Javier15 | https://vpuniverse.com/files/file/4790-austin-powers-stern-2001/ |
-| Batman (Data East 1991) | Javier15 | https://vpuniverse.com/files/file/4653-batman-data-east-1991/ |
-| Star Trek LE (Stern 2013) | freneticamnesic | https://vpuniverse.com/files/file/4235-star-trek-le-stern-2013/ |
-| Spanish Eyes (Williams 1972) FS/DT VP10.1 | jbg4208 | https://vpuniverse.com/files/file/4178-spanish-eyes-williams-1972-fsdt-vp101/ |
-| Swords of Fury (Williams 1988)(FS-DT)(VP10) | takut | https://vpuniverse.com/files/file/4159-swords-of-fury-williams-1988fs-dtvp10/ |
-| Pirates Of The Caribbean (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3581-pirates-of-the-caribbean-conversion-from-fp-vpx-beta/ |
-| Tron (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3577-tron-conversion-from-fp-vpx-beta/ |
 | Creepshow (Original 2022) re-mix | hauntfreaks | https://vpuniverse.com/files/file/25041-creepshow-original-2022-re-mix/ |
 | TX-Sector (Gottlieb 1988)GhettoBlasterMod | jmcgohon81 | https://vpuniverse.com/files/file/24706-tx-sector-gottlieb-1988ghettoblastermod/ |
 | Star Wars (Data East 1992)Remix | jmcgohon81 | https://vpuniverse.com/files/file/24698-star-wars-data-east-1992remix/ |

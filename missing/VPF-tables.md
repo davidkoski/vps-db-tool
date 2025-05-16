@@ -34,7 +34,6 @@
 | Rainbow (Gottlieb 1956) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15309 |
 | Big Valley (Bally 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15308 |
 | North Star (Gottlieb 1964) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15307 |
-| Bon Voyage (Bally 1974) 1.0 | beowulf99 | https://www.vpforums.org/index.php?app=downloads&showfile=15244 |
 | super mario galaxy pinball 1.2 | remdwaas1986 | https://www.vpforums.org/index.php?app=downloads&showfile=15236 |
 | Bad Cats (Williams 1989) VPin Workshop 2.0 | VPin Workshop | https://www.vpforums.org/index.php?app=downloads&showfile=15231 |
 | Soccer (Williams 1964) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15156 |
@@ -76,14 +75,12 @@
 | Caddie (Playmatic 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14450 |
 | 8 Ball (Williams 1966) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14448 |
 | sword of fury 1.0 | fripounet | https://www.vpforums.org/index.php?app=downloads&showfile=14437 |
-| Robo-War (Gottlieb 1988) full screen v 1.00 | balater | https://www.vpforums.org/index.php?app=downloads&showfile=14427 |
 | Sharpshooter - Bally 1961 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14428 |
 | Ten Strike Classic (Benchmark Games Inc. 2003 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14412 |
 | Pompeii - Williams 1978 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14388 |
 | King Tut (Williams 1979) 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14383 |
 | Top Dawg (Williams 1988) 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14375 |
 | Shuffle Inn (Williams 1989) 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14380 |
-| Striker Xtreme 2.0 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13177 |
 | League Champ - Williams 1996 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14366 |
 | The Goonies Pinball Adventure 1.03 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=14369 |
 | Surf Side (Gottlieb 1967) 1.0d | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14318 |
@@ -106,7 +103,6 @@
 | Jungle King (Gottlieb 1973) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14224 |
 | Psychedelic (Gottlieb 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14223 |
 | Grand Slam (Gottlieb 1972) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14220 |
-| King Kong (Data East 1990) Javier Mod 1.03 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=14146 |
 | Rack-A-Ball (Gottlieb 1962) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14194 |
 | Ice Fever (Gottlieb 1985) | Armyaviation | https://www.vpforums.org/index.php?app=downloads&showfile=14192 |
 | Hot Hand (Stern 1979) 1.0 | Armyaviation | https://www.vpforums.org/index.php?app=downloads&showfile=14191 |
@@ -120,26 +116,18 @@
 | Rey de Diamantes (Petaco 1967) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14157 |
 | Diamond Jack (Gottliieb 1967) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14155 |
 | King of Diamonds (Gottlieb 1967) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14154 |
-| Creature From The Black Lagoon (Bally 1992)... 1.3 | fuzzel | https://www.vpforums.org/index.php?app=downloads&showfile=13349 |
 | Caveman (Gottlieb 1982) 1.1 | DarthMarino | https://www.vpforums.org/index.php?app=downloads&showfile=14139 |
-| Barb Wire - Gottlieb 1996 VPX version 1.4 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=13989 |
-| I Dream of Jeannie Pinball VPX 1.0 | cryptdoctor21 | https://www.vpforums.org/index.php?app=downloads&showfile=14138 |
 | Electra Pool (Gottlieb 1965) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14132 |
 | Flipper Pool (Gottlieb 1965) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14131 |
 | Bank A Ball (Gottlieb 1965) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14130 |
-| VP 10 Monster Bash Frank Eye Version 2.3 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=11749 |
 | Pro Pool (Gottlieb 1973) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14100 |
 | Home Run (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14099 |
 | Playball (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14098 |
 | Balls A Poppin (Bally 1956) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14097 |
 | Spot A Card (Gottlieb 1960) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14096 |
-| Mario Andretti - Gottlieb/Premier 1995 1.4 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14090 |
 | Raven - Gottlieb/Premier 1986 1.3 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14089 |
-| Dragon Ball Z The Pinball 1.06 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=14093 |
-| Laser Ball (Williams 1979) 1.00 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=14088 |
 | Operation Thunder - Gottlieb 1992 VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14079 |
 | Monte Carlo - Gottlieb 1987 VPX version 1.4 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14053 |
-| Metal Slug (DOF) 1.03 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=13140 |
 | Now (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14050 |
 | Krull (Gottlieb 1983) VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14014 |
 | Jacks to Open (Mylstar/Gottlieb 1984) VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14012 |
@@ -159,7 +147,6 @@
 | Batter Up (Gottlieb 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14040 |
 | Baseball (Gottlieb 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14039 |
 | Tom & Jerry (Williams 2018) (DOF) 1.2 | watacaractr | https://www.vpforums.org/index.php?app=downloads&showfile=14023 |
-| Lady Luck (Bally 1986) 1.1 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13883 |
 | Pro Football (Gottlieb 1973) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13980 |
 | Gridiron (Gottlieb 1977) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13981 |
 | Spin Wheel (Gottlieb 1968) 1.0d | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13979 |
@@ -168,8 +155,6 @@
 | Fathom (Bally 1981) LED Mod 1.1 | vogliadicane | https://www.vpforums.org/index.php?app=downloads&showfile=13075 |
 | White Water 1.1 | flupper1 | https://www.vpforums.org/index.php?app=downloads&showfile=13423 |
 | Road Runner (Atari 1979) 2.0 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13148 |
-| Gold Ball (Bally 1983) 1.0 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13765 |
-| Sharpshooter II (Gameplan 1983) 1.2.2 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13615 |
 | 4 Square (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13695 |
 | Heat Wave (Williams 1964) 1.1 | DarthMarino | https://www.vpforums.org/index.php?app=downloads&showfile=13689 |
 | Flash, The (Original 2018) 1.0 | Onevox | https://www.vpforums.org/index.php?app=downloads&showfile=13687 |
@@ -177,9 +162,7 @@
 | Soccer (Gottlieb 1975) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13679 |
 | Super Soccer (Gottlieb 1975) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13678 |
 | Hot Ball (Taito 1979) 1.1 | editoy | https://www.vpforums.org/index.php?app=downloads&showfile=13672 |
-| Striker (Gottlieb 1982) 1.0.3 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13649 |
 | Teenage Mutant Ninja Turtles (Data East) 1.1 | cyberpez | https://www.vpforums.org/index.php?app=downloads&showfile=13643 |
-| Hoops (Gottlieb 1991) 1.3 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13629 |
 | Tag-Team 2.1.1 | roccodimarco | https://www.vpforums.org/index.php?app=downloads&showfile=13610 |
 | Vector (Bally 1982) 1.2 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=13405 |
 | Beach Bums (2018) 1.0 | watacaractr | https://www.vpforums.org/index.php?app=downloads&showfile=13621 |
@@ -220,8 +203,6 @@
 | Indiana Jones (Stern2008) Hanibal's 4k... 2.5 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=12866 |
 | Tron Legacy LE Hanibals 4k Edition 1.0 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=13373 |
 | Firepower (Drop Target Mod) � (Williams 198... 1.2 | DarthMarino | https://www.vpforums.org/index.php?app=downloads&showfile=13364 |
-| Terminator 2 - Judgment Day Hanibal's C... 3.2 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=11701 |
-| Terminator 3 (Stern 2003) Hanibals 4k Edition 1.5 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=13314 |
 | Barracora (Williams 1981) 1.1 | dids666 | https://www.vpforums.org/index.php?app=downloads&showfile=13335 |
 | Spirit of 76 (Gottlieb 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13328 |
 | Pioneer (Gottlieb 1976) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13327 |
@@ -229,12 +210,10 @@
 | Mustang (Gottlieb 1977) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13322 |
 | Bronco (Gottlieb 1977) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13321 |
 | Gigi (Gottlieb 1963) 1.0c | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13224 |
-| Harley Quinn (HauntFreaks 2017) supercalifr... v1.0 | hauntfreaks | https://www.vpforums.org/index.php?app=downloads&showfile=13318 |
 | Blackout (Williams 1980)-S34 mod 1.1 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=13312 |
 | Phantogram 1.0 | ronimhoff | https://www.vpforums.org/index.php?app=downloads&showfile=13307 |
 | Bristol Hills! (Gottlieb 1970) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13243 |
 | Circus (Zaccaria 1977) 1.0afix | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13248 |
-| Pirates of the Caribbean Hanibals 4k Edition 1.3 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=13277 |
 | 300 (Gottlieb 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13236 |
 | Xenon (Bally 1980)(mod of JP's table) v1.0 | hauntfreaks | https://www.vpforums.org/index.php?app=downloads&showfile=13182 |
 | Hot Tip (Williams 1977) B.O.L. mod v2.1 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=13085 |
@@ -243,7 +222,6 @@
 | Ufo Robot Goldrake (Original 2017)RHP.zip | editoy | https://www.vpforums.org/index.php?app=downloads&showfile=13119 |
 | Ufo Robot Grendizer (Original 2017)RHP.zip 1.0 | editoy | https://www.vpforums.org/index.php?app=downloads&showfile=13116 |
 | OXO (Williams 1973) 1.0 | scottacus | https://www.vpforums.org/index.php?app=downloads&showfile=13110 |
-| Hook (Data East 1992) 1.01 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=13068 |
 | Hot Shot (Gottlieb 1973) 1.4 | WED21 | https://www.vpforums.org/index.php?app=downloads&showfile=12932 |
 | Indianapolis_500_VPX10.4_1.1.rar 1.1 | Dozer316 | https://www.vpforums.org/index.php?app=downloads&showfile=13042 |
 | Cirqus Voltaire Hanibals 4k Mod 3.6 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=11841 |
@@ -264,11 +242,9 @@
 | Diner VPX 1.2 | flupper1 | https://www.vpforums.org/index.php?app=downloads&showfile=12701 |
 | TOTAN Hanibals 4k Mod 1.6 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=11857 |
 | Star Wars Trilogy Hanibals 4k 1.6 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=12151 |
-| Pinball Magic vpx 1.3.1 | unclewilly | https://www.vpforums.org/index.php?app=downloads&showfile=12593 |
 | El Dorado City of Gold - MOD 1.1 | jbg4208 | https://www.vpforums.org/index.php?app=downloads&showfile=12625 |
 | RollerGames (Williams 1990) 1.01a | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=12615 |
 | Mortal Kombat II Pinball Edition VPX 1.04 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=12535 |
-| Meteor (Stern 1979) 1.0 | ScottyVH | https://www.vpforums.org/index.php?app=downloads&showfile=12451 |
 | Young Frankenstein v 1.0 | gabrom78 | https://www.vpforums.org/index.php?app=downloads&showfile=12185 |
 | Miss-O (Williams 1969) v1.01 | hauntfreaks | https://www.vpforums.org/index.php?app=downloads&showfile=12095 |
 | Hi-Score Pool (Chicago Coin 1971) 1.2 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11976 |
@@ -277,7 +253,6 @@
 | Swords of Fury (Williams 1988)(FS-DT)(VP10) 1.3 | takut | https://www.vpforums.org/index.php?app=downloads&showfile=11873 |
 | Double-Up (Bally 1970) 1.1 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11879 |
 | Evel Knievel (Bally 1977) VPX v3.4 | hauntfreaks | https://www.vpforums.org/index.php?app=downloads&showfile=11800 |
-| Xs and Os (Bally 1984) 2.0 | 32assassin | https://www.vpforums.org/index.php?app=downloads&showfile=11798 |
 | Golden Arrow (Gottlieb 1977) 1.2 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11620 |
 | Golden Arrow 2p Mod (Gottlieb 1977) 1.04 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11641 |
 | VP10_Cactus_Canyon_Dozer_RTM_1.2.rar 1.2 | Dozer316 | https://www.vpforums.org/index.php?app=downloads&showfile=11670 |
@@ -287,4 +262,3 @@
 | Space Walk (Gottlieb 1979) 1.02 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11592 |
 | Gemini (Gottlieb 1978) 1.02 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11619 |
 | Joker Poker EM (Gottlieb 1978) 1.11 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11618 |
-| Pyramid (Gottlieb 1978) 1.01 | BorgDog | https://www.vpforums.org/index.php?app=downloads&showfile=11630 |
