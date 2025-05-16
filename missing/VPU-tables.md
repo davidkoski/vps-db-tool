@@ -29,33 +29,19 @@
 | Aliens | Delta23 | https://vpuniverse.com/files/file/5779-aliens/ |
 | Lost in Space (Sega 1998) | Goldchicco | https://vpuniverse.com/files/file/5753-lost-in-space-sega-1998/ |
 | Soul Reaver | Delta23 | https://vpuniverse.com/files/file/5652-soul-reaver/ |
-| The Goonies Pinball Adventure | Javier15 | https://vpuniverse.com/files/file/5607-the-goonies-pinball-adventure/ |
-| Sonic The Hedgehog 2 (Brendan Bailey 2005) | Javier15 | https://vpuniverse.com/files/file/5579-sonic-the-hedgehog-2-brendan-bailey-2005/ |
 | King Kong (Data East 1990) | Javier15 | https://vpuniverse.com/files/file/5528-king-kong-data-east-1990/ |
 | Fathom (Bally 1981) LED Mod | vogliadicane | https://vpuniverse.com/files/file/4897-fathom-bally-1981-led-mod/ |
 | Junkyard Cats (Bailey 2012) | Javier15 | https://vpuniverse.com/files/file/5508-junkyard-cats-bailey-2012/ |
 | Mario Andretti (Gottlieb/Premier 1995) | Rascal | https://vpuniverse.com/files/file/5482-mario-andretti-gottliebpremier-1995/ |
-| Raven (Gottlieb/Premier 1986) | Rascal | https://vpuniverse.com/files/file/5481-raven-gottliebpremier-1986/ |
-| Laser Ball (Williams 1979) | Javier15 | https://vpuniverse.com/files/file/5479-laser-ball-williams-1979/ |
 | Gottlieb Monte Carlo - 1987 - VPX | Rascal | https://vpuniverse.com/files/file/5473-gottlieb-monte-carlo-1987-vpx/ |
 | Krull (Gottlieb 1983) | Rascal | https://vpuniverse.com/files/file/5455-krull-gottlieb-1983/ |
-| Jacks to Open (Mylstar/Gottlieb 1984) | Rascal | https://vpuniverse.com/files/file/5454-jacks-to-open-mylstargottlieb-1984/ |
-| Ice Fever (Premier 1985) | Rascal | https://vpuniverse.com/files/file/5452-ice-fever-premier-1985/ |
 | Force II (Gottlieb 1981) | Rascal | https://vpuniverse.com/files/file/5447-force-ii-gottlieb-1981/ |
-| Excalibur (1988 Premier) | Rascal | https://vpuniverse.com/files/file/5439-excalibur-1988-premier/ |
-| Counterforce | Rascal | https://vpuniverse.com/files/file/5323-counterforce/ |
-| Big House (Gottlieb/Premier 1989) | Rascal | https://vpuniverse.com/files/file/5278-big-house-gottliebpremier-1989/ |
-| Cactus Jack's (Premier 1991) | Rascal | https://vpuniverse.com/files/file/5280-cactus-jacks-premier-1991/ |
-| Bounty Hunter (Gottlieb 1985) | Rascal | https://vpuniverse.com/files/file/5279-bounty-hunter-gottlieb-1985/ |
 | Cue Ball Wizard - Premier 1992 | Rascal | https://vpuniverse.com/files/file/5438-cue-ball-wizard-premier-1992/ |
 | Apache! (Taito 1978) full pack | editoy | https://vpuniverse.com/files/file/5244-apache-taito-1978-full-pack/ |
 | Hot Ball (Taito 1979) | editoy | https://vpuniverse.com/files/file/5201-hot-ball-taito-1979/ |
 | Ufo Robot Goldrake (Original 2017)RHP.zip | editoy | https://vpuniverse.com/files/file/4942-ufo-robot-goldrake-original-2017rhpzip/ |
-| Goldorak VPX Edition | Javier15 | https://vpuniverse.com/files/file/4916-goldorak-vpx-edition/ |
 | Fathom (Bally 1981) Vintage Mod | vogliadicane | https://vpuniverse.com/files/file/4650-fathom-bally-1981-vintage-mod/ |
-| Hook (Data East 1992) | Javier15 | https://vpuniverse.com/files/file/4894-hook-data-east-1992/ |
 | Solar Ride (Gottlieb, 1979) | LynnInDenver | https://vpuniverse.com/files/file/4870-solar-ride-gottlieb-1979/ |
-| Austin Powers (Stern 2001) | Javier15 | https://vpuniverse.com/files/file/4790-austin-powers-stern-2001/ |
 | Batman (Data East 1991) | Javier15 | https://vpuniverse.com/files/file/4653-batman-data-east-1991/ |
 | Star Trek LE (Stern 2013) | freneticamnesic | https://vpuniverse.com/files/file/4235-star-trek-le-stern-2013/ |
 | Spanish Eyes (Williams 1972) FS/DT VP10.1 | jbg4208 | https://vpuniverse.com/files/file/4178-spanish-eyes-williams-1972-fsdt-vp101/ |
