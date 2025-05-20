@@ -62,8 +62,6 @@
 | Caddie (Playmatic 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14450 |
 | 8 Ball (Williams 1966) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14448 |
 | sword of fury 1.0 | fripounet | https://www.vpforums.org/index.php?app=downloads&showfile=14437 |
-| Sharpshooter - Bally 1961 1.0 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14428 |
-| Ten Strike Classic (Benchmark Games Inc. 2003 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14412 |
 | The Goonies Pinball Adventure 1.03 | javier1515 | https://www.vpforums.org/index.php?app=downloads&showfile=14369 |
 | Surf Side (Gottlieb 1967) 1.0d | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14318 |
 | Touchdown (Williams 1967) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14319 |
@@ -110,7 +108,6 @@
 | Now (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14050 |
 | Krull (Gottlieb 1983) VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14014 |
 | Force II (Gottlieb 1981 VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=14004 |
-| Bounty Hunter (Gottlieb 1985) VPX version 1.1 | rascal | https://www.vpforums.org/index.php?app=downloads&showfile=13992 |
 | Ship Ahoy (Gottlieb 1976) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14041 |
 | Batter Up (Gottlieb 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14040 |
 | Baseball (Gottlieb 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14039 |
@@ -120,16 +117,13 @@
 | Strange World (Gottlieb 1978) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13982 |
 | Four Seasons (Gottlieb 1968) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13978 |
 | Fathom (Bally 1981) LED Mod 1.1 | vogliadicane | https://www.vpforums.org/index.php?app=downloads&showfile=13075 |
-| Road Runner (Atari 1979) 2.0 | kalavera | https://www.vpforums.org/index.php?app=downloads&showfile=13148 |
 | 4 Square (Gottlieb 1971) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13695 |
 | Flash, The (Original 2018) 1.0 | Onevox | https://www.vpforums.org/index.php?app=downloads&showfile=13687 |
 | Desert City (Fipermatic 1977) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13681 |
 | Soccer (Gottlieb 1975) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13679 |
 | Super Soccer (Gottlieb 1975) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13678 |
-| Teenage Mutant Ninja Turtles (Data East) 1.1 | cyberpez | https://www.vpforums.org/index.php?app=downloads&showfile=13643 |
 | Vector (Bally 1982) 1.2 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=13405 |
 | Victory (Gottlieb 1987) 2.0.1 | Sindbad | https://www.vpforums.org/index.php?app=downloads&showfile=13618 |
-| Seawitch (Stern).zip 1.0 | Flash 62 | https://www.vpforums.org/index.php?app=downloads&showfile=13558 |
 | Eight Ball 1.0 | roccodimarco | https://www.vpforums.org/index.php?app=downloads&showfile=13565 |
 | Captain Fantastic_VPX_DOZER_1.2.zip 1.2 | Dozer316 | https://www.vpforums.org/index.php?app=downloads&showfile=13551 |
 | Cow Poke (Gottlieb 1965) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13391 |
@@ -180,7 +174,6 @@
 | Capersville (Bally 1966) 3.1.3 | scottacus | https://www.vpforums.org/index.php?app=downloads&showfile=13078 |
 | Ufo Robot Goldrake (Original 2017)RHP.zip | editoy | https://www.vpforums.org/index.php?app=downloads&showfile=13119 |
 | Ufo Robot Grendizer (Original 2017)RHP.zip 1.0 | editoy | https://www.vpforums.org/index.php?app=downloads&showfile=13116 |
-| OXO (Williams 1973) 1.0 | scottacus | https://www.vpforums.org/index.php?app=downloads&showfile=13110 |
 | Hot Shot (Gottlieb 1973) 1.4 | WED21 | https://www.vpforums.org/index.php?app=downloads&showfile=12932 |
 | Indianapolis_500_VPX10.4_1.1.rar 1.1 | Dozer316 | https://www.vpforums.org/index.php?app=downloads&showfile=13042 |
 | Cirqus Voltaire Hanibals 4k Mod 3.6 | hanibal2001 | https://www.vpforums.org/index.php?app=downloads&showfile=11841 |
