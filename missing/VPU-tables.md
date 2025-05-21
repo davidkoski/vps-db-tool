@@ -18,27 +18,20 @@
 | Aliens 2.0 | Delta23 | https://vpuniverse.com/files/file/7550-aliens-20/ |
 | BatmanTAS | dunriwikan45 | https://vpuniverse.com/files/file/7500-batmantas/ |
 | Lucky Ace (Williams 1974) | loserman76 | https://vpuniverse.com/files/file/7239-lucky-ace-williams-1974/ |
-| chuck berry 1.0 VPX | john22 | https://vpuniverse.com/files/file/6437-chuck-berry-10-vpx/ |
 | Star Trek (Gottlieb 1971) | BorgDog | https://vpuniverse.com/files/file/6302-star-trek-gottlieb-1971/ |
 | Big Brave (Gottlieb 1974) | hauntfreaks | https://vpuniverse.com/files/file/6293-big-brave-gottlieb-1974/ |
-| Loch Ness Monster (Game Plan 1985) | jino0372 | https://vpuniverse.com/files/file/5996-loch-ness-monster-game-plan-1985/ |
 | TikiTime | TikiGoon | https://vpuniverse.com/files/file/5888-tikitime/ |
 | Michael Jordan (Data East, 1992) | Rascal | https://vpuniverse.com/files/file/5830-michael-jordan-data-east-1992/ |
 | Aliens | Delta23 | https://vpuniverse.com/files/file/5779-aliens/ |
 | Lost in Space (Sega 1998) | Goldchicco | https://vpuniverse.com/files/file/5753-lost-in-space-sega-1998/ |
 | Soul Reaver | Delta23 | https://vpuniverse.com/files/file/5652-soul-reaver/ |
 | King Kong (Data East 1990) | Javier15 | https://vpuniverse.com/files/file/5528-king-kong-data-east-1990/ |
-| Fathom (Bally 1981) LED Mod | vogliadicane | https://vpuniverse.com/files/file/4897-fathom-bally-1981-led-mod/ |
-| Junkyard Cats (Bailey 2012) | Javier15 | https://vpuniverse.com/files/file/5508-junkyard-cats-bailey-2012/ |
 | Mario Andretti (Gottlieb/Premier 1995) | Rascal | https://vpuniverse.com/files/file/5482-mario-andretti-gottliebpremier-1995/ |
 | Gottlieb Monte Carlo - 1987 - VPX | Rascal | https://vpuniverse.com/files/file/5473-gottlieb-monte-carlo-1987-vpx/ |
 | Krull (Gottlieb 1983) | Rascal | https://vpuniverse.com/files/file/5455-krull-gottlieb-1983/ |
 | Force II (Gottlieb 1981) | Rascal | https://vpuniverse.com/files/file/5447-force-ii-gottlieb-1981/ |
 | Cue Ball Wizard - Premier 1992 | Rascal | https://vpuniverse.com/files/file/5438-cue-ball-wizard-premier-1992/ |
 | Apache! (Taito 1978) full pack | editoy | https://vpuniverse.com/files/file/5244-apache-taito-1978-full-pack/ |
-| Hot Ball (Taito 1979) | editoy | https://vpuniverse.com/files/file/5201-hot-ball-taito-1979/ |
-| Ufo Robot Goldrake (Original 2017)RHP.zip | editoy | https://vpuniverse.com/files/file/4942-ufo-robot-goldrake-original-2017rhpzip/ |
-| Fathom (Bally 1981) Vintage Mod | vogliadicane | https://vpuniverse.com/files/file/4650-fathom-bally-1981-vintage-mod/ |
 | Batman (Data East 1991) | Javier15 | https://vpuniverse.com/files/file/4653-batman-data-east-1991/ |
 | Star Trek LE (Stern 2013) | freneticamnesic | https://vpuniverse.com/files/file/4235-star-trek-le-stern-2013/ |
 | Spanish Eyes (Williams 1972) FS/DT VP10.1 | jbg4208 | https://vpuniverse.com/files/file/4178-spanish-eyes-williams-1972-fsdt-vp101/ |
