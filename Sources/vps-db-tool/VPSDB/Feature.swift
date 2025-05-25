@@ -38,6 +38,7 @@ enum TableFeature: String, Codable, Sendable, Equatable {
     case inclVideo = "incl. Video"
     case nFozzy = "nFozzy"
     case noROM = "no ROM"
+    case vlm = "VLM"
 
     // to delete
     case mod2 = "Mod"

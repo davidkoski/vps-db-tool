@@ -188,6 +188,14 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                         if !handled {
                             let issue = URLIssue.entryNotFound(item)
                             issues.report(kind: scan.kind, url: item.url, issue: issue)
+
+                            // to auto obsolete
+                            //                            switch item.author {
+                            //                            case "tartzani", "remdwaas1986", "Onevox", "chokeee", "WED21", "hanibal2001", "gabrom78", "takut", "hauntfreaks", "Delta23", "dunriwikan45", "Javier15", "jbg4208", "senseless", "rothbauerw", "Sindbad":
+                            //                                issues.report(kind: scan.kind, url: item.url, issue: issue, comment: "obsolete")
+                            //                            default:
+                            //                                issues.report(kind: scan.kind, url: item.url, issue: issue)
+                            //                            }
                         }
                     }
                 }

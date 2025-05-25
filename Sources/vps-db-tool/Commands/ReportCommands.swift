@@ -79,7 +79,7 @@ struct ReportCommand: AsyncParsableCommand {
                 if let match = db[kind][item.url], let file = match.first, let game = db[file] {
                     if follow {
                         print(item.url)
-                        let content = try await client.getString(item.url)
+                        let content = try await client.getString(item.url, bypassCache: true)
                         if let detail = try scanner.scanDetail(
                             url: item.url, content: content, kind: kind)
                         {
@@ -268,7 +268,7 @@ private struct Report {
     private func emitRow(_ item: Item) -> String {
         """
         <tr>
-            <td><a href="\(item.url)">\(item.url)</a></td>
+            <td><a href="\(item.url)" target="_blank">\(item.url)</a></td>
             <td>\(item.name)</td>
             <td>\(item.author)</td>
             <td>\(Site(item.url).rawValue)</td>

@@ -205,6 +205,7 @@ enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case progressive = "Progressive"
     case prospecting = "Prospecting"
     case psychedelic = "Psychedelic"
+    case psychedelicArt = "Psychedelic Art"
     case punk = "Punk"
     case puppets = "Puppets"
     case racing = "Racing"
