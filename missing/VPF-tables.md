@@ -2,7 +2,7 @@
 
 | Name | Author | URL |
 | ---- | ------ | --- |                
-| Rolling Stones (Bally 1980)_Bigus(MOD) 1.0 | bigus1 | https://www.vpforums.org/index.php?app=downloads&showfile=15926 |
+| UT99ctfGE 2.2 | tartzani | https://www.vpforums.org/index.php?app=downloads&showfile=16085 |
 | Odds & Evens - Bud Spencer & Terenc... 1.0 | ivantba | https://www.vpforums.org/index.php?app=downloads&showfile=15828 |
 | Labyrinth 1.01 | Ronboy751 | https://www.vpforums.org/index.php?app=downloads&showfile=15772 |
 | TALES FROM THE CRYPT MOD | Paulhenri62 | https://www.vpforums.org/index.php?app=downloads&showfile=15778 |
@@ -153,6 +153,7 @@
 | Blackout (Williams 1980)-S34 mod 1.1 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=13312 |
 | Phantogram 1.0 | ronimhoff | https://www.vpforums.org/index.php?app=downloads&showfile=13307 |
 | Bristol Hills! (Gottlieb 1970) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13243 |
+| Jungle (Gottlieb 1972) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13259 |
 | Circus (Zaccaria 1977) 1.0afix | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13248 |
 | 300 (Gottlieb 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=13236 |
 | Capersville (Bally 1966) 3.1.3 | scottacus | https://www.vpforums.org/index.php?app=downloads&showfile=13078 |
