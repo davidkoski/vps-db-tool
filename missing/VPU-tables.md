@@ -220,7 +220,6 @@
 | VR_Room_Target Alpha (Gottlieb 1976) 1.0.vpx | dillman | https://vpuniverse.com/files/file/6783-vr_room_target-alpha-gottlieb-1976-10vpx/ |
 | VR ROOM Batman 66 (Original 2018) | drinkcristal | https://vpuniverse.com/files/file/6693-vr-room-batman-66-original-2018/ |
 | VR Room Pool Sharks (Bally 1990) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6733-vr-room-pool-sharks-bally-1990-100/ |
-| VR Room Eight Ball Champ (Bally 1985) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6729-vr-room-eight-ball-champ-bally-1985-100/ |
 | VR Room Devil's Dare (Gottlieb 1982) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6730-vr-room-devils-dare-gottlieb-1982-100/ |
 | VR Room Nip-It (Bally 1973) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6728-vr-room-nip-it-bally-1973-100/ |
 | VR_Rooms_Whirlwind_(Williams_1990)_Minimal_1.2.vpx | dillman | https://vpuniverse.com/files/file/6666-vr_rooms_whirlwind_williams_1990_minimal_12vpx/ |
@@ -462,6 +461,5 @@
 | Jungle Lord | CRAIGDEE | https://vpuniverse.com/files/file/2088-jungle-lord/ |
 | Embryon | CRAIGDEE | https://vpuniverse.com/files/file/2086-embryon/ |
 | Medieval Madness | CRAIGDEE | https://vpuniverse.com/files/file/2040-medieval-madness/ |
-| The Goonies Pinball Adventure | glxb | https://vpuniverse.com/files/file/2014-the-goonies-pinball-adventure/ |
 | Moon Patrol | Tii | https://vpuniverse.com/files/file/2018-moon-patrol/ |
 | Future Pinball | VPUStaff | https://vpuniverse.com/files/file/441-future-pinball/ |
