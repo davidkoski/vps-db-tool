@@ -162,7 +162,6 @@
 | Monster Bash Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22130-monster-bash-cabinet-mod/ |
 | Star Wars (Data East 1992) VPW - KidMode Patch | Supergibson | https://vpuniverse.com/files/file/21466-star-wars-data-east-1992-vpw-kidmode-patch/ |
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
-| VR Room Breaking Bad | Nesta78 | https://vpuniverse.com/files/file/23681-vr-room-breaking-bad/ |
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
 | Quijote (Juegos Populares 1987) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20997-quijote-juegos-populares-1987-vr-mr-ext2k/ |
 | Lortium (Juegos Populares 1987) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20991-lortium-juegos-populares-1987-vr-mr-ext2k/ |
@@ -282,10 +281,7 @@
 | Diablo v1.0 | VP1000 | https://vpuniverse.com/files/file/23891-diablo-v10/ |
 | EarthShaker (1989) v1.0 | VP1000 | https://vpuniverse.com/files/file/23858-earthshaker-1989-v10/ |
 | Gold Star (Gottlieb '54)15.46.rar | Francisco | https://vpuniverse.com/files/file/23174-gold-star-gottlieb-541546rar/ |
-| Snorks (2.0) | mark1 | https://vpuniverse.com/files/file/23192-snorks-20/ |
-| Spot Bowler | Francisco | https://vpuniverse.com/files/file/23175-spot-bowler/ |
 | Future Pinball and BAM Essentials - All in One | TerryRed | https://vpuniverse.com/files/file/14807-future-pinball-and-bam-essentials-all-in-one/ |
-| Marble Queen (Gottlieb '53) | okobojimusky | https://vpuniverse.com/files/file/22693-marble-queen-gottlieb-53/ |
 | The Simpsons Pinball Party (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22587-the-simpsons-pinball-party-v-10/ |
 | Joker Poker GottLieb 1978 (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22502-joker-poker-gottlieb-1978-v-10/ |
 | Rocky and Bullwinkle and Friends (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22254-rocky-and-bullwinkle-and-friends-v-10/ |
