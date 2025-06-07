@@ -3,12 +3,7 @@
 | Name | Author | URL |
 | ---- | ------ | --- |                
 | UT99ctfGE 2.2 | tartzani | https://www.vpforums.org/index.php?app=downloads&showfile=16085 |
-| Odds & Evens - Bud Spencer & Terenc... 1.0 | ivantba | https://www.vpforums.org/index.php?app=downloads&showfile=15828 |
-| Labyrinth 1.01 | Ronboy751 | https://www.vpforums.org/index.php?app=downloads&showfile=15772 |
-| TALES FROM THE CRYPT MOD | Paulhenri62 | https://www.vpforums.org/index.php?app=downloads&showfile=15778 |
-| Dolly Parton 1979 | bossman72 | https://www.vpforums.org/index.php?app=downloads&showfile=15744 |
 | Mary Shelley's Frankenstein (Sega 1995) 1.2.1 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=15682 |
-| Dready 4-Bushes (Horsepin, Balater 2021) 0.99 | chepas | https://www.vpforums.org/index.php?app=downloads&showfile=15648 |
 | Hang Glider (Bally 1976) 1.0c | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15373 |
 | Sweet Hearts (Gottlieb 1963) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15378 |
 | Hi-Deal (Bally 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15374 |
