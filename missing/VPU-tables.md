@@ -38,10 +38,6 @@
 | Swords of Fury (Williams 1988)(FS-DT)(VP10) | takut | https://vpuniverse.com/files/file/4159-swords-of-fury-williams-1988fs-dtvp10/ |
 | Pirates Of The Caribbean (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3581-pirates-of-the-caribbean-conversion-from-fp-vpx-beta/ |
 | Tron (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3577-tron-conversion-from-fp-vpx-beta/ |
-| Creepshow (Original 2022) re-mix | hauntfreaks | https://vpuniverse.com/files/file/25041-creepshow-original-2022-re-mix/ |
-| TX-Sector (Gottlieb 1988)GhettoBlasterMod | jmcgohon81 | https://vpuniverse.com/files/file/24706-tx-sector-gottlieb-1988ghettoblastermod/ |
-| Star Wars (Data East 1992)Remix | jmcgohon81 | https://vpuniverse.com/files/file/24698-star-wars-data-east-1992remix/ |
-| The Addams Family (Bally 1992)Bookcase mod | jmcgohon81 | https://vpuniverse.com/files/file/24584-the-addams-family-bally-1992bookcase-mod/ |
 | Hong Kong Phooey Mini-PUP | GauGau | https://vpuniverse.com/files/file/24473-hong-kong-phooey-mini-pup/ |
 | Bad Girls (Gottlieb 1988) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24484-bad-girls-gottlieb-1988-sideblade-mod/ |
 | Wheel of Fortune (Stern 2007) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24397-wheel-of-fortune-stern-2007-sideblade-mod/ |

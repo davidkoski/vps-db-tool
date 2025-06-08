@@ -2,6 +2,7 @@
 
 | Name | Author | URL |
 | ---- | ------ | --- |                
+| The Pabst Can Crusher (Stern 2016) 1.23 | MachWon | https://www.vpforums.org/index.php?app=downloads&showfile=18544 |
 | UT99ctfGE 2.2 | tartzani | https://www.vpforums.org/index.php?app=downloads&showfile=16085 |
 | Mary Shelley's Frankenstein (Sega 1995) 1.2.1 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=15682 |
 | Hang Glider (Bally 1976) 1.0c | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15373 |
@@ -30,29 +31,24 @@
 | 4 Queens (Bally 1970) Modbysing 1.0 | singinfool64 | https://www.vpforums.org/index.php?app=downloads&showfile=15110 |
 | Ship Mates (Gottlieb 1964) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15088 |
 | Olympics (Gottlieb 1962) 1.0c | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=15089 |
-| Jackpot 1 | Albert | https://www.vpforums.org/index.php?app=downloads&showfile=14850 |
-| LostInSpaceVPXcrudeConversion 1.0 | DevaL | https://www.vpforums.org/index.php?app=downloads&showfile=14801 |
 | Walkyria (Joctronic 1986) - Whitewood #1 0.1 | mfuegemann | https://www.vpforums.org/index.php?app=downloads&showfile=14598 |
 | Jungle Life (Gottlieb 1972) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14225 |
-| VR Clean Room with Tutorial 1.2 | drhotwing | https://www.vpforums.org/index.php?app=downloads&showfile=14348 |
 | Judge Dredd(Bally 1993)_Bigus(MOD) 1.2 | bigus1 | https://www.vpforums.org/index.php?app=downloads&showfile=14310 |
-| TX-Sector (Dozer MOD) 1.1 | roccodimarco | https://www.vpforums.org/index.php?app=downloads&showfile=14575 |
 | Lightning Ball (Gottlieb 1959) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14567 |
 | Flipper Fair (Gottlieb 1961) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14566 |
 | Freedom EM (Bally 1976) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14486 |
 | Hot Tip (Williams 1977) � v1.0 � S34 1.0 | Schlabber34 | https://www.vpforums.org/index.php?app=downloads&showfile=14485 |
-| Twister (Sega 1996) 1.1 | DJRobX | https://www.vpforums.org/index.php?app=downloads&showfile=14482 |
 | Wheel (Maresa 1974) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14453 |
 | Egg Head (Gottlieb 1961) 1.0b | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14466 |
 | Satin Doll (Williams 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14467 |
 | Barbarella (Talleres del Llobregat 1972) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14449 |
-| eddy 1.0 | fripounet | https://www.vpforums.org/index.php?app=downloads&showfile=14425 |
 | Tam-Tam (Playmatic 1975) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14452 |
 | Concorde (EMAGAR 1975) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14451 |
 | Caddie (Playmatic 1970) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14450 |
 | 8 Ball (Williams 1966) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14448 |
 | Surf Side (Gottlieb 1967) 1.0d | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14318 |
 | Touchdown (Williams 1967) 1.0a | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14319 |
+| Jackpot (Williams 1971) 1.0a B2S/Fullscreen MOD | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14265 |
 | Skipper (Gottlieb 1969) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14267 |
 | Hokus Pokus (Bally 1976) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14266 |
 | Top Hand (Gottlieb 1973) 1.0 | loserman76 | https://www.vpforums.org/index.php?app=downloads&showfile=14249 |
