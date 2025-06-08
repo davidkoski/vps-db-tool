@@ -32,6 +32,7 @@
 | Cue Ball Wizard - Premier 1992 | Rascal | https://vpuniverse.com/files/file/5438-cue-ball-wizard-premier-1992/ |
 | Apache! (Taito 1978) full pack | editoy | https://vpuniverse.com/files/file/5244-apache-taito-1978-full-pack/ |
 | Batman (Data East 1991) | Javier15 | https://vpuniverse.com/files/file/4653-batman-data-east-1991/ |
+| Mortal Kombat II Pinball Edition | Javier15 | https://vpuniverse.com/files/file/4361-mortal-kombat-ii-pinball-edition/ |
 | Star Trek LE (Stern 2013) | freneticamnesic | https://vpuniverse.com/files/file/4235-star-trek-le-stern-2013/ |
 | Spanish Eyes (Williams 1972) FS/DT VP10.1 | jbg4208 | https://vpuniverse.com/files/file/4178-spanish-eyes-williams-1972-fsdt-vp101/ |
 | Swords of Fury (Williams 1988)(FS-DT)(VP10) | takut | https://vpuniverse.com/files/file/4159-swords-of-fury-williams-1988fs-dtvp10/ |
