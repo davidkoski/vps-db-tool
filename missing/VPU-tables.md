@@ -160,7 +160,6 @@
 | Star Wars (Data East 1992) VPW - KidMode Patch | Supergibson | https://vpuniverse.com/files/file/21466-star-wars-data-east-1992-vpw-kidmode-patch/ |
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
-| Quijote (Juegos Populares 1987) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20997-quijote-juegos-populares-1987-vr-mr-ext2k/ |
 | Lortium (Juegos Populares 1987) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20991-lortium-juegos-populares-1987-vr-mr-ext2k/ |
 | America 1492 (Juegos Populares 1986) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/17217-america-1492-juegos-populares-1986-vr-mr-ext2k/ |
 | Luck Smile (Inder 1976) 1p v4 VR MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20534-luck-smile-inder-1976-1p-v4-vr-mr-ext2k/ |
@@ -263,10 +262,8 @@
 | VR ROOM WHO dunnit (Bally 1995) | senseless | https://vpuniverse.com/files/file/5686-vr-room-who-dunnit-bally-1995/ |
 | VR ROOM Fish Tales (Williams 1992) | senseless | https://vpuniverse.com/files/file/5685-vr-room-fish-tales-williams-1992/ |
 | Lancers | Francisco | https://vpuniverse.com/files/file/24887-lancers/ |
-| Continental Cafe | Francisco | https://vpuniverse.com/files/file/24886-continental-cafe/ |
 | Gladiator | Francisco | https://vpuniverse.com/files/file/24877-gladiator/ |
 | Brite Star | Francisco | https://vpuniverse.com/files/file/24873-brite-star/ |
-| Humpty Dumpty | Francisco | https://vpuniverse.com/files/file/24858-humpty-dumpty/ |
 | Barnacle Bill | Francisco | https://vpuniverse.com/files/file/24855-barnacle-bill/ |
 | Wonderland | Francisco | https://vpuniverse.com/files/file/24845-wonderland/ |
 | Peter Pan | Francisco | https://vpuniverse.com/files/file/24844-peter-pan/ |
