@@ -160,9 +160,6 @@
 | Star Wars (Data East 1992) VPW - KidMode Patch | Supergibson | https://vpuniverse.com/files/file/21466-star-wars-data-east-1992-vpw-kidmode-patch/ |
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
-| Lortium (Juegos Populares 1987) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20991-lortium-juegos-populares-1987-vr-mr-ext2k/ |
-| America 1492 (Juegos Populares 1986) VR-MR Ext2k | Ext2k | https://vpuniverse.com/files/file/17217-america-1492-juegos-populares-1986-vr-mr-ext2k/ |
-| Luck Smile (Inder 1976) 1p v4 VR MR Ext2k | Ext2k | https://vpuniverse.com/files/file/20534-luck-smile-inder-1976-1p-v4-vr-mr-ext2k/ |
 | Breakshot (Capcom 1996)_Bigus(MOD)3.1 VR | hmueck | https://vpuniverse.com/files/file/19078-breakshot-capcom-1996_bigusmod31-vr/ |
 | Star Wars Empire Strikes Back, The (Hankin 1980) VR ROOM | michel757 | https://vpuniverse.com/files/file/18884-star-wars-empire-strikes-back-the-hankin-1980-vr-room/ |
 | Moulin Rouge (Williams 1965) v1_VPX7 Ext2k VR ROOM | Ext2k | https://vpuniverse.com/files/file/17395-moulin-rouge-williams-1965-v1_vpx7-ext2k-vr-room/ |
@@ -197,9 +194,6 @@
 | VR ROOM Doodle love Bug (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7222-vr-room-doodle-love-bug-williams-1971/ |
 | VR Room Asteroid Annie and the Aliens (Gottlieb 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7168-vr-room-asteroid-annie-and-the-aliens-gottlieb-1980-100/ |
 | VR Room Viper (Stern 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7175-vr-room-viper-stern-1981-100/ |
-| VR Room The Amazing Spider-Man (Gottlieb 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7173-vr-room-the-amazing-spider-man-gottlieb-1980-100/ |
-| VR Room Lightning (Stern 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7172-vr-room-lightning-stern-1981-100/ |
-| VR Room Blackout (Williams 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7169-vr-room-blackout-williams-1980-100/ |
 | VR Room Flash Gordon (Bally 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6574-vr-room-flash-gordon-bally-1981-100/ |
 | VR Room Vector (Bally 1982) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6560-vr-room-vector-bally-1982-100/ |
 | VR Room Pinball Pool (Gottlieb 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6588-vr-room-pinball-pool-gottlieb-1979-100/ |
