@@ -161,73 +161,39 @@
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
 | Breakshot (Capcom 1996)_Bigus(MOD)3.1 VR | hmueck | https://vpuniverse.com/files/file/19078-breakshot-capcom-1996_bigusmod31-vr/ |
-| Star Wars Empire Strikes Back, The (Hankin 1980) VR ROOM | michel757 | https://vpuniverse.com/files/file/18884-star-wars-empire-strikes-back-the-hankin-1980-vr-room/ |
-| Moulin Rouge (Williams 1965) v1_VPX7 Ext2k VR ROOM | Ext2k | https://vpuniverse.com/files/file/17395-moulin-rouge-williams-1965-v1_vpx7-ext2k-vr-room/ |
-| Family Guy (Stern 2007)_Bigus(MOD) (VR ROOM) | michel757 | https://vpuniverse.com/files/file/17206-family-guy-stern-2007_bigusmod-vr-room/ |
-| James Bond 007 (Gottlieb 1980) 1.1.0 | teisen | https://vpuniverse.com/files/file/15913-james-bond-007-gottlieb-1980-110/ |
-| Soul Reaver (VR ROOM) | michel757 | https://vpuniverse.com/files/file/13698-soul-reaver-vr-room/ |
 | VR ROOM Sharpshooter - Bally 1961 (10.7) | Rascal | https://vpuniverse.com/files/file/12164-vr-room-sharpshooter-bally-1961-107/ |
-| VR ROOM Strike Zone (Williams 1984) (10.7) | Rascal | https://vpuniverse.com/files/file/12095-vr-room-strike-zone-williams-1984-107/ |
-| VR ROOM King Tut (Williams 1979) (10.7) | Rascal | https://vpuniverse.com/files/file/12071-vr-room-king-tut-williams-1979-107/ |
-| VR ROOM Top Dawg (Williams 1988) (10.7) | Rascal | https://vpuniverse.com/files/file/11999-vr-room-top-dawg-williams-1988-107/ |
-| VR ROOM Alley Cats (Williams 1985) (10.7) | Rascal | https://vpuniverse.com/files/file/11955-vr-room-alley-cats-williams-1985-107/ |
 | VR ROOM Wrath of Olympus | Solters | https://vpuniverse.com/files/file/11084-vr-room-wrath-of-olympus/ |
 | VR ROOM Diamond Lady | Solters | https://vpuniverse.com/files/file/10929-vr-room-diamond-lady/ |
 | VR ROOM Tmnt.wip 1.0 | pattyg234 | https://vpuniverse.com/files/file/10263-vr-room-tmntwip-10/ |
 | VR Room KISS (Bally 1979) 1.0.0 | rockhead | https://vpuniverse.com/files/file/8605-vr-room-kiss-bally-1979-100/ |
 | VR Room Car Hop (Gottlieb 1991) | 3rdaxis | https://vpuniverse.com/files/file/8278-vr-room-car-hop-gottlieb-1991/ |
-| VR ROOM ALGAR | michel757 | https://vpuniverse.com/files/file/7912-vr-room-algar/ |
 | VR Room Cueball Wizard (Gottlieb 1992) Minimal | psiomicron | https://vpuniverse.com/files/file/6068-vr-room-cueball-wizard-gottlieb-1992-minimal/ |
 | VR Room - The Rolling Stones LE (Stern 2011) v1.0.1 | retro27 | https://vpuniverse.com/files/file/7661-vr-room-the-rolling-stones-le-stern-2011-v101/ |
-| VR Room Panthera (Gottlieb 1980) | RajoJoey | https://vpuniverse.com/files/file/7640-vr-room-panthera-gottlieb-1980/ |
-| VR Room The Flintstones (Mod) (Williams 1994) | 3rdaxis | https://vpuniverse.com/files/file/6255-vr-room-the-flintstones-mod-williams-1994/ |
 | VR Room The Flintstones (Williams 1994) | 3rdaxis | https://vpuniverse.com/files/file/6135-vr-room-the-flintstones-williams-1994/ |
 | VR ROOM Spin Out (Gottlieb 1975) | drinkcristal | https://vpuniverse.com/files/file/7377-vr-room-spin-out-gottlieb-1975/ |
-| VR Room Cosmic Gunfight (Williams 1982) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6853-vr-room-cosmic-gunfight-williams-1982-100/ |
-| Space Station VR (Williams 1987) | Rawd | https://vpuniverse.com/files/file/6081-space-station-vr-williams-1987/ |
-| VR Room Medusa (Bally 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7305-vr-room-medusa-bally-1981-100/ |
 | VR ROOM Zodiac (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7286-vr-room-zodiac-williams-1971/ |
-| VR Room The Addams Family (Bally 1992) | 3rdaxis | https://vpuniverse.com/files/file/6375-vr-room-the-addams-family-bally-1992/ |
 | High Speed (Williams 1986) VR ROOM | Rawd | https://vpuniverse.com/files/file/6080-high-speed-williams-1986-vr-room/ |
 | Attack From Mars VR (Bally - 1995) G5K | Rawd | https://vpuniverse.com/files/file/6092-attack-from-mars-vr-bally-1995-g5k/ |
 | Fish Tales (Williams 1992) VR ROOM | Rawd | https://vpuniverse.com/files/file/6083-fish-tales-williams-1992-vr-room/ |
 | VR ROOM Doodle love Bug (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7222-vr-room-doodle-love-bug-williams-1971/ |
-| VR Room Asteroid Annie and the Aliens (Gottlieb 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7168-vr-room-asteroid-annie-and-the-aliens-gottlieb-1980-100/ |
-| VR Room Viper (Stern 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/7175-vr-room-viper-stern-1981-100/ |
-| VR Room Flash Gordon (Bally 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6574-vr-room-flash-gordon-bally-1981-100/ |
-| VR Room Vector (Bally 1982) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6560-vr-room-vector-bally-1982-100/ |
-| VR Room Pinball Pool (Gottlieb 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6588-vr-room-pinball-pool-gottlieb-1979-100/ |
-| VR Room Skateball (Bally 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6589-vr-room-skateball-bally-1980-100/ |
 | VR ROOM Winner (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7041-vr-room-winner-williams-1971/ |
 | Space Mission VR Room (Williams 1976) | leojreimroc | https://vpuniverse.com/files/file/6014-space-mission-vr-room-williams-1976/ |
 | Atlantis VR Room (Gottlieb 1975) | leojreimroc | https://vpuniverse.com/files/file/6020-atlantis-vr-room-gottlieb-1975/ |
-| VR Room Fireball II (Bally 1981) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6854-vr-room-fireball-ii-bally-1981-100/ |
 | VR ROOM Gold Rush (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/6540-vr-room-gold-rush-williams-1971/ |
 | Fireball VR Room (Bally 1972) | leojreimroc | https://vpuniverse.com/files/file/6006-fireball-vr-room-bally-1972/ |
-| VR Room Supersonic (Bally 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6858-vr-room-supersonic-bally-1979-100/ |
-| VR Room Alien Poker (Williams 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6851-vr-room-alien-poker-williams-1980-100/ |
 | VR_Room_Target Alpha (Gottlieb 1976) 1.0.vpx | dillman | https://vpuniverse.com/files/file/6783-vr_room_target-alpha-gottlieb-1976-10vpx/ |
-| VR ROOM Batman 66 (Original 2018) | drinkcristal | https://vpuniverse.com/files/file/6693-vr-room-batman-66-original-2018/ |
-| VR Room Pool Sharks (Bally 1990) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6733-vr-room-pool-sharks-bally-1990-100/ |
-| VR Room Devil's Dare (Gottlieb 1982) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6730-vr-room-devils-dare-gottlieb-1982-100/ |
-| VR Room Nip-It (Bally 1973) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6728-vr-room-nip-it-bally-1973-100/ |
 | VR_Rooms_Whirlwind_(Williams_1990)_Minimal_1.2.vpx | dillman | https://vpuniverse.com/files/file/6666-vr_rooms_whirlwind_williams_1990_minimal_12vpx/ |
 | VR Room The Phantom Of The Opera (Data East 1990) 1.0 | Cirqus | https://vpuniverse.com/files/file/6662-vr-room-the-phantom-of-the-opera-data-east-1990-10/ |
 | VR Room T.K.O. (Gottlieb 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6559-vr-room-tko-gottlieb-1979-100/ |
-| VR Room Seawitch (Stern 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6551-vr-room-seawitch-stern-1980-100/ |
 | Family Guy - Stern 2007 - VR Room | FlippingSweet | https://vpuniverse.com/files/file/6547-family-guy-stern-2007-vr-room/ |
 | VR ROOM High Hand (Gottlieb 1973) | drinkcristal | https://vpuniverse.com/files/file/6545-vr-room-high-hand-gottlieb-1973/ |
 | VR ROOM Grand Slam (Gottlieb 1972) | drinkcristal | https://vpuniverse.com/files/file/6544-vr-room-grand-slam-gottlieb-1972/ |
-| VR Room Dolly Parton (Bally 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6528-vr-room-dolly-parton-bally-1979-100/ |
-| VR Room Xenon (Bally 1980) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6510-vr-room-xenon-bally-1980-100/ |
-| VR Room Black Pyramid (Bally 1984) 1.0 | RajoJoey | https://vpuniverse.com/files/file/6459-vr-room-black-pyramid-bally-1984-10/ |
 | VR ROOM ghostbusters slimer 1.0 | pattyg234 | https://vpuniverse.com/files/file/6412-vr-room-ghostbusters-slimer-10/ |
 | VR ROOM Super Mario Bros v 1.2 | pattyg234 | https://vpuniverse.com/files/file/6216-vr-room-super-mario-bros-v-12/ |
 | VR ROOM monopoly v1.0.vpx | pattyg234 | https://vpuniverse.com/files/file/6281-vr-room-monopoly-v10vpx/ |
 | VR Room - WWF Royal Rumble (Data East 1994) v1.2.3  | retro27 | https://vpuniverse.com/files/file/6098-vr-room-wwf-royal-rumble-data-east-1994-v123%C2%A0/ |
 | VR Room - The Simpsons (Data East 1990) v1.04 | retro27 | https://vpuniverse.com/files/file/6097-vr-room-the-simpsons-data-east-1990-v104/ |
 | VR Room - Star Trek 25th Anniversary (Data East 1991) v1.3.1 | retro27 | https://vpuniverse.com/files/file/6096-vr-room-star-trek-25th-anniversary-data-east-1991-v131/ |
-| Gargamel_Park | Rawd | https://vpuniverse.com/files/file/6079-gargamel_park/ |
 | VR ROOM Haunted House (Gottlieb 1982) Minimal | psiomicron | https://vpuniverse.com/files/file/6077-vr-room-haunted-house-gottlieb-1982-minimal/ |
 | VR ROOM Tom and Jerry | psiomicron | https://vpuniverse.com/files/file/6070-vr-room-tom-and-jerry/ |
 | VR ROOM Star Wars Trilogy (Sega 1997) Minimal | psiomicron | https://vpuniverse.com/files/file/6064-vr-room-star-wars-trilogy-sega-1997-minimal/ |
@@ -266,7 +232,6 @@
 | Bang | Francisco | https://vpuniverse.com/files/file/24836-bang/ |
 | Grand Slam | Francisco | https://vpuniverse.com/files/file/24505-grand-slam/ |
 | Megadeth Thermo-Nuclear Protection v1.05 | VP1000 | https://vpuniverse.com/files/file/23894-megadeth-thermo-nuclear-protection-v105/ |
-| Diablo v1.0 | VP1000 | https://vpuniverse.com/files/file/23891-diablo-v10/ |
 | EarthShaker (1989) v1.0 | VP1000 | https://vpuniverse.com/files/file/23858-earthshaker-1989-v10/ |
 | Gold Star (Gottlieb '54)15.46.rar | Francisco | https://vpuniverse.com/files/file/23174-gold-star-gottlieb-541546rar/ |
 | Future Pinball and BAM Essentials - All in One | TerryRed | https://vpuniverse.com/files/file/14807-future-pinball-and-bam-essentials-all-in-one/ |
@@ -293,7 +258,6 @@
 | GhostBusters 2 "NightTime Edition" (Pro Series v1.3) | VP1000 | https://vpuniverse.com/files/file/21157-ghostbusters-2-nighttime-edition-pro-series-v13/ |
 | Angels and Demons (Anthias, original, FP/BAM, 2021) | Anthias | https://vpuniverse.com/files/file/21085-angels-and-demons-anthias-original-fpbam-2021/ |
 | White Water "Soaking Wet Edition" v1.2 | VP1000 | https://vpuniverse.com/files/file/21079-white-water-soaking-wet-edition-v12/ |
-| GhostBusters 2 NightTime Edition v1.2 | VP1000 | https://vpuniverse.com/files/file/21039-ghostbusters-2-nighttime-edition-v12/ |
 | Lizards in the City (1.0 Bam Edition, Anthias, 2021) | Anthias | https://vpuniverse.com/files/file/21028-lizards-in-the-city-10-bam-edition-anthias-2021/ |
 | Oktoberfest "Pinball On Tap" v 1.5 | VP1000 | https://vpuniverse.com/files/file/21027-oktoberfest-pinball-on-tap-v-15/ |
 | Jet Set Radio NightTime Edition v1.2 | VP1000 | https://vpuniverse.com/files/file/21021-jet-set-radio-nighttime-edition-v12/ |
@@ -304,6 +268,7 @@
 | Rockmakers (Bally 1968) | Angelo | https://vpuniverse.com/files/file/20071-rockmakers-bally-1968/ |
 | Hogans Heroes "Stalag 13" Pro Edition v1.0 | VP1000 | https://vpuniverse.com/files/file/20046-hogans-heroes-stalag-13-pro-edition-v10/ |
 | Oktoberfest "Pinball On Tap" v 1.4 | VP1000 | https://vpuniverse.com/files/file/19412-oktoberfest-pinball-on-tap-v-14/ |
+| GhostBusters 2 "NightTime Edition" V1.0 | VP1000 | https://vpuniverse.com/files/file/19684-ghostbusters-2-nighttime-edition-v10/ |
 | The Good Bois (Anthias, Original, 2024). | Anthias | https://vpuniverse.com/files/file/19224-the-good-bois-anthias-original-2024/ |
 | Sin-Di-Cats (Anthias, 2024, Original, BAM) | Anthias | https://vpuniverse.com/files/file/19035-sin-di-cats-anthias-2024-original-bam/ |
 | Lizard Harem (Anthias, 2024, original, EM) | Anthias | https://vpuniverse.com/files/file/18953-lizard-harem-anthias-2024-original-em/ |
