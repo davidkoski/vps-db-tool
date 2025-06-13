@@ -1,4 +1,5 @@
 import Foundation
+import VPSDB
 
 enum GameIssue: Codable, Sendable, Hashable {
     case emptyThemes

@@ -1,9 +1,9 @@
 import Foundation
 
-struct Index<Element: Sendable & Metadata>: Sendable {
-    var byURL: [URL: [Element]]
-    var byId: [String: Element]
-    var all: [Element]
+public struct Index<Element: Sendable & Metadata>: Sendable {
+    public var byURL: [URL: [Element]]
+    public var byId: [String: Element]
+    public var all: [Element]
 
     init(_ games: [String: Game], _ itemPath: KeyPath<Game, [Element]>) {
         var byURL = [URL: [Element]]()
@@ -29,11 +29,11 @@ struct Index<Element: Sendable & Metadata>: Sendable {
         all = games.values.flatMap { $0[keyPath: itemPath] }
     }
 
-    subscript(url: URL) -> [Element]? {
+    public subscript(url: URL) -> [Element]? {
         byURL[Site(url).canonicalize(url)]
     }
 
-    subscript(id: String) -> Element? {
+    public subscript(id: String) -> Element? {
         byId[id]
     }
 }
@@ -46,23 +46,23 @@ extension Index where Element == Game {
     }
 }
 
-struct AnyIndex {
+public struct AnyIndex {
 
-    var byURL: [URL: [Metadata]]
-    var byId: [String: Metadata]
-    var all: [Metadata]
+    public var byURL: [URL: [Metadata]]
+    public var byId: [String: Metadata]
+    public var all: [Metadata]
 
-    init<Element: Sendable & Metadata>(_ index: Index<Element>) {
+    public init<Element: Sendable & Metadata>(_ index: Index<Element>) {
         byURL = index.byURL as [URL: [Metadata]]
         byId = index.byId as [String: Metadata]
         all = index.all as [Metadata]
     }
 
-    subscript(url: URL) -> [Metadata]? {
+    public subscript(url: URL) -> [Metadata]? {
         byURL[Site(url).canonicalize(url)]
     }
 
-    subscript(id: String) -> Metadata? {
+    public subscript(id: String) -> Metadata? {
         byId[id]
     }
 }

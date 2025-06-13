@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import VPSDB
 
 @main
 struct VPSDbTool: AsyncParsableCommand {

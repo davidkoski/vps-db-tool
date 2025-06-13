@@ -1,26 +1,26 @@
 import Foundation
 import SwiftSoup
 
-struct IPDB: Sendable {
+public struct IPDB: Sendable {
 
-    struct Entry: Codable, Sendable {
-        let id: String
-        let name: String
-        let manufacturer: Manufacturer
-        let manufacturerName: String
-        let year: Int
-        let players: Int
-        let kind: Kind?
-        let themes: Set<Theme>
+    public struct Entry: Codable, Sendable {
+        public let id: String
+        public let name: String
+        public let manufacturer: Manufacturer
+        public let manufacturerName: String
+        public let year: Int
+        public let players: Int
+        public let kind: Kind?
+        public let themes: Set<Theme>
     }
 
-    let entries: [String: Entry]
-    let byName: [String: [Entry]]
+    public let entries: [String: Entry]
+    public let byName: [String: [Entry]]
 }
 
 extension IPDB {
 
-    init(html url: URL) throws {
+    public init(html url: URL) throws {
         let html = try SwiftSoup.parse(String(contentsOf: url, encoding: .utf8))
 
         var entries = [String: Entry]()

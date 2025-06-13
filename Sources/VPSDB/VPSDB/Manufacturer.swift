@@ -1,6 +1,6 @@
 import Foundation
 
-enum Manufacturer: String, Codable, Sendable, Equatable {
+public enum Manufacturer: String, Codable, Sendable, Equatable {
 
     case aPirmischer = "A. Pirmischer"
     case abt = "A.B.T."
@@ -121,7 +121,7 @@ enum Manufacturer: String, Codable, Sendable, Equatable {
         }
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let value = try container.decode(String.self)
         if let c = Manufacturer(string: value) {
@@ -141,7 +141,7 @@ enum Manufacturer: String, Codable, Sendable, Equatable {
         }
     }
 
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(self.rawValue)
     }

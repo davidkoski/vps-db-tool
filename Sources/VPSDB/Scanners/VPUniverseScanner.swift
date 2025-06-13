@@ -2,11 +2,13 @@ import Foundation
 import ReerCodable
 import SwiftSoup
 
-struct VPUniverseScanner {
+public struct VPUniverseScanner {
+    public init() {        
+    }
 }
 
 extension VPUniverseScanner: ScanSources {
-    func sources(kind: GameResourceKind) -> [URL] {
+    public func sources(kind: GameResourceKind) -> [URL] {
         let urls: [String] =
             switch kind {
             case .game: ["https://vpuniverse.com/files/category/104-visual-pinball/"]
@@ -53,7 +55,7 @@ extension VPUniverseScanner: ScanSources {
         return urls.compactMap { URL(string: $0) }
     }
 
-    func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
+    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
         if page > 1 {
             return url.appending(components: "page", page.description)
         } else {
@@ -103,7 +105,7 @@ extension VPUniverseScanner: DetailScanner {
         let dateCreated: Date
     }
 
-    func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
+    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
         let html = try SwiftSoup.parse(content)
 
         /*
@@ -176,7 +178,7 @@ extension VPUniverseScanner: DetailScanner {
 }
 
 extension VPUniverseScanner: ListScanner {
-    func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?

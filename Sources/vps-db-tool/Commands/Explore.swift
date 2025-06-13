@@ -1,10 +1,43 @@
 import ArgumentParser
 import Foundation
+import VPSDB
 
 struct ExploreCommand: AsyncParsableCommand {
 
     static let configuration = CommandConfiguration(
         commandName: "explore",
+        abstract: "scanning related commands",
+        subcommands: [
+            CheckEmptyCommand.self, BadURLCommand.self, CheckDuplicateURLs.self,
+        ]
+    )
+
+}
+
+struct CheckEmptyCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "empty",
+        abstract: "A place to put exploration code"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try db.database()
+
+        for g in db.games.all.sorted() {
+            if g.tables.isEmpty {
+                print(g.id)
+            }
+        }
+    }
+}
+
+struct BadURLCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "bad-url",
         abstract: "A place to put exploration code"
     )
 
@@ -53,7 +86,7 @@ struct ExploreCommand: AsyncParsableCommand {
 struct CheckDuplicateURLs: AsyncParsableCommand {
 
     static let configuration = CommandConfiguration(
-        commandName: "explore",
+        commandName: "duplicates",
         abstract: "A place to put exploration code"
     )
 

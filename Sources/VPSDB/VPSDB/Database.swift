@@ -1,24 +1,24 @@
 import Foundation
 
-struct Database: Codable, Sendable {
-    var games: Index<Game>
-    let gamesByName: [String: [Game]]
+public struct Database: Codable, Sendable {
+    public var games: Index<Game>
+    public let gamesByName: [String: [Game]]
 
-    let tables: Index<Table>
-    let backglasses: Index<B2S>
-    let tutorials: Index<Tutorial>
-    let roms: Index<ROM>
-    let pupPacks: Index<PupPack>
-    let altColors: Index<AltColors>
-    let altSounds: Index<AltSound>
-    let sounds: Index<Sound>
-    let povs: Index<POV>
-    let wheels: Index<WheelArt>
-    let toppers: Index<Topper>
-    let mediaPacks: Index<MediaPack>
-    let rules: Index<Rules>
+    public let tables: Index<Table>
+    public let backglasses: Index<B2S>
+    public let tutorials: Index<Tutorial>
+    public let roms: Index<ROM>
+    public let pupPacks: Index<PupPack>
+    public let altColors: Index<AltColors>
+    public let altSounds: Index<AltSound>
+    public let sounds: Index<Sound>
+    public let povs: Index<POV>
+    public let wheels: Index<WheelArt>
+    public let toppers: Index<Topper>
+    public let mediaPacks: Index<MediaPack>
+    public let rules: Index<Rules>
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
 
         func connect<T: GameResource>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>) {
@@ -72,12 +72,12 @@ struct Database: Codable, Sendable {
         self.rules = Index(games, \.rules)
     }
 
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(Array(self.games.all))
     }
 
-    subscript(kind: GameResourceKind) -> AnyIndex {
+    public subscript(kind: GameResourceKind) -> AnyIndex {
         switch kind {
         case .game: AnyIndex(games)
         case .table: AnyIndex(tables)
@@ -96,7 +96,7 @@ struct Database: Codable, Sendable {
         }
     }
 
-    subscript(metadata: Metadata) -> Game? {
+    public subscript(metadata: Metadata) -> Game? {
         games.byId[metadata.gameId]
     }
 }

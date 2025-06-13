@@ -8,7 +8,7 @@ enum HTTPError: Error {
     case response(URL, HTTPResponseStatus, String)
 }
 
-class HTTPClient {
+public class HTTPClient {
 
     let client: AsyncHTTPClient.HTTPClient
 
@@ -20,7 +20,7 @@ class HTTPClient {
     let throttle: Duration?
     var lastRequest: ContinuousClock.Instant?
 
-    init(cache: URL? = nil, throttle: Duration? = nil) {
+    public init(cache: URL? = nil, throttle: Duration? = nil) {
         self.client = .init()
         self.cache = cache
         self.throttle = throttle
@@ -39,7 +39,7 @@ class HTTPClient {
         return s.hasSuffix(".html") ? s : s + ".html"
     }
 
-    func get(_ url: URL, bypassCache: Bool = false) async throws -> Data {
+    public func get(_ url: URL, bypassCache: Bool = false) async throws -> Data {
         let cache = cache?.appending(path: pathify(url))
         if !bypassCache, let cache {
             if let data = try? Data(contentsOf: cache) {
@@ -80,7 +80,7 @@ class HTTPClient {
         }
     }
 
-    func getString(_ url: URL, bypassCache: Bool = false) async throws -> String {
+    public func getString(_ url: URL, bypassCache: Bool = false) async throws -> String {
         let data = try await get(url, bypassCache: bypassCache)
         if let s = String(data: data, encoding: .utf8) {
             return s

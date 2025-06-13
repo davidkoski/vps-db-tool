@@ -1,28 +1,28 @@
 import Foundation
 
-struct Author: Codable, Sendable, Hashable, Comparable {
-    let name: String
+public struct Author: Codable, Sendable, Hashable, Comparable {
+    public let name: String
 
-    internal init(name: String) {
+    public init(name: String) {
         self.name = name
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         self.name = try container.decode(String.self)
     }
 
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(self.name)
     }
 
-    static func < (lhs: Author, rhs: Author) -> Bool {
+    public static func < (lhs: Author, rhs: Author) -> Bool {
         lhs.name < rhs.name
     }
 }
 
-enum TableFormat: String, Codable, Hashable, Sendable, Equatable {
+public enum TableFormat: String, Codable, Hashable, Sendable, Equatable {
     case FP
     case FX
     case FX2
@@ -33,7 +33,7 @@ enum TableFormat: String, Codable, Hashable, Sendable, Equatable {
     case PM5
 }
 
-enum Kind: String, Codable, Hashable, Sendable, Equatable {
+public enum Kind: String, Codable, Hashable, Sendable, Equatable {
     case EM
     case SS
     case PM

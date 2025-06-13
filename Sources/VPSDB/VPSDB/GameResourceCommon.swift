@@ -2,48 +2,48 @@ import Foundation
 import ReerCodable
 
 @Codable
-struct GameResourceCommon: Sendable, Equatable {
-    @CustomCoding(OmitDateUnixEpoch.self) var createdAt: Date
-    @CustomCoding(OmitDateUnixEpoch.self) var updatedAt: Date
+public struct GameResourceCommon: Sendable, Equatable {
+    @CustomCoding(OmitDateUnixEpoch.self) public var createdAt: Date
+    @CustomCoding(OmitDateUnixEpoch.self) public var updatedAt: Date
 
-    var comment: String?
+    public var comment: String?
 
-    @CustomCoding(OmitGameRef.self) var game: GameRef
-    @CustomCoding(OmitEmpty<[Resource]>.self) var urls: [Resource]
-    @CustomCoding(OmitEmpty<[Author]>.self) var authors: [Author]
-    var version: String?
+    @CustomCoding(OmitGameRef.self) public var game: GameRef
+    @CustomCoding(OmitEmpty<[Resource]>.self) public var urls: [Resource]
+    @CustomCoding(OmitEmpty<[Author]>.self) public var authors: [Author]
+    public var version: String?
 }
 
-protocol GameResource: Metadata, Equatable {
+public protocol GameResource: Metadata, Equatable {
     var gameResource: GameResourceCommon { get set }
 }
 
 extension GameResource {
-    var version: String? {
+    public var version: String? {
         gameResource.version
     }
 
-    var url: URL? {
+    public var url: URL? {
         gameResource.urls.first?.url
     }
 
-    var urls: [URL] {
+    public var urls: [URL] {
         gameResource.urls.map { $0.url }
     }
 
-    var createdAt: Date {
+    public var createdAt: Date {
         gameResource.createdAt
     }
 
-    var updatedAt: Date {
+    public var updatedAt: Date {
         gameResource.updatedAt
     }
 
-    var gameId: String {
+    public var gameId: String {
         gameResource.game.id
     }
 
-    var gameName: String {
+    public var gameName: String {
         gameResource.game.name
     }
 

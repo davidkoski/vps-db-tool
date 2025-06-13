@@ -1,6 +1,7 @@
 import ArgumentParser
 import Collections
 import Foundation
+import VPSDB
 
 struct EditCommands: AsyncParsableCommand {
 
@@ -271,10 +272,6 @@ struct OneOffCommand: AsyncParsableCommand {
 
             game.tables = game.tables.map {
                 var t = $0
-                if t.features.contains(.oldPatch) {
-                    t.features.remove(.oldPatch)
-                    t.features.append(.patch)
-                }
                 return t
             }
 

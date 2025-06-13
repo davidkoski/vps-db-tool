@@ -1,13 +1,7 @@
 import Foundation
 
-// TODO: suggested changes for master list
-// mr -> mixed reality
-// retheme
-// DOF
-// DT Only
-
 /// https://github.com/VirtualPinballSpreadsheet/vps-frontend/blob/master/src/lib/types/VPin.ts#L129
-enum TableFeature: String, Codable, Sendable, Equatable {
+public enum TableFeature: String, Codable, Sendable, Equatable {
     case fourK = "4k"
     case adult = "Adult"
     case bam = "BAM"
@@ -39,13 +33,9 @@ enum TableFeature: String, Codable, Sendable, Equatable {
     case nFozzy = "nFozzy"
     case noROM = "no ROM"
     case vlm = "VLM"
-
-    // to delete
-    case mod2 = "Mod"
-    case oldPatch = "Patch"
 }
 
-enum B2SFeature: String, Codable, Sendable {
+public enum B2SFeature: String, Codable, Sendable {
     case screen2 = "2Screens"
     case screen3 = "3Screens"
     case fullDMD = "FullDMD"

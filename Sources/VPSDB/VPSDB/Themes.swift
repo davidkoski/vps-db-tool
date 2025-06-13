@@ -1,6 +1,6 @@
 import Foundation
 
-enum Theme: String, Codable, Hashable, Sendable, Comparable {
+public enum Theme: String, Codable, Hashable, Sendable, Comparable {
 
     case action = "Action"
     case adult = "Adult"
@@ -299,7 +299,7 @@ enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case wrestling = "Wrestling"
     case zombies = "Zombies"
 
-    static func < (lhs: Theme, rhs: Theme) -> Bool {
+    public static func < (lhs: Theme, rhs: Theme) -> Bool {
         lhs.rawValue < rhs.rawValue
     }
 }

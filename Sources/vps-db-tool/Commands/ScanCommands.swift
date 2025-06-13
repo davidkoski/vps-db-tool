@@ -1,5 +1,6 @@
 import ArgumentParser
 import Foundation
+import VPSDB
 
 struct ScanCommands: AsyncParsableCommand {
 
@@ -55,7 +56,7 @@ struct ScanArguments: ParsableArguments, Sendable {
 
         if let url {
             self.site =
-                switch vps_db_tool.Site(url) {
+                switch VPSDB.Site(url) {
                 case .vpu: .vpu
                 case .vpf: .vpf
                 default:

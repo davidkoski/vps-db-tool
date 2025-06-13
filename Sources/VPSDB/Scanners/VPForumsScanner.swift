@@ -2,11 +2,13 @@ import Foundation
 import ReerCodable
 import SwiftSoup
 
-struct VPForumsScanner {
+public struct VPForumsScanner {
+    public init() {
+    }
 }
 
 extension VPForumsScanner: ScanSources {
-    func sources(kind: GameResourceKind) -> [URL] {
+    public func sources(kind: GameResourceKind) -> [URL] {
         let urls: [String] =
             switch kind {
             case .game:
@@ -51,7 +53,7 @@ extension VPForumsScanner: ScanSources {
         return urls.compactMap { URL(string: $0) }
     }
 
-    func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
+    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
         // input: https://www.vpforums.org/index.php?app=downloads&showcat=50&dosort=1&sort_key=file_updated&sort_order=desc&num=&filter_key=
         // output: https://www.vpforums.org/index.php?app=downloads&showcat=50&sort_order=desc&sort_key=file_updated&num=10&st=10
         if page > 1 {
@@ -128,7 +130,7 @@ extension VPForumsScanner: DetailScanner {
         return (name, version2)
     }
 
-    func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
+    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
         let html = try SwiftSoup.parse(content)
 
         /*
@@ -156,7 +158,7 @@ extension VPForumsScanner: DetailScanner {
 }
 
 extension VPForumsScanner: ListScanner {
-    func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?

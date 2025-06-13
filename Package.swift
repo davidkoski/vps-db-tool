@@ -28,13 +28,20 @@ let package = Package(
         .executableTarget(
             name: "vps-db-tool",
             dependencies: [
-                "SwiftSoup",
+                "VPSDB",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Logging", package: "swift-log"),
+                .product(name: "Collections", package: "swift-collections"),
+            ]
+        ),
+        .target(
+            name: "VPSDB",
+            dependencies: [
+                "SwiftSoup",
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
                 .product(name: "ReerCodable", package: "ReerCodable"),
-                .product(name: "Collections", package: "swift-collections"),
             ]
-        )
+        ),
     ]
 )

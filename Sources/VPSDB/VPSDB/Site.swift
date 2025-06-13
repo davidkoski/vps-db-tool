@@ -1,12 +1,12 @@
 import Foundation
 
-enum Site: String, Sendable {
+public enum Site: String, Sendable {
     case vpu = "VPU"
     case vpf = "VPF"
     case pinballnirvana = "Nirvana"
     case other = "Other"
 
-    init?(_ url: URL?) {
+    public init?(_ url: URL?) {
         if let url {
             self.init(url)
         } else {
@@ -14,7 +14,7 @@ enum Site: String, Sendable {
         }
     }
 
-    init(_ url: URL) {
+    public init(_ url: URL) {
         switch url.host() {
         case "vpuniverse.com": self = .vpu
         case "www.vpforums.org": self = .vpf
@@ -23,12 +23,12 @@ enum Site: String, Sendable {
         }
     }
 
-    static func canonical(_ url: URL) -> URL {
+    public static func canonical(_ url: URL) -> URL {
         Site(url).canonicalize(url)
     }
 
     /// convert a URL into a canonical form -- remove any parts that can vary without consequence
-    func canonicalize(_ url: URL) -> URL {
+    public func canonicalize(_ url: URL) -> URL {
         var url = url
         if url.scheme == "http" {
             url = URL(
@@ -70,7 +70,7 @@ enum Site: String, Sendable {
     }
 
     /// convert a URL into its ideal form for use in the database -- remove any extra parts
-    func normalize(_ url: URL) -> URL {
+    public func normalize(_ url: URL) -> URL {
         var url = url
         if url.scheme == "http" {
             url = URL(
