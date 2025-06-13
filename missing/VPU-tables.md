@@ -162,8 +162,6 @@
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
 | Breakshot (Capcom 1996)_Bigus(MOD)3.1 VR | hmueck | https://vpuniverse.com/files/file/19078-breakshot-capcom-1996_bigusmod31-vr/ |
 | VR ROOM Sharpshooter - Bally 1961 (10.7) | Rascal | https://vpuniverse.com/files/file/12164-vr-room-sharpshooter-bally-1961-107/ |
-| VR ROOM Wrath of Olympus | Solters | https://vpuniverse.com/files/file/11084-vr-room-wrath-of-olympus/ |
-| VR ROOM Diamond Lady | Solters | https://vpuniverse.com/files/file/10929-vr-room-diamond-lady/ |
 | VR ROOM Tmnt.wip 1.0 | pattyg234 | https://vpuniverse.com/files/file/10263-vr-room-tmntwip-10/ |
 | VR Room KISS (Bally 1979) 1.0.0 | rockhead | https://vpuniverse.com/files/file/8605-vr-room-kiss-bally-1979-100/ |
 | VR Room Car Hop (Gottlieb 1991) | 3rdaxis | https://vpuniverse.com/files/file/8278-vr-room-car-hop-gottlieb-1991/ |
@@ -172,9 +170,6 @@
 | VR Room The Flintstones (Williams 1994) | 3rdaxis | https://vpuniverse.com/files/file/6135-vr-room-the-flintstones-williams-1994/ |
 | VR ROOM Spin Out (Gottlieb 1975) | drinkcristal | https://vpuniverse.com/files/file/7377-vr-room-spin-out-gottlieb-1975/ |
 | VR ROOM Zodiac (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7286-vr-room-zodiac-williams-1971/ |
-| High Speed (Williams 1986) VR ROOM | Rawd | https://vpuniverse.com/files/file/6080-high-speed-williams-1986-vr-room/ |
-| Attack From Mars VR (Bally - 1995) G5K | Rawd | https://vpuniverse.com/files/file/6092-attack-from-mars-vr-bally-1995-g5k/ |
-| Fish Tales (Williams 1992) VR ROOM | Rawd | https://vpuniverse.com/files/file/6083-fish-tales-williams-1992-vr-room/ |
 | VR ROOM Doodle love Bug (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7222-vr-room-doodle-love-bug-williams-1971/ |
 | VR ROOM Winner (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7041-vr-room-winner-williams-1971/ |
 | Space Mission VR Room (Williams 1976) | leojreimroc | https://vpuniverse.com/files/file/6014-space-mission-vr-room-williams-1976/ |
