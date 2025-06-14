@@ -1,0 +1,24 @@
+# This workflow will build a Swift project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Swift
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: date > report/date.txt
+      - name: Push
+        run: git remote set-url origin https://davidkoski:${{ secrets.COMMIT_TOKEN}}@github.com/davidkoski/vps-db-tool.git; git commit -m "update" report; git push
+      # - name: Push Report
+      #   uses: devops-infra/action-commit-push@master
+      #   with:
+      #     github_token: ${{ secrets.COMMIT_TOKEN }}
+      #     commit_message: "Update report"
