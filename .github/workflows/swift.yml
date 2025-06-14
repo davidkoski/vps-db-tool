@@ -29,9 +29,5 @@ jobs:
       - name: Push Report
         uses: devops-infra/action-commit-push@master
         with:
-          github_token: "${{ secrets.COMMIT_TOKEN }}"
-          add_timestamp: true
-          commit_prefix: "[AUTO]"
+          github_token: ${{ secrets.COMMIT_TOKEN }}
           commit_message: "Update report"
-          force: false
-          target_branch: main
