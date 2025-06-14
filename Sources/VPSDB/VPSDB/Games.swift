@@ -6,8 +6,8 @@ public func canonicalVersion(_ string: String?) -> String {
     (string ?? "")
         .replacingOccurrences(of: "v", with: "")
         .replacingOccurrences(of: " ", with: "")
-        .replacingOccurrences(of: ".0.0", with: ".0")
-        .replacing(/.0$/, with: { _ in "" })
+        .replacing(/[.]0+$/, with: { _ in "" })
+        .replacing(/[.]0+$/, with: { _ in "" })
 }
 
 public protocol Metadata {

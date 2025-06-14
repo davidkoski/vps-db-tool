@@ -22,7 +22,8 @@ let package = Package(
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.1"),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.0"),
 
-        .package(url: "https://github.com/reers/ReerCodable.git", from: "1.2.3"),
+        .package(url: "https://github.com/reers/ReerCodable.git", branch: "main"),
+        //        .package(url: "https://github.com/reers/ReerCodable.git", from: "1.2.3"),
     ],
     targets: [
         .executableTarget(
@@ -41,6 +42,13 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
                 .product(name: "ReerCodable", package: "ReerCodable"),
+            ]
+        ),
+        .testTarget(
+            name: "VPSDBTests",
+            dependencies: [
+                "VPSDB",
+                .product(name: "Collections", package: "swift-collections"),
             ]
         ),
     ]

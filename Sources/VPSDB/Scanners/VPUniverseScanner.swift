@@ -3,7 +3,7 @@ import ReerCodable
 import SwiftSoup
 
 public struct VPUniverseScanner {
-    public init() {        
+    public init() {
     }
 }
 
@@ -105,7 +105,9 @@ extension VPUniverseScanner: DetailScanner {
         let dateCreated: Date
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
+    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
+        -> DetailResult?
+    {
         let html = try SwiftSoup.parse(content)
 
         /*

@@ -19,7 +19,10 @@ public protocol ListScanner {
 }
 
 public struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible {
-    public init(url: URL, name: String? = nil, author: String? = nil, version: String? = nil, ipdb: URL? = nil, features: Set<TableFeature> = Set<TableFeature>()) {
+    public init(
+        url: URL, name: String? = nil, author: String? = nil, version: String? = nil,
+        ipdb: URL? = nil, features: Set<TableFeature> = Set<TableFeature>()
+    ) {
         self.url = url
         self.name = name
         self.author = author
@@ -27,7 +30,7 @@ public struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible
         self.ipdb = ipdb
         self.features = features
     }
-    
+
     public var url: URL
     public var name: String?
     public var author: String?

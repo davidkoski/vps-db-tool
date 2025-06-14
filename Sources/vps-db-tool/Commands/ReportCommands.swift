@@ -55,7 +55,7 @@ struct ReportCommand: AsyncParsableCommand {
     ) async throws -> [Item] {
         let db = try db.database()
         var issues = try issues.database()
-        let client = HTTPClient(cache: cache, throttle: .seconds(3))
+        let client = HTTPClient(cache: cache, throttle: .seconds(2))
 
         let scanner: ScanSources & DetailScanner & ListScanner =
             switch site {

@@ -130,7 +130,9 @@ extension VPForumsScanner: DetailScanner {
         return (name, version2)
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult? {
+    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
+        -> DetailResult?
+    {
         let html = try SwiftSoup.parse(content)
 
         /*
