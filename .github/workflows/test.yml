@@ -20,7 +20,7 @@ jobs:
       - name: Setup Remote
         run: git remote set-url origin https://davidkoski:${{ secrets.COMMIT_TOKEN}}@github.com/davidkoski/vps-db-tool.git
       - name: Push
-        run: git commit -m "update" report; git push
+        run: git add report; git commit -m "update"; git push
       # - name: Push Report
       #   uses: devops-infra/action-commit-push@master
       #   with:
