@@ -1,7 +1,7 @@
 # This workflow will build a Swift project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
 
-name: Swift
+name: Push Test
 
 on:
   workflow_dispatch:
@@ -15,8 +15,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build
         run: date > report/date.txt
+      - name: Setup Git
+        run: git config --global user.email "david_koski@mac.com"
+        run: git config --global user.name "David Koski"
+      - name: Setup Remote
+        run: git remote set-url origin https://davidkoski:${{ secrets.COMMIT_TOKEN}}@github.com/davidkoski/vps-db-tool.git
       - name: Push
-        run: git remote set-url origin https://davidkoski:${{ secrets.COMMIT_TOKEN}}@github.com/davidkoski/vps-db-tool.git; git commit -m "update" report; git push
+        run: git commit -m "update" report; git push
       # - name: Push Report
       #   uses: devops-infra/action-commit-push@master
       #   with:
