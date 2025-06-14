@@ -25,4 +25,4 @@ jobs:
       - name: Build
         run: swift build
       - name: Report
-        run: swift run vps-db-tool scan check-missing --site vpu --markdown
+        run: swift run vps-db-tool scan check-missing --site vpf --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json
