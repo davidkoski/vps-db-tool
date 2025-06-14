@@ -207,6 +207,8 @@ private struct Report {
           evt.currentTarget.className += " active";
         }
         </script>
+        <h4>Built \(Date().formatted())</h4>
+        
         """
 
     func emit(items: [Item]) -> String {
