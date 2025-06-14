@@ -5,6 +5,7 @@ import ReerCodable
 public func canonicalVersion(_ string: String?) -> String {
     (string ?? "")
         .replacingOccurrences(of: "v", with: "")
+        .replacingOccurrences(of: "Version", with: "")
         .replacingOccurrences(of: " ", with: "")
         .replacing(/[.]0+$/, with: { _ in "" })
         .replacing(/[.]0+$/, with: { _ in "" })
