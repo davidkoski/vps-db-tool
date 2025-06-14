@@ -24,7 +24,7 @@ struct CheckEmptyCommand: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             if g.tables.isEmpty {
@@ -44,7 +44,7 @@ struct BadURLCommand: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         print(
             """
@@ -93,7 +93,7 @@ struct CheckDuplicateURLs: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         print(
             """

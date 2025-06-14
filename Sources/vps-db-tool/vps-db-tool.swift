@@ -1,5 +1,7 @@
 import ArgumentParser
+import AsyncHTTPClient
 import Foundation
+import NIOFoundationCompat
 import VPSDB
 
 @main
@@ -21,14 +23,31 @@ struct VPSDbArguments: ParsableArguments, Sendable {
 
     private var db: Database?
 
-    mutating func database() throws -> Database {
+    enum HTTPError: Error {
+        case httpError(Int, String)
+    }
+
+    mutating func database() async throws -> Database {
         if let db {
             return db
         }
 
-        let db = try JSONDecoder().decode(Database.self, from: Data(contentsOf: path))
-        self.db = db
-        return db
+        if path.isFileURL {
+            let db = try JSONDecoder().decode(Database.self, from: Data(contentsOf: path))
+            self.db = db
+            return db
+        } else {
+            let httpRequest = HTTPClientRequest(url: path.description)
+            let response = try await HTTPClient.shared.execute(httpRequest, timeout: .seconds(30))
+            guard response.status == .ok else {
+                throw HTTPError.httpError(Int(response.status.code), response.status.reasonPhrase)
+            }
+
+            let data = try await response.body.collect(upTo: 20 * 1024 * 1024)
+            return try data.getJSONDecodable(
+                Database.self, decoder: JSONDecoder(), at: data.readerIndex,
+                length: data.readableBytes)!
+        }
     }
 }
 

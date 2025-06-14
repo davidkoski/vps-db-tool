@@ -147,7 +147,7 @@ struct CheckDownloadCommand: AsyncParsableCommand {
     var interactive = true
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
         var issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
@@ -244,7 +244,7 @@ struct CheckMissingCommand: AsyncParsableCommand {
     @Flag var markdown = false
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
         let issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
@@ -314,7 +314,7 @@ struct ScanPagesCommand: AsyncParsableCommand {
     @Option var output = Output.file
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = scan.site.scanner

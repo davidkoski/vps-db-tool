@@ -26,7 +26,7 @@ struct IPDBMissingCommand: AsyncParsableCommand {
     var ipdb: URL
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
         let ipdb = try IPDB(html: self.ipdb)
 
         for game in db.games.all.sorted() {
@@ -86,7 +86,7 @@ struct IPDBVerifyCommand: AsyncParsableCommand {
     var ipdb: URL
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
         let ipdb = try IPDB(html: self.ipdb)
 
         for game in db.games.all.sorted() {

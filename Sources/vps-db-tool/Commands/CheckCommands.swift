@@ -23,7 +23,7 @@ struct CheckTableFormat: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             for t in g.tables {
@@ -45,7 +45,7 @@ struct CheckYear: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             if g.year == nil || g.year == 0 {
@@ -65,7 +65,7 @@ struct CheckTheme: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             if g.theme.isEmpty {
@@ -85,7 +85,7 @@ struct CheckMod: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             for t in g.tables {
@@ -107,7 +107,7 @@ struct CheckRetheme: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
 
     mutating func run() async throws {
-        let db = try db.database()
+        let db = try await db.database()
 
         for g in db.games.all.sorted() {
             for t in g.tables {

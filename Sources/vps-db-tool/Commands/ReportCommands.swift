@@ -53,7 +53,7 @@ struct ReportCommand: AsyncParsableCommand {
     private mutating func scan(
         site: Site, kind: GameResourceKind, follow: Bool = false
     ) async throws -> [Item] {
-        let db = try db.database()
+        let db = try await db.database()
         var issues = try issues.database()
         let client = HTTPClient(cache: cache, throttle: .seconds(2))
 
