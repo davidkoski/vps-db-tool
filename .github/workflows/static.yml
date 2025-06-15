@@ -6,6 +6,11 @@ on:
   push:
     branches: ["main"]
 
+  workflow_run:
+    workflows: ["Build Report"]
+    types:
+      - completed
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
