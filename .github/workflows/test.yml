@@ -4,6 +4,8 @@
 name: Push Test
 
 on:
+  schedule:
+    - cron: '15 4 * * 1'
   workflow_dispatch:
 
 jobs:
@@ -13,16 +15,3 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Build
-        run: date > report/date.txt
-      - name: Setup Git
-        run: git config --global user.email "david_koski@mac.com"; git config --global user.name "David Koski"
-      - name: Setup Remote
-        run: git remote set-url origin https://davidkoski:${{ secrets.COMMIT_TOKEN}}@github.com/davidkoski/vps-db-tool.git
-      - name: Push
-        run: git add report; git commit -m "update"; git push
-      # - name: Push Report
-      #   uses: devops-infra/action-commit-push@master
-      #   with:
-      #     github_token: ${{ secrets.COMMIT_TOKEN }}
-      #     commit_message: "Update report"
