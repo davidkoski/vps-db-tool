@@ -4,9 +4,9 @@
 name: Build Report
 
 on:
-  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '37 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
