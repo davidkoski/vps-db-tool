@@ -11,5 +11,6 @@ struct TestTableVersions {
         #expect(canonicalVersion("2.0") == canonicalVersion("2.0.0"))
         #expect(canonicalVersion("2.1") != canonicalVersion("2.0.1"))
         #expect(canonicalVersion("2.0") == canonicalVersion("2.00"))
+        #expect(canonicalVersion("Version2.0") == canonicalVersion("2.0"))
     }
 }
