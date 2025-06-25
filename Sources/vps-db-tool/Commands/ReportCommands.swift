@@ -50,6 +50,19 @@ struct ReportCommand: AsyncParsableCommand {
         }
     }
 
+    private func getVersion(
+        client: HTTPClient, kind: GameResourceKind, scanner: DetailScanner, item: DetailResult
+    ) async throws -> String? {
+        print(item.url)
+        let content = try await client.getString(item.url, bypassCache: true)
+        if let detail = try scanner.scanDetail(
+            url: item.url, content: content, kind: kind)
+        {
+            return detail.version
+        }
+        return nil
+    }
+
     private mutating func scan(
         site: Site, kind: GameResourceKind, follow: Bool = false
     ) async throws -> [Item] {
@@ -79,35 +92,36 @@ struct ReportCommand: AsyncParsableCommand {
                 print(item.name ?? "unknown")
                 if let match = db[kind][item.url], let file = match.first, let game = db[file] {
                     if follow {
-                        print(item.url)
-                        let content = try await client.getString(item.url, bypassCache: true)
-                        if let detail = try scanner.scanDetail(
-                            url: item.url, content: content, kind: kind)
-                        {
+                        let rawVersion =
+                            if let v = item.version {
+                                v
+                            } else {
+                                try await getVersion(
+                                    client: client, kind: kind, scanner: scanner, item: item)
+                            }
 
-                            if canonicalVersion(file.version) != canonicalVersion(detail.version) {
-                                let issue = ResourceIssue.versionMismatch(detail.version)
+                        if canonicalVersion(file.version) != canonicalVersion(rawVersion) {
+                            let issue = ResourceIssue.versionMismatch(rawVersion)
 
-                                var report = !issues.check(
-                                    game: game, kind: kind, gameResource: file, url: item.url,
-                                    issue: issue)
+                            var report = !issues.check(
+                                game: game, kind: kind, gameResource: file, url: item.url,
+                                issue: issue)
 
-                                if report && recordIssues {
-                                    report =
-                                        issues.report(
-                                            game: game, kind: kind, gameResource: file,
-                                            url: item.url, issue: issue) == .willFix
-                                }
+                            if report && recordIssues {
+                                report =
+                                    issues.report(
+                                        game: game, kind: kind, gameResource: file,
+                                        url: item.url, issue: issue) == .willFix
+                            }
 
-                                if report {
-                                    result.append(
-                                        .init(
-                                            url: item.url, name: item.name ?? "unknown",
-                                            author: item.author ?? "unknown", kind: kind,
-                                            issue:
-                                                "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(detail.version))"
-                                        ))
-                                }
+                            if report {
+                                result.append(
+                                    .init(
+                                        url: item.url, name: item.name ?? "unknown",
+                                        author: item.author ?? "unknown", kind: kind,
+                                        issue:
+                                            "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(rawVersion))"
+                                    ))
                             }
                         }
                     }
@@ -208,7 +222,7 @@ private struct Report {
         }
         </script>
         <h4>Built \(Date().formatted())</h4>
-        
+
         """
 
     func emit(items: [Item]) -> String {

@@ -10,7 +10,7 @@ struct EditCommands: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
-            EditTagFeaturesCommand.self, OneOffCommand.self,
+            EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
         ]
     )
 }
@@ -277,5 +277,77 @@ struct OneOffCommand: AsyncParsableCommand {
 
             return game
         }
+    }
+}
+
+struct UpdateVersionCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "update",
+        abstract: "update version"
+    )
+
+    @OptionGroup var edit: EditArguments
+    @OptionGroup var scan: ScanArguments
+
+    mutating func run() async throws {
+        let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
+        let scanner = scan.site.scanner
+        let urls = try await scan.urls(scanner: scanner, client: client)
+
+        var items = [URL: DetailResult]()
+
+        for (variant, url) in urls {
+            switch variant {
+            case .detail:
+                let content = try await client.getString(url)
+                let detail = try scanner.scanDetail(url: url, content: content, kind: scan.kind)
+                items[Site(url).canonicalize(url)] = detail
+
+            case .list:
+                let content = try await client.getString(url)
+                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
+
+                for detail in result.list {
+                    let url = detail.url
+                    items[Site(url).canonicalize(url)] = detail
+                }
+            }
+        }
+
+        var matched = Set(items.keys)
+
+        try await edit.visitGames { game in
+            var game = game
+
+            game.tables = game.tables.map {
+                var t = $0
+                if let url = t.url {
+                    let canonicalURL = Site(url).canonicalize(url)
+                    if let item = items[canonicalURL] {
+                        matched.remove(canonicalURL)
+                        print("#", game.name, item.version ?? "-", t.version ?? "-")
+                        if let version = item.version, version != t.version {
+                            t.gameResource.version = version
+                            if let date = item.date {
+                                t.gameResource.createdAt = date
+                            }
+                        }
+                    }
+                }
+                return t
+            }
+
+            return game
+        }
+
+        // any that did not match
+        for url in matched {
+            if let item = items[url] {
+                print(url, item.name ?? "")
+            }
+        }
+
+        print(matched.count)
     }
 }

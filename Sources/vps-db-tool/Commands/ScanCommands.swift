@@ -168,6 +168,7 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                 let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
 
                 for item in result.list {
+                    print(item)
                     if let match = db[scan.kind][item.url], let first = match.first {
                         if scan.follow, let game = db[first] {
                             try await checkDetails(

@@ -21,7 +21,12 @@ public struct IPDB: Sendable {
 extension IPDB {
 
     public init(html url: URL) throws {
-        let html = try SwiftSoup.parse(String(contentsOf: url, encoding: .utf8))
+        let data = try Data(contentsOf: url)
+        let str = data.withUnsafeBytes { ptr in
+            let (s, _) = String.decodeCString(ptr, as: UTF8.self, repairingInvalidCodeUnits: true)!
+            return s
+        }
+        let html = try SwiftSoup.parse(str)
 
         var entries = [String: Entry]()
 

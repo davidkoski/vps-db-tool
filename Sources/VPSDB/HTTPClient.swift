@@ -36,6 +36,15 @@ public class HTTPClient {
         let s = url.description
             .replacingOccurrences(of: "://", with: ".")
             .replacingOccurrences(of: "/", with: ".")
+            .replacingOccurrences(of: "&", with: ".")
+            .replacingOccurrences(of: "?", with: ".")
+
+            // dealing with too long filenames
+            .replacingOccurrences(
+                of: "search_app_filters%5Bdownloads%5D%5BsearchInKey%5D", with: ""
+            )
+            .replacingOccurrences(
+                of: "search_app_filters%5Bdownloads%5D%5Bfiles%5D%5BsortKey%5D=date", with: "")
 
         return s.hasSuffix(".html") ? s : s + ".html"
     }
@@ -73,7 +82,11 @@ public class HTTPClient {
 
         if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
             if let cache {
-                try? data.write(to: cache, options: .atomic)
+                do {
+                    try data.write(to: cache, options: .atomic)
+                } catch {
+                    print("Failed to cache \(cache): \(error)")
+                }
             }
             return data
         } else {
