@@ -29,6 +29,7 @@ public enum TableFeature: String, Codable, Sendable, Equatable {
     case inclB2S = "incl. B2S"
     case inclPuP = "incl. PuP"
     case inclROM = "incl. ROM"
+    case inclNVRAM = "incl. nvram"
     case inclVideo = "incl. Video"
     case nFozzy = "nFozzy"
     case noROM = "no ROM"
