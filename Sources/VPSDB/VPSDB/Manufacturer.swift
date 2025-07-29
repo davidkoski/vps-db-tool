@@ -83,6 +83,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case professionalPinball = "Professional Pinball"
     case quezalPinball = "Quetzal Pinball"
     case rally = "Rally"
+    case rayworks = "Rayworks"
     case recel = "Recel"
     case recreativosFranco = "Recreativos Franco"
     case rockOla = "Rock-ola"
