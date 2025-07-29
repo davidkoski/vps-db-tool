@@ -109,6 +109,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case whizbang = "WhizBang Pinball"
     case wico = "Wico"
     case williams = "Williams"
+    case wiznwar = "Wiznwar, Flarb LLC"
     case zaccaria = "Zaccaria"
     case zen = "Zen Studios"
     case missing = ""

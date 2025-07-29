@@ -208,6 +208,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case psychedelicArt = "Psychedelic Art"
     case punk = "Punk"
     case puppets = "Puppets"
+    case puzzles = "Puzzles"
     case racing = "Racing"
     case rafting = "Rafting"
     case railroad = "Railroad"
