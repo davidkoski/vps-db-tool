@@ -38,8 +38,6 @@
 | Swords of Fury (Williams 1988)(FS-DT)(VP10) | takut | https://vpuniverse.com/files/file/4159-swords-of-fury-williams-1988fs-dtvp10/ |
 | Pirates Of The Caribbean (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3581-pirates-of-the-caribbean-conversion-from-fp-vpx-beta/ |
 | Tron (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3577-tron-conversion-from-fp-vpx-beta/ |
-| Hong Kong Phooey Mini-PUP | GauGau | https://vpuniverse.com/files/file/24473-hong-kong-phooey-mini-pup/ |
-| Bad Girls (Gottlieb 1988) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24484-bad-girls-gottlieb-1988-sideblade-mod/ |
 | Wheel of Fortune (Stern 2007) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24397-wheel-of-fortune-stern-2007-sideblade-mod/ |
 | Mousin' Around (Bally 1989) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24385-mousin-around-bally-1989-sideblade-mod/ |
 | Star Trek The Next Generation (Williams 1993) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24378-star-trek-the-next-generation-williams-1993-sideblade-mod/ |
@@ -185,8 +183,6 @@
 | VR ROOM Grand Slam (Gottlieb 1972) | drinkcristal | https://vpuniverse.com/files/file/6544-vr-room-grand-slam-gottlieb-1972/ |
 | VR ROOM ghostbusters slimer 1.0 | pattyg234 | https://vpuniverse.com/files/file/6412-vr-room-ghostbusters-slimer-10/ |
 | VR ROOM Super Mario Bros v 1.2 | pattyg234 | https://vpuniverse.com/files/file/6216-vr-room-super-mario-bros-v-12/ |
-| VR ROOM monopoly v1.0.vpx | pattyg234 | https://vpuniverse.com/files/file/6281-vr-room-monopoly-v10vpx/ |
-| VR Room - WWF Royal Rumble (Data East 1994) v1.2.3  | retro27 | https://vpuniverse.com/files/file/6098-vr-room-wwf-royal-rumble-data-east-1994-v123%C2%A0/ |
 | VR Room - The Simpsons (Data East 1990) v1.04 | retro27 | https://vpuniverse.com/files/file/6097-vr-room-the-simpsons-data-east-1990-v104/ |
 | VR Room - Star Trek 25th Anniversary (Data East 1991) v1.3.1 | retro27 | https://vpuniverse.com/files/file/6096-vr-room-star-trek-25th-anniversary-data-east-1991-v131/ |
 | VR ROOM Haunted House (Gottlieb 1982) Minimal | psiomicron | https://vpuniverse.com/files/file/6077-vr-room-haunted-house-gottlieb-1982-minimal/ |
