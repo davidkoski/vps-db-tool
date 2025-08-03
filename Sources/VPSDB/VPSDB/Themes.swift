@@ -29,6 +29,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case baseball = "Baseball"
     case basketball = "Basketball"
     case beach = "Beach"
+    case beer = "Beer"
     case bicycleRacing = "Bicycle Racing"
     case bicycling = "Bicycling"
     case billiards = "Billiards"

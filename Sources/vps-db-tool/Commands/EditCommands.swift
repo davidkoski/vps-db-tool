@@ -11,6 +11,7 @@ struct EditCommands: AsyncParsableCommand {
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
             EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
+            UpdateThemeCommand.self,
         ]
     )
 }
@@ -349,5 +350,29 @@ struct UpdateVersionCommand: AsyncParsableCommand {
         }
 
         print(matched.count)
+    }
+}
+
+struct UpdateThemeCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "themes",
+        abstract: "update themes"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = game
+
+            if game.theme.contains(.licensedTheme) && game.manufacturer == .original
+                && !game.name.hasPrefix("JP")
+            {
+                game.theme.remove(.licensedTheme)
+            }
+
+            return game
+        }
     }
 }

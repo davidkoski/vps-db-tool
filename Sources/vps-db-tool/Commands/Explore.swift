@@ -9,6 +9,7 @@ struct ExploreCommand: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             CheckEmptyCommand.self, BadURLCommand.self, CheckDuplicateURLs.self,
+            ThemesCommand.self,
         ]
     )
 
@@ -118,5 +119,31 @@ struct CheckDuplicateURLs: AsyncParsableCommand {
             }
         }
         print(lines.sorted().joined(separator: "\n"))
+    }
+}
+
+struct ThemesCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "themes",
+        abstract: "Looking at themes"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try await db.database()
+
+        for game in db.games.all.sorted() {
+            let themes = game.theme
+            //            if themes.isEmpty {
+            //                print(game.name)
+            //                continue
+            //            }
+            if !themes.contains(.movie) && themes.contains(.licensedTheme) {
+                print("\(game.manufacturer) \(game.name)")
+                continue
+            }
+        }
     }
 }
