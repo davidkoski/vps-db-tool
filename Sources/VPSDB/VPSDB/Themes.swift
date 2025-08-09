@@ -90,6 +90,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case example = "Example"
     case exercise = "Exercise"
     case exploration = "Exploration"
+    case fairyTail = "Fairytale"
     case fantasy = "Fantasy"
     case fashionShow = "Fashion Show"
     case felineMischief = "Feline Mischief"
