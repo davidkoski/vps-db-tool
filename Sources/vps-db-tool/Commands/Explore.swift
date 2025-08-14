@@ -140,9 +140,16 @@ struct ThemesCommand: AsyncParsableCommand {
             //                print(game.name)
             //                continue
             //            }
-            if !themes.contains(.movie) && themes.contains(.licensedTheme) {
-                print("\(game.manufacturer) \(game.name)")
-                continue
+            //            if !themes.contains(.movie) && themes.contains(.licensedTheme) {
+            //                print("\(game.manufacturer) \(game.name)")
+            //                continue
+            //            }
+            for t in game.tables {
+                if !t.features.contains(.retheme)
+                    && (t.gameResource.comment ?? "").lowercased().contains("mod of")
+                {
+                    print("\(game.manufacturer) \(game.name)")
+                }
             }
         }
     }

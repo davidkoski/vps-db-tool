@@ -11,7 +11,7 @@ struct EditCommands: AsyncParsableCommand {
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
             EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
-            UpdateThemeCommand.self,
+            UpdateThemeCommand.self, UpdateReThemeCommand.self,
         ]
     )
 }
@@ -370,6 +370,51 @@ struct UpdateThemeCommand: AsyncParsableCommand {
                 && !game.name.hasPrefix("JP")
             {
                 game.theme.remove(.licensedTheme)
+            }
+
+            return game
+        }
+    }
+}
+
+struct UpdateReThemeCommand: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "retheme",
+        abstract: "update retheme"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = game
+
+            game.tables = game.tables.map {
+                var t = $0
+
+                if !t.features.contains(.retheme)
+                    && (t.gameResource.comment ?? "").lowercased().contains("retheme")
+                {
+                    t.features.append(.retheme)
+                    t.features.append(.mod)
+                }
+
+                if !game.name.hasPrefix("JP") && !t.features.contains(.retheme)
+                    && (t.gameResource.comment ?? "").lowercased().contains("based on")
+                {
+                    t.features.append(.retheme)
+                    t.features.append(.mod)
+                }
+
+                if !t.features.contains(.retheme)
+                    && (t.gameResource.comment ?? "").lowercased().contains("mod of")
+                {
+                    t.features.append(.retheme)
+                    t.features.append(.mod)
+                }
+
+                return t
             }
 
             return game

@@ -9,6 +9,7 @@ struct CheckCommands: AsyncParsableCommand {
         subcommands: [
             CheckTableFormat.self, CheckYear.self,
             CheckTheme.self, CheckMod.self, CheckRetheme.self,
+            CheckMissingVR.self,
         ]
     )
 }
@@ -117,6 +118,46 @@ struct CheckRetheme: AsyncParsableCommand {
                             print("\(g) \(t.url)")
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+struct CheckMissingVR: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "missing-vr",
+        abstract: "Check nFozzy tables that are missing VR"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try await db.database()
+
+        print(
+            """
+            | Game   | URL | Table | nFozzy VR Version |
+            | ------ | --- | ----- | ----------------- |
+            """
+        )
+
+        for g in db.games.all.sorted() {
+            let nFozzyTable = g.tables.first {
+                $0.features.contains(.nFozzy) && $0.features.contains(.vr)
+            }
+            let nFuzzyDescription =
+                if let nFozzyTable {
+                    "\(nFozzyTable.gameResource.authors[0].name) (\(nFozzyTable.url?.description ?? "missing url")"
+                } else {
+                    "-"
+                }
+            for t in g.tables {
+                if t.features.contains(.nFozzy) && !t.features.contains(.vr) {
+                    print(
+                        "|\(g.name)|\(t.url?.description ?? "missing")|\(t.gameResource.authors[0].name)|\(nFuzzyDescription)|"
+                    )
                 }
             }
         }
