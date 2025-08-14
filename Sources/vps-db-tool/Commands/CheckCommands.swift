@@ -149,7 +149,7 @@ struct CheckMissingVR: AsyncParsableCommand {
             }
             let nFuzzyDescription =
                 if let nFozzyTable {
-                    "\(nFozzyTable.gameResource.authors[0].name) (\(nFozzyTable.url?.description ?? "missing url")"
+                    "\(nFozzyTable.gameResource.authors[0].name) \(nFozzyTable.url?.description ?? "missing url")"
                 } else {
                     "-"
                 }
