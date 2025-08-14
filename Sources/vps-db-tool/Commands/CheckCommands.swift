@@ -156,7 +156,7 @@ struct CheckMissingVR: AsyncParsableCommand {
             for t in g.tables {
                 if t.features.contains(.nFozzy) && !t.features.contains(.vr) {
                     print(
-                        "|\(g.name)|\(t.url?.description ?? "missing")|\(t.gameResource.authors[0].name)|\(nFuzzyDescription)|"
+                        "|\(g.name) https://virtualpinballspreadsheet.github.io/?game=\(g.id)|\(t.url?.description ?? "missing")|\(t.gameResource.authors[0].name)|\(nFuzzyDescription)|"
                     )
                 }
             }
