@@ -40,6 +40,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case geiger = "Geiger"
     case genco = "Genco"
     case gottlieb = "Gottlieb"
+    case gremlin = "Gremlin"
     case grandProducts = "Grand Products"
     case hankin = "Hankin"
     case hiSkor = "Hi-Skor"
