@@ -11,7 +11,7 @@ struct VPSDbTool: AsyncParsableCommand {
         subcommands: [
             DownloadCommand.self, CheckCommands.self, ExploreCommand.self,
             IPDBCommands.self, ScanCommands.self, EditCommands.self,
-            IssueCommands.self, ReportCommand.self,
+            IssueCommands.self, ReportCommand.self, TutorialCommands.self,
         ]
     )
 }
