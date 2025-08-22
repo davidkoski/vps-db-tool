@@ -48,6 +48,8 @@ public struct Table: GameResource, Sendable {
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
 
+    public var parentId: String?
+
     @CustomCoding(OmitEmpty<OrderedSet<TableFeature>>.self) public var features:
         OrderedSet<TableFeature>
     public var tableFormat: TableFormat?
@@ -78,7 +80,8 @@ public struct Tutorial: GameResource, Sendable {
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
 
-    public var youtubeId: String
+    public var youtubeId: String?
+    public var url: URL?
     public var title: String
 }
 

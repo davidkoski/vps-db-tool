@@ -11,7 +11,7 @@ struct EditCommands: AsyncParsableCommand {
         subcommands: [
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
             EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
-            UpdateThemeCommand.self, UpdateReThemeCommand.self,
+            UpdateThemeCommand.self, UpdateReThemeCommand.self, UpdateMissingDates.self,
         ]
     )
 }
@@ -167,7 +167,9 @@ struct EditTrimCommand: AsyncParsableCommand {
 
     func updateTutorial(_ item: Tutorial) -> Tutorial {
         var item = item
-        item.youtubeId = item.youtubeId.trim()
+        if let youtubeId = item.youtubeId {
+            item.youtubeId = youtubeId.trim()
+        }
         item.title = item.title.trim()
         return item
     }
@@ -412,6 +414,37 @@ struct UpdateReThemeCommand: AsyncParsableCommand {
                 {
                     t.features.append(.retheme)
                     t.features.append(.mod)
+                }
+
+                return t
+            }
+
+            return game
+        }
+    }
+}
+
+struct UpdateMissingDates: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "missing-dates",
+        abstract: "Update missing dates"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = game
+
+            game.tutorials = game.tutorials.map {
+                var t = $0
+
+                if t.createdAt == Date.distantPast {
+                    t.gameResource.createdAt = Date()
+                }
+                if t.updatedAt == Date.distantPast {
+                    t.gameResource.updatedAt = Date()
                 }
 
                 return t
