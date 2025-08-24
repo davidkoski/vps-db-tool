@@ -154,6 +154,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case memeCoin = "Meme Coin"
     case mermaids = "Mermaids"
     case mexico = "Mexico"
+    case mining = "Mining"
     case mobsters = "Mobsters"
     case modeling = "Modeling"
     case money = "Money"
