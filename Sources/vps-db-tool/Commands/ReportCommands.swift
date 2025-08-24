@@ -88,9 +88,19 @@ struct ReportCommand: AsyncParsableCommand {
 
             let scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
 
+            func match(_ item: DetailResult) -> [any Metadata]? {
+                switch kind {
+                case .rule:
+                    // rules are sometimes used as the url for a tutorial, e.g. kongedam
+                    db[kind][item.url] ?? db[.tutorial][item.url]
+                default:
+                    db[kind][item.url]
+                }
+            }
+
             for item in scanResult.list {
                 print(item.name ?? "unknown")
-                if let match = db[kind][item.url], let file = match.first, let game = db[file] {
+                if let match = match(item), let file = match.first, let game = db[file] {
                     if follow {
                         let rawVersion =
                             if let v = item.version {

@@ -9,7 +9,7 @@ struct TutorialCommands: AsyncParsableCommand {
         commandName: "tutorial",
         abstract: "tutorial related commands",
         subcommands: [
-            LoadTutorialsCommand.self,
+            LoadTutorialsCommand.self, MigrateRules.self,
         ]
     )
 }
@@ -29,28 +29,29 @@ struct TutorialEditArguments: ParsableArguments, Sendable {
 
     @Option
     var csv: URL
-    
+
     @Option
     var title: String
-    
+
     @Option
     var author: String
-    
+
     struct CSVFile {
         // lines look like:
         //
         // https://pinballprimer.github.io/alienpoker_G4yen.html,Alien Poker (Williams, SS, 1980)
-        
+
         struct Record {
             let id = UUID()
+            let gameId: String?
             let url: URL
             let name: String
             let manufacturer: Manufacturer?
             let year: Int?
-            
+
             init(line: String) throws {
                 let pieces = line.components(separatedBy: ",")
-                if pieces.count == 5 && pieces[0] == "STD" {
+                if pieces.count == 6 && pieces[0] == "STD" {
                     if let url = URL(string: pieces[1]) {
                         self.url = url
                     } else {
@@ -59,7 +60,8 @@ struct TutorialEditArguments: ParsableArguments, Sendable {
                     self.name = pieces[2]
                     self.manufacturer = Manufacturer(rawValue: pieces[3])
                     self.year = Int(pieces[4])
-                    
+                    self.gameId = pieces[5].isEmpty ? nil : pieces[5]
+
                 } else if pieces.count > 1 {
                     if let url = URL(string: String(pieces[0])) {
                         self.url = url
@@ -69,12 +71,15 @@ struct TutorialEditArguments: ParsableArguments, Sendable {
                     self.name = String(pieces[1].components(separatedBy: "(")[0].trim())
                     self.year = pieces.compactMap { Int($0.trim()) }.first
 
-                    self.manufacturer = Manufacturer(rawValue: pieces.first { $0.contains("(") }?.split(separator: "(")[1].description ?? "")
+                    self.manufacturer = Manufacturer(
+                        rawValue: pieces.first { $0.contains("(") }?.split(separator: "(")[1]
+                            .description ?? "")
+                    self.gameId = nil
                 } else {
                     throw TutorialError.invalidFormat(line)
                 }
             }
-            
+
             func matches(_ game: Game) -> Bool {
                 let name = game.name.replacingOccurrences(of: "The ", with: "").localizedLowercase
                 if name.hasPrefix(name.lowercased()) {
@@ -93,24 +98,33 @@ struct TutorialEditArguments: ParsableArguments, Sendable {
                     return false
                 }
             }
-            
+
             var csv: String {
-                "STD,\(url),\(name),\(manufacturer?.rawValue ?? ""),\(year?.description ?? "")"
+                "STD,\(url),\(name),\(manufacturer?.rawValue ?? ""),\(year?.description ?? ""),\(gameId ?? "")"
             }
         }
-        
-        let records: [String:[Record]]
-        
+
+        let records: [String: [Record]]
+        let byGameId: [String: [Record]]
+
         init(url: URL) throws {
-            let lines = try String(contentsOf: url, encoding: .utf8).components(separatedBy: "\n").map { String($0) }
-            
-            self.records = try lines
+            let lines = try String(contentsOf: url, encoding: .utf8).components(separatedBy: "\n")
+                .map { String($0) }
+
+            let records =
+                try lines
                 .filter { !$0.isEmpty }
                 .map { try Record(line: $0) }
-                .grouped(by: \.name.localizedLowercase)
+
+            self.records =
+                records
+                .grouping(by: \.name.localizedLowercase)
+            self.byGameId =
+                records
+                .grouping(by: \.gameId)
         }
     }
-    
+
     func loadCSV() throws -> CSVFile {
         try CSVFile(url: self.csv)
     }
@@ -151,34 +165,47 @@ struct LoadTutorialsCommand: AsyncParsableCommand {
 
     @OptionGroup var edit: TutorialEditArguments
 
+    mutating func update(
+        game: Game, record: TutorialEditArguments.CSVFile.Record
+    ) -> Game {
+        guard !game.tutorials.contains(where: { $0.url == record.url }) else {
+            return game
+        }
+
+        var game = game
+        let gameResource = GameResourceCommon(
+            createdAt: Date(), updatedAt: Date(),
+            game: .init(game: game),
+            urls: [],
+            authors: [.init(name: edit.author)])
+        let tutorial = Tutorial(
+            id: newId(10), gameResource: gameResource, url: record.url,
+            title: edit.title + " " + record.name)
+        game.tutorials.append(tutorial)
+        return game
+    }
+
     mutating func run() async throws {
         let csv = try edit.loadCSV()
         var addedOrDups = Set<UUID>()
-        
+
         try await edit.visitGames { game in
             var game = game
-            
-            let name = game.name.replacingOccurrences(of: "The ", with: "").localizedLowercase
 
+            // handle records that have a gameId
+            if let records = csv.byGameId[game.id] {
+                for record in records {
+                    game = update(game: game, record: record)
+                    addedOrDups.insert(record.id)
+                }
+            }
+
+            // handle matches by name
+            let name = game.name.replacingOccurrences(of: "The ", with: "").localizedLowercase
             if let records = csv.records[name] {
                 for record in records {
                     if record.matches(game) {
-                        if game.id == "-1uD97KYfI" {
-                            print("XXX")
-                            print(game.tutorials.map { $0.url?.description ?? "" }.joined(separator: "\n"))
-                        }
-                        guard !game.tutorials.contains(where: { $0.url == record.url }) else {
-                            addedOrDups.insert(record.id)
-                            continue
-                        }
-                        
-                        let gameResource = GameResourceCommon(
-                            createdAt: Date(), updatedAt: Date(),
-                            game: .init(game: game),
-                            urls: [],
-                            authors: [.init(name: edit.author)])
-                        let tutorial = Tutorial(id: newId(10), gameResource: gameResource, url: record.url, title: edit.title + " " + record.name)
-                        game.tutorials.append(tutorial)
+                        game = update(game: game, record: record)
                         addedOrDups.insert(record.id)
                     }
                 }
@@ -186,11 +213,48 @@ struct LoadTutorialsCommand: AsyncParsableCommand {
 
             return game
         }
-        
+
         for record in csv.records.values.flatMap({ $0 }) {
             if !addedOrDups.contains(record.id) {
                 print(record.csv)
             }
+        }
+    }
+}
+
+struct MigrateRules: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "migrate-rules",
+        abstract: "migrate Kongedam rules"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        let author = Author(name: "Kongedam")
+
+        try await edit.visitGames { game in
+            var game = game
+
+            let rule = game.rules.first { $0.gameResource.authors.contains(author) }
+            let tutorial = game.tutorials.first { $0.gameResource.authors.contains(author) }
+
+            if let rule, let tutorial {
+                // copy the rule url -> tutorial
+                let index = game.tutorials.firstIndex { $0.id == tutorial.id }!
+                game.tutorials[index].url = rule.url
+                if tutorial.gameResource.authors.count < rule.gameResource.authors.count {
+                    game.tutorials[index].gameResource.authors = rule.gameResource.authors
+                }
+                game.rules.removeAll { $0.id == rule.id }
+            } else if let rule {
+                print("\(game.name): has rule but no tutorial")
+            } else if let tutorial {
+                print("\(game.name): has tutorial but no rule")
+            }
+
+            return game
         }
     }
 }

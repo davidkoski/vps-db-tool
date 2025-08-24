@@ -83,6 +83,11 @@ public struct Tutorial: GameResource, Sendable {
     public var youtubeId: String?
     public var url: URL?
     public var title: String
+
+    public var urls: [URL] {
+        // the url property is used rather than the list of urls
+        [url].compactMap { $0 }
+    }
 }
 
 @Codable
