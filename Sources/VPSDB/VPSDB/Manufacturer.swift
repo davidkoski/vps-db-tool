@@ -89,6 +89,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case recreativosFranco = "Recreativos Franco"
     case rockOla = "Rock-ola"
     case rowamet = "Rowamet"
+    case seeburg = "Seeburg"
     case sega = "Sega"
     case segasa = "Segasa"
     case sleic = "Sleic"
