@@ -12,6 +12,7 @@ struct EditCommands: AsyncParsableCommand {
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
             EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
             UpdateThemeCommand.self, UpdateReThemeCommand.self, UpdateMissingDates.self,
+            UpdateGameType.self,
         ]
     )
 }
@@ -448,6 +449,28 @@ struct UpdateMissingDates: AsyncParsableCommand {
                 }
 
                 return t
+            }
+
+            return game
+        }
+    }
+}
+
+struct UpdateGameType: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "missing-gametype",
+        abstract: "Update missing gametype"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames { game in
+            var game = game
+
+            if game.type == nil {
+                game.type = .SS
             }
 
             return game

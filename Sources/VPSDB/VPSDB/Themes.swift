@@ -68,6 +68,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case comics = "Comics"
     case conspiracy = "Conspiracy"
     case countryandWestern = "Country and Western"
+    case cow = "Cow"
     case cricket = "Cricket"
     case crime = "Crime"
     case croquet = "Croquet"

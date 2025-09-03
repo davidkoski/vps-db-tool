@@ -9,7 +9,7 @@ struct ExploreCommand: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             CheckEmptyCommand.self, BadURLCommand.self, CheckDuplicateURLs.self,
-            ThemesCommand.self,
+            ThemesCommand.self, MissingGameType.self,
         ]
     )
 
@@ -150,6 +150,29 @@ struct ThemesCommand: AsyncParsableCommand {
                 {
                     print("\(game.manufacturer) \(game.name)")
                 }
+            }
+        }
+    }
+}
+
+struct MissingGameType: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "missing-gametype",
+        abstract: "List of games that are missing type"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try await db.database()
+
+        for game in db.games.all.sorted() {
+            if game.year == nil || game.year == 0 {
+                print("MISSING YEAR: \(game)")
+            }
+            if game.type == nil {
+                print("MISSING TYPE: \(game)")
             }
         }
     }
