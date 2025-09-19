@@ -36,6 +36,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case exhibit = "Exhibit"
     case fabulousFantasies = "Fabulous Fantasies"
     case fipermatic = "Fipermatic"
+    case fliperbol = "Fliperbol"
     case gamePlan = "Game Plan"
     case geiger = "Geiger"
     case genco = "Genco"

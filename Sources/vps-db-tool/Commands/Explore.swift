@@ -9,7 +9,7 @@ struct ExploreCommand: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             CheckEmptyCommand.self, BadURLCommand.self, CheckDuplicateURLs.self,
-            ThemesCommand.self, MissingGameType.self,
+            ThemesCommand.self, MissingGameType.self, WheelComments.self,
         ]
     )
 
@@ -173,6 +173,28 @@ struct MissingGameType: AsyncParsableCommand {
             }
             if game.type == nil {
                 print("MISSING TYPE: \(game)")
+            }
+        }
+    }
+}
+
+struct WheelComments: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "wheel-comments",
+        abstract: "List wheel comments"
+    )
+
+    @OptionGroup var db: VPSDbArguments
+
+    mutating func run() async throws {
+        let db = try await db.database()
+
+        for game in db.games.all.sorted() {
+            for wheel in game.wheels {
+                if let comment = wheel.gameResource.comment, !comment.isEmpty {
+                    print(comment)
+                }
             }
         }
     }

@@ -195,7 +195,7 @@ extension VPForumsScanner: ListScanner {
         let category = try html.select("div.idm_category_row")
         if !category.isEmpty {
             /*
-
+            
              <h3 class="ipsType_subtitle">
              <a href="https://www.vpforums.org/index.php?app=downloads&amp;showfile=18336" title="View file named Close Encounters">Close Encounters <span class="ipsType_small">1.4.3</span></a>
              */

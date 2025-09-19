@@ -117,7 +117,7 @@ extension VPUniverseScanner: DetailScanner {
                  Yes
              </div>
          </div>
-
+        
          */
         var vr = false
         for item in try html.select(
@@ -130,13 +130,13 @@ extension VPUniverseScanner: DetailScanner {
 
         /*
          IPDB
-
+        
          <div id='ipsTabs_tabs_file_file_tab_downloads_field_2_panel' class="ipsTabs_panel MVN_lsDownloads_viewCustom1_sectionPadding" aria-labelledby="file_tab_field_2" aria-hidden="false">
              <div class='ipsType_richText ipsContained ipsType_break' data-controller='core.front.core.lightboxedImages'>
                  https://www.ipdb.org/machine.cgi?id=4858
              </div>
          </div>
-
+        
          */
         var ipdbURL: URL?
         for item in try html.select(

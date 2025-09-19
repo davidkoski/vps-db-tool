@@ -12,7 +12,7 @@ struct EditCommands: AsyncParsableCommand {
             EditURLsCommand.self, EditIdsCommand.self, EditTrimCommand.self,
             EditTagFeaturesCommand.self, OneOffCommand.self, UpdateVersionCommand.self,
             UpdateThemeCommand.self, UpdateReThemeCommand.self, UpdateMissingDates.self,
-            UpdateGameType.self,
+            UpdateGameType.self, MissingLinks.self,
         ]
     )
 }
@@ -471,6 +471,55 @@ struct UpdateGameType: AsyncParsableCommand {
 
             if game.type == nil {
                 game.type = .SS
+            }
+
+            return game
+        }
+    }
+}
+
+struct MissingLinks: AsyncParsableCommand {
+
+    static let configuration = CommandConfiguration(
+        commandName: "missing-links",
+        abstract: "Update missing links"
+    )
+
+    @OptionGroup var edit: EditArguments
+
+    mutating func run() async throws {
+        try await edit.visitGames {
+            var game = $0
+
+            game.tables = game.tables.map {
+                var t = $0
+                if !t.gameResource.authors.isEmpty && t.gameResource.authors[0].name == "HiRez00" {
+                    t.gameResource.urls = t.gameResource.urls.map {
+                        var u = $0
+                        if Site(u.url) == .vpu {
+                            u.broken = true
+                        }
+                        return u
+                    }
+                }
+                return t
+            }
+            game.backglasses = game.backglasses.map {
+                var t = $0
+                if !t.gameResource.authors.isEmpty && t.gameResource.authors[0].name == "HiRez00" {
+                    t.gameResource.urls = t.gameResource.urls.map {
+                        var u = $0
+                        if Site(u.url) == .vpu {
+                            u.broken = true
+                        }
+                        return u
+                    }
+                }
+                return t
+            }
+
+            if game != $0 {
+                print(game)
             }
 
             return game
