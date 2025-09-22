@@ -130,6 +130,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case holiday = "Holiday"
     case horror = "Horror"
     case horseRacing = "Horse Racing"
+    case hotrod = "Hot Rod Culture"
     case hunting = "Hunting"
     case hypergamy = "Hypergamy"
     case iceSkating = "Ice Skating"
