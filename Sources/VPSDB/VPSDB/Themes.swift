@@ -274,6 +274,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case tVShow = "TV Show"
     case talkingClock = "Talking Clock"
     case technology = "Technology"
+    case television = "Television"
     case televisionSeries = "Television Series"
     case tennis = "Tennis"
     case testing = "Testing"
