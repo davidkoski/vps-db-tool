@@ -88,6 +88,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case educational = "Educational"
     case egyptology = "Egyptology"
     case electronicMusic = "Electronic Music"
+    case electricGuitars = "Electric Guitars"
     case espionage = "Espionage"
     case example = "Example"
     case exercise = "Exercise"
