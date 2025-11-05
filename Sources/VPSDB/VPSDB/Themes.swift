@@ -41,6 +41,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case bowling = "Bowling"
     case boxing = "Boxing"
     case calibration = "Calibration"
+    case camping = "Camping"
     case canadianWest = "Canadian West"
     case canoeing = "Canoeing"
     case carRally = "Car Rally"
