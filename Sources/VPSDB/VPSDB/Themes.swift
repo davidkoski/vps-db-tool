@@ -9,6 +9,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case agriculture = "Agriculture"
     case aircraft = "Aircraft"
     case aliens = "Aliens"
+    case alchohol = "Alcohol"
     case americanFootball = "American Football"
     case americanHistory = "American History"
     case americanPlaces = "American Places"
