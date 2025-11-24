@@ -116,6 +116,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case gameConsole = "Game Console"
     case gameShow = "Game Show"
     case games = "Games"
+    case gardening = "Gardening"
     case glamour = "Glamour"
     case golf = "Golf"
     case halloween = "Halloween"
