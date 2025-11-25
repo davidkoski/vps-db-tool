@@ -24,6 +24,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case chicagoCoin = "Chicago Coin"
     case cirsa = "Cirsa"
     case codemasters = "Codemasters"
+    case cobra = "Cobra"
     case culik = "Culik Pinball"
     case cunningDevelopments = "Cunning Developments"
     case dataEast = "Data East"
