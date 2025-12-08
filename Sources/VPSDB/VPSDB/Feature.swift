@@ -6,6 +6,7 @@ public enum TableFeature: String, Codable, Sendable, Equatable {
     case adult = "Adult"
     case bam = "BAM"
     case dof = "DOF"
+    case dt = "DT"
     case dtOnly = "DT only"
     case fss = "FSS"
     case fastFlips = "FastFlips"
