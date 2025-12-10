@@ -216,6 +216,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case police = "Police"
     case polo = "Polo"
     case pop = "Pop"
+    case prehistoric = "Prehistoric"
     case progressive = "Progressive"
     case prospecting = "Prospecting"
     case psychedelic = "Psychedelic"
