@@ -121,6 +121,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case gardening = "Gardening"
     case glamour = "Glamour"
     case golf = "Golf"
+    case graffiti = "Graffiti"
     case halloween = "Halloween"
     case hangGliding = "Hang Gliding"
     case happiness = "Happiness"
