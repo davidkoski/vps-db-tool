@@ -33,6 +33,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case durham = "Durham"
     case electromatic = "Electromatic"
     case emagar = "Emagar"
+    case esr = "E.S.R. Inc"
     case exhibit = "Exhibit"
     case fabulousFantasies = "Fabulous Fantasies"
     case fipermatic = "Fipermatic"
