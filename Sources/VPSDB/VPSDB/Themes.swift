@@ -280,6 +280,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case surfing = "Surfing"
     case survival = "Survival"
     case swimming = "Swimming"
+    case synthPop = "Synth Pop"
     case tVShow = "TV Show"
     case talkingClock = "Talking Clock"
     case technology = "Technology"
