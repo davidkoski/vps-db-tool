@@ -177,6 +177,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case motorcycles = "Motorcycles"
     case mountainClimbing = "Mountain Climbing"
     case movie = "Movie"
+    case mushrooms = "Mushrooms"
     case music = "Music"
     case musical = "Musical"
     case mystery = "Mystery"
