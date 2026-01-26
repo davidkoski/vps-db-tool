@@ -256,6 +256,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case scubaDiving = "Scuba Diving"
     case ships = "Ships"
     case shootingGallery = "Shooting Gallery"
+    case shopping = "Shopping"
     case showBusiness = "Show Business"
     case singing = "Singing"
     case skateboarding = "Skateboarding"
