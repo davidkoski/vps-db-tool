@@ -303,6 +303,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case tribute = "Tribute"
     case truckDriving = "Truck Driving"
     case tutorial = "Tutorial"
+    case unicorn = "Unicorn"
     case vacationing = "Vacationing"
     case vampires = "Vampires"
     case videoGame = "Video Game"
