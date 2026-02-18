@@ -106,6 +106,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case fireFighting = "Fire Fighting"
     case fishing = "Fishing"
     case fitness = "Fitness"
+    case flies = "Flies"
     case flipperless = "Flipperless"
     case flowerPower = "Flower Power"
     case flowers = "Flowers"
