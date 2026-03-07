@@ -6,6 +6,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case abt = "A.B.T."
     case abbey = "Abbey"
     case alvinG = "Alvin G."
+    case alliedLeisure = "Allied Leisure"
     case appleTime = "Apple Time"
     case arkon = "Arkon"
     case astroGames = "Astro Games"
