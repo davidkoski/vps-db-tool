@@ -29,7 +29,8 @@ extension Decoder {
         }
 
         if found {
-            return try container.decodeDate(type: Date.self, keys: keys, strategy: strategy)
+            return try container.decodeDate(
+                type: Date.self, keys: keys.map { AnyCodingKey($0) }, strategy: strategy)
         }
 
         return nil
@@ -78,7 +79,8 @@ struct OmitDateUnixEpoch: CodingCustomizable {
     static func encode(by encoder: any Encoder, key: String, value: Date) throws {
         if value != Date.distantPast {
             var container = encoder.container(keyedBy: AnyCodingKey.self)
-            try container.encodeDate(value: value, key: key, strategy: .millisecondsSince1970)
+            try container.encodeDate(
+                value: value, key: AnyCodingKey(key), strategy: .millisecondsSince1970)
         }
     }
 

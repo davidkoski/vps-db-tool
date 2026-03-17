@@ -22,8 +22,7 @@ let package = Package(
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.1"),
         .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.0"),
 
-        .package(url: "https://github.com/reers/ReerCodable.git", branch: "main"),
-        //        .package(url: "https://github.com/reers/ReerCodable.git", from: "1.2.3"),
+        .package(url: "https://github.com/reers/ReerCodable.git", .upToNextMinor(from: "1.7.1")),
     ],
     targets: [
         .executableTarget(

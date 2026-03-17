@@ -18,11 +18,12 @@ extension VPUniverseScanner: ScanSources {
                     "https://vpuniverse.com/files/category/157-vpuremix-vpx-table-patches/",
                     "https://vpuniverse.com/files/category/107-vr-virtual-reality-pinball/",
                     "https://vpuniverse.com/files/category/3-future-pinball/",
-                    //                    "https://vpuniverse.com/files/category/82-vpx-pinball-tables/",
-                    //                    "https://vpuniverse.com/files/category/131-pup-pack-original-pup-original-game-creations/",
-                    //                    "https://vpuniverse.com/files/category/123-modified-mod-games/",
-                    //                    "https://vpuniverse.com/files/category/114-vpx-full-single-screen-tables-fss/",
-                    //                    "https://vpuniverse.com/files/category/146-vpx-flipperless/",
+
+                    // Note: these _should_ be included in 82 above but are not always
+                    "https://vpuniverse.com/files/category/131-pup-pack-original-pup-original-game-creations/",
+                    "https://vpuniverse.com/files/category/123-modified-mod-games/",
+                    "https://vpuniverse.com/files/category/114-vpx-full-single-screen-tables-fss/",
+                    "https://vpuniverse.com/files/category/146-vpx-flipperless/",
                 ]
             case .b2s:
                 [

@@ -76,7 +76,7 @@ struct OmitGameRef: CodingCustomizable {
         }
 
         if found {
-            return try container.decode(type: GameRef.self, keys: keys)
+            return try container.decode(type: GameRef.self, keys: keys.map { AnyCodingKey($0) })
         }
 
         return GameRef(id: "", name: "")
