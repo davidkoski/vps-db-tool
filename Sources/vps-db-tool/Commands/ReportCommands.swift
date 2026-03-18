@@ -63,6 +63,19 @@ struct ReportCommand: AsyncParsableCommand {
         return nil
     }
 
+    fileprivate func fetch(
+        _ client: HTTPClient, _ kind: GameResourceKind,
+        _ scanner: any DetailScanner & ListScanner & ScanSources, _ item: DetailResult
+    ) async throws -> String? {
+        do {
+            return try await getVersion(
+                client: client, kind: kind, scanner: scanner, item: item)
+        } catch {
+            print("Error fetching \(item.url): \(error)")
+            return "failed"
+        }
+    }
+
     private mutating func scan(
         site: Site, kind: GameResourceKind, follow: Bool = false
     ) async throws -> [Item] {
@@ -106,8 +119,7 @@ struct ReportCommand: AsyncParsableCommand {
                             if let v = item.version {
                                 v
                             } else {
-                                try await getVersion(
-                                    client: client, kind: kind, scanner: scanner, item: item)
+                                try await fetch(client, kind, scanner, item)
                             }
 
                         if canonicalVersion(file.version) != canonicalVersion(rawVersion) {
