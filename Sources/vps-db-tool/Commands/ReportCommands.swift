@@ -42,7 +42,12 @@ struct ReportCommand: AsyncParsableCommand {
         var items = [Item]()
 
         for s in scans {
-            try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
+            do {
+                try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
+            } catch {
+                // skip that section
+                print("Error scanning \(s.0) \(s.1): \(error)")
+            }
         }
 
         if !items.isEmpty {
@@ -66,7 +71,7 @@ struct ReportCommand: AsyncParsableCommand {
     fileprivate func fetch(
         _ client: HTTPClient, _ kind: GameResourceKind,
         _ scanner: any DetailScanner & ListScanner & ScanSources, _ item: DetailResult
-    ) async throws -> String? {
+    ) async -> String? {
         do {
             return try await getVersion(
                 client: client, kind: kind, scanner: scanner, item: item)
@@ -97,9 +102,16 @@ struct ReportCommand: AsyncParsableCommand {
         for listURL in scanner.sources(kind: kind) {
             print(listURL)
 
-            let content = try await client.getString(listURL, bypassCache: true)
+            let content: String
+            let scanResult: ListResult
 
-            let scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+            do {
+                content = try await client.getString(listURL, bypassCache: true)
+                scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+            } catch {
+                print("Failed to gather from \(listURL): \(error)")
+                continue
+            }
 
             func match(_ item: DetailResult) -> [any Metadata]? {
                 switch kind {
@@ -119,7 +131,7 @@ struct ReportCommand: AsyncParsableCommand {
                             if let v = item.version {
                                 v
                             } else {
-                                try await fetch(client, kind, scanner, item)
+                                await fetch(client, kind, scanner, item)
                             }
 
                         if canonicalVersion(file.version) != canonicalVersion(rawVersion) {
