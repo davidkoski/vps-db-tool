@@ -155,11 +155,27 @@ extension VPForumsScanner: DetailScanner {
 
             let (name, version) = splitName(text)
 
+            var date: Date?
+            let dateText = try html.select("li strong")
+            for item in dateText.array() {
+                if try item.text().hasPrefix("Last Updated") {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "MMM dd yyyy hh:mm a"
+                    formatter.locale = Locale(identifier: "en_US_POSIX")
+
+                    date = formatter.date(
+                        from: text.replacingOccurrences(of: "Last Updated", with: "")
+                            .trimmingCharacters(in: .whitespacesAndNewlines))
+                    break
+                }
+            }
+
             return .init(
                 url: Site(url).canonicalize(url),
                 name: name,
                 author: nil,
-                version: version
+                version: version,
+                date: date
             )
         }
 

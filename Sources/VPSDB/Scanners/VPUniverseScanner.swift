@@ -171,6 +171,7 @@ extension VPUniverseScanner: DetailScanner {
                 name: meta.name,
                 author: meta.author.name,
                 version: meta.softwareVersion,
+                date: meta.dateModified,
                 ipdb: ipdbURL,
                 features: features
             )
@@ -203,7 +204,7 @@ extension VPUniverseScanner: ListScanner {
          <h4>
          <span class="ipsType_break ipsContained"><a href="https://vpuniverse.com/files/file/25136-iron-eagle-original-2025/" title="View the file Iron Eagle (Original 2025) " >Iron Eagle (Original 2025)</a></span>
          */
-        for item in try html.select("div.ipsDataItem_main") {
+        for item in try html.select("li.ipsDataItem") {
             var url = ""
             var title = ""
             var author = ""
@@ -220,8 +221,12 @@ extension VPUniverseScanner: ListScanner {
             let span = try item.select("p.ipsType_reset a")
             author = try span.text()
 
+            let timeElement = try item.select("time")
+            let dateTime = try timeElement.attr("datetime")
+            let date = ISO8601DateFormatter().date(from: dateTime)
+
             if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
-                items.append(.init(url: url, name: title, author: author))
+                items.append(.init(url: url, name: title, author: author, date: date))
             }
         }
 

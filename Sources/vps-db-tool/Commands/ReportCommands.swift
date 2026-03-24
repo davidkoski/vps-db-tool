@@ -154,7 +154,8 @@ struct ReportCommand: AsyncParsableCommand {
                                         url: item.url, name: item.name ?? "unknown",
                                         author: item.author ?? "unknown", kind: kind,
                                         issue:
-                                            "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(rawVersion))"
+                                            "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(rawVersion))",
+                                        date: item.date ?? Date()
                                     ))
                             }
                         }
@@ -166,7 +167,8 @@ struct ReportCommand: AsyncParsableCommand {
                             .init(
                                 url: item.url, name: item.name ?? "unknown",
                                 author: item.author ?? "unknown", kind: kind,
-                                issue: "missing"
+                                issue: "missing",
+                                date: item.date ?? Date()
                             ))
                     }
                 }
@@ -179,12 +181,17 @@ struct ReportCommand: AsyncParsableCommand {
     }
 }
 
-private struct Item {
+private struct Item: Comparable {
     let url: URL
     let name: String
     let author: String
     let kind: GameResourceKind
     let issue: String
+    let date: Date
+
+    static func < (lhs: Item, rhs: Item) -> Bool {
+        lhs.date > rhs.date
+    }
 }
 
 private struct Report {
@@ -289,6 +296,7 @@ private struct Report {
                 <table id="report\(kind)" class="display">
                 <thead>
                     <tr>
+                        <th>Date</th>
                         <th>URL</th>
                         <th>Name</th>
                         <th>Author</th>
@@ -297,7 +305,7 @@ private struct Report {
                         <th>Issue</th>
                     </tr>
                 </thead>
-                """ + items.map { emitRow($0) }.joined(separator: "\n") + """
+                """ + items.sorted().map { emitRow($0) }.joined(separator: "\n") + """
                     </table>
                     <script>
                     $("#report\(kind)").DataTable({
@@ -319,6 +327,7 @@ private struct Report {
     private func emitRow(_ item: Item) -> String {
         """
         <tr>
+            <td>\(item.date.formatted(date: .abbreviated, time: .omitted))</td>
             <td><a href="\(item.url)" target="_blank">\(item.url)</a></td>
             <td>\(item.name)</td>
             <td>\(item.author)</td>
