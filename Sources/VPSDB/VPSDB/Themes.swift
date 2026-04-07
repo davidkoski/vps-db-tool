@@ -3,6 +3,7 @@ import Foundation
 public enum Theme: String, Codable, Hashable, Sendable, Comparable {
 
     case action = "Action"
+    case activities = "Activities"
     case adult = "Adult"
     case adventure = "Adventure"
     case affluence = "Affluence"
