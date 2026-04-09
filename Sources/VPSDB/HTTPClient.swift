@@ -70,7 +70,7 @@ public class HTTPClient {
         var request = HTTPClientRequest(url: url.description)
         request.headers = ["User-Agent": userAgent]
 
-        let response = try await client.execute(request, timeout: .seconds(10))
+        let response = try await client.execute(request, timeout: .seconds(30))
 
         if response.status != .ok {
             throw HTTPError.response(url, response.status, response.status.reasonPhrase)

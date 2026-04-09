@@ -24,12 +24,28 @@ jobs:
           key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
             ${{ runner.os }}-spm-
+
       - name: Build
-        run: swift build
+        run: |
+          swift package resolve
+          swift build --skip-update
+
       - name: Report
         run: swift run vps-db-tool report --cache /tmp --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json
-      - name: Push Report
-        uses: devops-infra/action-commit-push@master
+
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.COMMIT_TOKEN }}
-          commit_message: "Update report"
+          path: report/
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
