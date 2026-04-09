@@ -41,12 +41,24 @@ struct ReportCommand: AsyncParsableCommand {
 
         var items = [Item]()
 
+        // make sure these load cleanly
+        _ = try await db.database()
+        _ = try issues.database()
+
         for s in scans {
             do {
                 try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
             } catch {
-                // skip that section
                 print("Error scanning \(s.0) \(s.1): \(error)")
+                switch s.0 {
+                case .vpu:
+                    throw error
+                case .vpf:
+                    // skip that section -- sometimes vpf is flaky
+                    break
+                default:
+                    throw error
+                }
             }
         }
 
