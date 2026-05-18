@@ -29,6 +29,7 @@ extension VPUniverseScanner: ScanSources {
                 [
                     "https://vpuniverse.com/files/category/33-b2s-directb2s-backglass-downloads/",
                     "https://vpuniverse.com/files/category/175-full-dmd-backglasses/",
+                    "https://vpuniverse.com/files/category/189-b2s-alternate-original/",
                 ]
             case .tutorial: []
             case .rom: ["https://vpuniverse.com/files/category/15-pinmame-roms/"]
