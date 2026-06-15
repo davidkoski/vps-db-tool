@@ -198,7 +198,7 @@ public enum Theme: String, Codable, Hashable, Sendable, Comparable {
     case noir = "Noir"
     case norseMythology = "Norse Mythology"
     case nostalgia = "Nostalgia"
-    case nursery = "Nursery Rhymes"
+    case nursery = "Nursery Rhyme"
     case occult = "Occult"
     case oktoberfest = "Oktoberfest"
     case olympicGames = "Olympic Games"
