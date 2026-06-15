@@ -11,7 +11,7 @@ enum HTTPError: Error {
 
 public class HTTPClient {
 
-    let client: AsyncHTTPClient.HTTPClient
+    var client: AsyncHTTPClient.HTTPClient
 
     let userAgent =
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.4 Safari/605.1.15"
@@ -69,28 +69,44 @@ public class HTTPClient {
 
         var request = HTTPClientRequest(url: url.description)
         request.headers = ["User-Agent": userAgent]
+        
+        var count = 0
+        let retryMax = 3
 
-        let response = try await client.execute(request, timeout: .seconds(30))
-
-        if response.status != .ok {
-            throw HTTPError.response(url, response.status, response.status.reasonPhrase)
-        }
-
-        let data = try await response.body.collect(upTo: 100 * 1024 * 1024)
-
-        lastRequest = ContinuousClock.Instant.now
-
-        if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
-            if let cache {
-                do {
-                    try data.write(to: cache, options: .atomic)
-                } catch {
-                    print("Failed to cache \(cache): \(error)")
+        while true {
+            do {
+                let response = try await client.execute(request, timeout: .seconds(30))
+                
+                if response.status != .ok {
+                    throw HTTPError.response(url, response.status, response.status.reasonPhrase)
+                }
+                
+                let data = try await response.body.collect(upTo: 100 * 1024 * 1024)
+                
+                lastRequest = ContinuousClock.Instant.now
+                
+                if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
+                    if let cache {
+                        do {
+                            try data.write(to: cache, options: .atomic)
+                        } catch {
+                            print("Failed to cache \(cache): \(error)")
+                        }
+                    }
+                    return data
+                } else {
+                    throw HTTPError.unableToReadBody
+                }
+            } catch let error as HTTPClientError where error == .deadlineExceeded {
+                count += 1
+                if count < retryMax {
+                    print("deadlineExceeded, retry \(url)")
+                    client = .init()
+                    try await Task.sleep(for: .seconds(5))
+                } else {
+                    throw error
                 }
             }
-            return data
-        } else {
-            throw HTTPError.unableToReadBody
         }
     }
 
