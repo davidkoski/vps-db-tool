@@ -102,7 +102,7 @@ public class HTTPClient {
                     throw HTTPError.unableToReadBody
                 }
             } catch let error as HTTPClientError where error == .deadlineExceeded {
-                log.error("GET \(url): \(error)")
+                log.error("GET DE \(url): \(error)")
 
                 count += 1
                 if count < retryMax {
@@ -113,7 +113,8 @@ public class HTTPClient {
                     throw error
                 }
             } catch {
-                log.error("GET \(url): \(error)")
+                log.error("GET CA \(url): \(error)")
+                throw error
             }
         }
     }
