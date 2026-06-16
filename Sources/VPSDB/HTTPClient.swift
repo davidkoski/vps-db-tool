@@ -79,7 +79,7 @@ public class HTTPClient {
         while true {
             do {
                 log.info("GET \(url)")
-                let response = try await client.execute(request, timeout: .seconds(30))
+                let response = try await client.execute(request, timeout: .seconds(5))
 
                 if response.status != .ok {
                     throw HTTPError.response(url, response.status, response.status.reasonPhrase)
@@ -106,14 +106,16 @@ public class HTTPClient {
 
                 count += 1
                 if count < retryMax {
-                    log.warning("deadlineExceeded, retry \(url)")
+                    log.info("deadlineExceeded, retry \(count)/\(retryMax) \(url)")
                     client = .init()
                     try await Task.sleep(for: .seconds(5))
                 } else {
+                    log.error("GET giving up after \(count) attempts \(url)")
                     throw error
                 }
             } catch {
-                log.error("GET CA \(url): \(error)")
+                log.error(
+                    "GET CA \(url): \(type(of: error)) \(String(reflecting: error))")
                 throw error
             }
         }

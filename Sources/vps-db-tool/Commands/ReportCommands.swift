@@ -49,10 +49,15 @@ struct ReportCommand: AsyncParsableCommand {
         _ = try issues.database()
 
         for s in scans {
+            log.info("BEGIN SCAN \(s.0) \(s.1) follow=\(s.2)")
             do {
                 try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
+                log.info("END SCAN \(s.0) \(s.1) ok")
             } catch {
-                log.error("Error scanning \(s.0) \(s.1): \(error)")
+                log.error(
+                    "Error scanning \(s.0) \(s.1): \(type(of: error)) \(String(reflecting: error))"
+                )
+                log.info("END SCAN \(s.0) \(s.1) failed")
                 switch s.0 {
                 case .vpu:
                     throw error
@@ -91,7 +96,8 @@ struct ReportCommand: AsyncParsableCommand {
             return try await getVersion(
                 client: client, kind: kind, scanner: scanner, item: item)
         } catch {
-            log.error("Error fetching \(item.url): \(error)")
+            log.error(
+                "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))")
             return "failed"
         }
     }
@@ -115,7 +121,7 @@ struct ReportCommand: AsyncParsableCommand {
         var result = [Item]()
 
         for listURL in scanner.sources(kind: kind) {
-            log.info("SCAN ITEM \(listURL)")
+            log.info("SCAN ITEM \(site) \(kind) \(listURL)")
 
             let content: String
             let scanResult: ListResult
@@ -124,7 +130,9 @@ struct ReportCommand: AsyncParsableCommand {
                 content = try await client.getString(listURL, bypassCache: true)
                 scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
             } catch {
-                log.error("Failed to gather from \(listURL): \(error)")
+                log.error(
+                    "Failed to gather from \(site) \(kind) \(listURL): \(type(of: error)) \(String(reflecting: error))"
+                )
                 continue
             }
 
@@ -141,7 +149,7 @@ struct ReportCommand: AsyncParsableCommand {
             log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
 
             for item in scanResult.list {
-                log.info("PROCESS: \(item.name ?? "unknown")")
+                log.info("PROCESS \(site) \(kind): \(item.name ?? "unknown") \(item.url)")
                 if let match = match(item), let file = match.first, let game = db[file] {
                     if follow {
                         let rawVersion =
@@ -191,6 +199,8 @@ struct ReportCommand: AsyncParsableCommand {
                 }
             }
         }
+
+        log.info("SCAN END \(site) \(kind) result=\(result.count)")
 
         self.issues.update(issues)
 
