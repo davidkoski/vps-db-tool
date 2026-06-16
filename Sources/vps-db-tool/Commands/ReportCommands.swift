@@ -1,6 +1,9 @@
 import ArgumentParser
 import Foundation
+import Logging
 import VPSDB
+
+private let log = Logger(label: "Report")
 
 struct ReportCommand: AsyncParsableCommand {
 
@@ -49,7 +52,7 @@ struct ReportCommand: AsyncParsableCommand {
             do {
                 try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
             } catch {
-                print("Error scanning \(s.0) \(s.1): \(error)")
+                log.error("Error scanning \(s.0) \(s.1): \(error)")
                 switch s.0 {
                 case .vpu:
                     throw error
@@ -70,7 +73,7 @@ struct ReportCommand: AsyncParsableCommand {
     private func getVersion(
         client: HTTPClient, kind: GameResourceKind, scanner: DetailScanner, item: DetailResult
     ) async throws -> String? {
-        print(item.url)
+        log.info("getVersion: \(item.url)")
         let content = try await client.getString(item.url, bypassCache: true)
         if let detail = try scanner.scanDetail(
             url: item.url, content: content, kind: kind)
@@ -88,7 +91,7 @@ struct ReportCommand: AsyncParsableCommand {
             return try await getVersion(
                 client: client, kind: kind, scanner: scanner, item: item)
         } catch {
-            print("Error fetching \(item.url): \(error)")
+            log.error("Error fetching \(item.url): \(error)")
             return "failed"
         }
     }
@@ -107,12 +110,12 @@ struct ReportCommand: AsyncParsableCommand {
             case .pinballnirvana, .other: fatalError()
             }
 
-        print(site, kind)
+        log.info("SCAN \(site) \(kind)")
 
         var result = [Item]()
 
         for listURL in scanner.sources(kind: kind) {
-            print(listURL)
+            log.info("SCAN ITEM \(listURL)")
 
             let content: String
             let scanResult: ListResult
@@ -121,7 +124,7 @@ struct ReportCommand: AsyncParsableCommand {
                 content = try await client.getString(listURL, bypassCache: true)
                 scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
             } catch {
-                print("Failed to gather from \(listURL): \(error)")
+                log.error("Failed to gather from \(listURL): \(error)")
                 continue
             }
 
@@ -135,8 +138,10 @@ struct ReportCommand: AsyncParsableCommand {
                 }
             }
 
+            log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
+
             for item in scanResult.list {
-                print(item.name ?? "unknown")
+                log.info("PROCESS: \(item.name ?? "unknown")")
                 if let match = match(item), let file = match.first, let game = db[file] {
                     if follow {
                         let rawVersion =

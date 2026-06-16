@@ -1,7 +1,10 @@
 import AsyncHTTPClient
 import Foundation
+import Logging
 import NIOFoundationCompat
 import NIOHTTP1
+
+private let log = Logger(label: "HTTPClient")
 
 enum HTTPError: Error {
     case unableToReadBody
@@ -69,28 +72,29 @@ public class HTTPClient {
 
         var request = HTTPClientRequest(url: url.description)
         request.headers = ["User-Agent": userAgent]
-        
+
         var count = 0
         let retryMax = 3
 
         while true {
             do {
+                log.info("GET \(url)")
                 let response = try await client.execute(request, timeout: .seconds(30))
-                
+
                 if response.status != .ok {
                     throw HTTPError.response(url, response.status, response.status.reasonPhrase)
                 }
-                
+
                 let data = try await response.body.collect(upTo: 100 * 1024 * 1024)
-                
+
                 lastRequest = ContinuousClock.Instant.now
-                
+
                 if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
                     if let cache {
                         do {
                             try data.write(to: cache, options: .atomic)
                         } catch {
-                            print("Failed to cache \(cache): \(error)")
+                            log.debug("Failed to cache \(cache): \(error)")
                         }
                     }
                     return data
@@ -98,14 +102,18 @@ public class HTTPClient {
                     throw HTTPError.unableToReadBody
                 }
             } catch let error as HTTPClientError where error == .deadlineExceeded {
+                log.error("GET \(url): \(error)")
+
                 count += 1
                 if count < retryMax {
-                    print("deadlineExceeded, retry \(url)")
+                    log.warning("deadlineExceeded, retry \(url)")
                     client = .init()
                     try await Task.sleep(for: .seconds(5))
                 } else {
                     throw error
                 }
+            } catch {
+                log.error("GET \(url): \(error)")
             }
         }
     }
