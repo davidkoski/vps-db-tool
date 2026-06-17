@@ -44,9 +44,11 @@ struct VPSDbArguments: ParsableArguments, Sendable {
             }
 
             let data = try await response.body.collect(upTo: 20 * 1024 * 1024)
-            return try data.getJSONDecodable(
+            let db = try data.getJSONDecodable(
                 Database.self, decoder: JSONDecoder(), at: data.readerIndex,
                 length: data.readableBytes)!
+            self.db = db
+            return db
         }
     }
 }
