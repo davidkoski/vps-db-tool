@@ -107,8 +107,9 @@ public class HTTPClient {
                 count += 1
                 if count < retryMax {
                     log.info("deadlineExceeded, retry \(count)/\(retryMax) \(url)")
+                    try? await client.shutdown()
                     client = .init()
-                    try await Task.sleep(for: .seconds(5))
+                    try await Task.sleep(for: .seconds(10))
                 } else {
                     log.error("GET giving up after \(count) attempts \(url)")
                     throw error
