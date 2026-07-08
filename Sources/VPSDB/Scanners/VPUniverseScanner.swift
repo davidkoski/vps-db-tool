@@ -39,7 +39,7 @@ extension VPUniverseScanner: ScanSources {
                     "https://vpuniverse.com/files/category/121-2-screen-4x3-pup-packs/",
                 ]
             case .altColor:
-                ["https://vpuniverse.com/files/category/101-pin2dmd-colorizations-virtual-pinball/"]
+                ["https://vpuniverse.com/files/category/174-rom-colorizations/"]
             case .altSound: ["https://vpuniverse.com/files/category/113-altsound/"]
             case .sound: []
             case .pov:
