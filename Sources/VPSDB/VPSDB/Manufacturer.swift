@@ -22,6 +22,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable {
     case brunswick = "Brunswick"
     case cicPlay = "CIC Play"
     case capcom = "Capcom"
+    case cedes = "Cedes"
     case chicagoCoin = "Chicago Coin"
     case christianAutomatic = "Christian Automatic"
     case cirsa = "Cirsa"
