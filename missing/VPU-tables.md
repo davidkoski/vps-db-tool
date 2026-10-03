@@ -2,42 +2,14 @@
 
 | Name | Author | URL |
 | ---- | ------ | --- |                
-| Sing Along (Gottlieb 1967) | loserman76 | https://vpuniverse.com/files/file/8255-sing-along-gottlieb-1967/ |
-| Sky Jump (Gottlieb 1974) | loserman76 | https://vpuniverse.com/files/file/8253-sky-jump-gottlieb-1974/ |
-| Slick Chick (Gottlieb 1963) | loserman76 | https://vpuniverse.com/files/file/8252-slick-chick-gottlieb-1963/ |
-| Snow Queen (Gottlieb 1970) | loserman76 | https://vpuniverse.com/files/file/8250-snow-queen-gottlieb-1970/ |
-| Grande Domino (Gottlieb 1968) | loserman76 | https://vpuniverse.com/files/file/8248-grande-domino-gottlieb-1968/ |
-| Solar City (Gottlieb 1977) | loserman76 | https://vpuniverse.com/files/file/8236-solar-city-gottlieb-1977/ |
-| Solitaire (Gottlieb 1967) | loserman76 | https://vpuniverse.com/files/file/8233-solitaire-gottlieb-1967/ |
-| Spin-A-Card (Gottlieb 1969) | loserman76 | https://vpuniverse.com/files/file/8230-spin-a-card-gottlieb-1969/ |
-| Spin Out (Gottlieb 1975) | loserman76 | https://vpuniverse.com/files/file/8229-spin-out-gottlieb-1975/ |
-| Full (Recreativos Franco 1977) | loserman76 | https://vpuniverse.com/files/file/8226-full-recreativos-franco-1977/ |
-| Roller Coaster Reverse (Gottlieb 1971) | ARMYAVIATION | https://vpuniverse.com/files/file/8158-roller-coaster-reverse-gottlieb-1971/ |
-| WWF Royal Rumble (Data East 1994) DT/FS/VR | hauntfreaks | https://vpuniverse.com/files/file/8044-wwf-royal-rumble-data-east-1994-dtfsvr/ |
-| Aliens 2.0 | Delta23 | https://vpuniverse.com/files/file/7550-aliens-20/ |
-| BatmanTAS | dunriwikan45 | https://vpuniverse.com/files/file/7500-batmantas/ |
-| Lucky Ace (Williams 1974) | loserman76 | https://vpuniverse.com/files/file/7239-lucky-ace-williams-1974/ |
-| Star Trek (Gottlieb 1971) | BorgDog | https://vpuniverse.com/files/file/6302-star-trek-gottlieb-1971/ |
-| Big Brave (Gottlieb 1974) | hauntfreaks | https://vpuniverse.com/files/file/6293-big-brave-gottlieb-1974/ |
-| TikiTime | TikiGoon | https://vpuniverse.com/files/file/5888-tikitime/ |
-| Michael Jordan (Data East, 1992) | Rascal | https://vpuniverse.com/files/file/5830-michael-jordan-data-east-1992/ |
-| Aliens | Delta23 | https://vpuniverse.com/files/file/5779-aliens/ |
-| Lost in Space (Sega 1998) | Goldchicco | https://vpuniverse.com/files/file/5753-lost-in-space-sega-1998/ |
-| Soul Reaver | Delta23 | https://vpuniverse.com/files/file/5652-soul-reaver/ |
-| King Kong (Data East 1990) | Javier15 | https://vpuniverse.com/files/file/5528-king-kong-data-east-1990/ |
-| Mario Andretti (Gottlieb/Premier 1995) | Rascal | https://vpuniverse.com/files/file/5482-mario-andretti-gottliebpremier-1995/ |
-| Gottlieb Monte Carlo - 1987 - VPX | Rascal | https://vpuniverse.com/files/file/5473-gottlieb-monte-carlo-1987-vpx/ |
-| Krull (Gottlieb 1983) | Rascal | https://vpuniverse.com/files/file/5455-krull-gottlieb-1983/ |
-| Force II (Gottlieb 1981) | Rascal | https://vpuniverse.com/files/file/5447-force-ii-gottlieb-1981/ |
-| Cue Ball Wizard - Premier 1992 | Rascal | https://vpuniverse.com/files/file/5438-cue-ball-wizard-premier-1992/ |
-| Apache! (Taito 1978) full pack | editoy | https://vpuniverse.com/files/file/5244-apache-taito-1978-full-pack/ |
-| Batman (Data East 1991) | Javier15 | https://vpuniverse.com/files/file/4653-batman-data-east-1991/ |
-| Mortal Kombat II Pinball Edition | Javier15 | https://vpuniverse.com/files/file/4361-mortal-kombat-ii-pinball-edition/ |
-| Star Trek LE (Stern 2013) | freneticamnesic | https://vpuniverse.com/files/file/4235-star-trek-le-stern-2013/ |
-| Spanish Eyes (Williams 1972) FS/DT VP10.1 | jbg4208 | https://vpuniverse.com/files/file/4178-spanish-eyes-williams-1972-fsdt-vp101/ |
-| Swords of Fury (Williams 1988)(FS-DT)(VP10) | takut | https://vpuniverse.com/files/file/4159-swords-of-fury-williams-1988fs-dtvp10/ |
-| Pirates Of The Caribbean (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3581-pirates-of-the-caribbean-conversion-from-fp-vpx-beta/ |
-| Tron (Conversion from FP) (VPX Beta) | freneticamnesic | https://vpuniverse.com/files/file/3577-tron-conversion-from-fp-vpx-beta/ |
+| John Wick Legend | marty02 | https://vpuniverse.com/files/file/32204-john-wick-legend/ |
+| Harley Davidson (Stern 2005) 3rd Edition | MachWon | https://vpuniverse.com/files/file/31770-harley-davidson-stern-2005-3rd-edition/ |
+| Pinball Champ 82 (Zaccaria 1982) | teisen | https://vpuniverse.com/files/file/31554-pinball-champ-82-zaccaria-1982/ |
+| Les insus | marty02 | https://vpuniverse.com/files/file/31051-les-insus/ |
+| Frozen North (Lunar Howl 8) | Anthias | https://vpuniverse.com/files/file/30304-frozen-north-lunar-howl-8/ |
+| El Duderino (Original 2026) Lebowski El Dorado Mod | endeemillr | https://vpuniverse.com/files/file/30226-el-duderino-original-2026-lebowski-el-dorado-mod/ |
+| Willy Wonka table mods | jcsk8 | https://vpuniverse.com/files/file/32128-willy-wonka-table-mods/ |
+| The Wizard of Oz table mods | jcsk8 | https://vpuniverse.com/files/file/31954-the-wizard-of-oz-table-mods/ |
 | Wheel of Fortune (Stern 2007) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24397-wheel-of-fortune-stern-2007-sideblade-mod/ |
 | Mousin' Around (Bally 1989) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24385-mousin-around-bally-1989-sideblade-mod/ |
 | Star Trek The Next Generation (Williams 1993) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24378-star-trek-the-next-generation-williams-1993-sideblade-mod/ |
@@ -100,7 +72,6 @@
 | Playboy (Stern 2002) Cabinet Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23620-playboy-stern-2002-cabinet-side-blade-mod/ |
 | Corvette Cabinet Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23617-corvette-cabinet-side-blade-mod/ |
 | Elvis Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22566-elvis-cabinet-mod/ |
-| Avatar Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23611-avatar-cabinet-mod/ |
 | Swords of Fury Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23610-swords-of-fury-cabinet-mod/ |
 | Hollywood Heat Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23609-hollywood-heat-cabinet-mod/ |
 | The Sopranos Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23234-the-sopranos-cabinet-mod/ |
@@ -114,7 +85,6 @@
 | Star Trek LE Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23052-star-trek-le-cabinet-mod/ |
 | NBA Fastbreak Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22888-nba-fastbreak-cabinet-mod/ |
 | Cavalcade (Stoner 1935) MW MOD | MachWon | https://vpuniverse.com/files/file/22827-cavalcade-stoner-1935-mw-mod/ |
-| Tales from the Crypt (Data East 1993) remix patch | jmcgohon81 | https://vpuniverse.com/files/file/22824-tales-from-the-crypt-data-east-1993-remix-patch/ |
 | Super Mario Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22793-super-mario-cabinet-mod/ |
 | The Machine Bride Of Pinbot Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22766-the-machine-bride-of-pinbot-cabinet-mod/ |
 | Pinbot Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22765-pinbot-cabinet-mod/ |
@@ -157,6 +127,7 @@
 | Monster Bash Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22130-monster-bash-cabinet-mod/ |
 | Star Wars (Data East 1992) VPW - KidMode Patch | Supergibson | https://vpuniverse.com/files/file/21466-star-wars-data-east-1992-vpw-kidmode-patch/ |
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
+| Conquest 200 (Playmatic 1976) JP v5.5.1 DT-FS-VR-MR Ext2k Conversion | Ext2k | https://vpuniverse.com/files/file/20528-conquest-200-playmatic-1976-jp-v551-dt-fs-vr-mr-ext2k-conversion/ |
 | The Fantastic Four Table & The Fantastic Four Table VR 2024 | icepinball | https://vpuniverse.com/files/file/22057-the-fantastic-four-table-the-fantastic-four-table-vr-2024/ |
 | Breakshot (Capcom 1996)_Bigus(MOD)3.1 VR | hmueck | https://vpuniverse.com/files/file/19078-breakshot-capcom-1996_bigusmod31-vr/ |
 | VR ROOM Sharpshooter - Bally 1961 (10.7) | Rascal | https://vpuniverse.com/files/file/12164-vr-room-sharpshooter-bally-1961-107/ |
@@ -172,46 +143,48 @@
 | VR ROOM Winner (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/7041-vr-room-winner-williams-1971/ |
 | Space Mission VR Room (Williams 1976) | leojreimroc | https://vpuniverse.com/files/file/6014-space-mission-vr-room-williams-1976/ |
 | Atlantis VR Room (Gottlieb 1975) | leojreimroc | https://vpuniverse.com/files/file/6020-atlantis-vr-room-gottlieb-1975/ |
-| VR ROOM Gold Rush (Williams 1971) | drinkcristal | https://vpuniverse.com/files/file/6540-vr-room-gold-rush-williams-1971/ |
-| Fireball VR Room (Bally 1972) | leojreimroc | https://vpuniverse.com/files/file/6006-fireball-vr-room-bally-1972/ |
-| VR_Room_Target Alpha (Gottlieb 1976) 1.0.vpx | dillman | https://vpuniverse.com/files/file/6783-vr_room_target-alpha-gottlieb-1976-10vpx/ |
-| VR_Rooms_Whirlwind_(Williams_1990)_Minimal_1.2.vpx | dillman | https://vpuniverse.com/files/file/6666-vr_rooms_whirlwind_williams_1990_minimal_12vpx/ |
-| VR Room The Phantom Of The Opera (Data East 1990) 1.0 | Cirqus | https://vpuniverse.com/files/file/6662-vr-room-the-phantom-of-the-opera-data-east-1990-10/ |
-| VR Room T.K.O. (Gottlieb 1979) 1.0.0 | RajoJoey | https://vpuniverse.com/files/file/6559-vr-room-tko-gottlieb-1979-100/ |
-| Family Guy - Stern 2007 - VR Room | FlippingSweet | https://vpuniverse.com/files/file/6547-family-guy-stern-2007-vr-room/ |
-| VR ROOM High Hand (Gottlieb 1973) | drinkcristal | https://vpuniverse.com/files/file/6545-vr-room-high-hand-gottlieb-1973/ |
-| VR ROOM Grand Slam (Gottlieb 1972) | drinkcristal | https://vpuniverse.com/files/file/6544-vr-room-grand-slam-gottlieb-1972/ |
-| VR ROOM ghostbusters slimer 1.0 | pattyg234 | https://vpuniverse.com/files/file/6412-vr-room-ghostbusters-slimer-10/ |
-| VR ROOM Super Mario Bros v 1.2 | pattyg234 | https://vpuniverse.com/files/file/6216-vr-room-super-mario-bros-v-12/ |
-| VR Room - The Simpsons (Data East 1990) v1.04 | retro27 | https://vpuniverse.com/files/file/6097-vr-room-the-simpsons-data-east-1990-v104/ |
-| VR Room - Star Trek 25th Anniversary (Data East 1991) v1.3.1 | retro27 | https://vpuniverse.com/files/file/6096-vr-room-star-trek-25th-anniversary-data-east-1991-v131/ |
-| VR ROOM Haunted House (Gottlieb 1982) Minimal | psiomicron | https://vpuniverse.com/files/file/6077-vr-room-haunted-house-gottlieb-1982-minimal/ |
-| VR ROOM Tom and Jerry | psiomicron | https://vpuniverse.com/files/file/6070-vr-room-tom-and-jerry/ |
-| VR ROOM Star Wars Trilogy (Sega 1997) Minimal | psiomicron | https://vpuniverse.com/files/file/6064-vr-room-star-wars-trilogy-sega-1997-minimal/ |
-| VR ROOM El Bueno el Feo y el Malo Minimal.zip | psiomicron | https://vpuniverse.com/files/file/6063-vr-room-el-bueno-el-feo-y-el-malo-minimalzip/ |
-| VR ROOM Lethal Weapon 3 v 1.11 | pattyg234 | https://vpuniverse.com/files/file/6047-vr-room-lethal-weapon-3-v-111/ |
-| Theatre of Magic (Fleep) Minimal VR Room (Bally 1995) | Sixtoe | https://vpuniverse.com/files/file/6037-theatre-of-magic-fleep-minimal-vr-room-bally-1995/ |
-| Stargate Minimal VR Room (Gottlieb 1995) | Sixtoe | https://vpuniverse.com/files/file/6027-stargate-minimal-vr-room-gottlieb-1995/ |
-| Ripleys Believe or Not Minimal VR Room (Stern 2004) | Sixtoe | https://vpuniverse.com/files/file/6017-ripleys-believe-or-not-minimal-vr-room-stern-2004/ |
-| Pinball Magic Minimal VR Room (Capcom 1995) | Sixtoe | https://vpuniverse.com/files/file/6015-pinball-magic-minimal-vr-room-capcom-1995/ |
-| Party Zone Minimal VR Room (Bally 1991) | Sixtoe | https://vpuniverse.com/files/file/6019-party-zone-minimal-vr-room-bally-1991/ |
-| Junk Yard Minimal VR Room (Williams 1996) | Sixtoe | https://vpuniverse.com/files/file/6009-junk-yard-minimal-vr-room-williams-1996/ |
-| Iron Man Minimal VR Room (Stern 2010) | Sixtoe | https://vpuniverse.com/files/file/6007-iron-man-minimal-vr-room-stern-2010/ |
-| Guns N Roses Minimal VR Room (Data East 1994) | Sixtoe | https://vpuniverse.com/files/file/6002-guns-n-roses-minimal-vr-room-data-east-1994/ |
-| Getaway Minimal VR Room (Williams 1992) | Sixtoe | https://vpuniverse.com/files/file/6000-getaway-minimal-vr-room-williams-1992/ |
-| Goldeneye Minimal VR Room (Sega 1996) | Sixtoe | https://vpuniverse.com/files/file/6001-goldeneye-minimal-vr-room-sega-1996/ |
-| Elvira and the Party Monsters Minimal VR Room (Bally 1989) | Sixtoe | https://vpuniverse.com/files/file/6004-elvira-and-the-party-monsters-minimal-vr-room-bally-1989/ |
-| Batman Dark Knight Minimal VR Room (Stern 2008) | Sixtoe | https://vpuniverse.com/files/file/5795-batman-dark-knight-minimal-vr-room-stern-2008/ |
-| ACDC LUCI Premium Minimal VR Room (Stern 2013) | Sixtoe | https://vpuniverse.com/files/file/5860-acdc-luci-premium-minimal-vr-room-stern-2013/ |
-| Big Bang Bar Minimal VR Room (Capcom 1996) | Sixtoe | https://vpuniverse.com/files/file/5964-big-bang-bar-minimal-vr-room-capcom-1996/ |
-| Cuphead Pro Minimal VR Room (D. Goblett 2019) | Sixtoe | https://vpuniverse.com/files/file/5968-cuphead-pro-minimal-vr-room-d-goblett-2019/ |
-| Attack from Mars g5k Minimal VR Room (Bally 1995) | Sixtoe | https://vpuniverse.com/files/file/5953-attack-from-mars-g5k-minimal-vr-room-bally-1995/ |
-| No Fear Minimal VR Room (Williams 1995) | Sixtoe | https://vpuniverse.com/files/file/5793-no-fear-minimal-vr-room-williams-1995/ |
-| VR ROOM Shrek (Stern 2008) | Arvid | https://vpuniverse.com/files/file/5789-vr-room-shrek-stern-2008/ |
-| VR ROOM Version AC-DC_Premium-1.5 | gear323 | https://vpuniverse.com/files/file/5707-vr-room-version-ac-dc_premium-15/ |
-| Cactus Canyon (Bally 1998) VR Room | legolas24 | https://vpuniverse.com/files/file/5694-cactus-canyon-bally-1998-vr-room/ |
-| VR ROOM WHO dunnit (Bally 1995) | senseless | https://vpuniverse.com/files/file/5686-vr-room-who-dunnit-bally-1995/ |
-| VR ROOM Fish Tales (Williams 1992) | senseless | https://vpuniverse.com/files/file/5685-vr-room-fish-tales-williams-1992/ |
+| King Arthur and his Round Table | Francisco | https://vpuniverse.com/files/file/32174-king-arthur-and-his-round-table/ |
+| Minecraft | mark1 | https://vpuniverse.com/files/file/31936-minecraft/ |
+| Flipper Fair (Gottlieb-1961) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/31636-flipper-fair-gottlieb-1961-fizx33/ |
+| Flipper Clown (Gottlieb-1962) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/31610-flipper-clown-gottlieb-1962-fizx33/ |
+| Screech (Inder 1978) 4 PL | eduguitar72 | https://vpuniverse.com/files/file/31183-screech-inder-1978-4-pl/ |
+| Crazy race (Petaco recel 1978) 4 PL | eduguitar72 | https://vpuniverse.com/files/file/31127-crazy-race-petaco-recel-1978-4-pl/ |
+| Future Pinball and BAM Essentials - All in One | TerryRed | https://vpuniverse.com/files/file/14807-future-pinball-and-bam-essentials-all-in-one/ |
+| Action (Chicago coin 1969) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30923-action-chicago-coin-1969-1-em/ |
+| Electric road (MD Italy 1967) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30928-electric-road-md-italy-1967-1-em/ |
+| Serenade (Playmatic 1969) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30938-serenade-playmatic-1969-1-em/ |
+| Jarama (Centromatic 1973) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30933-jarama-centromatic-1973-1-em/ |
+| Impacto (Recreativos Franco 1975) | eduguitar72 | https://vpuniverse.com/files/file/30932-impacto-recreativos-franco-1975/ |
+| Hot and cool (Inder 1978) 4 EM | eduguitar72 | https://vpuniverse.com/files/file/30931-hot-and-cool-inder-1978-4-em/ |
+| Festival pop (Marsa 1973) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30929-festival-pop-marsa-1973-1-em/ |
+| Dardos (Maresa 1970) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30925-dardos-maresa-1970-1-em/ |
+| Chamonix (Maresa 1970) 1 EM | eduguitar72 | https://vpuniverse.com/files/file/30924-chamonix-maresa-1970-1-em/ |
+| Cross-Country (Bally-1963) (FixZ 3.3) | Popotte | https://vpuniverse.com/files/file/27805-cross-country-bally-1963-fixz-33/ |
+| Skill Pool (Williams-1963) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/28059-skill-pool-williams-1963-fizx33/ |
+| Spirit of 76 (Gottlieb-1975) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/29156-spirit-of-76-gottlieb-1975-fizx33/ |
+| Moulin Rouge (WIlliams-1965) (FizX3.3 V1.00) | Popotte | https://vpuniverse.com/files/file/29155-moulin-rouge-williams-1965-fizx33-v100/ |
+| Happy Clown (Gottlieb-1964) (FizX3.3 V1.00) | Popotte | https://vpuniverse.com/files/file/29154-happy-clown-gottlieb-1964-fizx33-v100/ |
+| Rack aBall (Gottlieb-1962) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/29153-rack-aball-gottlieb-1962-fizx33/ |
+| Lectronamo (Stern-1978) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/27243-lectronamo-stern-1978-fizx33/ |
+| Strikes and Spares (Bally-1979) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/27055-strikes-and-spares-bally-1979-fizx33/ |
+| Big Deal (Williams-1963) (FizX3.3 V1.00) | Popotte | https://vpuniverse.com/files/file/28963-big-deal-williams-1963-fizx33-v100/ |
+| Rocket III (Bally-1967) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/28304-rocket-iii-bally-1967-fizx33/ |
+| Cleopatra (Gottlieb-1979) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/26934-cleopatra-gottlieb-1979-fizx33/ |
+| Fast Draw (Gottlieb-1975) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/29029-fast-draw-gottlieb-1975-fizx33/ |
+| Sheriff (Gottlieb-1971) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/28129-sheriff-gottlieb-1971-fizx33/ |
+| Bank Shot (Gottlieb-1976) | Popotte | https://vpuniverse.com/files/file/26957-bank-shot-gottlieb-1976/ |
+| Bank a Ball (Gottlieb-1965) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/26808-bank-a-ball-gottlieb-1965-fizx33/ |
+| Spanish Eyes (Williams-1971) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/26845-spanish-eyes-williams-1971-fizx33/ |
+| Ace High (Gottlieb-1957) (FizX3.3) | Popotte | https://vpuniverse.com/files/file/26833-ace-high-gottlieb-1957-fizx33/ |
+| Gotham City (Bat Man) | mark1 | https://vpuniverse.com/files/file/29010-gotham-city-bat-man/ |
+| The Munsters Pro (v1.0) | VP1000 | https://vpuniverse.com/files/file/28755-the-munsters-pro-v10/ |
+| Daffie (Williams 1968) | gianzo | https://vpuniverse.com/files/file/27932-daffie-williams-1968/ |
+| Doozie (Williams 1968) | gianzo | https://vpuniverse.com/files/file/27933-doozie-williams-1968/ |
+| Capersville (Bally 1966).fpt | gianzo | https://vpuniverse.com/files/file/27498-capersville-bally-1966fpt/ |
+| Sunny | Francisco | https://vpuniverse.com/files/file/27402-sunny/ |
+| Dragonette | Francisco | https://vpuniverse.com/files/file/27141-dragonette/ |
+| Capt. Fantastic and The Brown Dirt Cowboy (Bally-1976) (FizX 3.3) | Popotte | https://vpuniverse.com/files/file/27012-capt-fantastic-and-the-brown-dirt-cowboy-bally-1976-fizx-33/ |
+| Sunny | Francisco | https://vpuniverse.com/files/file/26941-sunny/ |
 | Lancers | Francisco | https://vpuniverse.com/files/file/24887-lancers/ |
 | Gladiator | Francisco | https://vpuniverse.com/files/file/24877-gladiator/ |
 | Brite Star | Francisco | https://vpuniverse.com/files/file/24873-brite-star/ |
@@ -225,7 +198,6 @@
 | Megadeth Thermo-Nuclear Protection v1.05 | VP1000 | https://vpuniverse.com/files/file/23894-megadeth-thermo-nuclear-protection-v105/ |
 | EarthShaker (1989) v1.0 | VP1000 | https://vpuniverse.com/files/file/23858-earthshaker-1989-v10/ |
 | Gold Star (Gottlieb '54)15.46.rar | Francisco | https://vpuniverse.com/files/file/23174-gold-star-gottlieb-541546rar/ |
-| Future Pinball and BAM Essentials - All in One | TerryRed | https://vpuniverse.com/files/file/14807-future-pinball-and-bam-essentials-all-in-one/ |
 | The Simpsons Pinball Party (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22587-the-simpsons-pinball-party-v-10/ |
 | Joker Poker GottLieb 1978 (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22502-joker-poker-gottlieb-1978-v-10/ |
 | Rocky and Bullwinkle and Friends (v 1.0) | VP1000 | https://vpuniverse.com/files/file/22254-rocky-and-bullwinkle-and-friends-v-10/ |
@@ -267,139 +239,27 @@
 | Ghostbusters (Ultimate Edition) Daytime (V1.4) | VP1000 | https://vpuniverse.com/files/file/16196-ghostbusters-ultimate-edition-daytime-v14/ |
 | Blade Runner ULTIMATE Pro 1.04 V2 Mod by Gamer7 FizX SSF DOF | Gamer7 | https://vpuniverse.com/files/file/14618-blade-runner-ultimate-pro-104-v2-mod-by-gamer7-fizx-ssf-dof/ |
 | Megaman 2.0 Future Pinball (FizX, DOF, SSF) | FusionshadowXJ | https://vpuniverse.com/files/file/14050-megaman-20-future-pinball-fizx-dof-ssf/ |
-| TMNT Stern | Balrog81 | https://vpuniverse.com/files/file/10256-tmnt-stern/ |
-| Hanna Barbera Cartoons | mark1 | https://vpuniverse.com/files/file/9605-hanna-barbera-cartoons/ |
-| Bowling Champ (Gottlieb - 1949) | Francisco | https://vpuniverse.com/files/file/9305-bowling-champ-gottlieb-1949/ |
-| Floating Power | Francisco | https://vpuniverse.com/files/file/8921-floating-power/ |
-| Space Shuttle (Williams, 1984) | GeorgeH | https://vpuniverse.com/files/file/8687-space-shuttle-williams-1984/ |
-| Star Fox | mark1 | https://vpuniverse.com/files/file/8718-star-fox/ |
-| Gladiator (Gottlieb-1956) | Francisco | https://vpuniverse.com/files/file/8690-gladiator-gottlieb-1956/ |
-| Cover Girl (Keeney'47) | Francisco | https://vpuniverse.com/files/file/8474-cover-girl-keeney47/ |
-| Humpty Dumpty | Francisco | https://vpuniverse.com/files/file/8404-humpty-dumpty/ |
-| JURASSIC PARK PIN | fastdraw | https://vpuniverse.com/files/file/7728-jurassic-park-pin/ |
-| Four Roses | Francisco | https://vpuniverse.com/files/file/7705-four-roses/ |
-| Metro | Francisco | https://vpuniverse.com/files/file/7395-metro/ |
-| Captain Kidd | Francisco | https://vpuniverse.com/files/file/6826-captain-kidd/ |
-| Big Hit (Exhibit 1946) | Francisco | https://vpuniverse.com/files/file/6702-big-hit-exhibit-1946/ |
-| Twilight Zone (Bally, 1993) | GeorgeH | https://vpuniverse.com/files/file/6668-twilight-zone-bally-1993/ |
-| Star Trek ULTIMATE 1.03 doflinx 1.0 | xavuis62 | https://vpuniverse.com/files/file/5756-star-trek-ultimate-103-doflinx-10/ |
-| SKYWALKER | fastdraw | https://vpuniverse.com/files/file/5762-skywalker/ |
-| guardians of the galaxy | fastdraw | https://vpuniverse.com/files/file/5759-guardians-of-the-galaxy/ |
-| Brite Star (Gottlieb 1958) | FranciscoPozo | https://vpuniverse.com/files/file/5458-brite-star-gottlieb-1958/ |
-| Lancers (Gottlieb 1961) | FranciscoPozo | https://vpuniverse.com/files/file/5456-lancers-gottlieb-1961/ |
-| Oh Boy (Williams-1964) | Francisco | https://vpuniverse.com/files/file/5212-oh-boy-williams-1964/ |
-| " Lancers " ( Gottlieb 1961 ) | Francisco | https://vpuniverse.com/files/file/5194-lancers-gottlieb-1961/ |
-| Star Wars Death Star Assault (Ultimate 1.04): DOFLinx MX Cabinet Edition | TerryRed | https://vpuniverse.com/files/file/4915-star-wars-death-star-assault-ultimate-104-doflinx-mx-cabinet-edition/ |
-| Avatar (Ultimate): DOFLinx MX Cabinet Edition | TerryRed | https://vpuniverse.com/files/file/4928-avatar-ultimate-doflinx-mx-cabinet-edition/ |
-| Wipeout: DOFLinx MX Cabinet Edition | TerryRed | https://vpuniverse.com/files/file/4920-wipeout-doflinx-mx-cabinet-edition/ |
-| Retroflair: DOFLinx MX Cabinet Edition | TerryRed | https://vpuniverse.com/files/file/4919-retroflair-doflinx-mx-cabinet-edition/ |
-| Masters of the Universe: Mastered, DOFLinx MX Cabinet Edition | TerryRed | https://vpuniverse.com/files/file/4914-masters-of-the-universe-mastered-doflinx-mx-cabinet-edition/ |
-| Wipeout (DOFLinx Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4747-wipeout-doflinx-cabinet-edition/ |
-| StargateAll:3.0:ultimate | electrico343 | https://vpuniverse.com/files/file/4232-stargateall30ultimate/ |
-| RetroFlair (p2.5) (DOFLinx Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4560-retroflair-p25-doflinx-cabinet-edition/ |
-| Nightmare on Elm Street ULTIMATE 1.06 (Physics 2.7 DOFLinx) | senseless | https://vpuniverse.com/files/file/4521-nightmare-on-elm-street-ultimate-106-physics-27-doflinx/ |
-| Star Wars: Death Star Assault (ULTIMATE) (DOFLinx Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4446-star-wars-death-star-assault-ultimate-doflinx-cabinet-edition/ |
-| Tron Legacy (STERN) (ULTIMATE) (DOFLinx - Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4365-tron-legacy-stern-ultimate-doflinx-cabinet-edition/ |
-| Avatar (ULTIMATE 1.01) (DOFLinx - Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4360-avatar-ultimate-101-doflinx-cabinet-edition/ |
-| Jaws (Ultimate Edition 1.05) (p2.7) (DOFLinx – Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4298-jaws-ultimate-edition-105-p27-doflinx-%E2%80%93-cabinet-edition/ |
-| Pinball Killer | theGhost787 | https://vpuniverse.com/files/file/4294-pinball-killer/ |
-| Pabst Can Crusher | theGhost787 | https://vpuniverse.com/files/file/4264-pabst-can-crusher/ |
-| Star Trek xse v1.3 (Oct 2016) | shiva | https://vpuniverse.com/files/file/4250-star-trek-xse-v13-oct-2016/ |
-| Robocop (Ultimate Edition 1.05) (p2.7) (DOFLinx) | TerryRed | https://vpuniverse.com/files/file/4246-robocop-ultimate-edition-105-p27-doflinx/ |
-| Captain Nemo | theGhost787 | https://vpuniverse.com/files/file/4244-captain-nemo/ |
-| Magic Girl | theGhost787 | https://vpuniverse.com/files/file/4241-magic-girl/ |
-| Tommy Robot | theGhost787 | https://vpuniverse.com/files/file/4238-tommy-robot/ |
-| JabberJaw | theGhost787 | https://vpuniverse.com/files/file/4237-jabberjaw/ |
-| Star Trek (Stern) (Ultimate Edition) (v1.03) (p2.6) (DOFLinx - Cabinet Edition) | TerryRed | https://vpuniverse.com/files/file/4234-star-trek-stern-ultimate-edition-v103-p26-doflinx-cabinet-edition/ |
-| Darth Vader | mark1 | https://vpuniverse.com/files/file/4208-darth-vader/ |
-| The Borg (Star Trek) | mark1 | https://vpuniverse.com/files/file/2349-the-borg-star-trek/ |
-| ROLLER DISCO | fastdraw | https://vpuniverse.com/files/file/4148-roller-disco/ |
-| SCORPION | fastdraw | https://vpuniverse.com/files/file/3915-scorpion/ |
-| PARAGON | fastdraw | https://vpuniverse.com/files/file/4143-paragon/ |
-| TIME LINE | fastdraw | https://vpuniverse.com/files/file/4142-time-line/ |
-| VOLCANO | fastdraw | https://vpuniverse.com/files/file/3977-volcano/ |
-| OUTBREAK MOD | fastdraw | https://vpuniverse.com/files/file/4125-outbreak-mod/ |
-| The Silence of the Lambs | fastdraw | https://vpuniverse.com/files/file/4098-the-silence-of-the-lambs/ |
-| CIRCUS | fastdraw | https://vpuniverse.com/files/file/4074-circus/ |
-| COUNTERFORCE MOD | fastdraw | https://vpuniverse.com/files/file/3910-counterforce-mod/ |
-| PANTHERA 2.0 | fastdraw | https://vpuniverse.com/files/file/3913-panthera-20/ |
-| Alaska | theGhost787 | https://vpuniverse.com/files/file/3773-alaska/ |
-| Ice Fever | theGhost787 | https://vpuniverse.com/files/file/3746-ice-fever/ |
-| Roller Disco | theGhost787 | https://vpuniverse.com/files/file/3742-roller-disco/ |
-| Counterforce | theGhost787 | https://vpuniverse.com/files/file/3738-counterforce/ |
-| Wallace and Gromit | theGhost787 | https://vpuniverse.com/files/file/3736-wallace-and-gromit/ |
-| Volcano | theGhost787 | https://vpuniverse.com/files/file/3732-volcano/ |
-| Bounty Hunter | theGhost787 | https://vpuniverse.com/files/file/3729-bounty-hunter/ |
-| Circus | theGhost787 | https://vpuniverse.com/files/file/3728-circus/ |
-| Time Line | theGhost787 | https://vpuniverse.com/files/file/3723-time-line/ |
-| panthera | theGhost787 | https://vpuniverse.com/files/file/3721-panthera/ |
-| Scorpion | theGhost787 | https://vpuniverse.com/files/file/3720-scorpion/ |
-| Inspector Gadget | theGhost787 | https://vpuniverse.com/files/file/3716-inspector-gadget/ |
-| Pink Panther | theGhost787 | https://vpuniverse.com/files/file/3715-pink-panther/ |
-| Big Lebowski | theGhost787 | https://vpuniverse.com/files/file/3714-big-lebowski/ |
-| Pokerino | theGhost787 | https://vpuniverse.com/files/file/3713-pokerino/ |
-| Paragon | theGhost787 | https://vpuniverse.com/files/file/3712-paragon/ |
-| Toxic Crusaders | theGhost787 | https://vpuniverse.com/files/file/3711-toxic-crusaders/ |
-| Skeleton Warriors | theGhost787 | https://vpuniverse.com/files/file/3710-skeleton-warriors/ |
-| Escape from Haunted City | theGhost787 | https://vpuniverse.com/files/file/3708-escape-from-haunted-city/ |
-| Creepy Crawlers | theGhost787 | https://vpuniverse.com/files/file/3707-creepy-crawlers/ |
-| Zombies Ate My Neighbors | theGhost787 | https://vpuniverse.com/files/file/3706-zombies-ate-my-neighbors/ |
-| Wizard of Oz | theGhost787 | https://vpuniverse.com/files/file/3705-wizard-of-oz/ |
-| Street Fighter II | theGhost787 | https://vpuniverse.com/files/file/3704-street-fighter-ii/ |
-| Mad Race | theGhost787 | https://vpuniverse.com/files/file/3703-mad-race/ |
-| Pro Wrestling | theGhost787 | https://vpuniverse.com/files/file/3702-pro-wrestling/ |
-| Hellraiser | theGhost787 | https://vpuniverse.com/files/file/3701-hellraiser/ |
-| Silent Night Deadly Night | theGhost787 | https://vpuniverse.com/files/file/3700-silent-night-deadly-night/ |
-| Call of Duty | theGhost787 | https://vpuniverse.com/files/file/3699-call-of-duty/ |
-| Final Fantasy | theGhost787 | https://vpuniverse.com/files/file/3698-final-fantasy/ |
-| Werewolf | theGhost787 | https://vpuniverse.com/files/file/3697-werewolf/ |
-| Garfield | theGhost787 | https://vpuniverse.com/files/file/3696-garfield/ |
-| Lost In Space | theGhost787 | https://vpuniverse.com/files/file/3694-lost-in-space/ |
-| Maverick | theGhost787 | https://vpuniverse.com/files/file/3693-maverick/ |
-| TMNT | theGhost787 | https://vpuniverse.com/files/file/3692-tmnt/ |
-| Gargoyles | theGhost787 | https://vpuniverse.com/files/file/3691-gargoyles/ |
-| HELL | theGhost787 | https://vpuniverse.com/files/file/3690-hell/ |
-| Striker | theGhost787 | https://vpuniverse.com/files/file/3689-striker/ |
-| Walking Dead | theGhost787 | https://vpuniverse.com/files/file/3688-walking-dead/ |
-| Friday the 13th | theGhost787 | https://vpuniverse.com/files/file/3687-friday-the-13th/ |
-| Tetris | theGhost787 | https://vpuniverse.com/files/file/3685-tetris/ |
-| Junk Yard | theGhost787 | https://vpuniverse.com/files/file/3683-junk-yard/ |
-| Dungeons & Dragons | theGhost787 | https://vpuniverse.com/files/file/3682-dungeons-dragons/ |
-| EEK the Cat | theGhost787 | https://vpuniverse.com/files/file/3681-eek-the-cat/ |
-| Deadly Weapon | theGhost787 | https://vpuniverse.com/files/file/3680-deadly-weapon/ |
-| Resident Evil | theGhost787 | https://vpuniverse.com/files/file/3679-resident-evil/ |
-| Nba Jam | theGhost787 | https://vpuniverse.com/files/file/3678-nba-jam/ |
-| Raven | theGhost787 | https://vpuniverse.com/files/file/3676-raven/ |
-| Stargate | theGhost787 | https://vpuniverse.com/files/file/3675-stargate/ |
-| Mystery Castle | theGhost787 | https://vpuniverse.com/files/file/3674-mystery-castle/ |
-| Pinball Open | theGhost787 | https://vpuniverse.com/files/file/3673-pinball-open/ |
-| DarkMan | theGhost787 | https://vpuniverse.com/files/file/3672-darkman/ |
-| Darius | theGhost787 | https://vpuniverse.com/files/file/3671-darius/ |
-| Dakar | theGhost787 | https://vpuniverse.com/files/file/3670-dakar/ |
-| Kids in the Hall | theGhost787 | https://vpuniverse.com/files/file/3669-kids-in-the-hall/ |
-| Pee Wees Playhouse | theGhost787 | https://vpuniverse.com/files/file/3668-pee-wees-playhouse/ |
-| Puppet Master | theGhost787 | https://vpuniverse.com/files/file/3667-puppet-master/ |
-| Evil Dead | theGhost787 | https://vpuniverse.com/files/file/3666-evil-dead/ |
-| Bow and Arrow | theGhost787 | https://vpuniverse.com/files/file/3665-bow-and-arrow/ |
-| Cyclopes | theGhost787 | https://vpuniverse.com/files/file/3663-cyclopes/ |
-| Black Rose | theGhost787 | https://vpuniverse.com/files/file/3662-black-rose/ |
-| Contra | theGhost787 | https://vpuniverse.com/files/file/3661-contra/ |
-| Castlevania Vampire Rising | theGhost787 | https://vpuniverse.com/files/file/3660-castlevania-vampire-rising/ |
-| Battle Toads | theGhost787 | https://vpuniverse.com/files/file/3659-battle-toads/ |
-| Batman | theGhost787 | https://vpuniverse.com/files/file/3658-batman/ |
-| Barb Wire | theGhost787 | https://vpuniverse.com/files/file/3657-barb-wire/ |
-| Banzai Run | theGhost787 | https://vpuniverse.com/files/file/3656-banzai-run/ |
-| Attack of the Killer Tomatoes | theGhost787 | https://vpuniverse.com/files/file/3655-attack-of-the-killer-tomatoes/ |
-| Alone in the Dark | theGhost787 | https://vpuniverse.com/files/file/3653-alone-in-the-dark/ |
-| PREDATOR | theGhost787 | https://vpuniverse.com/files/file/3652-predator/ |
-| Frankenstein | theGhost787 | https://vpuniverse.com/files/file/3651-frankenstein/ |
-| Ancient Aliens | theGhost787 | https://vpuniverse.com/files/file/3650-ancient-aliens/ |
-| The Fly | theGhost787 | https://vpuniverse.com/files/file/3649-the-fly/ |
-| Alien Rage | theGhost787 | https://vpuniverse.com/files/file/3648-alien-rage/ |
-| Gottlieb BUCCANEER | monnezzas | https://vpuniverse.com/files/file/3228-gottlieb-buccaneer/ |
-| Road Girls Revisted | CRAIGDEE | https://vpuniverse.com/files/file/2089-road-girls-revisted/ |
-| Jungle Lord | CRAIGDEE | https://vpuniverse.com/files/file/2088-jungle-lord/ |
-| Embryon | CRAIGDEE | https://vpuniverse.com/files/file/2086-embryon/ |
-| Medieval Madness | CRAIGDEE | https://vpuniverse.com/files/file/2040-medieval-madness/ |
-| Moon Patrol | Tii | https://vpuniverse.com/files/file/2018-moon-patrol/ |
-| Future Pinball | VPUStaff | https://vpuniverse.com/files/file/441-future-pinball/ |
+| Trust PUP (Original 2026) | LAROUILLAS | https://vpuniverse.com/files/file/31007-trust-pup-original-2026/ |
+| Bruce Lee PUP Larouillas (Original 2026) | LAROUILLAS | https://vpuniverse.com/files/file/30900-bruce-lee-pup-larouillas-original-2026/ |
+| Gorillaz (Original 2024) PuP Pack w/ Table | Migs | https://vpuniverse.com/files/file/22657-gorillaz-original-2024-pup-pack-w-table/ |
+| Tron Classic Dual Table Pup Rom Edition | GtecArcade | https://vpuniverse.com/files/file/18614-tron-classic-dual-table-pup-rom-edition/ |
+| Fiction Pup Pack | GtecArcade | https://vpuniverse.com/files/file/18391-fiction-pup-pack/ |
+| Death Proof Pup & Table Balutito Mod | GtecArcade | https://vpuniverse.com/files/file/14682-death-proof-pup-table-balutito-mod/ |
+| Django Pup and Table Balutito Mod | GtecArcade | https://vpuniverse.com/files/file/15187-django-pup-and-table-balutito-mod/ |
+| Dr. Strange PUP Balutito Mod | GtecArcade | https://vpuniverse.com/files/file/14797-dr-strange-pup-balutito-mod/ |
+| Cheech & Chong Pup & Table Patch | GtecArcade | https://vpuniverse.com/files/file/14688-cheech-chong-pup-table-patch/ |
+| Flash Gordon Pup Pack | Dr.Nobody | https://vpuniverse.com/files/file/10540-flash-gordon-pup-pack/ |
+| Dr. Jekyll and Mr. Hyde - pup pack and pup version of the table | BurtMacklin | https://vpuniverse.com/files/file/10445-dr-jekyll-and-mr-hyde-pup-pack-and-pup-version-of-the-table/ |
+| Indochine Table & Puppack | GameOver | https://vpuniverse.com/files/file/8046-indochine-table-puppack/ |
+| Chris Cornell Tribute Pinball with Video PupPack | darthwhat | https://vpuniverse.com/files/file/6214-chris-cornell-tribute-pinball-with-video-puppack/ |
+| Foo Fighters 4x3 PuPPack | hawkeyez88 | https://vpuniverse.com/files/file/6199-foo-fighters-4x3-puppack/ |
+| HIPHOP explicit music mod | TallThin1 | https://vpuniverse.com/files/file/32085-hiphop-explicit-music-mod/ |
+| TikiSurfPunch(Original, 2026) | endeemillr | https://vpuniverse.com/files/file/31762-tikisurfpunchoriginal-2026/ |
+| Johnny Cash by oly 1.01 | oly2 | https://vpuniverse.com/files/file/31043-johnny-cash-by-oly-101/ |
+| Cobra by Oly 1.0 (Blackout Williams 1980 from SBR34) | oly2 | https://vpuniverse.com/files/file/31044-cobra-by-oly-10-blackout-williams-1980-from-sbr34/ |
+| Demon Slayer Alt HD And Medias (mod Circus Zaccaria 1977) for B2S numeric | LAROUILLAS | https://vpuniverse.com/files/file/30832-demon-slayer-alt-hd-and-medias-mod-circus-zaccaria-1977-for-b2s-numeric/ |
+| Headless Horseman | PinRich | https://vpuniverse.com/files/file/32275-headless-horseman/ |
+| Show Boat (Gottlieb 1961) | PinRich | https://vpuniverse.com/files/file/31679-show-boat-gottlieb-1961/ |
+| Bowl-O (Bally 1970) | PinRich | https://vpuniverse.com/files/file/31367-bowl-o-bally-1970/ |
+| Trail Drive (Bally 1970) | PinRich | https://vpuniverse.com/files/file/31260-trail-drive-bally-1970/ |
+| a-ha 1.01 (Solid State Electronic 2025) | VLive | https://vpuniverse.com/files/file/28001-a-ha-101-solid-state-electronic-2025/ |
