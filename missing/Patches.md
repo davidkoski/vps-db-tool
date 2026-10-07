@@ -2,12 +2,8 @@
 
 | Name | Author | URL |
 | ---- | ------ | --- |                
-| Creepshow (Original 2022) re-mix | hauntfreaks | https://vpuniverse.com/files/file/25041-creepshow-original-2022-re-mix/ |
-| TX-Sector (Gottlieb 1988)GhettoBlasterMod | jmcgohon81 | https://vpuniverse.com/files/file/24706-tx-sector-gottlieb-1988ghettoblastermod/ |
-| Star Wars (Data East 1992)Remix | jmcgohon81 | https://vpuniverse.com/files/file/24698-star-wars-data-east-1992remix/ |
-| The Addams Family (Bally 1992)Bookcase mod | jmcgohon81 | https://vpuniverse.com/files/file/24584-the-addams-family-bally-1992bookcase-mod/ |
-| Hong Kong Phooey Mini-PUP | GauGau | https://vpuniverse.com/files/file/24473-hong-kong-phooey-mini-pup/ |
-| Bad Girls (Gottlieb 1988) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24484-bad-girls-gottlieb-1988-sideblade-mod/ |
+| Willy Wonka table mods | jcsk8 | https://vpuniverse.com/files/file/32128-willy-wonka-table-mods/ |
+| The Wizard of Oz table mods | jcsk8 | https://vpuniverse.com/files/file/31954-the-wizard-of-oz-table-mods/ |
 | Wheel of Fortune (Stern 2007) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24397-wheel-of-fortune-stern-2007-sideblade-mod/ |
 | Mousin' Around (Bally 1989) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24385-mousin-around-bally-1989-sideblade-mod/ |
 | Star Trek The Next Generation (Williams 1993) Sideblade Mod | baberim | https://vpuniverse.com/files/file/24378-star-trek-the-next-generation-williams-1993-sideblade-mod/ |
@@ -43,7 +39,6 @@
 | 24 (Stern 2009) Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23819-24-stern-2009-side-blade-mod/ |
 | King Kong (Data East 1990) Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23898-king-kong-data-east-1990-side-blade-mod/ |
 | Mary Shelley's Frankenstein (Sega 1995) Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23860-mary-shelleys-frankenstein-sega-1995-side-blade-mod/ |
-| The Return Of The Living Dead (TBA 2020) | Bogusking | https://vpuniverse.com/files/file/23862-the-return-of-the-living-dead-tba-2020/ |
 | Mustang LE (Stern 2014) Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23859-mustang-le-stern-2014-side-blade-mod/ |
 | South Park Cabinet Mod +nFozzy | LoadedWeapon | https://vpuniverse.com/files/file/23827-south-park-cabinet-mod-nfozzy/ |
 | Monopoly (Stern 2001) Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23836-monopoly-stern-2001-side-blade-mod/ |
@@ -70,7 +65,6 @@
 | Playboy (Stern 2002) Cabinet Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23620-playboy-stern-2002-cabinet-side-blade-mod/ |
 | Corvette Cabinet Side Blade Mod | capnclaw | https://vpuniverse.com/files/file/23617-corvette-cabinet-side-blade-mod/ |
 | Elvis Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22566-elvis-cabinet-mod/ |
-| Avatar Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23611-avatar-cabinet-mod/ |
 | Swords of Fury Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23610-swords-of-fury-cabinet-mod/ |
 | Hollywood Heat Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23609-hollywood-heat-cabinet-mod/ |
 | The Sopranos Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23234-the-sopranos-cabinet-mod/ |
@@ -84,7 +78,6 @@
 | Star Trek LE Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/23052-star-trek-le-cabinet-mod/ |
 | NBA Fastbreak Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22888-nba-fastbreak-cabinet-mod/ |
 | Cavalcade (Stoner 1935) MW MOD | MachWon | https://vpuniverse.com/files/file/22827-cavalcade-stoner-1935-mw-mod/ |
-| Tales from the Crypt (Data East 1993) remix patch | jmcgohon81 | https://vpuniverse.com/files/file/22824-tales-from-the-crypt-data-east-1993-remix-patch/ |
 | Super Mario Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22793-super-mario-cabinet-mod/ |
 | The Machine Bride Of Pinbot Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22766-the-machine-bride-of-pinbot-cabinet-mod/ |
 | Pinbot Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22765-pinbot-cabinet-mod/ |
@@ -125,5 +118,6 @@
 | Scared Stiff Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22175-scared-stiff-cabinet-mod/ |
 | The Who's Tommy Pinball Wizard Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22169-the-whos-tommy-pinball-wizard-cabinet-mod/ |
 | Monster Bash Cabinet Mod | LoadedWeapon | https://vpuniverse.com/files/file/22130-monster-bash-cabinet-mod/ |
-| Star Wars (Data East 1992) VPW - KidMode Patch | Supergibson | https://vpuniverse.com/files/file/21466-star-wars-data-east-1992-vpw-kidmode-patch/ |
 | Barbarella fur backdrop for desktop players | GauGau | https://vpuniverse.com/files/file/15322-barbarella-fur-backdrop-for-desktop-players/ |
+| Willy Wonka table mods | jcsk8 | https://vpuniverse.com/files/file/32128-willy-wonka-table-mods/ |
+| The Wizard of Oz table mods | jcsk8 | https://vpuniverse.com/files/file/31954-the-wizard-of-oz-table-mods/ |
