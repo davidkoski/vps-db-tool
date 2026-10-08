@@ -31,18 +31,20 @@ jobs:
             ${{ runner.os }}-spm-
 
       - name: Build
+        working-directory: ./VPSDB
         run: |
           swift package resolve
           swift build --skip-update
 
       - name: Report
+        working-directory: ./VPSDB
         run: swift run vps-db-tool report --cache /tmp --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json
 
       - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: report/
+          path: VPSDB/report/
 
   deploy:
     environment:

@@ -1,4 +1,5 @@
 import Collections
+import OrderedCollections
 import Foundation
 import ReerCodable
 
@@ -187,7 +188,32 @@ public struct GameContainer: Decodable {
 
     public init(from decoder: any Decoder) throws {
         do {
-            self.game = try Game(from: decoder)
+            func connect<T: GameResource>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>) {
+                let id = GameRef(id: game.id, name: game.name)
+                game[keyPath: keyPath] = game[keyPath: keyPath].map { i in
+                    var i = i
+                    i.gameResource.game = id
+                    return i
+                }
+            }
+
+            var game = try Game(from: decoder)
+            
+            connect(&game, \.tables)
+            connect(&game, \.backglasses)
+            connect(&game, \.tutorials)
+            connect(&game, \.roms)
+            connect(&game, \.pupPacks)
+            connect(&game, \.altColors)
+            connect(&game, \.altSounds)
+            connect(&game, \.sounds)
+            connect(&game, \.povs)
+            connect(&game, \.wheels)
+            connect(&game, \.toppers)
+            connect(&game, \.mediaPacks)
+            connect(&game, \.rules)
+
+            self.game = game
         } catch {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             let id = try container.decodeIfPresent(String.self, forKey: .id) ?? "missing"
@@ -290,8 +316,18 @@ public struct Game: Metadata, Sendable, CustomStringConvertible {
     public var shouldHaveIPDBEntry: Bool {
         manufacturer.shouldHaveIPDBEntry
     }
+    
+    public func matches(_ query: String) -> Bool {
+        gameId == query ||
+        gameName.lowercased().contains(query) ||
+        manufacturer.rawValue.lowercased().contains(query) ||
+        (year?.description ?? "").contains(query) ||
+        designers.contains { $0.lowercased().contains(query) } ||
+        theme.contains { $0.rawValue.lowercased().contains(query) } ||
+        tables.contains { ($0.gameResource.authors.first?.name.lowercased() ?? "").contains(query) }
+    }
 
-    subscript(kind: GameResourceKind) -> [any GameResource] {
+    public subscript(kind: GameResourceKind) -> [any GameResource] {
         switch kind {
         case .game: []
         case .table: tables
@@ -317,11 +353,17 @@ public struct Game: Metadata, Sendable, CustomStringConvertible {
 
 extension Game: Comparable {
     static public func < (lhs: Game, rhs: Game) -> Bool {
-        lhs.name < rhs.name
+        if lhs.name != rhs.name {
+            lhs.name < rhs.name
+        } else if let y1 = lhs.year, let y2 = rhs.year, y1 != y2 {
+            y1 < y2
+        } else {
+            lhs.id < rhs.id
+        }
     }
 }
 
-public enum GameResourceKind: String, Codable, Sendable, Comparable {
+public enum GameResourceKind: String, Codable, Sendable, Comparable, CaseIterable {
     case game
     case table
     case b2s

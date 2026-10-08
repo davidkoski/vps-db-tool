@@ -4,14 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "vps-db-tools",
+    name: "vps-db-tool",
 
     platforms: [
         .macOS(.v15)
     ],
 
     products: [
-        .executable(name: "vps-db-tool", targets: ["vps-db-tool"])
+        .executable(name: "vps-db-tool", targets: ["vps-db-tool"]),
+        .library(name: "VPSDB", targets: [
+            "VPSDB",
+        ])
     ],
     dependencies: [
         .package(
@@ -41,6 +44,7 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
                 .product(name: "ReerCodable", package: "ReerCodable"),
+                .product(name: "Collections", package: "swift-collections"),
             ]
         ),
         .testTarget(

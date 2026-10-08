@@ -241,8 +241,14 @@ struct CheckMissingCommand: AsyncParsableCommand {
     @OptionGroup var db: VPSDbArguments
     @OptionGroup var issues: IssuesArguments
     @OptionGroup var scan: ScanArguments
+    
+    enum Output: String, ExpressibleByArgument {
+        case markdown
+        case csv
+        case report
+    }
 
-    @Flag var markdown = false
+    @Option var output: Output = .markdown
 
     mutating func run() async throws {
         let db = try await db.database()
@@ -253,7 +259,8 @@ struct CheckMissingCommand: AsyncParsableCommand {
 
         var urls = try await scan.urls(scanner: scanner, client: client)
 
-        if markdown {
+        switch output {
+        case .markdown:
             print(
                 """
                 **Missing \(scan.kind)**
@@ -262,6 +269,10 @@ struct CheckMissingCommand: AsyncParsableCommand {
                 | ---- | ------ | --- |                
                 """
             )
+        case .csv:
+            print("name\tauthor\tversion\tdate\turl")
+        case .report:
+            break
         }
 
         while !urls.isEmpty {
@@ -279,11 +290,14 @@ struct CheckMissingCommand: AsyncParsableCommand {
                     if db[scan.kind][item.url] == nil {
                         let issue = URLIssue.entryNotFound(item)
                         if !issues.check(kind: scan.kind, url: item.url, issue: issue) {
-                            if markdown {
+                            switch output {
+                            case .markdown:
                                 print(
                                     "| \(item.name ?? "unknown") | \(item.author ?? "unknown" ) | \(item.url) |"
                                 )
-                            } else {
+                            case .csv:
+                                print("\(item.name ?? "unknown")\t\(item.author ?? "unknown")\t\(item.version ?? "1.0")\t\((item.date ?? Date()).timeIntervalSince1970)\t\(item.url)")
+                            case .report:
                                 print(issue.describe(kind: scan.kind, url: item.url))
                             }
                         }
