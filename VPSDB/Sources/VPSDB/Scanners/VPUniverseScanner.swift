@@ -99,6 +99,12 @@ extension VPUniverseScanner: DetailScanner {
         }
 
         let author: Author
+        
+        struct Screenshot: Codable {
+            let url: URL
+        }
+        
+        let screenshot: [Screenshot]?
 
         @DateCoding(.iso8601)
         let dateModified: Date?
@@ -172,8 +178,10 @@ extension VPUniverseScanner: DetailScanner {
                 name: meta.name,
                 author: meta.author.name,
                 version: meta.softwareVersion,
-                date: meta.dateModified,
+                date: meta.dateModified ?? meta.dateCreated,
                 ipdb: ipdbURL,
+                text: meta.description,
+                images: (meta.screenshot ?? []).map { $0.url },
                 features: features
             )
         }

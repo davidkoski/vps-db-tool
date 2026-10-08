@@ -19,19 +19,18 @@ public protocol ListScanner {
 }
 
 public struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible {
-    public init(
-        url: URL, name: String? = nil, author: String? = nil,
-        version: String? = nil, date: Date? = nil,
-        ipdb: URL? = nil, features: Set<TableFeature> = Set<TableFeature>()
-    ) {
+    public init(url: URL, name: String? = nil, author: String? = nil, version: String? = nil, date: Date? = nil, ipdb: URL? = nil, text: String? = nil, images: [URL] = [URL](), features: Set<TableFeature> = Set<TableFeature>()) {
         self.url = url
         self.name = name
         self.author = author
         self.version = version
         self.date = date
         self.ipdb = ipdb
+        self.text = text
+        self.images = images
         self.features = features
     }
+    
 
     public var url: URL
     public var name: String?
@@ -39,6 +38,8 @@ public struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible
     public var version: String?
     public var date: Date?
     public var ipdb: URL?
+    public var text: String?
+    public var images = [URL]()
     public var features = Set<TableFeature>()
 
     public func hash(into hasher: inout Hasher) {

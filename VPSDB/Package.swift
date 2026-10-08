@@ -52,6 +52,9 @@ let package = Package(
             dependencies: [
                 "VPSDB",
                 .product(name: "Collections", package: "swift-collections"),
+            ],
+            resources: [
+                .copy("Resources"),
             ]
         ),
     ]
