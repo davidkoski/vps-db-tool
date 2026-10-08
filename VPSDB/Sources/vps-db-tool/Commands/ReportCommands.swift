@@ -51,7 +51,8 @@ struct ReportCommand: AsyncParsableCommand {
         for s in scans {
             log.info("BEGIN SCAN \(s.0) \(s.1) follow=\(s.2)")
             do {
-                try await items.append(contentsOf: scan(site: s.0, kind: s.1, follow: s.2))
+                let scanResults = try await scan(site: s.0, kind: s.1, follow: s.2)
+                items.append(contentsOf: scanResults)
                 log.info("END SCAN \(s.0) \(s.1) ok")
             } catch {
                 log.error(
@@ -107,95 +108,75 @@ struct ReportCommand: AsyncParsableCommand {
     ) async throws -> [Item] {
         let db = try await db.database()
         var issues = try issues.database()
+
+        func match(_ item: DetailResult) -> [any Metadata]? {
+            switch kind {
+            case .rule:
+                // rules are sometimes used as the url for a tutorial, e.g. kongedam
+                db[kind][item.url] ?? db[.tutorial][item.url]
+            default:
+                db[kind][item.url]
+            }
+        }
+        
+        func followItem(_ item: DetailResult) -> Bool {
+            guard follow else { return false }
+            
+            if let match = match(item), let file = match.first, let game = db[file] {
+                // if we matched an existing file and want to folow links
+                // to check version
+                return true
+            }
+            
+            return false
+        }
+        
         let client = HTTPClient(cache: cache, throttle: .seconds(2))
-
-        let scanner: ScanSources & DetailScanner & ListScanner =
-            switch site {
-            case .vpu: VPUniverseScanner()
-            case .vpf: VPForumsScanner()
-            case .pinballnirvana, .other: fatalError()
-            }
-
-        log.info("SCAN \(site) \(kind)")
-
+        let details = try await gather(client: client, site: site, kind: kind, follow: followItem(_:))
+        
         var result = [Item]()
+        
+        for item in details {
+            if let match = match(item), let file = match.first, let game = db[file] {
+                // matches an existing item, check the version
+                if canonicalVersion(file.version) != canonicalVersion(item.version) {
+                    let issue = ResourceIssue.versionMismatch(item.version)
 
-        for listURL in scanner.sources(kind: kind) {
-            log.info("SCAN ITEM \(site) \(kind) \(listURL)")
+                    var report = !issues.check(
+                        game: game, kind: kind, gameResource: file, url: item.url,
+                        issue: issue)
 
-            let content: String
-            let scanResult: ListResult
-
-            do {
-                content = try await client.getString(listURL, bypassCache: true)
-                scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
-            } catch {
-                log.error(
-                    "Failed to gather from \(site) \(kind) \(listURL): \(type(of: error)) \(String(reflecting: error))"
-                )
-                continue
-            }
-
-            func match(_ item: DetailResult) -> [any Metadata]? {
-                switch kind {
-                case .rule:
-                    // rules are sometimes used as the url for a tutorial, e.g. kongedam
-                    db[kind][item.url] ?? db[.tutorial][item.url]
-                default:
-                    db[kind][item.url]
-                }
-            }
-
-            log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
-
-            for item in scanResult.list {
-                log.info("PROCESS \(site) \(kind): \(item.name ?? "unknown") \(item.url)")
-                if let match = match(item), let file = match.first, let game = db[file] {
-                    if follow {
-                        let rawVersion =
-                            if let v = item.version {
-                                v
-                            } else {
-                                await fetch(client, kind, scanner, item)
-                            }
-
-                        if canonicalVersion(file.version) != canonicalVersion(rawVersion) {
-                            let issue = ResourceIssue.versionMismatch(rawVersion)
-
-                            var report = !issues.check(
-                                game: game, kind: kind, gameResource: file, url: item.url,
-                                issue: issue)
-
-                            if report && recordIssues {
-                                report =
-                                    issues.report(
-                                        game: game, kind: kind, gameResource: file,
-                                        url: item.url, issue: issue) == .willFix
-                            }
-
-                            if report {
-                                result.append(
-                                    .init(
-                                        url: item.url, name: item.name ?? "unknown",
-                                        author: item.author ?? "unknown", kind: kind,
-                                        issue:
-                                            "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(rawVersion))",
-                                        date: item.date ?? Date()
-                                    ))
-                            }
-                        }
+                    if report && recordIssues {
+                        report =
+                            issues.report(
+                                game: game, kind: kind, gameResource: file,
+                                url: item.url, issue: issue) == .willFix
                     }
-                } else {
-                    let issue = URLIssue.entryNotFound(item)
-                    if !issues.check(kind: kind, url: item.url, issue: issue) {
+
+                    if report {
                         result.append(
                             .init(
                                 url: item.url, name: item.name ?? "unknown",
                                 author: item.author ?? "unknown", kind: kind,
-                                issue: "missing",
+                                issue:
+                                    "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(item.version))",
                                 date: item.date ?? Date()
                             ))
                     }
+                } else {
+                    // no version mismatch, nothing to report
+                }
+            } else {
+                // no existing file, report as missing
+                let issue = URLIssue.entryNotFound(item)
+                if !issues.check(kind: kind, url: item.url, issue: issue) {
+                    result.append(
+                        .init(
+                            url: item.url, name: item.name ?? "unknown",
+                            author: item.author ?? "unknown", kind: kind,
+                            issue: "missing",
+                            date: item.date ?? Date()
+                        ))
                 }
             }
         }

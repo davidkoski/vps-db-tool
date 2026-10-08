@@ -19,6 +19,9 @@ struct ScannerTests {
         #expect(detail.name == "Dogelon Mars Pinball")
         #expect(detail.version == "1.0")
         #expect(detail.author == "Cisano")
+        #expect(detail.date?.timeIntervalSince1970 == 1706030940)
+        #expect((detail.text ?? "").hasPrefix("My first Pinball with simple"))
+        #expect((detail.images ?? []).count == 1)
     }
 
     @Test func testVPU() async throws {
@@ -34,7 +37,7 @@ struct ScannerTests {
         #expect(detail.author == "oly2")
         #expect(detail.date?.timeIntervalSince1970 == 1706377662)
         #expect((detail.text ?? "").hasPrefix("First of all,"))
-        #expect(detail.images.count == 3)
+        #expect((detail.images ?? []).count == 3)
     }
 
 }

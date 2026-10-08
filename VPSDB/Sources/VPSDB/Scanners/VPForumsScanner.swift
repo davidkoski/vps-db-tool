@@ -150,32 +150,56 @@ extension VPForumsScanner: DetailScanner {
          */
 
         if let titleVersion = try html.select("h1.ipsType_pagetitle").first() {
-            let text = try titleVersion.text()
+            let titleText = try titleVersion.text()
                 .replacingOccurrences(of: "Download ", with: "")
 
-            let (name, version) = splitName(text)
+            let (name, version) = splitName(titleText)
 
             var date: Date?
             let dateText = try html.select("li strong")
             for item in dateText.array() {
-                if try item.text().hasPrefix("Last Updated") {
+                if try item.text().hasPrefix("Last Updated:"), let text = try item.parent()?.text() {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "MMM dd yyyy hh:mm a"
                     formatter.locale = Locale(identifier: "en_US_POSIX")
 
                     date = formatter.date(
-                        from: text.replacingOccurrences(of: "Last Updated", with: "")
+                        from: text.replacingOccurrences(of: "Last Updated:", with: "")
                             .trimmingCharacters(in: .whitespacesAndNewlines))
                     break
+                }
+            }
+            
+            var author: String?
+            let author1 = try html.select(".name")
+            let author2 = try html.select(".ipsType_subtitle")
+            let authorElement = author1.isEmpty() ? author2 : author1
+            if !authorElement.isEmpty() {
+                author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
+            }
+            
+            var text: String?
+            let textElement = try html.select(".description_content")
+            if !textElement.isEmpty() {
+                text = try textElement[0].text(trimAndNormaliseWhitespace: true)
+            }
+            
+            var images: [URL]?
+            let screenShotElement = try html.select(".screenshot.primary")
+            if !screenShotElement.isEmpty() {
+                if let image = try URL(string: screenShotElement.attr("href")) {
+                    images = [image]
                 }
             }
 
             return .init(
                 url: Site(url).canonicalize(url),
                 name: name,
-                author: nil,
+                author: author,
                 version: version,
-                date: date
+                date: date,
+                text: text,
+                images: images
             )
         }
 
