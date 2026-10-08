@@ -72,6 +72,7 @@ let starTrek3 = Game(
     broken: false, urls: [])
 
 let testDatabase = Database(
+    url: nil,
     games: [
         flashGordon.id: flashGordon,
         flash.id: flash,

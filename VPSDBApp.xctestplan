@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "4D70EAD3-321A-49A7-8249-4D9A0DF4BB37",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:VPSDBApp.xcodeproj",
+      "identifier" : "000000000000000100000000",
+      "name" : "VPSDBApp"
+    },
+    "testInteropMode" : "complete"
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:VPSDB",
+        "identifier" : "VPSDBTests",
+        "name" : "VPSDBTests"
+      }
+    }
+  ],
+  "version" : 1
+}
