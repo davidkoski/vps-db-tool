@@ -181,7 +181,7 @@ extension VPUniverseScanner: DetailScanner {
                 date: meta.dateModified ?? meta.dateCreated,
                 ipdb: ipdbURL,
                 text: meta.description,
-                images: (meta.screenshot ?? []).map { $0.url },
+                images: meta.screenshot?.map { $0.url },
                 features: features
             )
         }
