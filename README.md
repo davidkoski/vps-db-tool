@@ -17,7 +17,7 @@ swift run vps-db-tool scan check-missing --site vpu --pages 85 --markdown > miss
 ```
 
 ```
-swift run vps-db-tool scan check-missing --cache /tmp/c --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json --kind rule --pages 4 --markdown > missing/rules.md
+swift run vps-db-tool scan check-missing --cache /tmp/c --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json --kind rule --pages 4 --output markdown > missing/rules.md
 ```
 
 ## Ideas

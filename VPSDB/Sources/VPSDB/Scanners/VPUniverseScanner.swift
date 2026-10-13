@@ -57,7 +57,7 @@ extension VPUniverseScanner: ScanSources {
         return urls.compactMap { URL(string: $0) }
     }
 
-    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
+    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL? {
         if page > 1 {
             return url.appending(components: "page", page.description)
         } else {
@@ -67,25 +67,6 @@ extension VPUniverseScanner: ScanSources {
 }
 
 extension VPUniverseScanner: DetailScanner {
-
-    func scanFeatures(_ text: String) -> Set<TableFeature> {
-        var result = Set<TableFeature>()
-
-        if text.contains(/fozzy/.ignoresCase()) {
-            result.insert(.nFozzy)
-        }
-        if text.contains(/fleep/.ignoresCase()) {
-            result.insert(.fleep)
-        }
-        if text.contains(/vr ?room/.ignoresCase()) {
-            result.insert(.vr)
-        }
-        if text.contains(/Mixed Reality/.ignoresCase()) {
-            result.insert(.mixedReality)
-        }
-
-        return result
-    }
 
     @Codable
     struct Meta {
@@ -99,11 +80,11 @@ extension VPUniverseScanner: DetailScanner {
         }
 
         let author: Author
-        
+
         struct Screenshot: Codable {
             let url: URL
         }
-        
+
         let screenshot: [Screenshot]?
 
         @DateCoding(.iso8601)
@@ -168,21 +149,23 @@ extension VPUniverseScanner: DetailScanner {
                     Meta.self, from: script.html().data(using: .utf8)!)
             else { continue }
 
-            var features = scanFeatures(meta.description)
-            if vr {
-                features.insert(.vr)
-            }
+            let text =
+                if vr {
+                    meta.description + " VR Room"
+                } else {
+                    meta.description
+                }
 
             return .init(
-                url: Site(url).canonicalize(url),
+                url: url,
+                kind: kind,
                 name: meta.name,
                 author: meta.author.name,
                 version: meta.softwareVersion,
                 date: meta.dateModified ?? meta.dateCreated,
                 ipdb: ipdbURL,
-                text: meta.description,
-                images: meta.screenshot?.map { $0.url },
-                features: features
+                text: text,
+                images: meta.screenshot?.map { $0.url }
             )
         }
 
@@ -235,7 +218,7 @@ extension VPUniverseScanner: ListScanner {
             let date = ISO8601DateFormatter().date(from: dateTime)
 
             if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
-                items.append(.init(url: url, name: title, author: author, date: date))
+                items.append(.init(url: url, kind: kind, name: title, author: author, date: date))
             }
         }
 

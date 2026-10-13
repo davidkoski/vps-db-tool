@@ -14,8 +14,24 @@ public struct GameResourceCommon: Sendable, Equatable {
     public var version: String?
 }
 
+extension GameResourceCommon {
+    /// Common fields for a new resource built from a scanned detail page.
+    public init(detail: DetailResult, game: Game, db: Database, comment: String? = nil) {
+        self.init(
+            createdAt: detail.date,
+            updatedAt: Date(),
+            comment: comment,
+            game: GameRef(game: game),
+            urls: [Resource(url: detail.normalizedURL, broken: false)],
+            authors: [db.matchAuthor(name: detail.author)],
+            version: detail.version
+        )
+    }
+}
+
 public protocol GameResource: Metadata, Equatable {
     var gameResource: GameResourceCommon { get set }
+    var kind: GameResourceKind { get }
 }
 
 extension GameResource {
@@ -45,6 +61,22 @@ extension GameResource {
 
     public var gameName: String {
         gameResource.game.name
+    }
+
+    func matchAuthor(_ name: String) -> Author? {
+        gameResource.authors.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+    }
+}
+
+extension Array where Element: GameResource {
+
+    func matchAuthor(_ name: String) -> Author? {
+        for item in self {
+            if let author = item.matchAuthor(name) {
+                return author
+            }
+        }
+        return nil
     }
 
 }

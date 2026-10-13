@@ -1,0 +1,173 @@
+{
+  "suppressedURLs" : {
+    "https://vpuniverse.com/files/file/27897-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/29542-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/29555-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/30280-any/" : {
+      "version" : {
+        "parsed" : "1.3"
+      }
+    },
+    "https://vpuniverse.com/files/file/31001-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Seven-Seas"
+      }
+    },
+    "https://vpuniverse.com/files/file/31337-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "sfiWmEeN"
+        ],
+        "name" : "Welcome To Derry Pup Videos Expansion Pack"
+      }
+    },
+    "https://vpuniverse.com/files/file/31541-any/" : {
+      "version" : {
+        "parsed" : "2.0 and VR 2.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/32060-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Spyro"
+      }
+    },
+    "https://vpuniverse.com/files/file/32184-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ding Dong"
+      }
+    },
+    "https://vpuniverse.com/files/file/32316-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ramp Warrior"
+      }
+    },
+    "https://vpuniverse.com/files/file/32329-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Royal Play"
+      }
+    },
+    "https://vpuniverse.com/files/file/32357-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Astro Bot Pinball"
+      }
+    },
+    "https://vpuniverse.com/files/file/32358-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Metal Gear Solid - Tactical Espionage Pinball"
+      }
+    },
+    "https://vpuniverse.com/files/file/32391-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ramp Warrior"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19826" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "COMICS"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19932" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Blue Max"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19939" : {
+      "version" : {
+        "parsed" : "0.0"
+      }
+    },
+    "https://www.youtube.com/watch?v=-F3Tan2qhE0" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "pYOREKXd"
+        ],
+        "name" : "Dialed In Pinball Tutorial"
+      }
+    },
+    "https://www.youtube.com/watch?v=2lzyh7ku28w" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=ClEhw7MnFHY" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=H-obxLZfBj0" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=P0cDQDNuZKY" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=Qjmja7fNdPQ" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=lKd9-SWfzsk" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.youtube.com/watch?v=roJbHZe4YfQ" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "QMLNe1qCrN"
+        ],
+        "name" : "Godzilla Pinball Tutorial"
+      }
+    },
+    "https://www.youtube.com/watch?v=xHd0su1lLF4" : {
+      "permanent" : {
+
+      }
+    }
+  }
+}

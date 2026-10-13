@@ -20,6 +20,11 @@ public struct IPDB: Sendable {
 
 extension IPDB {
 
+    public init() {
+        entries = [:]
+        byName = [:]
+    }
+
     public init(html url: URL) throws {
         let data = try Data(contentsOf: url)
         let str = data.withUnsafeBytes { ptr in
@@ -100,4 +105,32 @@ extension IPDB {
         self.byName = Dictionary(grouping: entries.values, by: \.name)
     }
 
+    public func search(name: String, manufacturer: Manufacturer?, year: Int?) -> [Entry] {
+
+        func canonicalize(_ string: String) -> String {
+            String(string.lowercased().filter { $0.isLetter || $0.isNumber })
+        }
+
+        let name = canonicalize(name)
+
+        return entries
+            .values
+            .filter { entry in
+                var match = false
+                let entryName = canonicalize(entry.name)
+                if entryName.contains(name) || name.contains(entryName) {
+                    match = true
+                }
+                if match, let manufacturer, entry.manufacturer != manufacturer {
+                    match = false
+                }
+                if match, let year, entry.year != year {
+                    match = false
+                }
+                return match
+            }
+            .sorted {
+                ($0.name, $0.year, $0.id) < ($1.name, $1.year, $1.id)
+            }
+    }
 }

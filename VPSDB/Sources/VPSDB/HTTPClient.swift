@@ -12,23 +12,23 @@ enum HTTPError: Error {
     case response(URL, HTTPResponseStatus, String)
 }
 
-public class HTTPClient {
+public final class HTTPClient: Sendable {
 
-    var client: AsyncHTTPClient.HTTPClient
+    let client: AsyncHTTPClient.HTTPClient
 
     let userAgent =
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.4 Safari/605.1.15"
 
     let cache: URL?
 
+    let lock = NSLock()
     let throttle: Duration?
-    var lastRequest: ContinuousClock.Instant?
+    nonisolated(unsafe) var lastRequest = [String: ContinuousClock.Instant]()
 
     public init(cache: URL? = nil, throttle: Duration? = nil) {
         self.client = .init()
         self.cache = cache
         self.throttle = throttle
-        self.lastRequest = nil
     }
 
     deinit {
@@ -52,16 +52,36 @@ public class HTTPClient {
         return s.hasSuffix(".html") ? s : s + ".html"
     }
 
-    public func get(_ url: URL, bypassCache: Bool = false) async throws -> Data {
+    func cacheEntry(url: URL, newerThan maxAge: Duration) -> Bool {
+        guard let values = try? url.resourceValues(forKeys: [.contentModificationDateKey]) else {
+            return false
+        }
+
+        guard let modificationDate = values.contentModificationDate else {
+            return false
+        }
+
+        let age: Duration = .seconds(Date.now.timeIntervalSince(modificationDate))
+        return age < maxAge
+    }
+
+    public func get(
+        _ url: URL, bypassCache: Bool = false, maxAge: Duration? = nil
+    ) async throws -> Data {
         let cache = cache?.appending(path: pathify(url))
         if !bypassCache, let cache {
-            if let data = try? Data(contentsOf: cache) {
+            var read = true
+            if let maxAge {
+                read = cacheEntry(url: cache, newerThan: maxAge)
+            }
+            if read, let data = try? Data(contentsOf: cache) {
                 return data
             }
         }
 
+        let domain = url.host() ?? "host"
         if let throttle {
-            if let lastRequest {
+            if let lastRequest = lock.withLock({ lastRequest[domain] }) {
                 let now = ContinuousClock.Instant.now
                 let diff = now - lastRequest
                 if diff < throttle {
@@ -87,7 +107,9 @@ public class HTTPClient {
 
                 let data = try await response.body.collect(upTo: 100 * 1024 * 1024)
 
-                lastRequest = ContinuousClock.Instant.now
+                lock.withLock {
+                    lastRequest[domain] = ContinuousClock.Instant.now
+                }
 
                 if let data = data.getData(at: data.readerIndex, length: data.readableBytes) {
                     if let cache {
@@ -107,8 +129,6 @@ public class HTTPClient {
                 count += 1
                 if count < retryMax {
                     log.info("deadlineExceeded, retry \(count)/\(retryMax) \(url)")
-                    try? await client.shutdown()
-                    client = .init()
                     try await Task.sleep(for: .seconds(10))
                 } else {
                     log.error("GET giving up after \(count) attempts \(url)")
@@ -122,8 +142,10 @@ public class HTTPClient {
         }
     }
 
-    public func getString(_ url: URL, bypassCache: Bool = false) async throws -> String {
-        let data = try await get(url, bypassCache: bypassCache)
+    public func getString(
+        _ url: URL, bypassCache: Bool = false, maxAge: Duration? = nil
+    ) async throws -> String {
+        let data = try await get(url, bypassCache: bypassCache, maxAge: maxAge)
         if let s = String(data: data, encoding: .utf8) {
             return s
         }

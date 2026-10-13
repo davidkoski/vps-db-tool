@@ -11,7 +11,7 @@ struct VPSDbTool: AsyncParsableCommand {
         subcommands: [
             DownloadCommand.self, CheckCommands.self, ExploreCommand.self,
             IPDBCommands.self, ScanCommands.self, EditCommands.self,
-            IssueCommands.self, ReportCommand.self, TutorialCommands.self,
+            ReportCommand.self, TutorialCommands.self,
             ImportCommands.self,
         ]
     )
@@ -23,6 +23,22 @@ struct VPSDbArguments: ParsableArguments, Sendable {
     var path: URL = URL(fileURLWithPath: "../vps-db/db/vpsdb.json")
 
     private var db: Database?
+
+    @Option(name: .customLong("document"), help: "Path to VPSDB.vpsdbdoc")
+    var document: URL?
+
+    public func suppressedURLs() throws -> [URL: SuppressionReason] {
+        if let document {
+            let data = try Data(contentsOf: document)
+            let document = try JSONDecoder().decode(Document.self, from: data)
+            return Dictionary(
+                uniqueKeysWithValues: document.suppressedURLs.map {
+                    (URL(string: $0.key)!, $0.value)
+                })
+        } else {
+            return [:]
+        }
+    }
 
     enum HTTPError: Error {
         case httpError(Int, String)
@@ -54,28 +70,6 @@ struct VPSDbArguments: ParsableArguments, Sendable {
     }
 }
 
-struct IssuesArguments: ParsableArguments, Sendable {
-
-    @Option(name: .customLong("issues"), help: "Path to issues.json")
-    var path: URL = URL(fileURLWithPath: "issues.json")
-
-    private var db: IssueDatabase?
-
-    mutating func database() throws -> IssueDatabase {
-        if let db {
-            return db
-        }
-
-        let db = try JSONDecoder().decode(IssueDatabase.self, from: Data(contentsOf: path))
-        self.db = db
-        return db
-    }
-
-    mutating func update(_ db: IssueDatabase) {
-        self.db = db
-    }
-
-    func save(db: IssueDatabase) throws {
-        try JSONEncoder().encode(db).write(to: path, options: .atomic)
-    }
+struct Document: Codable {
+    var suppressedURLs = [String: SuppressionReason]()
 }

@@ -1,9 +1,11 @@
 import Foundation
 
-public enum Site: String, Sendable {
+public enum Site: String, Sendable, Codable {
     case vpu = "VPU"
     case vpf = "VPF"
     case pinballnirvana = "Nirvana"
+    case pinballPrimer = "Pinball Primer"
+    case youtube = "YouTube"
     case other = "Other"
 
     public init?(_ url: URL?) {
@@ -19,9 +21,14 @@ public enum Site: String, Sendable {
         case "vpuniverse.com": self = .vpu
         case "www.vpforums.org": self = .vpf
         case "pinballnirvana.com": self = .pinballnirvana
+        case "pinballprimer.github.io": self = .pinballPrimer
+        case "www.youtube.com", "youtube.com", "m.youtube.com", "music.youtube.com", "youtu.be":
+            self = .youtube
         default: self = .other
         }
     }
+
+    public static let scanSites = [Site.vpu, .vpf, .pinballPrimer, .youtube]
 
     public static func canonical(_ url: URL) -> URL {
         Site(url).canonicalize(url)
@@ -64,7 +71,9 @@ public enum Site: String, Sendable {
                 .replacing(/#$/, with: "")
             return URL(string: string)!
 
+        case .youtube: return youtubeWatchURL(url) ?? url
         case .pinballnirvana: return url
+        case .pinballPrimer: return url
         case .other: return url
         }
     }
@@ -109,8 +118,39 @@ public enum Site: String, Sendable {
                 .replacing(/#$/, with: "")
             return URL(string: string)!
 
+        case .youtube: return youtubeWatchURL(url) ?? url
         case .pinballnirvana: return url
+        case .pinballPrimer: return url
         case .other: return url
         }
     }
+}
+
+/// Extract the video id from the various forms of YouTube URL:
+///
+/// - `https://www.youtube.com/watch?v=ID&list=...`
+/// - `https://youtu.be/ID?t=10`
+/// - `https://www.youtube.com/shorts/ID`, `/embed/ID`, `/live/ID`, `/v/ID`
+public func youtubeVideoId(_ url: URL) -> String? {
+    guard Site(url) == .youtube else { return nil }
+
+    let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+    if let v = components?.queryItems?.first(where: { $0.name == "v" })?.value, !v.isEmpty {
+        return v
+    }
+
+    let path = url.pathComponents.filter { $0 != "/" }
+    if url.host() == "youtu.be" {
+        return path.first
+    }
+    if path.count >= 2, ["shorts", "embed", "live", "v"].contains(path[0]) {
+        return path[1]
+    }
+    return nil
+}
+
+/// Canonical `https://www.youtube.com/watch?v=ID` form of a YouTube URL.
+public func youtubeWatchURL(_ url: URL) -> URL? {
+    guard let id = youtubeVideoId(url) else { return nil }
+    return URL(string: "https://www.youtube.com/watch?v=\(id)")
 }

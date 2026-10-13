@@ -1,12 +1,14 @@
 import Collections
-import OrderedCollections
 import Foundation
+import OrderedCollections
 import ReerCodable
 
 public func canonicalVersion(_ string: String?) -> String {
     (string ?? "")
-        .replacingOccurrences(of: "v", with: "")
         .replacingOccurrences(of: "Version", with: "")
+        .replacingOccurrences(of: "FizX3.3", with: "")
+        .replacingOccurrences(of: "v", with: "")
+        .replacingOccurrences(of: "V", with: "")
         .replacingOccurrences(of: " ", with: "")
         .replacing(/[.]0+$/, with: { _ in "" })
         .replacing(/[.]0+$/, with: { _ in "" })
@@ -42,9 +44,11 @@ public struct GameRef: Sendable, Equatable {
     }
 }
 
+public let imageBase = URL(string: "https://virtualpinballspreadsheet.github.io/vps-db/img")!
+
 @Codable
 public struct Table: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
@@ -59,6 +63,38 @@ public struct Table: GameResource, Sendable {
     public var gameFileName: String?
 
     public var imgUrl: URL?
+
+    public var kind: GameResourceKind { .table }
+
+    /// New table from a scanned page -- features are scanned from the text.
+    /// `imgUrl` is left for the image processing (crop / upload).
+    public init(detail: DetailResult, game: Game, db: Database) {
+        let scanned = TableFeature.scan(detail.text)
+        self.init(
+            id: newId(),
+            gameResource: .init(detail: detail, game: game, db: db),
+            parentId: nil,
+            features: OrderedSet(TableFeature.allCases.filter { scanned.contains($0) }),
+            tableFormat: nil,
+            edition: nil,
+            gameFileName: nil,
+            imgUrl: nil)
+    }
+
+    public func hasFeature(_ feature: TableFeature) -> Bool {
+        features.contains(feature)
+    }
+
+    /// Add / remove a feature, keeping the features in canonical (`allCases`) order.
+    public mutating func setFeature(_ feature: TableFeature, _ on: Bool) {
+        var set = Set(features)
+        if on {
+            set.insert(feature)
+        } else {
+            set.remove(feature)
+        }
+        features = OrderedSet(TableFeature.allCases.filter { set.contains($0) })
+    }
 }
 
 @Codable
@@ -66,17 +102,48 @@ public struct B2S: GameResource, Sendable {
     // Note: b2s for FX tables don't have an id
     public var id: String = newId()
 
-    @CustomCoding(OmitEmpty<OrderedSet<B2SFeature>>.self) let features: OrderedSet<B2SFeature>
+    @CustomCoding(OmitEmpty<OrderedSet<B2SFeature>>.self) public var features:
+        OrderedSet<B2SFeature>
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
 
     public var imgUrl: URL?
+
+    public var kind: GameResourceKind { .b2s }
+
+    /// New backglass from a scanned page -- features are scanned from the text.
+    /// `imgUrl` is left for the image processing (crop / upload).
+    public init(detail: DetailResult, game: Game, db: Database) {
+        let scanned = B2SFeature.scan(detail.text)
+        self.init(
+            id: newId(),
+            features: OrderedSet(B2SFeature.allCases.filter { scanned.contains($0) }),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanB2Text(detail.name, detail.text)),
+            imgUrl: nil)
+    }
+
+    public func hasFeature(_ feature: B2SFeature) -> Bool {
+        features.contains(feature)
+    }
+
+    /// Add / remove a feature, keeping the features in canonical (`allCases`) order.
+    public mutating func setFeature(_ feature: B2SFeature, _ on: Bool) {
+        var set = Set(features)
+        if on {
+            set.insert(feature)
+        } else {
+            set.remove(feature)
+        }
+        features = OrderedSet(B2SFeature.allCases.filter { set.contains($0) })
+    }
 }
 
 @Codable
 public struct Tutorial: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
@@ -89,27 +156,68 @@ public struct Tutorial: GameResource, Sendable {
         // the url property is used rather than the list of urls
         [url].compactMap { $0 }
     }
+
+    public var kind: GameResourceKind { .tutorial }
+
+    /// New tutorial from a scanned page.
+    ///
+    /// YouTube videos are stored by `youtubeId` (with the watch url in the
+    /// common urls), anything else in `url`.
+    public init(detail: DetailResult, game: Game, db: Database) {
+        var common = GameResourceCommon(detail: detail, game: game, db: db)
+
+        // we don't store anything in the common urls
+        common.urls = []
+        common.version = nil
+
+        // tutorials aren't versioned
+        common.version = nil
+
+        let youtubeId = youtubeVideoId(detail.url)
+        self.init(
+            id: newId(), gameResource: common, youtubeId: youtubeId,
+            url: youtubeId == nil ? detail.url : nil,
+            title: detail.name)
+    }
 }
 
 @Codable
 public struct ROM: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .rom }
+
+    /// The version of a ROM is its name, e.g. `amh_022` -- taken from the
+    /// first zip file name (`amh_022.zip`) mentioned in the detail text.
+    public init(detail: DetailResult, game: Game, db: Database) {
+        var common = GameResourceCommon(detail: detail, game: game, db: db)
+        if let name = scanROMName(detail.text) {
+            common.version = name
+        }
+        self.init(id: newId(), gameResource: common)
+    }
 }
 
 @Codable
 public struct PupPack: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .pupPack }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(id: newId(), gameResource: .init(detail: detail, game: game, db: db))
+    }
 }
 
 @Codable
 public struct AltColors: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
@@ -117,14 +225,33 @@ public struct AltColors: GameResource, Sendable {
     public var fileName: String?
     public var folder: String?
     public var type: String?
+
+    public var kind: GameResourceKind { .altColor }
+
+    /// New alt color from a scanned page -- the folder defaults to the game's
+    /// (first) ROM name, e.g. `mm_109c`.
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(
+            id: newId(),
+            gameResource: .init(detail: detail, game: game, db: db),
+            fileName: nil,
+            folder: game.roms.first?.version,
+            type: nil)
+    }
 }
 
 @Codable
 public struct AltSound: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .altSound }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(id: newId(), gameResource: .init(detail: detail, game: game, db: db))
+    }
 }
 
 @Codable
@@ -132,48 +259,92 @@ public struct Sound: GameResource, Sendable {
     // Note: these are largely missing -- sound files look obsolete
     public var id: String = newId()
 
+    public var kind: GameResourceKind { .sound }
+
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
 }
 
 @Codable
 public struct POV: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .pov }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(
+            id: newId(),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanPOVText(detail.name, detail.text)))
+    }
 }
 
 @Codable
 public struct WheelArt: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .wheelArt }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(
+            id: newId(),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanWheelText(detail.name, detail.text)))
+    }
 }
 
 @Codable
 public struct Topper: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .topper }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(id: newId(), gameResource: .init(detail: detail, game: game, db: db))
+    }
 }
 
 @Codable
 public struct MediaPack: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .mediaPack }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(id: newId(), gameResource: .init(detail: detail, game: game, db: db))
+    }
 }
 
 @Codable
 public struct Rules: GameResource, Sendable {
-    public let id: String
+    public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public var kind: GameResourceKind { .rule }
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(
+            id: newId(),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanRuleText(detail.name, detail.text)))
+    }
 }
 
 public struct GameDecodeError: Error {
@@ -188,7 +359,8 @@ public struct GameContainer: Decodable {
 
     public init(from decoder: any Decoder) throws {
         do {
-            func connect<T: GameResource>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>) {
+            func connect<T: GameResource>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>)
+            {
                 let id = GameRef(id: game.id, name: game.name)
                 game[keyPath: keyPath] = game[keyPath: keyPath].map { i in
                     var i = i
@@ -198,7 +370,7 @@ public struct GameContainer: Decodable {
             }
 
             var game = try Game(from: decoder)
-            
+
             connect(&game, \.tables)
             connect(&game, \.backglasses)
             connect(&game, \.tutorials)
@@ -249,7 +421,7 @@ public struct IPDBURL: CodingCustomizable {
 }
 
 @Codable
-public struct Game: Metadata, Sendable, CustomStringConvertible {
+public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
 
     public let id: String
 
@@ -316,15 +488,73 @@ public struct Game: Metadata, Sendable, CustomStringConvertible {
     public var shouldHaveIPDBEntry: Bool {
         manufacturer.shouldHaveIPDBEntry
     }
-    
+
     public func matches(_ query: String) -> Bool {
-        gameId == query ||
-        gameName.lowercased().contains(query) ||
-        manufacturer.rawValue.lowercased().contains(query) ||
-        (year?.description ?? "").contains(query) ||
-        designers.contains { $0.lowercased().contains(query) } ||
-        theme.contains { $0.rawValue.lowercased().contains(query) } ||
-        tables.contains { ($0.gameResource.authors.first?.name.lowercased() ?? "").contains(query) }
+        gameId == query || gameName.lowercased().contains(query)
+            || manufacturer.rawValue.lowercased().contains(query)
+            || (year?.description ?? "").contains(query)
+            || designers.contains { $0.lowercased().contains(query) }
+            || theme.contains { $0.rawValue.lowercased().contains(query) }
+            || tables.contains {
+                ($0.gameResource.authors.first?.name.lowercased() ?? "").contains(query)
+            }
+    }
+
+    func matchAuthor(_ name: String) -> Author? {
+        func match(_ array: [any GameResource]) -> Author? {
+            for item in array {
+                if let author = item.matchAuthor(name) {
+                    return author
+                }
+            }
+            return nil
+        }
+
+        return match(tables) ?? match(backglasses) ?? match(tutorials) ?? match(roms) ?? match(
+            pupPacks) ?? match(altColors) ?? match(altSounds) ?? match(povs) ?? match(wheels)
+    }
+
+    func collect(authors set: inout Set<String>) {
+        func collect(_ array: [any GameResource]) {
+            for item in array {
+                set.formUnion(item.gameResource.authors.map { $0.name })
+            }
+        }
+
+        collect(tables)
+        collect(backglasses)
+        collect(tutorials)
+        collect(roms)
+        collect(pupPacks)
+        collect(altColors)
+        collect(altSounds)
+        collect(povs)
+        collect(wheels)
+    }
+
+    public func shouldMergeURL<T: GameResource>(_ item: T) -> T? {
+        guard let firstAuthor = item.gameResource.authors.first else { return nil }
+        guard let url = item.url else { return nil }
+
+        let targetSites: Set<Site> =
+            switch Site(url) {
+            case .vpf: [.vpu, .pinballnirvana]
+            case .vpu: [.vpf, .pinballnirvana]
+            case .pinballnirvana: [.vpu, .vpf]
+            default: []
+            }
+
+        if targetSites.isEmpty { return nil }
+
+        return self[item.kind].first {
+            if $0.gameResource.authors.first == firstAuthor {
+                let url = $0.url
+                if let site = Site(url), targetSites.contains(site) {
+                    return true
+                }
+            }
+            return false
+        } as? T
     }
 
     public subscript(kind: GameResourceKind) -> [any GameResource] {
@@ -348,6 +578,67 @@ public struct Game: Metadata, Sendable, CustomStringConvertible {
 
     public var description: String {
         "\(self.name) \(self.manufacturer) (\(self.year ?? 0))"
+    }
+}
+
+extension Game {
+    /// Replace the resource with the same id at `keyPath`, or append it if not present.
+    public mutating func upsert<R: GameResource>(
+        _ resource: R, at keyPath: WritableKeyPath<Game, [R]>
+    ) {
+        if let index = self[keyPath: keyPath].firstIndex(where: { $0.id == resource.id }) {
+            self[keyPath: keyPath][index] = resource
+        } else {
+            self[keyPath: keyPath].append(resource)
+        }
+    }
+}
+
+extension Game {
+    /// A new game, not yet in the database.
+    public init(
+        name: String,
+        manufacturer: Manufacturer = .unknown,
+        year: Int? = nil,
+        type: Kind? = nil,
+        players: Int? = nil,
+        ipdbUrl: URL? = nil,
+        designers: [String] = [],
+        themes: [Theme] = []
+    ) {
+        let now = Date()
+        self.init(
+            id: newId(10),
+            createdAt: now,
+            updatedAt: now,
+            lastCreatedAt: now,
+            name: name,
+            manufacturer: manufacturer,
+            imageUrl: nil,
+            mpu: nil,
+            year: year,
+            theme: OrderedSet(themes),
+            designers: OrderedSet(designers),
+            type: type,
+            players: players,
+            ipdbUrl: ipdbUrl,
+            imgUrl: nil,
+            tables: [],
+            backglasses: [],
+            tutorials: [],
+            roms: [],
+            pupPacks: [],
+            altColors: [],
+            altSounds: [],
+            povs: [],
+            wheels: [],
+            toppers: [],
+            mediaPacks: [],
+            rules: [],
+            sounds: [],
+            broken: false,
+            urls: []
+        )
     }
 }
 

@@ -1,5 +1,6 @@
 import Foundation
 import Logging
+import ReerCodable
 
 private let log = Logger(label: "Scanner")
 
@@ -10,40 +11,80 @@ public enum ScanVariant: String, Codable {
 
 public protocol ScanSources {
     func sources(kind: GameResourceKind) -> [URL]
-    func update(kind: GameResourceKind, url: URL, page: Int) -> URL
+    func update(kind: GameResourceKind, url: URL, page: Int) -> URL?
 }
 
-public protocol DetailScanner {
+public protocol DetailScanner: Sendable {
     func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult?
 }
 
-public protocol ListScanner {
+public protocol ListScanner: Sendable {
     func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult
 }
 
-public struct DetailResult: Codable, Hashable, Sendable, CustomStringConvertible {
-    public init(url: URL, name: String? = nil, author: String? = nil, version: String? = nil, date: Date? = nil, ipdb: URL? = nil, text: String? = nil, images: [URL]? = nil, features: Set<TableFeature> = Set<TableFeature>()) {
-        self.url = url
-        self.name = name
-        self.author = author
-        self.version = version
-        self.date = date
-        self.ipdb = ipdb
-        self.text = text
-        self.images = images
-        self.features = features
-    }
-    
+private let authorMap = [
+    "pinballprimer.github.io": "Pinball Primer",
+    "animusan2": "Animusan",
+    "flyingdutchman": "Flying Dutchman",
+    "xfl": "PinRich",
+]
 
+public func canonicalizeAuthor(_ author: String?) -> String {
+    guard let author else { return "unknown" }
+
+    let trimmedAuthor =
+        author
+        .replacingOccurrences(of: "&nbsp;", with: " ")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+
+    if let replacement = authorMap[trimmedAuthor.lowercased()] {
+        return replacement
+    } else {
+        return trimmedAuthor
+    }
+}
+
+@Codable
+public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
+
+    public init(
+        url: URL, maxAge: Duration = .seconds(3600),
+        kind: GameResourceKind, name: String? = nil, author: String? = nil,
+        version: String? = nil, date: Date? = nil, ipdb: URL? = nil, text: String? = nil,
+        images: [URL]? = nil, tableFeatures: Set<TableFeature> = Set<TableFeature>(),
+        b2sFeatures: Set<B2SFeature> = Set<B2SFeature>()
+    ) {
+        if version?.isEmpty ?? false {
+            print("here")
+        }
+        let site = Site(url)
+        self.url = site.canonicalize(url)
+        self.normalizedURL = site.normalize(url)
+        self.maxAge = maxAge
+        self.site = site
+        self.kind = kind
+        self.name = name ?? "unknown"
+        self.author = canonicalizeAuthor(author)
+        self.version = version
+        self.date = date ?? Date()
+        self.text = text
+        self.images = images ?? []
+    }
+
+    // canonical URL, e.g. has all extra data stripped
     public var url: URL
-    public var name: String?
-    public var author: String?
+
+    // cleaned URL that we want to store in the database
+    public var normalizedURL: URL
+    public var maxAge: Duration = .seconds(3600)
+    public var site: Site = .other
+    public var kind: GameResourceKind = .game
+    public var name = "unknown"
+    public var author = "unknown"
     public var version: String?
-    public var date: Date?
-    public var ipdb: URL?
+    public var date = Date()
     public var text: String?
-    public var images: [URL]?
-    public var features = Set<TableFeature>()
+    public var images = [URL]()
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
@@ -69,76 +110,162 @@ public struct ListResult: Sendable {
     public var list: [DetailResult]
 }
 
+extension Site {
+    /// The scanner for this site, if supported.
+    public var scanner: (any ScanSources & DetailScanner & ListScanner)? {
+        switch self {
+        case .vpu: VPUniverseScanner()
+        case .vpf: VPForumsScanner()
+        case .pinballPrimer: PinballPrimerScanner()
+        case .youtube: YouTubeScanner()
+        case .pinballnirvana, .other: nil
+        }
+    }
+
+    /// Scanner for a single detail page -- falls back to generic page metadata.
+    public var detailScanner: any DetailScanner {
+        scanner ?? WebPageScanner()
+    }
+}
+
+public enum ScanError: Error {
+    case unableToScanDetail(URL)
+}
+
+/// Fetch and scan the detail page for a (typically list-derived) ``DetailResult``.
+///
+/// The result has the full information -- text, images, version, etc.
+public func fetchDetail(client: HTTPClient, detail: DetailResult) async throws -> DetailResult {
+    try await fetchDetail(
+        client: client, url: detail.normalizedURL, maxAge: detail.maxAge, kind: detail.kind)
+}
+
+/// Fetch and scan the detail page at `url` -- any site, see ``Site/detailScanner``.
+public func fetchDetail(
+    client: HTTPClient, url: URL, maxAge: Duration, kind: GameResourceKind
+) async throws -> DetailResult {
+    let site = Site(url)
+
+    let content = try await client.getString(url, maxAge: maxAge)
+    guard var result = try site.detailScanner.scanDetail(url: url, content: content, kind: kind)
+    else {
+        throw ScanError.unableToScanDetail(url)
+    }
+    result.maxAge = maxAge
+    return result
+}
+
 public func gather(
     client: HTTPClient,
+    maxAge: Duration,
     site: Site,
     pages: [Int] = [],
     kind: GameResourceKind,
-    follow: (DetailResult) -> Bool
-) async throws -> [DetailResult] {
+    suppress: [URL: SuppressionReason],
+    follow: @escaping @Sendable (DetailResult) -> Bool
+) -> AsyncStream<DetailResult> {
 
-    let scanner: ScanSources & DetailScanner & ListScanner =
-        switch site {
-        case .vpu: VPUniverseScanner()
-        case .vpf: VPForumsScanner()
-        case .pinballnirvana, .other: fatalError()
-        }
+    guard let scanner = site.scanner else {
+        fatalError("unsupported site: \(site)")
+    }
 
     log.info("SCAN \(site) \(kind)")
 
-    var result = [DetailResult]()
-    
-    var urls = [URL]()
-    for listURL in scanner.sources(kind: kind) {
-        if pages.isEmpty {
-            urls.append(listURL)
-        } else {
-            for page in pages {
-                urls.append(scanner.update(kind: kind, url: listURL, page: page))
+    return AsyncStream { continuation in
+        var urls = [URL]()
+        for listURL in scanner.sources(kind: kind) {
+            if pages.isEmpty {
+                urls.append(listURL)
+            } else {
+                urls.append(
+                    contentsOf: pages.compactMap {
+                        scanner.update(kind: kind, url: listURL, page: $0)
+                    })
             }
         }
-    }
 
-    for listURL in urls {
-        log.info("SCAN ITEM \(site) \(kind) \(listURL)")
+        let producer = Task { [urls] in
+            for listURL in urls {
+                log.info("SCAN ITEM \(site) \(kind) \(listURL)")
 
-        let content: String
-        let scanResult: ListResult
+                try Task.checkCancellation()
 
-        do {
-            content = try await client.getString(listURL, bypassCache: true)
-            scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
-        } catch {
-            log.error(
-                "Failed to gather from \(site) \(kind) \(listURL): \(type(of: error)) \(String(reflecting: error))"
-            )
-            continue
-        }
+                let content: String
+                var scanResult: ListResult
 
-        log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
-
-        for item in scanResult.list {
-            log.info("PROCESS \(site) \(kind): \(item.name ?? "unknown") \(item.url)")
-
-            if follow(item) {
                 do {
-                    let content = try await client.getString(item.url)
-                    let detail = try scanner.scanDetail(url: item.url, content: content, kind: kind)
-                    if let detail {
-                        result.append(detail)
-                    }
+                    content = try await client.getString(listURL, maxAge: maxAge)
+                    scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+                    scanResult.list = scanResult.list
+                        .filter {
+                            if let reason = suppress[$0.url] {
+                                return !reason.shouldSuppress()
+                            }
+                            return true
+                        }
+                        .map {
+                            var new = $0
+                            new.maxAge = maxAge
+                            return new
+                        }
                 } catch {
                     log.error(
-                        "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))")
-                    result.append(item)
+                        "Failed to gather from \(site) \(kind) \(listURL): \(type(of: error)) \(String(reflecting: error))"
+                    )
+                    continue
                 }
-            } else {
-                result.append(item)
+
+                log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
+
+                for item in scanResult.list {
+                    log.info("PROCESS \(site) \(kind): \(item.name) \(item.url)")
+
+                    if follow(item) {
+                        do {
+                            let content = try await client.getString(item.url, maxAge: maxAge)
+                            var detail = try scanner.scanDetail(
+                                url: item.url, content: content, kind: kind)
+                            detail?.maxAge = maxAge
+                            if let detail {
+                                continuation.yield(detail)
+                            }
+                        } catch {
+                            log.error(
+                                "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))"
+                            )
+                            continuation.yield(item)
+                        }
+                    } else {
+                        continuation.yield(item)
+                    }
+                }
             }
+
+            continuation.finish()
+
+            log.info("SCAN END \(site) \(kind) result=\(urls.count)")
+        }
+
+        continuation.onTermination = { _ in
+            producer.cancel()
         }
     }
+}
 
-    log.info("SCAN END \(site) \(kind) result=\(result.count)")
-    
-    return result
+public func trimText(_ text: String?) -> String? {
+    guard var text else { return nil }
+
+    while true {
+        let new =
+            text
+            .replacingOccurrences(of: "\n\n", with: "\n")
+            .replacingOccurrences(of: "\t\n", with: "\n")
+            .replacingOccurrences(of: " \n", with: "\n")
+            .replacingOccurrences(of: "  ", with: " ")
+        if text == new {
+            return text
+        } else {
+            text = new
+        }
+    }
 }

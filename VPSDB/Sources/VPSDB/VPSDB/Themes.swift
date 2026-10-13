@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Theme: String, Codable, Hashable, Sendable, Comparable {
+public enum Theme: String, Codable, Hashable, Sendable, Comparable, CaseIterable {
 
     case action = "Action"
     case activities = "Activities"

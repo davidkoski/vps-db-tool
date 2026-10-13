@@ -13,61 +13,43 @@ struct ReportCommand: AsyncParsableCommand {
     )
 
     @OptionGroup var db: VPSDbArguments
-    @OptionGroup var issues: IssuesArguments
 
     @Option var cache = URL(fileURLWithPath: "./cache-report")
 
     @Option var output = URL(fileURLWithPath: "./report/index.html")
 
-    @Flag var recordIssues = false
-
     mutating func run() async throws {
-        let scans: [(Site, GameResourceKind, Bool)] = [
-            (.vpu, .table, true),
-            (.vpf, .table, true),
-            (.vpu, .b2s, false),
-            (.vpf, .b2s, false),
-            (.vpu, .rom, false),
-            (.vpf, .rom, false),
-            (.vpu, .pupPack, false),
-            (.vpu, .altColor, false),
-            (.vpu, .altSound, false),
-            (.vpu, .pov, false),
-            (.vpu, .wheelArt, false),
-            (.vpf, .wheelArt, false),
-            (.vpu, .topper, false),
-            (.vpf, .topper, false),
-            (.vpu, .mediaPack, false),
-            (.vpf, .mediaPack, false),
-            (.vpu, .rule, false),
+        let scans: [(GameResourceKind, Bool)] = [
+            (.table, true),
+            (.b2s, false),
+            (.rom, false),
+            (.pupPack, false),
+            (.altColor, false),
+            (.altSound, false),
+            (.pov, false),
+            (.wheelArt, false),
+            (.topper, false),
+            (.mediaPack, false),
+            (.rule, false),
         ]
 
         var items = [Item]()
 
         // make sure these load cleanly
         _ = try await db.database()
-        _ = try issues.database()
 
         for s in scans {
-            log.info("BEGIN SCAN \(s.0) \(s.1) follow=\(s.2)")
+            log.info("BEGIN SCAN \(s.0) follow=\(s.1)")
             do {
-                let scanResults = try await scan(site: s.0, kind: s.1, follow: s.2)
+                let scanResults = try await scan(kind: s.0, follow: s.1)
                 items.append(contentsOf: scanResults)
-                log.info("END SCAN \(s.0) \(s.1) ok")
+                log.info("END SCAN \(s.0) ok")
             } catch {
                 log.error(
-                    "Error scanning \(s.0) \(s.1): \(type(of: error)) \(String(reflecting: error))"
+                    "Error scanning \(s.0): \(type(of: error)) \(String(reflecting: error))"
                 )
-                log.info("END SCAN \(s.0) \(s.1) failed")
-                switch s.0 {
-                case .vpu:
-                    throw error
-                case .vpf:
-                    // skip that section -- sometimes vpf is flaky
-                    break
-                default:
-                    throw error
-                }
+                log.info("END SCAN \(s.0) failed")
+                throw error
             }
         }
 
@@ -104,86 +86,94 @@ struct ReportCommand: AsyncParsableCommand {
     }
 
     private mutating func scan(
-        site: Site, kind: GameResourceKind, follow: Bool = false
+        kind: GameResourceKind, follow: Bool = false
     ) async throws -> [Item] {
+        let suppressedURLs = try db.suppressedURLs()
         let db = try await db.database()
-        var issues = try issues.database()
 
-        func match(_ item: DetailResult) -> [any Metadata]? {
-            switch kind {
-            case .rule:
-                // rules are sometimes used as the url for a tutorial, e.g. kongedam
-                db[kind][item.url] ?? db[.tutorial][item.url]
-            default:
-                db[kind][item.url]
-            }
-        }
-        
+        @Sendable
         func followItem(_ item: DetailResult) -> Bool {
             guard follow else { return false }
-            
-            if let match = match(item), let file = match.first, let game = db[file] {
+
+            if let reason = suppressedURLs[item.url] {
+                if reason.shouldSuppress() {
+                    return false
+                }
+            }
+
+            if let match = db.existing(url: item.normalizedURL, kind: kind),
+                let file = match.first, let game = db[file]
+            {
                 // if we matched an existing file and want to folow links
                 // to check version
                 return true
             }
-            
+
             return false
         }
-        
+
         let client = HTTPClient(cache: cache, throttle: .seconds(2))
-        let details = try await gather(client: client, site: site, kind: kind, follow: followItem(_:))
-        
+        let details = try await withThrowingTaskGroup { group in
+            for site in Site.scanSites {
+                group.addTask {
+                    let stream = gather(
+                        client: client, maxAge: .seconds(3600), site: site,
+                        kind: kind, suppress: [:], follow: followItem(_:))
+
+                    var result = [DetailResult]()
+                    for await item in stream {
+                        result.append(item)
+                    }
+                    return result
+                }
+            }
+            var results = [DetailResult]()
+            for try await result in group {
+                results.append(contentsOf: result)
+            }
+            return results
+        }
+
         var result = [Item]()
-        
+
         for item in details {
-            if let match = match(item), let file = match.first, let game = db[file] {
+            if let reason = suppressedURLs[item.url] {
+                if reason.shouldSuppress(detail: item, db: db) {
+                    continue
+                }
+            }
+
+            if let match = db.existing(url: item.normalizedURL, kind: kind),
+                let file = match.first, let game = db[file]
+            {
+                if item.version == nil { continue }
+
                 // matches an existing item, check the version
                 if canonicalVersion(file.version) != canonicalVersion(item.version) {
-                    let issue = ResourceIssue.versionMismatch(item.version)
-
-                    var report = !issues.check(
-                        game: game, kind: kind, gameResource: file, url: item.url,
-                        issue: issue)
-
-                    if report && recordIssues {
-                        report =
-                            issues.report(
-                                game: game, kind: kind, gameResource: file,
-                                url: item.url, issue: issue) == .willFix
-                    }
-
-                    if report {
-                        result.append(
-                            .init(
-                                url: item.url, name: item.name ?? "unknown",
-                                author: item.author ?? "unknown", kind: kind,
-                                issue:
-                                    "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(item.version))",
-                                date: item.date ?? Date()
-                            ))
-                    }
+                    result.append(
+                        .init(
+                            url: item.normalizedURL, name: item.name,
+                            author: item.author, kind: kind,
+                            issue:
+                                "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(item.version))",
+                            date: item.date
+                        ))
                 } else {
                     // no version mismatch, nothing to report
                 }
             } else {
                 // no existing file, report as missing
-                let issue = URLIssue.entryNotFound(item)
-                if !issues.check(kind: kind, url: item.url, issue: issue) {
-                    result.append(
-                        .init(
-                            url: item.url, name: item.name ?? "unknown",
-                            author: item.author ?? "unknown", kind: kind,
-                            issue: "missing",
-                            date: item.date ?? Date()
-                        ))
-                }
+                result.append(
+                    .init(
+                        url: item.normalizedURL, name: item.name,
+                        author: item.author, kind: kind,
+                        issue: "missing",
+                        date: item.date
+                    ))
             }
         }
 
-        log.info("SCAN END \(site) \(kind) result=\(result.count)")
-
-        self.issues.update(issues)
+        log.info("SCAN END \(kind) result=\(result.count)")
 
         return result
     }

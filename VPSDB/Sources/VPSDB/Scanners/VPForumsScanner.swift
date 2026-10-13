@@ -61,7 +61,7 @@ extension VPForumsScanner: ScanSources {
         return urls.compactMap { URL(string: $0) }
     }
 
-    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL {
+    public func update(kind: GameResourceKind, url: URL, page: Int) -> URL? {
         // input: https://www.vpforums.org/index.php?app=downloads&showcat=50&dosort=1&sort_key=file_updated&sort_order=desc&num=&filter_key=
         // output: https://www.vpforums.org/index.php?app=downloads&showcat=50&sort_order=desc&sort_key=file_updated&num=10&st=10
         if page > 1 {
@@ -122,20 +122,22 @@ extension VPForumsScanner: DetailScanner {
     }
 
     func splitName(_ text: String) -> (name: String, version: String) {
-        var name: String
+        // VPF specific cleanup:
+        //   Cerberus wheel
+        //   Boxster Pinball (JPSalas 2010).png
+        let text =
+            text
+            .replacingOccurrences(of: " wheel", with: "", options: .caseInsensitive)
+            .replacingOccurrences(of: " backglass", with: "", options: .caseInsensitive)
+            .replacingOccurrences(of: ".png", with: "", options: .caseInsensitive)
+            .replacingOccurrences(of: ".webp", with: "", options: .caseInsensitive)
+            .replacingOccurrences(of: "(JPSalas ", with: "(Original ", options: .caseInsensitive)
 
         // Count-Down (Gottlieb 1978) JP v5.5 DT-FS-VR-MR Ext2k Conversion 2.0
-        let pieces = text.split(separator: ") ")
-        let pieces2 = text.split(separator: " ")
+        let title = ReleaseTitle(text)
 
-        if pieces.count == 2 {
-            name = pieces[0] + ")"
-        } else {
-            name = pieces2.dropLast().joined(separator: " ")
-        }
-
-        let version2 = String(pieces2.last ?? "")
-        return (name, version2)
+        // the detail scan requires a version
+        return (title.title, title.version ?? "1.0")
     }
 
     public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
@@ -158,7 +160,8 @@ extension VPForumsScanner: DetailScanner {
             var date: Date?
             let dateText = try html.select("li strong")
             for item in dateText.array() {
-                if try item.text().hasPrefix("Last Updated:"), let text = try item.parent()?.text() {
+                if try item.text().hasPrefix("Last Updated:"), let text = try item.parent()?.text()
+                {
                     let formatter = DateFormatter()
                     formatter.dateFormat = "MMM dd yyyy hh:mm a"
                     formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -169,7 +172,7 @@ extension VPForumsScanner: DetailScanner {
                     break
                 }
             }
-            
+
             var author: String?
             let author1 = try html.select(".name")
             let author2 = try html.select(".ipsType_subtitle")
@@ -177,13 +180,13 @@ extension VPForumsScanner: DetailScanner {
             if !authorElement.isEmpty() {
                 author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
             }
-            
+
             var text: String?
             let textElement = try html.select(".description_content")
             if !textElement.isEmpty() {
                 text = try textElement[0].text(trimAndNormaliseWhitespace: true)
             }
-            
+
             var images: [URL]?
             let screenShotElement = try html.select(".screenshot.primary")
             if !screenShotElement.isEmpty() {
@@ -193,7 +196,8 @@ extension VPForumsScanner: DetailScanner {
             }
 
             return .init(
-                url: Site(url).canonicalize(url),
+                url: url,
+                kind: kind,
                 name: name,
                 author: author,
                 version: version,
@@ -245,7 +249,10 @@ extension VPForumsScanner: ListScanner {
                 let title = try a.attr("title")
                     .replacingOccurrences(of: "View file named ", with: "")
 
-                let version = try a.select("span.ipsType_small").text()
+                var version: String? = try a.select("span.ipsType_small").text()
+                if version?.isEmpty ?? false {
+                    version = nil
+                }
 
                 // By xxx
                 let div = try item.select("div.lighter").html()
@@ -262,7 +269,8 @@ extension VPForumsScanner: ListScanner {
                 if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
                     items.append(
                         .init(
-                            url: Site(url).canonicalize(url),
+                            url: url,
+                            kind: kind,
                             name: title, author: author,
                             version: version, date: date
                         ))
@@ -280,7 +288,10 @@ extension VPForumsScanner: ListScanner {
                 let title = try a.attr("title")
                     .replacingOccurrences(of: "View file named ", with: "")
 
-                let version = try a.select("span.ipsType_small").text()
+                var version: String? = try a.select("span.ipsType_small").text()
+                if version?.isEmpty ?? false {
+                    version = nil
+                }
 
                 let list = try item.select("ul.last_post li")
                 let author = list.count == 2 ? try list[0].text() : nil
@@ -297,7 +308,8 @@ extension VPForumsScanner: ListScanner {
                 if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
                     items.append(
                         .init(
-                            url: Site(url).canonicalize(url),
+                            url: url,
+                            kind: kind,
                             name: title, author: author,
                             version: version, date: date
                         ))

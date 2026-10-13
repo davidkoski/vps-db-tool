@@ -1,4 +1,5 @@
 import Foundation
+
 @testable import VPSDB
 
 let flashGordon = Game(
@@ -71,6 +72,34 @@ let starTrek3 = Game(
     mediaPacks: [], rules: [], sounds: [],
     broken: false, urls: [])
 
+let gameShow = Game(
+    id: "l8PhYmEL",
+    createdAt: Date(), updatedAt: Date(), lastCreatedAt: Date(),
+    name: "The Bally Game Show", manufacturer: .bally,
+    imageUrl: nil, mpu: nil, year: 1990,
+    theme: [.comedy, .gameShow],
+    designers: ["Dan Langlois", "Peter Perry"],
+    type: .SS, players: 4,
+    ipdbUrl: nil, imgUrl: nil, tables: [], backglasses: [],
+    tutorials: [], roms: [], pupPacks: [], altColors: [],
+    altSounds: [], povs: [], wheels: [], toppers: [],
+    mediaPacks: [], rules: [], sounds: [],
+    broken: false, urls: [])
+
+let fastbreak = Game(
+    id: "nKd3MiUo",
+    createdAt: Date(), updatedAt: Date(), lastCreatedAt: Date(),
+    name: "NBA Fastbreak", manufacturer: .bally,
+    imageUrl: nil, mpu: nil, year: 1990,
+    theme: [.comedy, .gameShow],
+    designers: ["Dan Langlois", "Peter Perry"],
+    type: .SS, players: 4,
+    ipdbUrl: nil, imgUrl: nil, tables: [], backglasses: [],
+    tutorials: [], roms: [], pupPacks: [], altColors: [],
+    altSounds: [], povs: [], wheels: [], toppers: [],
+    mediaPacks: [], rules: [], sounds: [],
+    broken: false, urls: [])
+
 let testDatabase = Database(
     url: nil,
     games: [
@@ -79,5 +108,7 @@ let testDatabase = Database(
         starTrek1.id: starTrek1,
         starTrek2.id: starTrek2,
         starTrek3.id: starTrek3,
+        gameShow.id: gameShow,
+        fastbreak.id: fastbreak,
     ]
 )

@@ -333,9 +333,7 @@ struct UpdateVersionCommand: AsyncParsableCommand {
                         print("#", game.name, item.version ?? "-", t.version ?? "-")
                         if let version = item.version, version != t.version {
                             t.gameResource.version = version
-                            if let date = item.date {
-                                t.gameResource.createdAt = date
-                            }
+                            t.gameResource.createdAt = item.date
                         }
                     }
                 }
@@ -348,7 +346,7 @@ struct UpdateVersionCommand: AsyncParsableCommand {
         // any that did not match
         for url in matched {
             if let item = items[url] {
-                print(url, item.name ?? "")
+                print(url, item.name)
             }
         }
 

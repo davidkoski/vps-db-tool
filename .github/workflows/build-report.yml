@@ -38,7 +38,7 @@ jobs:
 
       - name: Report
         working-directory: ./VPSDB
-        run: swift run vps-db-tool report --cache /tmp --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json
+        run: swift run vps-db-tool report --cache /tmp --db https://raw.githubusercontent.com/VirtualPinballSpreadsheet/vps-db/refs/heads/main/db/vpsdb.json --document ../VPSDB.vpsdbdoc
 
       - name: Upload static files as artifact
         id: deployment

@@ -22,7 +22,7 @@ public struct Author: Codable, Sendable, Hashable, Comparable {
     }
 }
 
-public enum TableFormat: String, Codable, Hashable, Sendable, Equatable {
+public enum TableFormat: String, Codable, Hashable, Sendable, Equatable, CaseIterable {
     case FP
     case FX
     case FX2
@@ -33,7 +33,7 @@ public enum TableFormat: String, Codable, Hashable, Sendable, Equatable {
     case PM5
 }
 
-public enum Kind: String, Codable, Hashable, Sendable, Equatable {
+public enum Kind: String, Codable, Hashable, Sendable, Equatable, CaseIterable {
     case EM
     case SS
     case PM

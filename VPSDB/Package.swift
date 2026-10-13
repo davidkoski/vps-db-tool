@@ -1,4 +1,4 @@
-// swift-tools-version: 6.1
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -12,11 +12,15 @@ let package = Package(
 
     products: [
         .executable(name: "vps-db-tool", targets: ["vps-db-tool"]),
-        .library(name: "VPSDB", targets: [
-            "VPSDB",
-        ])
+        .library(
+            name: "VPSDB",
+            targets: [
+                "VPSDB"
+            ]),
     ],
     dependencies: [
+        .package(url: "https://github.com/swiftlang/swift-syntax.git", "602.0.0" ..< "604.0.0"),
+
         .package(
             url: "https://github.com/apple/swift-argument-parser.git", .upToNextMajor(from: "1.1.2")
         ),
@@ -54,7 +58,7 @@ let package = Package(
                 .product(name: "Collections", package: "swift-collections"),
             ],
             resources: [
-                .copy("Resources"),
+                .copy("Resources")
             ]
         ),
     ]

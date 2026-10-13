@@ -64,9 +64,13 @@ struct ScanArguments: ParsableArguments, Sendable {
                 }
 
             if pages > 0 {
-                for i in 0 ..< pages {
-                    urls.append((.list, scanner.update(kind: kind, url: url, page: page + i)))
-                }
+                urls.append(
+                    contentsOf: (1 ... pages).compactMap {
+                        scanner.update(kind: kind, url: url, page: $0)
+                    }.map {
+                        (.list, $0)
+                    }
+                )
             } else {
                 urls.append((.list, url))
             }
@@ -76,9 +80,13 @@ struct ScanArguments: ParsableArguments, Sendable {
                 let content = try await client.getString(root)
                 let list = try scanner.scanList(url: root, content: content, kind: kind)
 
-                for i in 0 ..< min(pages, list.pages ?? pages) {
-                    urls.append((.list, scanner.update(kind: kind, url: root, page: page + i)))
-                }
+                urls.append(
+                    contentsOf: (1 ... min(pages, list.pages ?? pages)).compactMap {
+                        scanner.update(kind: kind, url: root, page: page + $0)
+                    }.map {
+                        (.list, $0)
+                    }
+                )
             }
         } else {
             urls.append(contentsOf: scanner.sources(kind: kind).map { (.list, $0) })
@@ -140,15 +148,14 @@ struct CheckDownloadCommand: AsyncParsableCommand {
     )
 
     @OptionGroup var db: VPSDbArguments
-    @OptionGroup var issues: IssuesArguments
     @OptionGroup var scan: ScanArguments
 
     @Flag(inversion: .prefixedEnableDisable)
     var interactive = true
 
     mutating func run() async throws {
+        let suppressedURLs = try db.suppressedURLs()
         let db = try await db.database()
-        var issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = scan.site.scanner
@@ -173,7 +180,8 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                         if scan.follow, let game = db[first] {
                             try await checkDetails(
                                 client: client, scanner: scanner, url: item.url,
-                                game: game, items: match, issues: &issues)
+                                db: db, game: game, items: match,
+                                suppressedURLs: suppressedURLs)
                         }
                     } else {
                         var handled = false
@@ -182,14 +190,25 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                             if let detail = try scanner.scanDetail(
                                 url: item.url, content: content, kind: scan.kind)
                             {
-                                let issue = URLIssue.entryNotFound(detail)
-                                issues.report(kind: scan.kind, url: item.url, issue: issue)
+                                var show = true
+                                if let reason = suppressedURLs[detail.url] {
+                                    show = reason.shouldSuppress(detail: detail, db: db)
+                                }
+                                if show {
+                                    print(
+                                        "\(scan.kind.rawValue): not found \(item.url)\n\t\(detail)")
+                                }
                                 handled = true
                             }
                         }
                         if !handled {
-                            let issue = URLIssue.entryNotFound(item)
-                            issues.report(kind: scan.kind, url: item.url, issue: issue)
+                            var show = true
+                            if let reason = suppressedURLs[item.url] {
+                                show = reason.shouldSuppress(detail: item, db: db)
+                            }
+                            if show {
+                                print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
+                            }
 
                             // to auto obsolete
                             //                            switch item.author {
@@ -204,13 +223,12 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                 print("")
             }
         }
-
-        try self.issues.save(db: issues)
     }
 
     func checkDetails(
-        client: HTTPClient, scanner: DetailScanner, url: URL, game: Game, items: [any Metadata],
-        issues: inout IssueDatabase
+        client: HTTPClient, scanner: DetailScanner, url: URL,
+        db: Database, game: Game, items: [any Metadata],
+        suppressedURLs: [URL: SuppressionReason]
     )
         async throws
     {
@@ -219,10 +237,14 @@ struct CheckDownloadCommand: AsyncParsableCommand {
 
         if let detail {
             for item in items {
-                if canonicalVersion(item.version) != canonicalVersion(detail.version) {
-                    let issue = ResourceIssue.versionMismatch(detail.version)
-                    issues.report(
-                        game: game, kind: scan.kind, gameResource: item, url: url, issue: issue)
+                var show = true
+                if let reason = suppressedURLs[detail.url] {
+                    show = reason.shouldSuppress(detail: detail, db: db)
+                }
+                if show, canonicalVersion(item.version) != canonicalVersion(detail.version) {
+                    print(
+                        "\(game) \(scan.kind.rawValue) \(item.id): version mismatch \(canonicalVersion(item.version)) != \(canonicalVersion(detail.version))"
+                    )
                 }
             }
         } else {
@@ -239,9 +261,8 @@ struct CheckMissingCommand: AsyncParsableCommand {
     )
 
     @OptionGroup var db: VPSDbArguments
-    @OptionGroup var issues: IssuesArguments
     @OptionGroup var scan: ScanArguments
-    
+
     enum Output: String, ExpressibleByArgument {
         case markdown
         case csv
@@ -251,8 +272,8 @@ struct CheckMissingCommand: AsyncParsableCommand {
     @Option var output: Output = .markdown
 
     mutating func run() async throws {
+        let suppressedURLs = try db.suppressedURLs()
         let db = try await db.database()
-        let issues = try issues.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let scanner = scan.site.scanner
@@ -288,25 +309,29 @@ struct CheckMissingCommand: AsyncParsableCommand {
 
                 for item in result.list {
                     if db[scan.kind][item.url] == nil {
-                        let issue = URLIssue.entryNotFound(item)
-                        if !issues.check(kind: scan.kind, url: item.url, issue: issue) {
+                        var show = true
+                        if let reason = suppressedURLs[item.url] {
+                            show = reason.shouldSuppress(detail: item, db: db)
+                        }
+
+                        if show {
                             switch output {
                             case .markdown:
                                 print(
-                                    "| \(item.name ?? "unknown") | \(item.author ?? "unknown" ) | \(item.url) |"
+                                    "| \(item.name) | \(item.author ) | \(item.url) |"
                                 )
                             case .csv:
-                                print("\(item.name ?? "unknown")\t\(item.author ?? "unknown")\t\(item.version ?? "1.0")\t\((item.date ?? Date()).timeIntervalSince1970)\t\(item.url)")
+                                print(
+                                    "\(item.name)\t\(item.author)\t\(item.version ?? "1.0")\t\(item.date.timeIntervalSince1970)\t\(item.url)"
+                                )
                             case .report:
-                                print(issue.describe(kind: scan.kind, url: item.url))
+                                print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
                             }
                         }
                     }
                 }
             }
         }
-
-        try self.issues.save(db: issues)
     }
 }
 
