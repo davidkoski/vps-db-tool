@@ -1,4 +1,5 @@
 import Foundation
+import OrderedCollections
 
 private struct ScanPattern<T: Sendable>: Sendable {
     nonisolated(unsafe) let pattern: any RegexComponent
@@ -10,12 +11,20 @@ private struct ScanPattern<T: Sendable>: Sendable {
     }
 }
 
-private let tablePatterns: [ScanPattern<TableFeature>] = [
+private let tableFeaturePatterns: [ScanPattern<TableFeature>] = [
     .init(/fozzy/.ignoresCase(), .nFozzy),
     .init(/fleep/.ignoresCase(), .fleep),
     .init(/vr ?room/.ignoresCase(), .vr),
     .init(/mixed reality/.ignoresCase(), .mr),
     .init(/hybrid/.ignoresCase(), .hybrid),
+    .init(/scorbit/.ignoresCase(), .scorbit),
+    .init(/fizx/.ignoresCase(), .fizX),
+    .init(/\bBAM\b/, .bam),
+]
+
+private let tableCommentPatterns: [ScanPattern<String>] = [
+    .init(/sideblade/.ignoresCase(), "Sideblade Mod"),
+    .init(/side blade/.ignoresCase(), "Sideblade Mod"),
 ]
 
 /// https://github.com/VirtualPinballSpreadsheet/vps-frontend/blob/master/src/lib/types/VPin.ts#L129
@@ -58,11 +67,15 @@ public enum TableFeature: String, Codable, Sendable, Equatable, CaseIterable {
         guard let text else { return [] }
 
         return
-            tablePatterns
+            tableFeaturePatterns
             .filter { text.contains($0.pattern) }
             .map { $0.result }
             .set()
     }
+}
+
+public func scanTableText(_ text: (String?)...) -> String? {
+    scanText(text, tableCommentPatterns)
 }
 
 private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
@@ -113,7 +126,7 @@ private func scanText(_ text: [String?], _ patterns: [ScanPattern<String>]) -> S
     if result.isEmpty {
         return nil
     } else {
-        return result.joined(separator: " ")
+        return OrderedSet(result).joined(separator: " ")
     }
 }
 

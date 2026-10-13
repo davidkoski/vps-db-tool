@@ -118,7 +118,8 @@ extension Site {
         case .vpf: VPForumsScanner()
         case .pinballPrimer: PinballPrimerScanner()
         case .youtube: YouTubeScanner()
-        case .pinballnirvana, .other: nil
+        case .pinballnirvana: PinballNirvanaScanner()
+        case .other: nil
         }
     }
 

@@ -302,6 +302,9 @@ public struct Database: Codable, Sendable {
 
     public func existing(url: URL, kind: GameResourceKind) -> [any Metadata]? {
         switch kind {
+        case .table:
+            return self[kind][url] ?? self[.pupPack][url]
+
         case .mediaPack, .rule, .tutorial:
             // these are often misclassified, scan some related items
             let kinds: [GameResourceKind] = [

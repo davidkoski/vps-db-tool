@@ -4,7 +4,7 @@ public enum Site: String, Sendable, Codable {
     case vpu = "VPU"
     case vpf = "VPF"
     case pinballnirvana = "Nirvana"
-    case pinballPrimer = "Pinball Primer"
+    case pinballPrimer = "Primer"
     case youtube = "YouTube"
     case other = "Other"
 
@@ -28,7 +28,7 @@ public enum Site: String, Sendable, Codable {
         }
     }
 
-    public static let scanSites = [Site.vpu, .vpf, .pinballPrimer, .youtube]
+    public static let scanSites = [Site.vpu, .vpf, .pinballnirvana, .pinballPrimer, .youtube]
 
     public static func canonical(_ url: URL) -> URL {
         Site(url).canonicalize(url)
@@ -72,7 +72,23 @@ public enum Site: String, Sendable, Codable {
             return URL(string: string)!
 
         case .youtube: return youtubeWatchURL(url) ?? url
-        case .pinballnirvana: return url
+        case .pinballnirvana:
+            // https://pinballnirvana.com/forums/resources/off-road-racers-original.8611/
+            if url.path().hasPrefix("/forums/resources/") {
+                let last = url.lastPathComponent
+                let pieces = last.split(separator: ".")
+                let new =
+                    if pieces.count == 2 {
+                        "any.\(pieces[1])"
+                    } else {
+                        last
+                    }
+                return url.deletingLastPathComponent().appending(
+                    component: new, directoryHint: .isDirectory)
+            } else {
+                return url
+            }
+
         case .pinballPrimer: return url
         case .other: return url
         }

@@ -96,4 +96,30 @@ struct ScannerTests {
         #expect(list.list[3].author == "Digital Victory")
     }
 
+    @Test func testPinballNirvanaList() throws {
+        let url = url("pinballnirvana-1.html")
+
+        let scanner = PinballNirvanaScanner()
+        let list = try scanner.scanList(
+            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)
+
+        #expect(list.list.count == 25)
+        #expect(list.list[0].name == "Uncomposed Arrangement (Lunar Howl 9)")
+        #expect(list.list[0].author == "Anthias")
+    }
+
+    @Test func testPinballNirvanaDetail() throws {
+        let url = url("pinballnirvana-2.html")
+
+        let scanner = PinballNirvanaScanner()
+        let detail = try scanner.scanDetail(
+            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)!
+
+        #expect(detail.name == "Uncomposed Arrangement (Lunar Howl 9)")
+        #expect(detail.author == "Anthias")
+        #expect(detail.version == "1.0")
+        #expect((detail.text ?? "").hasPrefix("This is a MOD"))
+        #expect(detail.images.count == 4)
+    }
+
 }

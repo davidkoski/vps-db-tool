@@ -72,7 +72,9 @@ public struct Table: GameResource, Sendable {
         let scanned = TableFeature.scan(detail.text)
         self.init(
             id: newId(),
-            gameResource: .init(detail: detail, game: game, db: db),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanTableText(detail.name, detail.text)),
             parentId: nil,
             features: OrderedSet(TableFeature.allCases.filter { scanned.contains($0) }),
             tableFormat: nil,
@@ -510,8 +512,18 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
             return nil
         }
 
-        return match(tables) ?? match(backglasses) ?? match(tutorials) ?? match(roms) ?? match(
-            pupPacks) ?? match(altColors) ?? match(altSounds) ?? match(povs) ?? match(wheels)
+        let probe: [[any GameResource]] = [
+            tables, backglasses, tutorials, wheels, pupPacks,
+            altColors, altSounds, povs, roms,
+        ]
+
+        for item in probe {
+            if let author = match(item) {
+                return author
+            }
+        }
+
+        return nil
     }
 
     func collect(authors set: inout Set<String>) {
