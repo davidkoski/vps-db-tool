@@ -544,9 +544,9 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
         collect(wheels)
     }
 
-    public func shouldMergeURL<T: GameResource>(_ item: T) -> T? {
-        guard let firstAuthor = item.gameResource.authors.first else { return nil }
-        guard let url = item.url else { return nil }
+    public func shouldMergeURL<T: GameResource>(_ item: T) -> [T] {
+        guard let firstAuthor = item.gameResource.authors.first else { return [] }
+        guard let url = item.url else { return [] }
 
         let targetSites: Set<Site> =
             switch Site(url) {
@@ -556,9 +556,9 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
             default: []
             }
 
-        if targetSites.isEmpty { return nil }
+        if targetSites.isEmpty { return [] }
 
-        return self[item.kind].first {
+        return self[item.kind].filter {
             if $0.gameResource.authors.first == firstAuthor {
                 let url = $0.url
                 if let site = Site(url), targetSites.contains(site) {
@@ -566,7 +566,7 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
                 }
             }
             return false
-        } as? T
+        } as? [T] ?? []
     }
 
     public subscript(kind: GameResourceKind) -> [any GameResource] {
