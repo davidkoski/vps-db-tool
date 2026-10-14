@@ -3,15 +3,92 @@ import Foundation
 import OrderedCollections
 import ReerCodable
 
+/// Canonical form of a version scraped from a web page, for comparing
+/// versions: the (highest) version number in the string, e.g.
+///
+/// - `v1.01 PUP and Non-PUP` -> `1.01`
+/// - `RAMBO V2.0`, `Version 2.00`, `2` -> `2`
+/// - `v1.1 & v2.0` -> `2` (several versions: the highest)
+/// - `v1.2.5 [DT, FS, B2S]` -> `1.2.5` (numbers inside words don't count)
+/// - `v1.1f 2020-01-28` -> `1.1f` (dates are removed)
+/// - `FizX3.3 V1.10` -> `1.10`, `FizX3.3 V1.00` -> `1`
+/// - `1.0a`, `1.0A` -> `1a`, `v1.105 b` -> `1.105b`, `1.0b2` -> `1b2`
+///
+/// Trailing `.0` components are dropped so `2.0` == `2.0.0` == `2`.  A string
+/// that is only a date (`2026-09-17`) is kept whole; strings without a number
+/// fall back to stripping spaces and `v`.
 public func canonicalVersion(_ string: String?) -> String {
-    (string ?? "")
-        .replacingOccurrences(of: "Version", with: "")
-        .replacingOccurrences(of: "FizX3.3", with: "")
-        .replacingOccurrences(of: "v", with: "")
-        .replacingOccurrences(of: "V", with: "")
-        .replacingOccurrences(of: " ", with: "")
-        .replacing(/[.]0+$/, with: { _ in "" })
-        .replacing(/[.]0+$/, with: { _ in "" })
+    let string = (string ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+
+    let date = /\d{4}-\d\d-\d\d/
+    if string.wholeMatch(of: date) != nil {
+        return string
+    }
+
+    let cleaned =
+        string
+        // e.g. "Version2.0" -- otherwise the number follows a letter
+        .replacing(/(?i)version/, with: " ")
+        // physics version, e.g. "FizX3.3 V1.10" (also misspelled "FixZ")
+        .replacing(/(?i)fi[xz][xz]\s*\d+(\.\d+)?/, with: " ")
+        // a release date next to the version
+        .replacing(date, with: " ")
+        // decimal comma: "1,0" (but not a list: "1.1, 2.0")
+        .replacing(/(\d),(\d)/, with: { "\($0.output.1).\($0.output.2)" })
+
+    // A number -- at the start, after a non-letter or after "v" (not inside a
+    // word like "B2S") -- with an optional suffix: a letter, possibly
+    // followed by digits, possibly after one space ("1.0a", "1.0b2", "1.105 b"),
+    // but not the start of a word ("1.0 WIP", "1.0 B2S").
+    let versions = cleaned.matches(
+        of: /(?:^|[^a-zA-Z0-9.]|[vV])(\d+(?:\.\d+)*(?:\s?[a-zA-Z]\d*(?![a-zA-Z0-9]))?)/
+    )
+    .map { ParsedVersion(String($0.output.1)) }
+
+    guard let highest = versions.max() else {
+        // no number, e.g. "Final", "WIP"
+        return
+            string
+            .replacingOccurrences(of: "Version", with: "")
+            .replacingOccurrences(of: "v", with: "")
+            .replacingOccurrences(of: "V", with: "")
+            .replacingOccurrences(of: " ", with: "")
+    }
+
+    return highest.canonical
+}
+
+/// A version number like `1.01`, `1.0a` or `1.0b2`, ordered numerically by
+/// component (`1.10` > `1.9`), then by suffix (none < `a` < `b`).
+private struct ParsedVersion: Comparable {
+    /// Lowercased, without spaces or trailing `.0` components: `1.0A` -> `1a`.
+    let canonical: String
+
+    let components: [Int]
+    let suffix: String
+
+    init(_ string: String) {
+        canonical = string.lowercased()
+            .filter { !$0.isWhitespace }
+            // trailing zero components, before an optional suffix
+            .replacing(/(\.0+)+(?=([a-z]\d*)?$)/, with: "")
+
+        let numeric = canonical.prefix { $0.isNumber || $0 == "." }
+        components = numeric.split(separator: ".").map { Int($0) ?? 0 }
+        suffix = String(canonical.dropFirst(numeric.count))
+    }
+
+    static func < (lhs: ParsedVersion, rhs: ParsedVersion) -> Bool {
+        let count = max(lhs.components.count, rhs.components.count)
+        for index in 0 ..< count {
+            let l = index < lhs.components.count ? lhs.components[index] : 0
+            let r = index < rhs.components.count ? rhs.components[index] : 0
+            if l != r {
+                return l < r
+            }
+        }
+        return lhs.suffix < rhs.suffix
+    }
 }
 
 public protocol Metadata {

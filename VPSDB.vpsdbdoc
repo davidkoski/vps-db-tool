@@ -15,6 +15,11 @@
         "parsed" : "v1.0 [Demo] 2020-01-28"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.5158/" : {
+      "version" : {
+        "parsed" : "v1.1f 2020-01-28"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.5164/" : {
       "version" : {
         "parsed" : "v1.1 2020-01-28"
@@ -40,14 +45,29 @@
         "parsed" : "v1.0 2020-01-28"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.5805/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.10"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.5814/" : {
       "version" : {
         "parsed" : "v1.2a [DT][FS][FSS]"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.5834/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.00"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.5878/" : {
       "version" : {
         "parsed" : "v1.1 [VPX06][DT+FS]"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5893/" : {
+      "version" : {
+        "parsed" : "v1.2.5 [DT, FS, B2S]"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.5964/" : {
@@ -73,6 +93,11 @@
     "https://pinballnirvana.com/forums/resources/any.5976/" : {
       "version" : {
         "parsed" : "v2.1 and v2.1redux VPX7.2"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5978/" : {
+      "version" : {
+        "parsed" : "2026-02-26"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.6070/" : {
@@ -130,6 +155,11 @@
         "parsed" : "v4.4 (VPX6.2 and VPX7.2)"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8052/" : {
+      "version" : {
+        "parsed" : "2026-02-26"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.8068/" : {
       "version" : {
         "parsed" : "FizX3.3 V1.00"
@@ -140,9 +170,19 @@
         "parsed" : "balutito mod 1.0"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8159/" : {
+      "permanent" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.8198/" : {
       "version" : {
         "parsed" : "v1.1"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8200/" : {
+      "version" : {
+        "parsed" : "2026-02-26"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8520/" : {
@@ -195,6 +235,11 @@
         "parsed" : "FizX3.3 V1.20"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8734/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.10"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.8753/" : {
       "version" : {
         "parsed" : "2.0"
@@ -213,6 +258,61 @@
     "https://pinballnirvana.com/forums/resources/any.8790/" : {
       "version" : {
         "parsed" : "2026-07-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8797/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8799/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8801/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8805/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8809/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8811/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8813/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8816/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8818/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8819/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8822/" : {
+      "permanent" : {
+
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8824/" : {
@@ -280,6 +380,11 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/17202-any/" : {
+      "version" : {
+        "parsed" : "1.0.0"
+      }
+    },
     "https://vpuniverse.com/files/file/19039-any/" : {
       "version" : {
         "parsed" : "1.0.0 VR"
@@ -300,14 +405,40 @@
         "parsed" : "1.0.0"
       }
     },
+    "https://vpuniverse.com/files/file/20528-any/" : {
+      "permanent" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/23998-any/" : {
       "version" : {
         "parsed" : "Rambo _ExtraVideos"
       }
     },
+    "https://vpuniverse.com/files/file/25260-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Star Wars"
+      }
+    },
+    "https://vpuniverse.com/files/file/25261-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Star Wars The Mandalorian"
+      }
+    },
     "https://vpuniverse.com/files/file/25760-any/" : {
       "version" : {
         "parsed" : "FizX 3.3 V1.10"
+      }
+    },
+    "https://vpuniverse.com/files/file/25869-any/" : {
+      "version" : {
+        "parsed" : "1.0"
       }
     },
     "https://vpuniverse.com/files/file/25953-any/" : {
@@ -320,14 +451,48 @@
         "parsed" : "3.0 desktop, 4.0 standalone"
       }
     },
+    "https://vpuniverse.com/files/file/27099-any/" : {
+      "version" : {
+        "parsed" : "1.0.0"
+      }
+    },
     "https://vpuniverse.com/files/file/27897-any/" : {
       "permanent" : {
 
       }
     },
+    "https://vpuniverse.com/files/file/27951-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Supreme"
+      }
+    },
+    "https://vpuniverse.com/files/file/27953-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "pz8DuivPBc"
+        ],
+        "name" : "The Avengers Infinity Quest HPMP"
+      }
+    },
+    "https://vpuniverse.com/files/file/27955-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Wrestlemania"
+      }
+    },
     "https://vpuniverse.com/files/file/28001-any/" : {
       "permanent" : {
 
+      }
+    },
+    "https://vpuniverse.com/files/file/28485-any/" : {
+      "version" : {
+        "parsed" : "1.0.0"
       }
     },
     "https://vpuniverse.com/files/file/29542-any/" : {
@@ -348,6 +513,11 @@
     "https://vpuniverse.com/files/file/30093-any/" : {
       "version" : {
         "parsed" : "1.0.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/30094-any/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.00"
       }
     },
     "https://vpuniverse.com/files/file/30280-any/" : {
@@ -437,9 +607,87 @@
         "name" : "Ramp Warrior"
       }
     },
+    "https://vpuniverse.com/files/file/32432-any/" : {
+      "temporary" : {
+        "until" : "2026-11-14T04:18:22Z"
+      }
+    },
+    "https://vpuniverse.com/files/file/32528-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "2896k22MAz"
+        ],
+        "name" : "The Jetsons"
+      }
+    },
+    "https://vpuniverse.com/files/file/5966-any/" : {
+      "version" : {
+        "parsed" : "VPW Mod Link"
+      }
+    },
     "https://vpuniverse.com/files/file/7368-any/" : {
       "version" : {
         "parsed" : "JP's Deadpool V5.1.2"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17979" : {
+      "version" : {
+        "parsed" : "3.0.1"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18156" : {
+      "version" : {
+        "parsed" : "1.0.5"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19379" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19497" : {
+      "version" : {
+        "parsed" : "2.1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19545" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19593" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19657" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19666" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19684" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19691" : {
+      "version" : {
+        "parsed" : "1.0.1"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19775" : {
+      "version" : {
+        "parsed" : "1.2"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19811" : {
+      "version" : {
+        "parsed" : "1.0"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19826" : {
@@ -466,6 +714,11 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=19939" : {
       "version" : {
         "parsed" : "0.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19948" : {
+      "permanent" : {
+
       }
     },
     "https://www.youtube.com/watch?v=-F3Tan2qhE0" : {

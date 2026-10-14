@@ -82,45 +82,6 @@ extension VPForumsScanner: ScanSources {
 
 extension VPForumsScanner: DetailScanner {
 
-    func scanFeatures(_ text: String) -> Set<TableFeature> {
-        var result = Set<TableFeature>()
-
-        if text.contains(/fozzy/.ignoresCase()) {
-            result.insert(.nFozzy)
-        }
-        if text.contains(/fleep/.ignoresCase()) {
-            result.insert(.fleep)
-        }
-        if text.contains(/vr ?room/.ignoresCase()) {
-            result.insert(.vr)
-        }
-        if text.contains(/Mixed Reality/.ignoresCase()) {
-            result.insert(.mixedReality)
-        }
-
-        return result
-    }
-
-    @Codable
-    struct Meta {
-        let name: String
-
-        let description: String
-        let softwareVersion: String
-
-        struct Author: Codable {
-            let name: String
-        }
-
-        let author: Author
-
-        @DateCoding(.iso8601)
-        let dateModified: Date?
-
-        @DateCoding(.iso8601)
-        let dateCreated: Date
-    }
-
     func splitName(_ text: String) -> (name: String, version: String) {
         // VPF specific cleanup:
         //   Cerberus wheel
@@ -187,12 +148,9 @@ extension VPForumsScanner: DetailScanner {
                 text = try textElement[0].text(trimAndNormaliseWhitespace: true)
             }
 
-            var images: [URL]?
-            let screenShotElement = try html.select(".screenshot.primary")
-            if !screenShotElement.isEmpty() {
-                if let image = try URL(string: screenShotElement.attr("href")) {
-                    images = [image]
-                }
+            let screenShotElement = try html.select(".screenshot")
+            let images = try? screenShotElement.compactMap {
+                try URL(string: $0.attr("href"))
             }
 
             return .init(

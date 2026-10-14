@@ -81,11 +81,12 @@ public func scanTableText(_ text: (String?)...) -> String? {
 private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
     .init(/\b2 screen\b/.ignoresCase(), .screen2),
     .init(/\b3 screen\b/.ignoresCase(), .screen3),
-    .init(/\bfull dmd\b/.ignoresCase(), .screen3),
+    .init(/\bfull dmd\b/.ignoresCase(), .fullDMD),
 ]
 
 private let b2sCommentPatterns: [ScanPattern<String>] = [
-    .init(/\balternate\b/.ignoresCase(), "Alternate")
+    .init(/\balternate\b/.ignoresCase(), "Alternate"),
+    .init(/\balt\b/.ignoresCase(), "Alternate"),
 ]
 
 public enum B2SFeature: String, Codable, Sendable, CaseIterable {

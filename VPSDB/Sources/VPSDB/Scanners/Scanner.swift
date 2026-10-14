@@ -27,6 +27,8 @@ private let authorMap = [
     "animusan2": "Animusan",
     "flyingdutchman": "Flying Dutchman",
     "xfl": "PinRich",
+    "francisco pozo robles": "Francisco",
+    "francisco666": "Francisco",
 ]
 
 public func canonicalizeAuthor(_ author: String?) -> String {
@@ -173,21 +175,30 @@ public func gather(
     log.info("SCAN \(site) \(kind)")
 
     return AsyncStream { continuation in
-        var urls = [URL]()
+        var urls = [(Int, URL)]()
         for listURL in scanner.sources(kind: kind) {
             if pages.isEmpty {
-                urls.append(listURL)
+                urls.append((1, listURL))
             } else {
                 urls.append(
                     contentsOf: pages.compactMap {
-                        scanner.update(kind: kind, url: listURL, page: $0)
+                        if let url = scanner.update(kind: kind, url: listURL, page: $0) {
+                            ($0, url)
+                        } else {
+                            nil
+                        }
                     })
             }
         }
 
         let producer = Task { [urls] in
-            for listURL in urls {
+            var maxPage = Int.max
+            for (page, listURL) in urls {
                 log.info("SCAN ITEM \(site) \(kind) \(listURL)")
+
+                if page > maxPage {
+                    continue
+                }
 
                 try Task.checkCancellation()
 
@@ -197,6 +208,9 @@ public func gather(
                 do {
                     content = try await client.getString(listURL, maxAge: maxAge)
                     scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+                    if let pages = scanResult.pages, maxPage == .max {
+                        maxPage = pages
+                    }
                     scanResult.list = scanResult.list
                         .filter {
                             if let reason = suppress[$0.url] {

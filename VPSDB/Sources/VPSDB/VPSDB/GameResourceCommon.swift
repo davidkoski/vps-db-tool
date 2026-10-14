@@ -24,7 +24,7 @@ extension GameResourceCommon {
             game: GameRef(game: game),
             urls: [Resource(url: detail.normalizedURL, broken: false)],
             authors: [db.matchAuthor(name: detail.author)],
-            version: detail.version
+            version: canonicalVersion(detail.version)
         )
     }
 }
