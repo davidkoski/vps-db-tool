@@ -1,8 +1,28 @@
 {
   "suppressedURLs" : {
+    "https://pinballnirvana.com/forums/resources/any.5131/" : {
+      "version" : {
+        "parsed" : "v1.0 2020-01-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5136/" : {
+      "version" : {
+        "parsed" : "v1.0 2020-01-28"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.5139/" : {
       "version" : {
         "parsed" : "v1.0 [Demo] 2020-01-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5164/" : {
+      "version" : {
+        "parsed" : "v1.1 2020-01-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5165/" : {
+      "version" : {
+        "parsed" : "v1.0 2020-01-28"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.5166/" : {
@@ -10,9 +30,59 @@
         "parsed" : "v1.0 2020-01-28"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.5436/" : {
+      "version" : {
+        "parsed" : "v1.0 2020-01-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5449/" : {
+      "version" : {
+        "parsed" : "v1.0 2020-01-28"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5814/" : {
+      "version" : {
+        "parsed" : "v1.2a [DT][FS][FSS]"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5878/" : {
+      "version" : {
+        "parsed" : "v1.1 [VPX06][DT+FS]"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5964/" : {
+      "version" : {
+        "parsed" : "v1.1 [DT, FS]"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5969/" : {
+      "version" : {
+        "parsed" : "v2.1 VPX7.2"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5970/" : {
+      "version" : {
+        "parsed" : "v2.1 VPX7.2"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.5972/" : {
       "version" : {
         "parsed" : "v2.2 + 2.2psy"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.5976/" : {
+      "version" : {
+        "parsed" : "v2.1 and v2.1redux VPX7.2"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.6070/" : {
+      "version" : {
+        "parsed" : "v2.3 VPX7.2"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.6224/" : {
+      "version" : {
+        "parsed" : "WIP 0.84"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.6323/" : {
@@ -38,6 +108,46 @@
     "https://pinballnirvana.com/forums/resources/any.6341/" : {
       "version" : {
         "parsed" : "Original & v1.0 Light-Tweaked"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.6358/" : {
+      "version" : {
+        "parsed" : "v1.0 Reskin by Iceman 2022"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.6362/" : {
+      "version" : {
+        "parsed" : "v1.01 Reskin Kids Table (Iceman 2022)"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.6366/" : {
+      "version" : {
+        "parsed" : "v1.1.0 Reskin (Iceman 2022) Remember Table"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8031/" : {
+      "version" : {
+        "parsed" : "v4.4 (VPX6.2 and VPX7.2)"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8068/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.00"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8157/" : {
+      "version" : {
+        "parsed" : "balutito mod 1.0"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8198/" : {
+      "version" : {
+        "parsed" : "v1.1"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8520/" : {
+      "version" : {
+        "parsed" : "v1.0 2025-01-24"
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8521/" : {
@@ -80,6 +190,31 @@
         "parsed" : "1.0.0"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8669/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.20"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8753/" : {
+      "version" : {
+        "parsed" : "2.0"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8779/" : {
+      "version" : {
+        "parsed" : "2026-06-26"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8780/" : {
+      "version" : {
+        "parsed" : "2026-06-27"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8790/" : {
+      "version" : {
+        "parsed" : "2026-07-28"
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.8824/" : {
       "permanent" : {
 
@@ -101,6 +236,11 @@
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8829/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8830/" : {
       "permanent" : {
 
       }
@@ -140,6 +280,16 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/19039-any/" : {
+      "version" : {
+        "parsed" : "1.0.0 VR"
+      }
+    },
+    "https://vpuniverse.com/files/file/19084-any/" : {
+      "version" : {
+        "parsed" : "2.0.1 VR"
+      }
+    },
     "https://vpuniverse.com/files/file/19408-any/" : {
       "version" : {
         "parsed" : "2.0 VR"
@@ -153,6 +303,16 @@
     "https://vpuniverse.com/files/file/23998-any/" : {
       "version" : {
         "parsed" : "Rambo _ExtraVideos"
+      }
+    },
+    "https://vpuniverse.com/files/file/25760-any/" : {
+      "version" : {
+        "parsed" : "FizX 3.3 V1.10"
+      }
+    },
+    "https://vpuniverse.com/files/file/25953-any/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.10"
       }
     },
     "https://vpuniverse.com/files/file/27042-any/" : {
