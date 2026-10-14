@@ -30,7 +30,9 @@ struct VPSDbArguments: ParsableArguments, Sendable {
     public func suppressedURLs() throws -> [URL: SuppressionReason] {
         if let document {
             let data = try Data(contentsOf: document)
-            let document = try JSONDecoder().decode(Document.self, from: data)
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let document = try decoder.decode(Document.self, from: data)
             return Dictionary(
                 uniqueKeysWithValues: document.suppressedURLs.map {
                     (URL(string: $0.key)!, $0.value)
