@@ -375,6 +375,11 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/12405-any/" : {
+      "version" : {
+        "parsed" : "10.7.2"
+      }
+    },
     "https://vpuniverse.com/files/file/14807-any/" : {
       "permanent" : {
 
@@ -413,6 +418,11 @@
     "https://vpuniverse.com/files/file/23998-any/" : {
       "version" : {
         "parsed" : "Rambo _ExtraVideos"
+      }
+    },
+    "https://vpuniverse.com/files/file/24858-humpty-dumpty/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/25260-any/" : {
@@ -456,6 +466,11 @@
         "parsed" : "1.0.0"
       }
     },
+    "https://vpuniverse.com/files/file/27779-any/" : {
+      "version" : {
+        "parsed" : "final"
+      }
+    },
     "https://vpuniverse.com/files/file/27897-any/" : {
       "permanent" : {
 
@@ -495,6 +510,11 @@
         "parsed" : "1.0.0"
       }
     },
+    "https://vpuniverse.com/files/file/28755-any/" : {
+      "permanent" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/29542-any/" : {
       "permanent" : {
 
@@ -530,12 +550,65 @@
         "parsed" : "1.0"
       }
     },
+    "https://vpuniverse.com/files/file/30898-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ten-Up"
+      }
+    },
+    "https://vpuniverse.com/files/file/30899-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ten-Up"
+      }
+    },
+    "https://vpuniverse.com/files/file/30944-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Ten-Up"
+      }
+    },
     "https://vpuniverse.com/files/file/31001-any/" : {
       "missingGame" : {
         "falsePositives" : [
 
         ],
         "name" : "Seven-Seas"
+      }
+    },
+    "https://vpuniverse.com/files/file/31002-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Seven Up"
+      }
+    },
+    "https://vpuniverse.com/files/file/31210-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Spooky"
+      }
+    },
+    "https://vpuniverse.com/files/file/31248-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/31321-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "World Champ - New York Pinball by Gottlieb, D. & Co. in 1957"
       }
     },
     "https://vpuniverse.com/files/file/31337-any/" : {
@@ -557,6 +630,14 @@
 
         ],
         "name" : "Spyro"
+      }
+    },
+    "https://vpuniverse.com/files/file/32071-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "La Retata"
       }
     },
     "https://vpuniverse.com/files/file/32184-any/" : {
@@ -630,6 +711,11 @@
         "parsed" : "JP's Deadpool V5.1.2"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=14958" : {
+      "version" : {
+        "parsed" : "1.1"
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=17979" : {
       "version" : {
         "parsed" : "3.0.1"
@@ -638,6 +724,14 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=18156" : {
       "version" : {
         "parsed" : "1.0.5"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19046" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Black Magic"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19379" : {
