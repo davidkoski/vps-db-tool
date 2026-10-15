@@ -28,6 +28,7 @@ private let authorMap = [
     "flyingdutchman": "Flying Dutchman",
     "xfl": "PinRich",
     "francisco pozo robles": "Francisco",
+    "francisco pozo": "Francisco",
     "francisco666": "Francisco",
 ]
 
