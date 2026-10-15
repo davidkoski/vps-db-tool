@@ -201,7 +201,7 @@ extension VPUniverseScanner: ListScanner {
             var title = ""
             var author = ""
 
-            let a = try item.select("h4 a")
+            let a = try item.select("h4 .ipsContained a")
             url = try a.attr("href")
             title = try a.text()
 

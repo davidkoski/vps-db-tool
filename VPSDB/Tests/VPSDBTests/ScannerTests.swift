@@ -83,6 +83,17 @@ struct ScannerTests {
         #expect(detail.images.count == 3)
     }
 
+    @Test func testVPUList() async throws {
+        let url = url("vpu-2.html")
+
+        let scanner = VPUniverseScanner()
+        let list = try scanner.scanList(
+            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)
+
+        #expect(list.pages == 7)
+        #expect(list.list.count == 25)
+    }
+
     @Test(arguments: [
         ("https://www.youtube.com/watch?v=afIOXq040dM", "afIOXq040dM"),
         (
