@@ -621,9 +621,10 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
         collect(wheels)
     }
 
-    public func shouldMergeURL<T: GameResource>(_ item: T) -> [T] {
-        guard let firstAuthor = item.gameResource.authors.first else { return [] }
-        guard let url = item.url else { return [] }
+    private func matchMergeURL(
+        _ kind: GameResourceKind, url: URL, firstAuthorName: String
+    ) -> [any GameResource] {
+        let firstAuthorName = canonicalizeAuthor(firstAuthorName)
 
         let targetSites: Set<Site> =
             switch Site(url) {
@@ -635,15 +636,44 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
 
         if targetSites.isEmpty { return [] }
 
-        return self[item.kind].filter {
-            if $0.gameResource.authors.first == firstAuthor {
+        return self[kind].filter {
+            let resourceFirstAuthor = canonicalizeAuthor($0.gameResource.authors.first?.name)
+            if resourceFirstAuthor == firstAuthorName {
                 let url = $0.url
                 if let site = Site(url), targetSites.contains(site) {
                     return true
                 }
             }
             return false
-        } as? [T] ?? []
+        }
+    }
+
+    /// Find matching resources for merge
+    public func shouldMergeURL<T: GameResource>(_ item: T) -> [(T, MergeURLAction)] {
+        guard let firstAuthor = item.gameResource.authors.first else { return [] }
+        let firstAuthorName = canonicalizeAuthor(firstAuthor.name)
+        guard let url = item.url else { return [] }
+
+        return self[item.kind]
+            .compactMap {
+                guard let r = $0 as? T else { return nil }
+                if let action = r.shouldMerge(normalizedURL: url, canonicalAuthor: firstAuthorName)
+                {
+                    return (r, action)
+                } else {
+                    return nil
+                }
+            }
+    }
+
+    /// Answer the merge URL question generically -- is there any action to take?
+    public func shouldMergeDetail(
+        _ detail: DetailResult
+    ) -> Bool {
+        self[detail.kind].contains {
+            $0.shouldMerge(normalizedURL: detail.normalizedURL, canonicalAuthor: detail.author)
+                != nil
+        }
     }
 
     public subscript(kind: GameResourceKind) -> [any GameResource] {

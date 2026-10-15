@@ -68,6 +68,68 @@ extension GameResource {
     }
 }
 
+public enum MergeURLAction: Sendable {
+    case add
+    case replace(URL)
+}
+
+extension GameResource {
+
+    func shouldMerge(normalizedURL: URL, canonicalAuthor: String) -> MergeURLAction? {
+        let resourceFirstAuthor = canonicalizeAuthor(gameResource.authors.first?.name)
+        if canonicalAuthor != resourceFirstAuthor { return nil }
+
+        let site = Site(normalizedURL)
+        for url in urls {
+            if url == normalizedURL {
+                // we already have it
+                return nil
+            }
+            if Site(url) == site {
+                // offer to replace
+                return .replace(url)
+            }
+        }
+
+        return .add
+    }
+
+    @discardableResult
+    mutating public func mergeURL(other: any GameResource) -> MergeURLAction? {
+        guard let url = other.url else { return nil }
+        let site = Site(url)
+
+        var replaced: URL?
+        gameResource.urls = gameResource.urls.map {
+            if Site($0.url) == site {
+                replaced = $0.url
+                return .init(url: url, broken: false)
+            } else {
+                return $0
+            }
+        }
+
+        if replaced == nil {
+            gameResource.urls.append(.init(url: url, broken: false))
+        }
+
+        if other.createdAt > self.createdAt {
+            self.gameResource.createdAt = other.createdAt
+        }
+        if let version = other.version {
+            self.gameResource.version = version
+        }
+        self.gameResource.updatedAt = Date()
+
+        if let replaced {
+            return .replace(replaced)
+        } else {
+            return .add
+        }
+    }
+
+}
+
 extension Array where Element: GameResource {
 
     func matchAuthor(_ name: String) -> Author? {

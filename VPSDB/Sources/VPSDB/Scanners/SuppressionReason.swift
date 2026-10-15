@@ -7,6 +7,9 @@ public enum SuppressionReason: Codable, Sendable, Hashable {
     /// Never update, e.g. the page isn't a table / resource.
     case permanent
 
+    /// There is a newer version of the page with a new URL
+    case obsolete
+
     /// Don't show it for a while.
     case temporary(until: Date)
 
@@ -23,7 +26,7 @@ public enum SuppressionReason: Codable, Sendable, Hashable {
     /// Should be ignored (static, without db or detail knowledge)
     public func shouldSuppress() -> Bool {
         switch self {
-        case .permanent: true
+        case .permanent, .obsolete: true
         case .temporary(let until): Date() < until
         case .version: false
         case .missingGame: false
@@ -33,7 +36,7 @@ public enum SuppressionReason: Codable, Sendable, Hashable {
     /// Dynamic suppress evaluation with detail result (name) and db (lookups)
     public func shouldSuppress(detail: DetailResult, db: Database) -> Bool {
         switch self {
-        case .permanent:
+        case .permanent, .obsolete:
             return true
         case .temporary(let until):
             return Date() < until
@@ -47,7 +50,7 @@ public enum SuppressionReason: Codable, Sendable, Hashable {
             }
 
             // search by name -- if we find anything, look at it
-            let games = db.matchName(name)
+            let games = db.matchName(detail.name)
                 .filter { !falsePositives.contains($0.id) }
 
             return games.isEmpty
