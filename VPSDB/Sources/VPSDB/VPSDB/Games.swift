@@ -621,33 +621,6 @@ public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
         collect(wheels)
     }
 
-    private func matchMergeURL(
-        _ kind: GameResourceKind, url: URL, firstAuthorName: String
-    ) -> [any GameResource] {
-        let firstAuthorName = canonicalizeAuthor(firstAuthorName)
-
-        let targetSites: Set<Site> =
-            switch Site(url) {
-            case .vpf: [.vpu, .pinballnirvana]
-            case .vpu: [.vpf, .pinballnirvana]
-            case .pinballnirvana: [.vpu, .vpf]
-            default: []
-            }
-
-        if targetSites.isEmpty { return [] }
-
-        return self[kind].filter {
-            let resourceFirstAuthor = canonicalizeAuthor($0.gameResource.authors.first?.name)
-            if resourceFirstAuthor == firstAuthorName {
-                let url = $0.url
-                if let site = Site(url), targetSites.contains(site) {
-                    return true
-                }
-            }
-            return false
-        }
-    }
-
     /// Find matching resources for merge
     public func shouldMergeURL<T: GameResource>(_ item: T) -> [(T, MergeURLAction)] {
         guard let firstAuthor = item.gameResource.authors.first else { return [] }
