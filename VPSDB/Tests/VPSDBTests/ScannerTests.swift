@@ -209,7 +209,7 @@ struct ScannerTests {
         #expect(detail.name == "Uncomposed Arrangement (Lunar Howl 9)")
         #expect(detail.author == "Anthias")
         #expect(detail.version == "1.0")
-        #expect((detail.text ?? "").hasPrefix("This is a MOD"))
+        #expect((detail.text ?? "").hasPrefix("VPX, SS, Original Table, This is a MOD"))
         #expect(detail.images.count == 4)
     }
 

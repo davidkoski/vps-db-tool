@@ -83,11 +83,14 @@ extension PinballNirvanaScanner: DetailScanner {
                                      <dd><time class="u-dt" dir="auto" datetime="2025-11-22T03:38:57-0500" data-timestamp="1763800737" data-date="Nov 22, 2025" data-time="3:38 AM" data-short="Nov '25" title="Nov 22, 2025 at 3:38 AM">Nov 22, 2025</time></dd>
                                  </dl>
         */
-
+        
         let name = try html.select("h1.p-title-value").first()?.ownText().trimmingCharacters(
             in: .whitespacesAndNewlines)
         let version = try html.select("span.u-muted").text(trimAndNormaliseWhitespace: true)
-        let text = try html.select("div.bbWrapper").text()
+        
+        let labels = try html.select("h1.p-title-value .label").map { try $0.text() }
+        let text = try labels.joined(separator: ", ") + ", " + html.select("article.resourceBody-main").text()
+
         let urls = try html.select("a.file-preview")
             .map { try $0.attr("href") }
             .compactMap { URL(string: "https://pinballnirvana.com" + $0) }
