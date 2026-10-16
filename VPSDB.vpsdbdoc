@@ -375,6 +375,11 @@
 
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8851/" : {
+      "permanent" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/12405-any/" : {
       "version" : {
         "parsed" : "10.7.2"
@@ -622,6 +627,11 @@
     "https://vpuniverse.com/files/file/31541-any/" : {
       "version" : {
         "parsed" : "2.0 and VR 2.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/31714-any/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/32060-any/" : {
