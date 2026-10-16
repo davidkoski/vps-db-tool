@@ -4,7 +4,7 @@ import SwiftSoup
 public struct PinballPrimerScanner {
     public init() {
     }
-    
+
     public let version = 1
 }
 
@@ -28,9 +28,6 @@ extension PinballPrimerScanner: ScanSources {
 
 extension PinballPrimerScanner: ListScanner {
     public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
-        let url = request.url
-        let kind = request.kind
-
         let html = try SwiftSoup.parse(content)
 
         var items = [DetailResult]()
@@ -48,7 +45,8 @@ extension PinballPrimerScanner: ListScanner {
                 .replacingOccurrences(of: ", DMD, ", with: " ")
                 .replacingOccurrences(of: ", LCD, ", with: " ")
 
-            items.append(.init(url: url, kind: .tutorial, name: title, author: "Pinball Primer"))
+            items.append(
+                .init(.detail, url: url, kind: .tutorial, name: title, author: "Pinball Primer"))
         }
 
         return .init(pages: 1, list: items)

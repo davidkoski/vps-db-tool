@@ -2,18 +2,18 @@ import Foundation
 import ReerCodable
 import SwiftSoup
 
-public struct VPForumsScanner {
+/// 20 Apr 2025
+private let dateFormat: DateFormatter = {
+    let df = DateFormatter()
+    df.dateFormat = "dd MM yyyy"
+    return df
+}()
 
-    /// 20 Apr 2025
-    private let dateFormat: DateFormatter = {
-        let df = DateFormatter()
-        df.dateFormat = "dd MM yyyy"
-        return df
-    }()
+public struct VPForumsScanner {
 
     public init() {
     }
-    
+
     public let version = 1
 }
 
@@ -126,8 +126,26 @@ extension VPForumsScanner: DetailScanner {
             var date: Date?
             let dateText = try html.select("li strong")
             for item in dateText.array() {
-                if try item.text().hasPrefix("Last Updated:"), let text = try item.parent()?.text()
+                if try item.text().hasPrefix("Last Updated:"), var text = try item.parent()?.text()
                 {
+                    // Today, 08:09 AM
+                    // Yesterday, 08:09 AM
+                    // Oct 05 2020 04:41 AM
+
+                    if text.contains("Today,") {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "MMM dd yyyy"
+                        formatter.locale = Locale(identifier: "en_US_POSIX")
+                        let replace = formatter.string(from: Date())
+                        text = text.replacingOccurrences(of: "Today,", with: replace)
+                    } else if text.contains("Yesterday,") {
+                        let formatter = DateFormatter()
+                        formatter.dateFormat = "MMM dd yyyy"
+                        formatter.locale = Locale(identifier: "en_US_POSIX")
+                        let replace = formatter.string(from: Date(timeIntervalSinceNow: -24 * 3600))
+                        text = text.replacingOccurrences(of: "Yesterday,", with: replace)
+                    }
+
                     let formatter = DateFormatter()
                     formatter.dateFormat = "MMM dd yyyy hh:mm a"
                     formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -135,6 +153,7 @@ extension VPForumsScanner: DetailScanner {
                     date = formatter.date(
                         from: text.replacingOccurrences(of: "Last Updated:", with: "")
                             .trimmingCharacters(in: .whitespacesAndNewlines))
+
                     break
                 }
             }
@@ -159,12 +178,13 @@ extension VPForumsScanner: DetailScanner {
             }
 
             return .init(
+                .detail,
                 url: url,
                 kind: kind,
                 name: name,
                 author: author,
                 version: version,
-                date: date,
+                date: .new(date),
                 text: text,
                 images: images
             )
@@ -235,10 +255,11 @@ extension VPForumsScanner: ListScanner {
                 if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
                     items.append(
                         .init(
+                            .list,
                             url: url,
                             kind: kind,
                             name: title, author: author,
-                            version: version, date: date
+                            version: version, date: .new(date)
                         ))
                 }
             }
@@ -274,10 +295,11 @@ extension VPForumsScanner: ListScanner {
                 if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
                     items.append(
                         .init(
+                            .list,
                             url: url,
                             kind: kind,
                             name: title, author: author,
-                            version: version, date: date
+                            version: version, date: .new(date)
                         ))
                 }
             }

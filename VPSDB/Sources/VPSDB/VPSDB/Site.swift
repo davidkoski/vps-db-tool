@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Site: String, Sendable, Codable {
+public enum Site: String, Hashable, Sendable, Codable {
     case vpu = "VPU"
     case vpf = "VPF"
     case pinballnirvana = "Nirvana"

@@ -22,6 +22,31 @@ public struct Author: Codable, Sendable, Hashable, Comparable {
     }
 }
 
+private let authorMap = [
+    "pinballprimer.github.io": "Pinball Primer",
+    "animusan2": "Animusan",
+    "flyingdutchman": "Flying Dutchman",
+    "xfl": "PinRich",
+    "francisco pozo robles": "Francisco",
+    "francisco pozo": "Francisco",
+    "francisco666": "Francisco",
+]
+
+public func canonicalizeAuthor(_ author: String?) -> String {
+    guard let author else { return "unknown" }
+
+    let trimmedAuthor =
+        author
+        .replacingOccurrences(of: "&nbsp;", with: " ")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+
+    if let replacement = authorMap[trimmedAuthor.lowercased()] {
+        return replacement
+    } else {
+        return trimmedAuthor
+    }
+}
+
 public enum TableFormat: String, Codable, Hashable, Sendable, Equatable, CaseIterable {
     case FP
     case FX

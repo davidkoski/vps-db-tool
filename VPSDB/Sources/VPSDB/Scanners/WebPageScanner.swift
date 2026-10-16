@@ -9,7 +9,7 @@ public struct WebPageScanner: DetailScanner {
 
     public init() {
     }
-    
+
     public let version = 1
 
     public func scanDetail(
@@ -26,12 +26,20 @@ public struct WebPageScanner: DetailScanner {
                 "meta[property=og:site_name]")
             ?? url.host()
 
-        let date = page.meta(
+        let parsedDate = page.meta(
             "meta[itemprop=datePublished]", "meta[property=article:published_time]",
             "meta[property=article:modified_time]", "meta[itemprop=dateModified]"
         ).flatMap(parseDate)
 
+        let date =
+            if let parsedDate {
+                DetailResult.DateKind.date(parsedDate)
+            } else {
+                DetailResult.DateKind.undated
+            }
+
         return DetailResult(
+            .detail,
             url: url, kind: kind, name: page.title, author: author, date: date,
             text: page.description, images: page.image.map { [$0] } ?? [])
     }

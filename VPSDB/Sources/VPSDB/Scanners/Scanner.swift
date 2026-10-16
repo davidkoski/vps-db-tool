@@ -4,6 +4,11 @@ import ReerCodable
 
 private let log = Logger(label: "Scanner")
 
+public enum ScanError: Error {
+    case unableToScanDetail(URL)
+    case scannerNotAvailable(URL)
+}
+
 public protocol ScanSources {
     func sources(kind: GameResourceKind) -> [URL]
     func update(kind: GameResourceKind, url: URL, page: Int) -> URL?
@@ -25,19 +30,25 @@ public protocol ScanRequest: Sendable {
     var kind: GameResourceKind { get }
 }
 
-public struct DetailScanRequest: ScanRequest, Hashable {
+public struct DetailScanRequest: ScanRequest {
     public let site: Site
     public let url: URL
+    public let canonicalURL: URL
     public let kind: GameResourceKind
+    public let scannerVersion: Int
+    public let updated: DetailResult.DateKind
 
     public static func test(_ kind: GameResourceKind) -> Self {
         .init(URL(string: "http://www.vpuniverse.com")!, kind)
     }
 
-    public init(_ url: URL, _ kind: GameResourceKind) {
+    public init(_ url: URL, _ kind: GameResourceKind, updated: DetailResult.DateKind = .unknown) {
         self.site = Site(url)
         self.url = url
+        self.canonicalURL = site.canonicalize(url)
         self.kind = kind
+        self.scannerVersion = site.detailScanner.version
+        self.updated = updated
     }
 
     public func scan(content: String) async throws -> DetailResult? {
@@ -45,12 +56,21 @@ public struct DetailScanRequest: ScanRequest, Hashable {
     }
 
     public func fetch(
-        client: HTTPClient, maxAge: Duration = .seconds(3600)
+        client: HTTPClient, maxAge: Duration = .seconds(3600), scanCache: ScanCache?
     ) async throws -> DetailResult {
+        if let cached = await scanCache?.get(request: self),
+            cached.detailKind == .detail,
+            cached.date.isValid(updated)
+        {
+            return cached
+        }
+
+        log.info("Download \(url)")
         let content = try await client.getString(url, maxAge: maxAge)
         guard let result = try await scan(content: content) else {
             throw ScanError.unableToScanDetail(url)
         }
+        await scanCache?.cache(request: self, item: result)
         return result
     }
 }
@@ -61,6 +81,7 @@ public struct ListScanRequest: ScanRequest, Hashable {
     public let url: URL
     public let page: Int
     public let kind: GameResourceKind
+    public let scannerVersion: Int
 
     public static func tests(_ kind: GameResourceKind) -> [ListScanRequest] {
         pages([1], URL(string: "http://www.vpuniverse.com")!, kind)
@@ -76,6 +97,7 @@ public struct ListScanRequest: ScanRequest, Hashable {
         self.url = site.scanner?.update(kind: kind, url: url, page: page) ?? url
         self.page = page
         self.kind = kind
+        self.scannerVersion = site.scanner?.version ?? 0
     }
 
     internal init(site: Site, base: URL, url: URL, page: Int, kind: GameResourceKind) {
@@ -84,6 +106,7 @@ public struct ListScanRequest: ScanRequest, Hashable {
         self.url = url
         self.page = page
         self.kind = kind
+        self.scannerVersion = site.scanner?.version ?? 0
     }
 
     public static func pages(_ pages: some Collection<Int>, _ url: URL, _ kind: GameResourceKind)
@@ -119,41 +142,18 @@ public struct ListScanRequest: ScanRequest, Hashable {
 
 }
 
-private let authorMap = [
-    "pinballprimer.github.io": "Pinball Primer",
-    "animusan2": "Animusan",
-    "flyingdutchman": "Flying Dutchman",
-    "xfl": "PinRich",
-    "francisco pozo robles": "Francisco",
-    "francisco pozo": "Francisco",
-    "francisco666": "Francisco",
-]
-
-public func canonicalizeAuthor(_ author: String?) -> String {
-    guard let author else { return "unknown" }
-
-    let trimmedAuthor =
-        author
-        .replacingOccurrences(of: "&nbsp;", with: " ")
-        .trimmingCharacters(in: .whitespacesAndNewlines)
-
-    if let replacement = authorMap[trimmedAuthor.lowercased()] {
-        return replacement
-    } else {
-        return trimmedAuthor
-    }
-}
-
 @Codable
 public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
 
     public init(
+        _ detailKind: DetailKind,
         url: URL,
         kind: GameResourceKind, name: String? = nil, author: String? = nil,
-        version: String? = nil, date: Date? = nil, ipdb: URL? = nil, text: String? = nil,
+        version: String? = nil, date: DateKind = .undated, ipdb: URL? = nil, text: String? = nil,
         images: [URL]? = nil, tableFeatures: Set<TableFeature> = Set<TableFeature>(),
         b2sFeatures: Set<B2SFeature> = Set<B2SFeature>()
     ) {
+        self.detailKind = detailKind
         let site = Site(url)
         self.url = site.canonicalize(url)
         self.normalizedURL = site.normalize(url)
@@ -162,7 +162,7 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
         self.name = name ?? "unknown"
         self.author = canonicalizeAuthor(author)
         self.version = version
-        self.date = date ?? Date()
+        self.date = date
         self.text = text
         self.images = images ?? []
     }
@@ -170,6 +170,12 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
     public var detailRequest: DetailScanRequest {
         .init(normalizedURL, kind)
     }
+
+    public enum DetailKind: String, Codable, Sendable, Equatable {
+        case list
+        case detail
+    }
+    public let detailKind: DetailKind
 
     // canonical URL, e.g. has all extra data stripped
     public var url: URL
@@ -181,9 +187,41 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
     public var name = "unknown"
     public var author = "unknown"
     public var version: String?
-    public var date = Date()
     public var text: String?
     public var images = [URL]()
+
+    public enum DateKind: Codable, Sendable, Equatable {
+        case unknown
+        case undated
+        case date(Date)
+
+        public static func new(_ date: Date?) -> DateKind {
+            if let date {
+                .date(date)
+            } else {
+                .unknown
+            }
+        }
+
+        public var resolved: Date {
+            switch self {
+            case .unknown, .undated: Date()
+            case .date(let date): date
+            }
+        }
+
+        public func isValid(_ other: DateKind) -> Bool {
+            switch (self, other) {
+            case (.unknown, _): true
+            case (.undated, _): true
+            case (.date(let lhs), .date(let rhs)): lhs >= rhs
+            default: false
+            }
+        }
+    }
+
+    public var date: DateKind
+    public var resolvedDate: Date { date.resolved }
 
     public func hash(into hasher: inout Hasher) {
         hasher.combine(url)
@@ -225,87 +263,6 @@ extension Site {
     /// Scanner for a single detail page -- falls back to generic page metadata.
     public var detailScanner: any DetailScanner {
         scanner ?? WebPageScanner()
-    }
-}
-
-public enum ScanError: Error {
-    case unableToScanDetail(URL)
-    case scannerNotAvailable(URL)
-}
-
-public func gather(
-    client: HTTPClient,
-    maxAge: Duration,
-    requests: [ListScanRequest],
-    suppress: [URL: SuppressionReason],
-    follow: @escaping @Sendable (DetailResult) -> Bool
-) -> AsyncStream<DetailResult> {
-
-    return AsyncStream { continuation in
-        let producer = Task {
-            var maxPage = Int.max
-            for request in requests {
-                log.info("SCAN ITEM \(request.site) \(request.kind) \(request.url)")
-
-                if request.page > maxPage {
-                    continue
-                }
-
-                try Task.checkCancellation()
-
-                var scanResult: ListResult
-
-                do {
-                    let content = try await client.getString(request.url, maxAge: maxAge)
-                    scanResult = try await request.scan(content: content)
-                    if let pages = scanResult.pages, maxPage == .max {
-                        maxPage = pages
-                    }
-                    scanResult.list = scanResult.list
-                        .filter {
-                            if let reason = suppress[$0.url] {
-                                return !reason.shouldSuppress()
-                            }
-                            return true
-                        }
-                } catch {
-                    log.error(
-                        "Failed to gather from \(request.site) \(request.kind) \(request.url): \(type(of: error)) \(String(reflecting: error))"
-                    )
-                    continue
-                }
-
-                log.info(
-                    "SCAN \(request.site) \(request.kind) - PROCESS LIST \(scanResult.list.count)")
-
-                for item in scanResult.list {
-                    log.info("PROCESS \(request.site) \(request.kind): \(item.name) \(item.url)")
-
-                    if follow(item) {
-                        do {
-                            let detailRequest = item.detailRequest
-                            let content = try await client.getString(item.url, maxAge: maxAge)
-                            if let detail = try await detailRequest.scan(content: content) {
-                                continuation.yield(detail)
-                            }
-                        } catch {
-                            log.error(
-                                "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))"
-                            )
-                            continuation.yield(item)
-                        }
-                    } else {
-                        continuation.yield(item)
-                    }
-                }
-            }
-
-            continuation.finish()
-        }
-
-        continuation.onTermination = { _ in
-            producer.cancel()
-        }
     }
 }
 

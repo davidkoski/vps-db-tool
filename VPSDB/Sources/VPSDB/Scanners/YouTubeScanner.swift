@@ -15,7 +15,7 @@ public struct YouTubeScanner: DetailScanner {
 
     public init() {
     }
-    
+
     public let version = 1
 
     public func scanDetail(
@@ -30,9 +30,6 @@ public struct YouTubeScanner: DetailScanner {
             page.attr("span[itemprop=author] link[itemprop=name]", "content")
             ?? page.meta("meta[name=author]")
 
-        let date = page.meta("meta[itemprop=datePublished]", "meta[itemprop=uploadDate]")
-            .flatMap(parseDate)
-
         // the thumbnail is predictable from the id; og:image is usually the same image
         // at a different size
         var images = [URL]()
@@ -46,7 +43,8 @@ public struct YouTubeScanner: DetailScanner {
         }
 
         return DetailResult(
-            url: url, kind: kind, name: page.title, author: author, date: date,
+            .detail,
+            url: url, kind: kind, name: page.title, author: author, date: .undated,
             text: page.description, images: images)
     }
 }
@@ -160,8 +158,12 @@ extension YouTubeScanner: ListScanner {
 
             let videoURL = URL(string: "https://www.youtube.com/watch?v=\(id)")!
 
+            // note: this has the same level of detail as a detail scan (on a single page)
+            // so record it as such
+
             items.append(
                 .init(
+                    .detail,
                     url: videoURL, kind: kind,
                     name: title, author: author
                 ))

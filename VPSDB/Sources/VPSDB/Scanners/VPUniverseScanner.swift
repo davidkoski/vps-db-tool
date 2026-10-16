@@ -5,7 +5,7 @@ import SwiftSoup
 public struct VPUniverseScanner {
     public init() {
     }
-    
+
     public let version = 1
 }
 
@@ -162,12 +162,13 @@ extension VPUniverseScanner: DetailScanner {
                 }
 
             return .init(
+                .detail,
                 url: url,
                 kind: kind,
                 name: meta.name,
                 author: meta.author.name,
                 version: meta.softwareVersion,
-                date: meta.dateModified ?? meta.dateCreated,
+                date: .new(meta.dateModified ?? meta.dateCreated),
                 ipdb: ipdbURL,
                 text: text,
                 images: meta.screenshot?.map { $0.url }
@@ -226,7 +227,9 @@ extension VPUniverseScanner: ListScanner {
             let date = ISO8601DateFormatter().date(from: dateTime)
 
             if !url.isEmpty && !title.isEmpty, let url = URL(string: url) {
-                items.append(.init(url: url, kind: kind, name: title, author: author, date: date))
+                items.append(
+                    .init(
+                        .list, url: url, kind: kind, name: title, author: author, date: .new(date)))
             }
         }
 

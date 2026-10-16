@@ -16,6 +16,8 @@ struct ReportCommand: AsyncParsableCommand {
 
     @Option var cache = URL(fileURLWithPath: "./cache-report")
 
+    @Option var scanCache: URL?
+
     @Option var output = URL(fileURLWithPath: "./report/index.html")
 
     mutating func run() async throws {
@@ -38,10 +40,17 @@ struct ReportCommand: AsyncParsableCommand {
         // make sure these load cleanly
         _ = try await db.database()
 
+        var scanCache: ScanCache?
+        if let url = self.scanCache {
+            scanCache = ScanCache()
+            try await scanCache?.load(url: url)
+            await scanCache?.mark()
+        }
+
         for s in scans {
             log.info("BEGIN SCAN \(s.0) follow=\(s.1)")
             do {
-                let scanResults = try await scan(kind: s.0, follow: s.1)
+                let scanResults = try await scan(kind: s.0, follow: s.1, scanCache: scanCache)
                 items.append(contentsOf: scanResults)
                 log.info("END SCAN \(s.0) ok")
             } catch {
@@ -56,10 +65,13 @@ struct ReportCommand: AsyncParsableCommand {
         if !items.isEmpty {
             try Report().emit(items: items).write(to: output, atomically: true, encoding: .utf8)
         }
+
+        await scanCache?.sweep()
+        try? await scanCache?.save()
     }
 
     private mutating func scan(
-        kind: GameResourceKind, follow: Bool = false
+        kind: GameResourceKind, follow: Bool = false, scanCache: ScanCache?
     ) async throws -> [Item] {
         let suppressedURLs = try db.suppressedURLs()
         let db = try await db.database()
@@ -91,7 +103,7 @@ struct ReportCommand: AsyncParsableCommand {
                 let requests = ListScanRequest.pages([1], site: site, kind)
                 group.addTask {
                     let stream = gather(
-                        client: client, maxAge: .seconds(3600),
+                        client: client, maxAge: .seconds(3600), scanCache: scanCache,
                         requests: requests,
                         suppress: [:], follow: followItem(_:))
 
@@ -131,7 +143,7 @@ struct ReportCommand: AsyncParsableCommand {
                             author: item.author, kind: kind,
                             issue:
                                 "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(item.version))",
-                            date: item.date
+                            date: item.resolvedDate
                         ))
                 } else {
                     // no version mismatch, nothing to report
@@ -143,7 +155,7 @@ struct ReportCommand: AsyncParsableCommand {
                         url: item.normalizedURL, name: item.name,
                         author: item.author, kind: kind,
                         issue: "missing",
-                        date: item.date
+                        date: item.resolvedDate
                     ))
             }
         }

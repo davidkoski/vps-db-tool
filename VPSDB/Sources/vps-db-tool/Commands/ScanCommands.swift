@@ -73,7 +73,8 @@ struct DownloadCommand: AsyncParsableCommand {
 
         let follow = scan.follow
         let stream = gather(
-            client: client, maxAge: .seconds(3600), requests: scan.requests(), suppress: [:]
+            client: client, maxAge: .seconds(3600), scanCache: nil,
+            requests: scan.requests(), suppress: [:]
         ) { _ in
             follow
         }
@@ -104,7 +105,8 @@ struct CheckDownloadCommand: AsyncParsableCommand {
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let follow = scan.follow
         let stream = gather(
-            client: client, maxAge: .seconds(3600), requests: scan.requests(),
+            client: client, maxAge: .seconds(3600), scanCache: nil,
+            requests: scan.requests(),
             suppress: suppressedURLs
         ) { _ in
             follow
@@ -213,7 +215,8 @@ struct CheckMissingCommand: AsyncParsableCommand {
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
         let follow = scan.follow
         let stream = gather(
-            client: client, maxAge: .seconds(3600), requests: scan.requests(),
+            client: client, maxAge: .seconds(3600), scanCache: nil,
+            requests: scan.requests(),
             suppress: suppressedURLs
         ) { _ in
             follow
@@ -250,7 +253,7 @@ struct CheckMissingCommand: AsyncParsableCommand {
                         )
                     case .csv:
                         print(
-                            "\(item.name)\t\(item.author)\t\(item.version ?? "1.0")\t\(item.date.timeIntervalSince1970)\t\(item.url)"
+                            "\(item.name)\t\(item.author)\t\(item.version ?? "1.0")\t\(item.resolvedDate.timeIntervalSince1970)\t\(item.url)"
                         )
                     case .report:
                         print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")

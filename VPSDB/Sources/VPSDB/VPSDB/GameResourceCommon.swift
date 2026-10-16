@@ -18,7 +18,7 @@ extension GameResourceCommon {
     /// Common fields for a new resource built from a scanned detail page.
     public init(detail: DetailResult, game: Game, db: Database, comment: String? = nil) {
         self.init(
-            createdAt: detail.date,
+            createdAt: detail.resolvedDate,
             updatedAt: Date(),
             comment: comment,
             game: GameRef(game: game),
