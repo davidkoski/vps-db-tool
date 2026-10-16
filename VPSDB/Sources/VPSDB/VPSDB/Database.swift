@@ -313,11 +313,6 @@ public struct Database: Codable, Sendable {
 
             for probe in kinds {
                 switch probe {
-                case .rule:
-                    // rules are sometimes used as the url for a tutorial, e.g. kongedam
-                    if let result = self[kind][url] ?? self[.tutorial][url] {
-                        return result
-                    }
                 case .tutorial:
                     // youtube tutorials are stored by id, not url
                     if let id = youtubeVideoId(url) {
@@ -326,15 +321,11 @@ public struct Database: Codable, Sendable {
                             return matches
                         }
                     }
-                    if let result = self[kind][url] {
-                        return result
-                    }
-                case .mediaPack:
-                    if let result = self[kind][url] {
+                    if let result = self[probe][url] {
                         return result
                     }
                 default:
-                    if let result = self[kind][url] {
+                    if let result = self[probe][url] {
                         return result
                     }
                 }
