@@ -9,7 +9,6 @@ struct ScanCommands: AsyncParsableCommand {
         abstract: "scanning related commands",
         subcommands: [
             DownloadCommand.self, CheckDownloadCommand.self, CheckMissingCommand.self,
-            ScanPagesCommand.self,
         ]
     )
 }
@@ -25,11 +24,13 @@ struct ScanArguments: ParsableArguments, Sendable {
     enum Site: String, ExpressibleByArgument {
         case vpu
         case vpf
+        case nirvana
 
-        var scanner: ScanSources & DetailScanner & ListScanner {
+        var site: VPSDB.Site {
             switch self {
-            case .vpu: VPUniverseScanner()
-            case .vpf: VPForumsScanner()
+            case .vpu: .vpu
+            case .vpf: .vpf
+            case .nirvana: .pinballnirvana
             }
         }
     }
@@ -44,55 +45,17 @@ struct ScanArguments: ParsableArguments, Sendable {
     var page = 1
 
     @Option
-    var pages = 0
+    var pages = 1
 
     @Flag
     var follow = false
 
-    mutating func urls(scanner: ScanSources & ListScanner, client: HTTPClient) async throws -> [(
-        ScanVariant, URL
-    )] {
-        var urls = [(ScanVariant, URL)]()
-
+    func requests() -> [ListScanRequest] {
         if let url {
-            self.site =
-                switch VPSDB.Site(url) {
-                case .vpu: .vpu
-                case .vpf: .vpf
-                default:
-                    fatalError("site for \(url) not supported for scan")
-                }
-
-            if pages > 0 {
-                urls.append(
-                    contentsOf: (1 ... pages).compactMap {
-                        scanner.update(kind: kind, url: url, page: $0)
-                    }.map {
-                        (.list, $0)
-                    }
-                )
-            } else {
-                urls.append((.list, url))
-            }
-
-        } else if pages > 0 {
-            for root in scanner.sources(kind: kind) {
-                let content = try await client.getString(root)
-                let list = try scanner.scanList(url: root, content: content, kind: kind)
-
-                urls.append(
-                    contentsOf: (1 ... min(pages, list.pages ?? pages)).compactMap {
-                        scanner.update(kind: kind, url: root, page: page + $0)
-                    }.map {
-                        (.list, $0)
-                    }
-                )
-            }
+            return ListScanRequest.pages(1 ... pages, url, kind)
         } else {
-            urls.append(contentsOf: scanner.sources(kind: kind).map { (.list, $0) })
+            return ListScanRequest.pages(1 ... pages, site: site.site, kind)
         }
-
-        return urls
     }
 }
 
@@ -107,35 +70,16 @@ struct DownloadCommand: AsyncParsableCommand {
 
     mutating func run() async throws {
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = scan.site.scanner
 
-        var first = true
-        var urls = try await scan.urls(scanner: scanner, client: client)
+        let follow = scan.follow
+        let stream = gather(
+            client: client, maxAge: .seconds(3600), requests: scan.requests(), suppress: [:]
+        ) { _ in
+            follow
+        }
 
-        while !urls.isEmpty {
-            let (variant, url) = urls.removeFirst()
-
-            let content = try await client.getString(url)
-
-            switch variant {
-            case .detail:
-                // nothing -- we just download
-                print("\(url)")
-            case .list:
-                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
-                if first {
-                    first = false
-                    print("\(scan.kind.rawValue): pages = \(result.pages ?? 0)")
-                }
-
-                print("\(url): count=\(result.list.count)")
-
-                if scan.follow {
-                    for item in result.list {
-                        urls.append((.detail, item.url))
-                    }
-                }
-            }
+        for try await item in stream {
+            print("\(item.name): \(item.url)")
         }
     }
 }
@@ -158,82 +102,73 @@ struct CheckDownloadCommand: AsyncParsableCommand {
         let db = try await db.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = scan.site.scanner
+        let follow = scan.follow
+        let stream = gather(
+            client: client, maxAge: .seconds(3600), requests: scan.requests(),
+            suppress: suppressedURLs
+        ) { _ in
+            follow
+        }
 
-        var urls = try await scan.urls(scanner: scanner, client: client)
+        for try await item in stream {
+            print("\(item.name): \(item.url)")
 
-        while !urls.isEmpty {
-            let (variant, url) = urls.removeFirst()
-
-            let content = try await client.getString(url)
-
-            switch variant {
-            case .detail:
-                break
-            case .list:
-                print(url)
-                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
-
-                for item in result.list {
-                    print(item)
-                    if let match = db[scan.kind][item.url], let first = match.first {
-                        if scan.follow, let game = db[first] {
-                            try await checkDetails(
-                                client: client, scanner: scanner, url: item.url,
-                                db: db, game: game, items: match,
-                                suppressedURLs: suppressedURLs)
+            if let match = db[scan.kind][item.url], let first = match.first {
+                if scan.follow, let game = db[first] {
+                    try await checkDetails(
+                        client: client, request: item.detailRequest,
+                        db: db, game: game, items: match,
+                        suppressedURLs: suppressedURLs)
+                }
+            } else {
+                var handled = false
+                if scan.follow {
+                    let content = try await client.getString(item.url)
+                    let request = item.detailRequest
+                    if let detail = try await request.scan(content: content) {
+                        var show = true
+                        if let reason = suppressedURLs[detail.url] {
+                            show = reason.shouldSuppress(detail: detail, db: db)
                         }
-                    } else {
-                        var handled = false
-                        if scan.follow {
-                            let content = try await client.getString(item.url)
-                            if let detail = try scanner.scanDetail(
-                                url: item.url, content: content, kind: scan.kind)
-                            {
-                                var show = true
-                                if let reason = suppressedURLs[detail.url] {
-                                    show = reason.shouldSuppress(detail: detail, db: db)
-                                }
-                                if show {
-                                    print(
-                                        "\(scan.kind.rawValue): not found \(item.url)\n\t\(detail)")
-                                }
-                                handled = true
-                            }
+                        if show {
+                            print(
+                                "\(scan.kind.rawValue): not found \(item.url)\n\t\(detail)")
                         }
-                        if !handled {
-                            var show = true
-                            if let reason = suppressedURLs[item.url] {
-                                show = reason.shouldSuppress(detail: item, db: db)
-                            }
-                            if show {
-                                print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
-                            }
-
-                            // to auto obsolete
-                            //                            switch item.author {
-                            //                            case "tartzani", "remdwaas1986", "Onevox", "chokeee", "WED21", "hanibal2001", "gabrom78", "takut", "hauntfreaks", "Delta23", "dunriwikan45", "Javier15", "jbg4208", "senseless", "rothbauerw", "Sindbad":
-                            //                                issues.report(kind: scan.kind, url: item.url, issue: issue, comment: "obsolete")
-                            //                            default:
-                            //                                issues.report(kind: scan.kind, url: item.url, issue: issue)
-                            //                            }
-                        }
+                        handled = true
                     }
                 }
-                print("")
+                if !handled {
+                    var show = true
+                    if let reason = suppressedURLs[item.url] {
+                        show = reason.shouldSuppress(detail: item, db: db)
+                    }
+                    if show {
+                        print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
+                    }
+
+                    // to auto obsolete
+                    //                            switch item.author {
+                    //                            case "tartzani", "remdwaas1986", "Onevox", "chokeee", "WED21", "hanibal2001", "gabrom78", "takut", "hauntfreaks", "Delta23", "dunriwikan45", "Javier15", "jbg4208", "senseless", "rothbauerw", "Sindbad":
+                    //                                issues.report(kind: scan.kind, url: item.url, issue: issue, comment: "obsolete")
+                    //                            default:
+                    //                                issues.report(kind: scan.kind, url: item.url, issue: issue)
+                    //                            }
+                }
             }
+
+            print("")
         }
     }
 
     func checkDetails(
-        client: HTTPClient, scanner: DetailScanner, url: URL,
+        client: HTTPClient, request: DetailScanRequest,
         db: Database, game: Game, items: [any Metadata],
         suppressedURLs: [URL: SuppressionReason]
     )
         async throws
     {
-        let content = try await client.getString(url)
-        let detail = try scanner.scanDetail(url: url, content: content, kind: scan.kind)
+        let content = try await client.getString(request.url)
+        let detail = try await request.scan(content: content)
 
         if let detail {
             for item in items {
@@ -248,7 +183,7 @@ struct CheckDownloadCommand: AsyncParsableCommand {
                 }
             }
         } else {
-            print("\(url): not able to parse details")
+            print("\(request.url): not able to parse details")
         }
     }
 }
@@ -276,9 +211,13 @@ struct CheckMissingCommand: AsyncParsableCommand {
         let db = try await db.database()
 
         let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = scan.site.scanner
-
-        var urls = try await scan.urls(scanner: scanner, client: client)
+        let follow = scan.follow
+        let stream = gather(
+            client: client, maxAge: .seconds(3600), requests: scan.requests(),
+            suppress: suppressedURLs
+        ) { _ in
+            follow
+        }
 
         switch output {
         case .markdown:
@@ -296,92 +235,25 @@ struct CheckMissingCommand: AsyncParsableCommand {
             break
         }
 
-        while !urls.isEmpty {
-            let (variant, url) = urls.removeFirst()
-
-            let content = try await client.getString(url)
-
-            switch variant {
-            case .detail:
-                break
-            case .list:
-                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
-
-                for item in result.list {
-                    if db[scan.kind][item.url] == nil {
-                        var show = true
-                        if let reason = suppressedURLs[item.url] {
-                            show = reason.shouldSuppress(detail: item, db: db)
-                        }
-
-                        if show {
-                            switch output {
-                            case .markdown:
-                                print(
-                                    "| \(item.name) | \(item.author ) | \(item.url) |"
-                                )
-                            case .csv:
-                                print(
-                                    "\(item.name)\t\(item.author)\t\(item.version ?? "1.0")\t\(item.date.timeIntervalSince1970)\t\(item.url)"
-                                )
-                            case .report:
-                                print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
-                            }
-                        }
-                    }
+        for try await item in stream {
+            if db[scan.kind][item.url] == nil {
+                var show = true
+                if let reason = suppressedURLs[item.url] {
+                    show = reason.shouldSuppress(detail: item, db: db)
                 }
-            }
-        }
-    }
-}
 
-struct ScanPagesCommand: AsyncParsableCommand {
-
-    static let configuration = CommandConfiguration(
-        commandName: "pages",
-        abstract: "scan pages and print matched resources"
-    )
-
-    @OptionGroup var db: VPSDbArguments
-    @OptionGroup var scan: ScanArguments
-
-    enum Output: String, Codable, ExpressibleByArgument {
-        case url
-        case game
-        case file
-    }
-
-    @Option var output = Output.file
-
-    mutating func run() async throws {
-        let db = try await db.database()
-
-        let client = HTTPClient(cache: scan.cache, throttle: .seconds(3))
-        let scanner = scan.site.scanner
-
-        var urls = try await scan.urls(scanner: scanner, client: client)
-
-        while !urls.isEmpty {
-            let (variant, url) = urls.removeFirst()
-
-            let content = try await client.getString(url)
-
-            switch variant {
-            case .detail:
-                break
-            case .list:
-                let result = try scanner.scanList(url: url, content: content, kind: scan.kind)
-
-                for item in result.list {
-                    if let files = db[scan.kind][item.url], let first = files.first {
-                        switch output {
-                        case .url:
-                            print(item.url)
-                        case .game:
-                            print(first.gameId)
-                        case .file:
-                            print(first.id)
-                        }
+                if show {
+                    switch output {
+                    case .markdown:
+                        print(
+                            "| \(item.name) | \(item.author ) | \(item.url) |"
+                        )
+                    case .csv:
+                        print(
+                            "\(item.name)\t\(item.author)\t\(item.version ?? "1.0")\t\(item.date.timeIntervalSince1970)\t\(item.url)"
+                        )
+                    case .report:
+                        print("\(scan.kind.rawValue): not found \(item.url)\n\t\(item)")
                     }
                 }
             }

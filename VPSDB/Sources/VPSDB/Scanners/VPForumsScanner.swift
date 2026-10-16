@@ -101,9 +101,12 @@ extension VPForumsScanner: DetailScanner {
         return (title.title, title.version ?? "1.0")
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         /*
@@ -170,7 +173,10 @@ extension VPForumsScanner: DetailScanner {
 }
 
 extension VPForumsScanner: ListScanner {
-    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?

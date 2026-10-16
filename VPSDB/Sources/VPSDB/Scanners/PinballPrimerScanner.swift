@@ -25,7 +25,10 @@ extension PinballPrimerScanner: ScanSources {
 }
 
 extension PinballPrimerScanner: ListScanner {
-    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         var items = [DetailResult]()
@@ -52,10 +55,10 @@ extension PinballPrimerScanner: ListScanner {
 
 extension PinballPrimerScanner: DetailScanner {
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
-        try WebPageScanner().scanDetail(url: url, content: content, kind: kind)
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        try WebPageScanner().scanDetail(request: request, content: content)
     }
 
 }

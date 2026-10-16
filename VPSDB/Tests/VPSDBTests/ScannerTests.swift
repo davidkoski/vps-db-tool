@@ -43,7 +43,7 @@ struct ScannerTests {
 
         let scanner = VPForumsScanner()
         let detail = try scanner.scanDetail(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)!
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))!
 
         #expect(detail.name == "Dogelon Mars Pinball")
         #expect(detail.version == "1.0")
@@ -58,7 +58,7 @@ struct ScannerTests {
 
         let scanner = VPForumsScanner()
         let detail = try scanner.scanDetail(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)!
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))!
 
         #expect(detail.name == "Cerberus")
         #expect(detail.version == "1.0")
@@ -73,7 +73,7 @@ struct ScannerTests {
 
         let scanner = VPUniverseScanner()
         let detail = try scanner.scanDetail(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)!
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))!
 
         #expect(detail.name == "Jolly Park Oktoberfest oly")
         #expect(detail.version == "1.0.0")
@@ -88,7 +88,7 @@ struct ScannerTests {
 
         let scanner = VPUniverseScanner()
         let list = try scanner.scanList(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))
 
         #expect(list.pages == 7)
         #expect(list.list.count == 25)
@@ -125,7 +125,6 @@ struct ScannerTests {
     }
 
     @Test func testYouTubePage() throws {
-        let url = URL(string: "https://www.youtube.com/watch?v=afIOXq040dM&list=PL123")!
         let html = """
             <html><head>
             <title>Sharkey's Shootout gameplay - YouTube</title>
@@ -143,7 +142,7 @@ struct ScannerTests {
             """
 
         let detail = try #require(
-            try YouTubeScanner().scanDetail(url: url, content: html, kind: .tutorial))
+            try YouTubeScanner().scanDetail(request: .test(.tutorial), content: html))
 
         #expect(detail.site == .youtube)
         #expect(detail.url.absoluteString == "https://www.youtube.com/watch?v=afIOXq040dM")
@@ -158,7 +157,6 @@ struct ScannerTests {
     }
 
     @Test func testGenericPage() throws {
-        let url = URL(string: "https://pinballprimer.github.io/alienpoker_G4yen.html")!
         let html = """
             <html><head>
             <title>Alien Poker - Pinball Primer</title>
@@ -168,7 +166,7 @@ struct ScannerTests {
             """
 
         let detail = try #require(
-            try WebPageScanner().scanDetail(url: url, content: html, kind: .tutorial))
+            try WebPageScanner().scanDetail(request: .test(.tutorial), content: html))
 
         #expect(detail.site == .pinballPrimer)
         #expect(detail.name == "Alien Poker - Pinball Primer")
@@ -182,7 +180,7 @@ struct ScannerTests {
 
         let scanner = YouTubeScanner()
         let list = try scanner.scanList(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .tutorial)
+            request: .test(.tutorial), content: String(contentsOf: url, encoding: .utf8))
 
         #expect(list.list.count == 83)
         #expect(list.list[3].name == "Dr. Dude and His Excellent Ray Pinball Tutorial")
@@ -194,7 +192,7 @@ struct ScannerTests {
 
         let scanner = PinballNirvanaScanner()
         let list = try scanner.scanList(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))
 
         #expect(list.list.count == 25)
         #expect(list.list[0].name == "Uncomposed Arrangement (Lunar Howl 9)")
@@ -206,7 +204,7 @@ struct ScannerTests {
 
         let scanner = PinballNirvanaScanner()
         let detail = try scanner.scanDetail(
-            url: url, content: String(contentsOf: url, encoding: .utf8), kind: .table)!
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))!
 
         #expect(detail.name == "Uncomposed Arrangement (Lunar Howl 9)")
         #expect(detail.author == "Anthias")

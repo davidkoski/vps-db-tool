@@ -16,9 +16,12 @@ public struct YouTubeScanner: DetailScanner {
     public init() {
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        let url = request.url
+        let kind = request.kind
+
         let page = try PageMetadata(url: url, content: content)
 
         let author =
@@ -98,7 +101,10 @@ extension YouTubeScanner: ListScanner {
     ///
     /// Note: this info is from gemini and then the rest of the parsing is
     /// by looking at the JSON.  This could potentially change over time.
-    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
+        let url = request.url
+        let kind = request.kind
+
         guard let json = Self.initialData(content) else {
             return ListResult(pages: 1, list: [])
         }

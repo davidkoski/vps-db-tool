@@ -94,9 +94,12 @@ extension VPUniverseScanner: DetailScanner {
         let dateCreated: Date
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         /*
@@ -174,7 +177,10 @@ extension VPUniverseScanner: DetailScanner {
 }
 
 extension VPUniverseScanner: ListScanner {
-    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?

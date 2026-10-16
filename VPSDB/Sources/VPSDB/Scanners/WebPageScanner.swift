@@ -10,9 +10,12 @@ public struct WebPageScanner: DetailScanner {
     public init() {
     }
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        let url = request.url
+        let kind = request.kind
+
         let page = try PageMetadata(url: url, content: content)
 
         let author =

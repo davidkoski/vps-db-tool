@@ -58,33 +58,6 @@ struct ReportCommand: AsyncParsableCommand {
         }
     }
 
-    private func getVersion(
-        client: HTTPClient, kind: GameResourceKind, scanner: DetailScanner, item: DetailResult
-    ) async throws -> String? {
-        log.info("getVersion: \(item.url)")
-        let content = try await client.getString(item.url, bypassCache: true)
-        if let detail = try scanner.scanDetail(
-            url: item.url, content: content, kind: kind)
-        {
-            return detail.version
-        }
-        return nil
-    }
-
-    fileprivate func fetch(
-        _ client: HTTPClient, _ kind: GameResourceKind,
-        _ scanner: any DetailScanner & ListScanner & ScanSources, _ item: DetailResult
-    ) async -> String? {
-        do {
-            return try await getVersion(
-                client: client, kind: kind, scanner: scanner, item: item)
-        } catch {
-            log.error(
-                "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))")
-            return "failed"
-        }
-    }
-
     private mutating func scan(
         kind: GameResourceKind, follow: Bool = false
     ) async throws -> [Item] {
@@ -115,10 +88,12 @@ struct ReportCommand: AsyncParsableCommand {
         let client = HTTPClient(cache: cache, throttle: .seconds(2))
         let details = try await withThrowingTaskGroup { group in
             for site in Site.scanSites {
+                let requests = ListScanRequest.pages([1], site: site, kind)
                 group.addTask {
                     let stream = gather(
-                        client: client, maxAge: .seconds(3600), site: site,
-                        kind: kind, suppress: [:], follow: followItem(_:))
+                        client: client, maxAge: .seconds(3600),
+                        requests: requests,
+                        suppress: [:], follow: followItem(_:))
 
                     var result = [DetailResult]()
                     for await item in stream {

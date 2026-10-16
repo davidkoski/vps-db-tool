@@ -51,9 +51,12 @@ extension PinballNirvanaScanner: ScanSources {
 
 extension PinballNirvanaScanner: DetailScanner {
 
-    public func scanDetail(url: URL, content: String, kind: GameResourceKind) throws
-        -> DetailResult?
-    {
+    public func scanDetail(
+        request: DetailScanRequest, content: String
+    ) throws -> DetailResult? {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         /*
@@ -116,7 +119,10 @@ extension PinballNirvanaScanner: DetailScanner {
 }
 
 extension PinballNirvanaScanner: ListScanner {
-    public func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult {
+    public func scanList(request: ListScanRequest, content: String) throws -> ListResult {
+        let url = request.url
+        let kind = request.kind
+
         let html = try SwiftSoup.parse(content)
 
         var pages: Int?

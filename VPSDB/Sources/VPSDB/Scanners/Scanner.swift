@@ -15,11 +15,111 @@ public protocol ScanSources {
 }
 
 public protocol DetailScanner: Sendable {
-    func scanDetail(url: URL, content: String, kind: GameResourceKind) throws -> DetailResult?
+    func scanDetail(request: DetailScanRequest, content: String) async throws -> DetailResult?
 }
 
 public protocol ListScanner: Sendable {
-    func scanList(url: URL, content: String, kind: GameResourceKind) throws -> ListResult
+    func scanList(request: ListScanRequest, content: String) async throws -> ListResult
+}
+
+public protocol ScanRequest: Sendable {
+    var site: Site { get }
+    var url: URL { get }
+    var kind: GameResourceKind { get }
+}
+
+public struct DetailScanRequest: ScanRequest, Hashable {
+    public let site: Site
+    public let url: URL
+    public let kind: GameResourceKind
+
+    public static func test(_ kind: GameResourceKind) -> Self {
+        .init(URL(string: "http://www.vpuniverse.com")!, kind)
+    }
+
+    public init(_ url: URL, _ kind: GameResourceKind) {
+        self.site = Site(url)
+        self.url = url
+        self.kind = kind
+    }
+
+    public func scan(content: String) async throws -> DetailResult? {
+        try await site.scanner?.scanDetail(request: self, content: content)
+    }
+
+    public func fetch(
+        client: HTTPClient, maxAge: Duration = .seconds(3600)
+    ) async throws -> DetailResult {
+        let content = try await client.getString(url, maxAge: maxAge)
+        guard let result = try await scan(content: content) else {
+            throw ScanError.unableToScanDetail(url)
+        }
+        return result
+    }
+}
+
+public struct ListScanRequest: ScanRequest, Hashable {
+    public let site: Site
+    public let base: URL
+    public let url: URL
+    public let page: Int
+    public let kind: GameResourceKind
+
+    public static func tests(_ kind: GameResourceKind) -> [ListScanRequest] {
+        pages([1], URL(string: "http://www.vpuniverse.com")!, kind)
+    }
+
+    public static func test(_ kind: GameResourceKind) -> ListScanRequest {
+        .init(URL(string: "http://www.vpuniverse.com")!, kind)
+    }
+
+    public init(_ url: URL, _ kind: GameResourceKind, page: Int = 1) {
+        self.site = Site(url)
+        self.base = url
+        self.url = site.scanner?.update(kind: kind, url: url, page: page) ?? url
+        self.page = page
+        self.kind = kind
+    }
+
+    internal init(site: Site, base: URL, url: URL, page: Int, kind: GameResourceKind) {
+        self.site = site
+        self.base = base
+        self.url = url
+        self.page = page
+        self.kind = kind
+    }
+
+    public static func pages(_ pages: some Collection<Int>, _ url: URL, _ kind: GameResourceKind)
+        -> [ListScanRequest]
+    {
+        let site = Site(url)
+        guard let scanner = site.scanner else { return [] }
+
+        return pages.compactMap {
+            guard let pageURL = scanner.update(kind: kind, url: url, page: $0) else {
+                return nil as ListScanRequest?
+            }
+
+            return .init(site: site, base: url, url: pageURL, page: $0, kind: kind)
+        }
+    }
+
+    public static func pages(_ pages: some Collection<Int>, site: Site, _ kind: GameResourceKind)
+        -> [ListScanRequest]
+    {
+        guard let scanner = site.scanner else { return [] }
+        let urls = scanner.sources(kind: kind)
+
+        return urls.flatMap {
+            Self.pages(pages, $0, kind)
+        }
+    }
+
+    public func scan(content: String) async throws -> ListResult {
+        guard let scanner = site.scanner else { throw ScanError.scannerNotAvailable(url) }
+        return try await scanner.scanList(request: self, content: content)
+    }
+
 }
 
 private let authorMap = [
@@ -51,19 +151,15 @@ public func canonicalizeAuthor(_ author: String?) -> String {
 public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
 
     public init(
-        url: URL, maxAge: Duration = .seconds(3600),
+        url: URL,
         kind: GameResourceKind, name: String? = nil, author: String? = nil,
         version: String? = nil, date: Date? = nil, ipdb: URL? = nil, text: String? = nil,
         images: [URL]? = nil, tableFeatures: Set<TableFeature> = Set<TableFeature>(),
         b2sFeatures: Set<B2SFeature> = Set<B2SFeature>()
     ) {
-        if version?.isEmpty ?? false {
-            print("here")
-        }
         let site = Site(url)
         self.url = site.canonicalize(url)
         self.normalizedURL = site.normalize(url)
-        self.maxAge = maxAge
         self.site = site
         self.kind = kind
         self.name = name ?? "unknown"
@@ -74,12 +170,15 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
         self.images = images ?? []
     }
 
+    public var detailRequest: DetailScanRequest {
+        .init(url, kind)
+    }
+
     // canonical URL, e.g. has all extra data stripped
     public var url: URL
 
     // cleaned URL that we want to store in the database
     public var normalizedURL: URL
-    public var maxAge: Duration = .seconds(3600)
     public var site: Site = .other
     public var kind: GameResourceKind = .game
     public var name = "unknown"
@@ -134,81 +233,34 @@ extension Site {
 
 public enum ScanError: Error {
     case unableToScanDetail(URL)
-}
-
-/// Fetch and scan the detail page for a (typically list-derived) ``DetailResult``.
-///
-/// The result has the full information -- text, images, version, etc.
-public func fetchDetail(client: HTTPClient, detail: DetailResult) async throws -> DetailResult {
-    try await fetchDetail(
-        client: client, url: detail.normalizedURL, maxAge: detail.maxAge, kind: detail.kind)
-}
-
-/// Fetch and scan the detail page at `url` -- any site, see ``Site/detailScanner``.
-public func fetchDetail(
-    client: HTTPClient, url: URL, maxAge: Duration, kind: GameResourceKind
-) async throws -> DetailResult {
-    let site = Site(url)
-
-    let content = try await client.getString(url, maxAge: maxAge)
-    guard var result = try site.detailScanner.scanDetail(url: url, content: content, kind: kind)
-    else {
-        throw ScanError.unableToScanDetail(url)
-    }
-    result.maxAge = maxAge
-    return result
+    case scannerNotAvailable(URL)
 }
 
 public func gather(
     client: HTTPClient,
     maxAge: Duration,
-    site: Site,
-    pages: [Int] = [],
-    kind: GameResourceKind,
+    requests: [ListScanRequest],
     suppress: [URL: SuppressionReason],
     follow: @escaping @Sendable (DetailResult) -> Bool
 ) -> AsyncStream<DetailResult> {
 
-    guard let scanner = site.scanner else {
-        fatalError("unsupported site: \(site)")
-    }
-
-    log.info("SCAN \(site) \(kind)")
-
     return AsyncStream { continuation in
-        var urls = [(Int, URL)]()
-        for listURL in scanner.sources(kind: kind) {
-            if pages.isEmpty {
-                urls.append((1, listURL))
-            } else {
-                urls.append(
-                    contentsOf: pages.compactMap {
-                        if let url = scanner.update(kind: kind, url: listURL, page: $0) {
-                            ($0, url)
-                        } else {
-                            nil
-                        }
-                    })
-            }
-        }
-
-        let producer = Task { [urls] in
+        let producer = Task {
             var maxPage = Int.max
-            for (page, listURL) in urls {
-                log.info("SCAN ITEM \(site) \(kind) \(listURL)")
+            for request in requests {
+                log.info("SCAN ITEM \(request.site) \(request.kind) \(request.url)")
 
-                if page > maxPage {
+                if request.page > maxPage {
                     continue
                 }
 
                 try Task.checkCancellation()
 
-                let content: String
                 var scanResult: ListResult
 
                 do {
-                    content = try await client.getString(listURL, maxAge: maxAge)
-                    scanResult = try scanner.scanList(url: listURL, content: content, kind: kind)
+                    let content = try await client.getString(request.url, maxAge: maxAge)
+                    scanResult = try await request.scan(content: content)
                     if let pages = scanResult.pages, maxPage == .max {
                         maxPage = pages
                     }
@@ -219,30 +271,24 @@ public func gather(
                             }
                             return true
                         }
-                        .map {
-                            var new = $0
-                            new.maxAge = maxAge
-                            return new
-                        }
                 } catch {
                     log.error(
-                        "Failed to gather from \(site) \(kind) \(listURL): \(type(of: error)) \(String(reflecting: error))"
+                        "Failed to gather from \(request.site) \(request.kind) \(request.url): \(type(of: error)) \(String(reflecting: error))"
                     )
                     continue
                 }
 
-                log.info("SCAN \(site) \(kind) - PROCESS LIST \(scanResult.list.count)")
+                log.info(
+                    "SCAN \(request.site) \(request.kind) - PROCESS LIST \(scanResult.list.count)")
 
                 for item in scanResult.list {
-                    log.info("PROCESS \(site) \(kind): \(item.name) \(item.url)")
+                    log.info("PROCESS \(request.site) \(request.kind): \(item.name) \(item.url)")
 
                     if follow(item) {
                         do {
+                            let detailRequest = item.detailRequest
                             let content = try await client.getString(item.url, maxAge: maxAge)
-                            var detail = try scanner.scanDetail(
-                                url: item.url, content: content, kind: kind)
-                            detail?.maxAge = maxAge
-                            if let detail {
+                            if let detail = try await detailRequest.scan(content: content) {
                                 continuation.yield(detail)
                             }
                         } catch {
@@ -258,8 +304,6 @@ public func gather(
             }
 
             continuation.finish()
-
-            log.info("SCAN END \(site) \(kind) result=\(urls.count)")
         }
 
         continuation.onTermination = { _ in
