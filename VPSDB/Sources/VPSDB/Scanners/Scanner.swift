@@ -168,7 +168,7 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
     }
 
     public var detailRequest: DetailScanRequest {
-        .init(url, kind)
+        .init(normalizedURL, kind)
     }
 
     // canonical URL, e.g. has all extra data stripped
