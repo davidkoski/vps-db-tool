@@ -4,6 +4,8 @@ import SwiftSoup
 public struct PinballPrimerScanner {
     public init() {
     }
+    
+    public let version = 1
 }
 
 extension PinballPrimerScanner: ScanSources {

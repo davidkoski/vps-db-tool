@@ -5,6 +5,8 @@ import SwiftSoup
 public struct VPUniverseScanner {
     public init() {
     }
+    
+    public let version = 1
 }
 
 extension VPUniverseScanner: ScanSources {

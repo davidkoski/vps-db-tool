@@ -13,6 +13,8 @@ public struct VPForumsScanner {
 
     public init() {
     }
+    
+    public let version = 1
 }
 
 extension VPForumsScanner: ScanSources {

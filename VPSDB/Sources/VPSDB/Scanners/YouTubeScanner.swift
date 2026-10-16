@@ -15,6 +15,8 @@ public struct YouTubeScanner: DetailScanner {
 
     public init() {
     }
+    
+    public let version = 1
 
     public func scanDetail(
         request: DetailScanRequest, content: String

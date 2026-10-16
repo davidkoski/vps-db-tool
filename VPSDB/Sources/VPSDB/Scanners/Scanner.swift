@@ -4,21 +4,18 @@ import ReerCodable
 
 private let log = Logger(label: "Scanner")
 
-public enum ScanVariant: String, Codable {
-    case detail
-    case list
-}
-
 public protocol ScanSources {
     func sources(kind: GameResourceKind) -> [URL]
     func update(kind: GameResourceKind, url: URL, page: Int) -> URL?
 }
 
 public protocol DetailScanner: Sendable {
+    var version: Int { get }
     func scanDetail(request: DetailScanRequest, content: String) async throws -> DetailResult?
 }
 
 public protocol ListScanner: Sendable {
+    var version: Int { get }
     func scanList(request: ListScanRequest, content: String) async throws -> ListResult
 }
 

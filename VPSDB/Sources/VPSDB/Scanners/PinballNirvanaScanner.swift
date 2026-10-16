@@ -5,6 +5,8 @@ import SwiftSoup
 public struct PinballNirvanaScanner {
     public init() {
     }
+    
+    public let version = 1
 }
 
 extension PinballNirvanaScanner: ScanSources {
