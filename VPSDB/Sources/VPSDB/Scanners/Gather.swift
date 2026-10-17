@@ -36,7 +36,8 @@ public func gather(
 
                 var scanResult: ListResult
 
-                if let cachedList = await scanCache?.get(request: request),
+                // we never cache (at the scanCache) the first page
+                if request.page > 1, let cachedList = await scanCache?.get(request: request),
                     !cachedList.isExpired(maxAge: maxAge),
                     let result = await cachedList.reconstitute(scanCache: scanCache)
                 {
@@ -46,6 +47,26 @@ public func gather(
                     do {
                         let content = try await client.getString(request.url, maxAge: maxAge)
                         scanResult = try await request.scan(content: content)
+
+                        // compare it to the cache -- if it is present but does not
+                        // match then invalidate the rest of the pages
+                        if let cachedList = await scanCache?.get(request: request),
+                            !cachedList.isExpired(maxAge: maxAge),
+                            let result = await cachedList.reconstitute(scanCache: scanCache)
+                        {
+                            if result.list.count != scanResult.list.count {
+                                log.info("INVALIDATE CACHE: counts !=, \(request.url)")
+                                await scanCache?.invalidate(request: request)
+                            } else {
+                                for (lhs, rhs) in zip(result.list, scanResult.list) {
+                                    if lhs.name != rhs.name || lhs.date != rhs.date {
+                                        log.info("INVALIDATE CACHE: contents !=, \(request.url)")
+                                        await scanCache?.invalidate(request: request)
+                                        break
+                                    }
+                                }
+                            }
+                        }
 
                         await scanCache?.cache(request: request, item: scanResult)
 

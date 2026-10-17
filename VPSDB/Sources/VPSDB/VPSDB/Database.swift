@@ -266,7 +266,7 @@ public struct Database: Codable, Sendable {
 
             let gameName = canonicalize(game.name)
 
-            if gameName.count < 4 {
+            if name.count > 4 && gameName.count < 4 {
                 // too many false hits, looking at you NBA
                 return false
             }
@@ -288,6 +288,11 @@ public struct Database: Codable, Sendable {
         }
 
         let maxScore = scored.map { $0.0 }.max() ?? 0
+        if scored.filter({ $0.0 == maxScore }).contains(where: { $0.1.name == "Wheel" }) {
+            print("here")
+
+        }
+
         return scored.filter { $0.0 == maxScore }.map { $0.1 }
     }
 

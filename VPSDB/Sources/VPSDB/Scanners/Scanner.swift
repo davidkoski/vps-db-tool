@@ -159,7 +159,7 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
         self.normalizedURL = site.normalize(url)
         self.site = site
         self.kind = kind
-        self.name = name ?? "unknown"
+        self.name = canonicalizeName(name, kind: kind) ?? "unknown"
         self.author = canonicalizeAuthor(author)
         self.version = version
         self.date = date
@@ -282,4 +282,18 @@ public func trimText(_ text: String?) -> String? {
             text = new
         }
     }
+}
+
+public func canonicalizeName(_ text: String?, kind: GameResourceKind) -> String? {
+    guard var text = trimText(text) else { return nil }
+
+    switch kind {
+    case .wheelArt:
+        text =
+            text
+            .replacing(/\bwheels?\b/.ignoresCase(), with: "")
+    default:
+        break
+    }
+    return text
 }
