@@ -135,6 +135,11 @@
         "parsed" : "Original & v1.0 Light-Tweaked"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.6346/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.6358/" : {
       "version" : {
         "parsed" : "v1.0 Reskin by Iceman 2022"
@@ -243,6 +248,11 @@
     "https://pinballnirvana.com/forums/resources/any.8753/" : {
       "version" : {
         "parsed" : "2.0"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8778/" : {
+      "obsolete" : {
+
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8779/" : {
@@ -380,9 +390,19 @@
 
       }
     },
+    "https://pinballnirvana.com/forums/resources/humpty-dumpty-gottlieb-1947.6213/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/12405-any/" : {
       "version" : {
         "parsed" : "10.7.2"
+      }
+    },
+    "https://vpuniverse.com/files/file/14126-bang-genco-1939-v-12-desktop/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/14807-any/" : {
@@ -405,6 +425,11 @@
         "parsed" : "2.0.1 VR"
       }
     },
+    "https://vpuniverse.com/files/file/19394-white-water-v10-soaking-wet-edition/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/19408-any/" : {
       "version" : {
         "parsed" : "2.0 VR"
@@ -423,6 +448,16 @@
     "https://vpuniverse.com/files/file/23998-any/" : {
       "version" : {
         "parsed" : "Rambo _ExtraVideos"
+      }
+    },
+    "https://vpuniverse.com/files/file/24855-any/" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/24858-any/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/24858-humpty-dumpty/" : {
@@ -634,6 +669,11 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/31897-any/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/32060-any/" : {
       "missingGame" : {
         "falsePositives" : [
@@ -711,9 +751,19 @@
         "name" : "The Jetsons"
       }
     },
+    "https://vpuniverse.com/files/file/5257-grand-slam-gottlieb-1953/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/5966-any/" : {
       "version" : {
         "parsed" : "VPW Mod Link"
+      }
+    },
+    "https://vpuniverse.com/files/file/7178-maisie-gottlieb-1947/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/7368-any/" : {
@@ -745,6 +795,27 @@
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19379" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19394" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Willlow"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19400" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Sunny"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19409" : {
       "permanent" : {
 
       }
@@ -787,6 +858,11 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=19775" : {
       "version" : {
         "parsed" : "1.2"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19786" : {
+      "version" : {
+        "parsed" : "1.0"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19811" : {
