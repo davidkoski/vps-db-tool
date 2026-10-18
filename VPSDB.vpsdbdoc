@@ -395,9 +395,44 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/12272-any/" : {
+      "version" : {
+        "parsed" : "v10.7 required"
+      }
+    },
+    "https://vpuniverse.com/files/file/12370-any/" : {
+      "version" : {
+        "parsed" : "FULLDMD PUP Edition"
+      }
+    },
+    "https://vpuniverse.com/files/file/12371-any/" : {
+      "version" : {
+        "parsed" : "nFozzy"
+      }
+    },
     "https://vpuniverse.com/files/file/12405-any/" : {
       "version" : {
         "parsed" : "10.7.2"
+      }
+    },
+    "https://vpuniverse.com/files/file/12549-any/" : {
+      "version" : {
+        "parsed" : "nFozzy"
+      }
+    },
+    "https://vpuniverse.com/files/file/12740-any/" : {
+      "version" : {
+        "parsed" : "nFozzy"
+      }
+    },
+    "https://vpuniverse.com/files/file/13381-any/" : {
+      "version" : {
+        "parsed" : "1.0.9"
+      }
+    },
+    "https://vpuniverse.com/files/file/13638-any/" : {
+      "version" : {
+        "parsed" : "1.0.2"
       }
     },
     "https://vpuniverse.com/files/file/14126-bang-genco-1939-v-12-desktop/" : {
@@ -413,6 +448,35 @@
     "https://vpuniverse.com/files/file/17202-any/" : {
       "version" : {
         "parsed" : "1.0.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/17310-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pinball FX - Honor and Legacy Media (Playfield, BG, DMD, Wheel)"
+      }
+    },
+    "https://vpuniverse.com/files/file/17446-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pinball FX - Game Night Pinball Volume 1 Media (BG, PF, DMD, Logo, Wheel, Audio)"
+      }
+    },
+    "https://vpuniverse.com/files/file/17447-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pinball FX - Star Trek Pinball Media (BG, PF, DMD, Logo, Wheel, Audio)"
+      }
+    },
+    "https://vpuniverse.com/files/file/18614-any/" : {
+      "permanent" : {
+
       }
     },
     "https://vpuniverse.com/files/file/19039-any/" : {
@@ -445,9 +509,64 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/21182-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/22188-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/23997-any/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/23998-any/" : {
       "version" : {
         "parsed" : "Rambo _ExtraVideos"
+      }
+    },
+    "https://vpuniverse.com/files/file/24712-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Elvira's House of Horrors"
+      }
+    },
+    "https://vpuniverse.com/files/file/24713-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Teenage Mutant Ninja Turtles"
+      }
+    },
+    "https://vpuniverse.com/files/file/24714-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Netflix Stranger Things"
+      }
+    },
+    "https://vpuniverse.com/files/file/24715-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Led Zeppelin"
+      }
+    },
+    "https://vpuniverse.com/files/file/24719-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "James Bond 007"
       }
     },
     "https://vpuniverse.com/files/file/24855-any/" : {
@@ -494,6 +613,11 @@
     "https://vpuniverse.com/files/file/25953-any/" : {
       "version" : {
         "parsed" : "FizX3.3 V1.10"
+      }
+    },
+    "https://vpuniverse.com/files/file/27022-any/" : {
+      "permanent" : {
+
       }
     },
     "https://vpuniverse.com/files/file/27042-any/" : {
@@ -590,6 +714,46 @@
         "parsed" : "1.0"
       }
     },
+    "https://vpuniverse.com/files/file/30853-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pool Champion"
+      }
+    },
+    "https://vpuniverse.com/files/file/30867-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "QPXHSssh"
+        ],
+        "name" : "Spinning"
+      }
+    },
+    "https://vpuniverse.com/files/file/30868-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Space Patrol"
+      }
+    },
+    "https://vpuniverse.com/files/file/30869-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Snake Machine"
+      }
+    },
+    "https://vpuniverse.com/files/file/30873-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pop-A-Card"
+      }
+    },
     "https://vpuniverse.com/files/file/30898-any/" : {
       "missingGame" : {
         "falsePositives" : [
@@ -662,6 +826,14 @@
     "https://vpuniverse.com/files/file/31541-any/" : {
       "version" : {
         "parsed" : "2.0 and VR 2.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/31640-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "The Phantom"
       }
     },
     "https://vpuniverse.com/files/file/31714-any/" : {
@@ -776,6 +948,11 @@
         "parsed" : "1.1"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17373" : {
+      "obsolete" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=17979" : {
       "version" : {
         "parsed" : "3.0.1"
@@ -784,6 +961,21 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=18156" : {
       "version" : {
         "parsed" : "1.0.5"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18362" : {
+      "version" : {
+        "parsed" : "db2s"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18387" : {
+      "version" : {
+        "parsed" : "2024"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18438" : {
+      "version" : {
+        "parsed" : "2024"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19046" : {
@@ -820,6 +1012,11 @@
 
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19439" : {
+      "obsolete" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19497" : {
       "version" : {
         "parsed" : "2.1.0"
@@ -830,9 +1027,49 @@
         "parsed" : "1.0"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19574" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Alice�s Adventures In Wonderland"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19591" : {
+      "missingGame" : {
+        "falsePositives" : [
+          "RyFa3iRcGp"
+        ],
+        "name" : "Alien"
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19593" : {
       "version" : {
         "parsed" : "1.0"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19615" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pok�mon"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19616" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pok�mon"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19617" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Pok�mon"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19657" : {
