@@ -390,6 +390,16 @@
 
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8852/" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8853/" : {
+      "permanent" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/humpty-dumpty-gottlieb-1947.6213/" : {
       "obsolete" : {
 
@@ -600,6 +610,11 @@
         "name" : "Star Wars The Mandalorian"
       }
     },
+    "https://vpuniverse.com/files/file/25502-any/" : {
+      "permanent" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/25760-any/" : {
       "version" : {
         "parsed" : "FizX 3.3 V1.10"
@@ -613,6 +628,14 @@
     "https://vpuniverse.com/files/file/25953-any/" : {
       "version" : {
         "parsed" : "FizX3.3 V1.10"
+      }
+    },
+    "https://vpuniverse.com/files/file/26843-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "The Avengers Infinity Quest"
       }
     },
     "https://vpuniverse.com/files/file/27022-any/" : {
