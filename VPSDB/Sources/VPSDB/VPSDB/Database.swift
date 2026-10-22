@@ -253,8 +253,9 @@ public struct Database: Codable, Sendable {
         let firstPart = canonicalize(name)
 
         let matches = games.all.filter { game in
-            if let year {
-                if game.year != year {
+            if let year, let gameYear = game.year {
+                if abs(year - gameYear) > 2 {
+                    // sometimes the year is off by 1 or 2
                     return false
                 }
             }
@@ -288,11 +289,6 @@ public struct Database: Codable, Sendable {
         }
 
         let maxScore = scored.map { $0.0 }.max() ?? 0
-        if scored.filter({ $0.0 == maxScore }).contains(where: { $0.1.name == "Wheel" }) {
-            print("here")
-
-        }
-
         return scored.filter { $0.0 == maxScore }.map { $0.1 }
     }
 

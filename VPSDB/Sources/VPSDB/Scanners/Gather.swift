@@ -102,11 +102,8 @@ public func gather(
                     if item.detailKind == .list && follow(item) {
                         do {
                             let detailRequest = item.detailRequest
-                            let content = try await client.getString(item.url, maxAge: maxAge)
-                            if let detail = try await detailRequest.scan(content: content) {
-                                await scanCache?.cache(request: detailRequest, item: detail)
-                                continuation.yield(detail)
-                            }
+                            let detail = try await detailRequest.fetch(client: client, maxAge: maxAge, scanCache: scanCache)
+                            continuation.yield(detail)
                         } catch {
                             log.error(
                                 "Error fetching \(item.url): \(type(of: error)) \(String(reflecting: error))"

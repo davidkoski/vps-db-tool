@@ -164,14 +164,15 @@ public actor ScanCache {
     }
 
     public func cache(request: DetailScanRequest, item: DetailResult) {
-        if item.detailKind == .list {
-            if let existing = detailCache[request.site]?[request.scannerVersion]?[request.kind]?[
-                request.canonicalURL]
-            {
-                if existing.detailKind == .detail {
-                    // don't overwrite a detail with a list version
-                    return
-                }
+        if let existing = detailCache[request.site]?[request.scannerVersion]?[request.kind]?[
+            request.canonicalURL]
+        {
+            if existing == item {
+                return
+            }
+            if item.detailKind == .list && existing.detailKind == .detail {
+                // don't overwrite a detail with a list version
+                return
             }
         }
 

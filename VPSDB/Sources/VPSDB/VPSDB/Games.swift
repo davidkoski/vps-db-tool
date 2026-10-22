@@ -3,6 +3,10 @@ import Foundation
 import OrderedCollections
 import ReerCodable
 
+public protocol HasScreenshot {
+    var imgUrl: URL? { get }
+}
+
 /// Canonical form of a version scraped from a web page, for comparing
 /// versions: the (highest) version number in the string, e.g.
 ///
@@ -124,7 +128,7 @@ public struct GameRef: Sendable, Equatable {
 public let imageBase = URL(string: "https://virtualpinballspreadsheet.github.io/vps-db/img")!
 
 @Codable
-public struct Table: GameResource, Sendable {
+public struct Table: GameResource, HasScreenshot, Sendable {
     public var id: String
 
     @CustomCoding(GameResourceCommonTransformer.self)
@@ -177,7 +181,7 @@ public struct Table: GameResource, Sendable {
 }
 
 @Codable
-public struct B2S: GameResource, Sendable {
+public struct B2S: GameResource, HasScreenshot, Sendable {
     // Note: b2s for FX tables don't have an id
     public var id: String = newId()
 
@@ -329,7 +333,9 @@ public struct AltSound: GameResource, Sendable {
     public var kind: GameResourceKind { .altSound }
 
     public init(detail: DetailResult, game: Game, db: Database) {
-        self.init(id: newId(), gameResource: .init(detail: detail, game: game, db: db))
+        self.init(id: newId(), gameResource: .init(
+            detail: detail, game: game, db: db,
+            comment: scanAltSoundText(detail.name, detail.text)))
     }
 }
 
@@ -500,7 +506,7 @@ public struct IPDBURL: CodingCustomizable {
 }
 
 @Codable
-public struct Game: Metadata, Identifiable, Sendable, CustomStringConvertible {
+public struct Game: Metadata, HasScreenshot, Identifiable, Sendable, CustomStringConvertible {
 
     public let id: String
 

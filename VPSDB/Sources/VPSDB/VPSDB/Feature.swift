@@ -20,6 +20,7 @@ private let tableFeaturePatterns: [ScanPattern<TableFeature>] = [
     .init(/scorbit/.ignoresCase(), .scorbit),
     .init(/fizx/.ignoresCase(), .fizX),
     .init(/\bBAM\b/, .bam),
+    .init(/\bVPU Remix\b/, .patch),
 ]
 
 private let tableCommentPatterns: [ScanPattern<String>] = [
@@ -81,7 +82,10 @@ public func scanTableText(_ text: (String?)...) -> String? {
 private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
     .init(/\b2 screen\b/.ignoresCase(), .screen2),
     .init(/\b3 screen\b/.ignoresCase(), .screen3),
+    .init(/\b2screen\b/.ignoresCase(), .screen2),
+    .init(/\b3screen\b/.ignoresCase(), .screen3),
     .init(/\bfull dmd\b/.ignoresCase(), .fullDMD),
+    .init(/\bfulldmd\b/.ignoresCase(), .fullDMD),
 ]
 
 private let b2sCommentPatterns: [ScanPattern<String>] = [
@@ -176,3 +180,17 @@ public func scanROMName(_ text: String?) -> String? {
     else { return nil }
     return String(match.1)
 }
+
+private let altSoundPatterns: [ScanPattern<String>] = [
+    .init(/\bgerman\b/.ignoresCase(), "German"),
+    .init(/\bdeutch\b/.ignoresCase(), "German"),
+    .init(/\bfrench\b/.ignoresCase(), "French"),
+    .init(/\bfrançais\b/.ignoresCase(), "French"),
+    .init(/\bspanish\b/.ignoresCase(), "Spanish"),
+    .init(/\bespañol\b/.ignoresCase(), "Spanish"),
+]
+
+public func scanAltSoundText(_ text: (String?)...) -> String? {
+    scanText(text, altSoundPatterns)
+}
+

@@ -1,5 +1,7 @@
 import Foundation
 
+// TODO dkoski -- merge with ParsedGameName?
+
 /// The game name from a file name in a pack (wheel art, POVs, ...), for
 /// matching with ``Database/matchName(_:)``:
 ///

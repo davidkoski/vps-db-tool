@@ -166,9 +166,9 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
         self.text = text
         self.images = images ?? []
     }
-
+    
     public var detailRequest: DetailScanRequest {
-        .init(normalizedURL, kind)
+        .init(normalizedURL, kind, updated: date)
     }
 
     public enum DetailKind: String, Codable, Sendable, Equatable {
@@ -215,7 +215,7 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
             case (.unknown, _): true
             case (.undated, _): true
             case (.date(let lhs), .date(let rhs)): lhs >= rhs
-            default: false
+            case (.date, _): true
             }
         }
     }
