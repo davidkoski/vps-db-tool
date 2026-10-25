@@ -107,7 +107,7 @@ public protocol Metadata {
 }
 
 @Codable
-public struct Resource: Sendable, Codable, Equatable {
+public struct Resource: Sendable, Codable, Hashable {
     public var url: URL
 
     @CustomCoding(OmitIfFalse.self)
@@ -333,9 +333,11 @@ public struct AltSound: GameResource, Sendable {
     public var kind: GameResourceKind { .altSound }
 
     public init(detail: DetailResult, game: Game, db: Database) {
-        self.init(id: newId(), gameResource: .init(
-            detail: detail, game: game, db: db,
-            comment: scanAltSoundText(detail.name, detail.text)))
+        self.init(
+            id: newId(),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: scanAltSoundText(detail.name, detail.text)))
     }
 }
 
@@ -648,11 +650,20 @@ public struct Game: Metadata, HasScreenshot, Identifiable, Sendable, CustomStrin
     /// Answer the merge URL question generically -- is there any action to take?
     public func shouldMergeDetail(
         _ detail: DetailResult
-    ) -> Bool {
-        self[detail.kind].contains {
-            $0.shouldMerge(normalizedURL: detail.normalizedURL, canonicalAuthor: detail.author)
-                != nil
-        }
+    ) -> [(any GameResource, MergeURLAction)] {
+        let firstAuthorName = detail.author
+        let url = detail.normalizedURL
+
+        return self[detail.kind]
+            .compactMap { r in
+                if let action = r.shouldMerge(normalizedURL: url, canonicalAuthor: firstAuthorName)
+                {
+                    return (r, action)
+                } else {
+                    return nil
+                }
+
+            }
     }
 
     public subscript(kind: GameResourceKind) -> [any GameResource] {
@@ -680,6 +691,26 @@ public struct Game: Metadata, HasScreenshot, Identifiable, Sendable, CustomStrin
 }
 
 extension Game {
+    /// Remove the resource of `kind` with `id` (nothing for games).
+    public mutating func remove(kind: GameResourceKind, id: String) {
+        switch kind {
+        case .game: break
+        case .table: tables.removeAll { $0.id == id }
+        case .b2s: backglasses.removeAll { $0.id == id }
+        case .tutorial: tutorials.removeAll { $0.id == id }
+        case .rom: roms.removeAll { $0.id == id }
+        case .pupPack: pupPacks.removeAll { $0.id == id }
+        case .altColor: altColors.removeAll { $0.id == id }
+        case .altSound: altSounds.removeAll { $0.id == id }
+        case .pov: povs.removeAll { $0.id == id }
+        case .wheelArt: wheels.removeAll { $0.id == id }
+        case .topper: toppers.removeAll { $0.id == id }
+        case .mediaPack: mediaPacks.removeAll { $0.id == id }
+        case .rule: rules.removeAll { $0.id == id }
+        case .sound: sounds.removeAll { $0.id == id }
+        }
+    }
+
     /// Replace the resource with the same id at `keyPath`, or append it if not present.
     public mutating func upsert<R: GameResource>(
         _ resource: R, at keyPath: WritableKeyPath<Game, [R]>

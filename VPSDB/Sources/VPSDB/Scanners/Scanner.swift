@@ -166,7 +166,7 @@ public struct DetailResult: Hashable, Sendable, CustomStringConvertible {
         self.text = text
         self.images = images ?? []
     }
-    
+
     public var detailRequest: DetailScanRequest {
         .init(normalizedURL, kind, updated: date)
     }

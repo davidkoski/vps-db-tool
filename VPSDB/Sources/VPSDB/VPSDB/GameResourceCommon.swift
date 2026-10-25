@@ -68,7 +68,7 @@ extension GameResource {
     }
 }
 
-public enum MergeURLAction: Sendable {
+public enum MergeURLAction: Sendable, Equatable {
     case add
     case replace(URL)
 }

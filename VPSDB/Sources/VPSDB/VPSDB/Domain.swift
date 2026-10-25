@@ -29,7 +29,10 @@ private let authorMap = [
     "xfl": "PinRich",
     "francisco pozo robles": "Francisco",
     "francisco pozo": "Francisco",
+    "franciscopozo": "Francisco",
     "francisco666": "Francisco",
+    "fpozo45": "Francisco",
+    "conrado": "Francisco",
 ]
 
 public func canonicalizeAuthor(_ author: String?) -> String {

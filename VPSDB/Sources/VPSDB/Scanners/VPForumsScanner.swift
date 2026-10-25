@@ -27,7 +27,8 @@ extension VPForumsScanner: ScanSources {
                 ]
             case .table:
                 [
-                    "https://www.vpforums.org/index.php?app=downloads&showcat=50&dosort=1&sort_key=file_updated&sort_order=desc&num=&filter_key="
+                    "https://www.vpforums.org/index.php?app=downloads&showcat=50&dosort=1&sort_key=file_updated&sort_order=desc&num=&filter_key=",
+                    "https://www.vpforums.org/index.php?app=downloads&showcat=6&dosort=1&sort_key=file_updated&sort_order=desc&num=&filter_key=",
                 ]
             case .b2s:
                 [
@@ -159,11 +160,23 @@ extension VPForumsScanner: DetailScanner {
             }
 
             var author: String?
-            let author1 = try html.select(".name")
-            let author2 = try html.select(".ipsType_subtitle")
-            let authorElement = author1.isEmpty() ? author2 : author1
-            if !authorElement.isEmpty() {
-                author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
+
+            // <li><strong>Author(s):</strong>fpozo
+            let author0 = try html.select("strong.title:contains(Author)").first?.nextSibling()?
+                .outerHtml().trimmingCharacters(in: .whitespacesAndNewlines)
+
+            if let author0, !author0.isEmpty {
+                // foo (images)
+                // foo, bar
+                // foo & bar
+                author = String(author0.split(separator: " ")[0].split(separator: ", ")[0])
+            } else {
+                let author1 = try html.select(".name")
+                let author2 = try html.select(".ipsType_subtitle")
+                let authorElement = author1.isEmpty() ? author2 : author1
+                if !authorElement.isEmpty() {
+                    author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
+                }
             }
 
             var text: String?

@@ -102,7 +102,8 @@ public func gather(
                     if item.detailKind == .list && follow(item) {
                         do {
                             let detailRequest = item.detailRequest
-                            let detail = try await detailRequest.fetch(client: client, maxAge: maxAge, scanCache: scanCache)
+                            let detail = try await detailRequest.fetch(
+                                client: client, maxAge: maxAge, scanCache: scanCache)
                             continuation.yield(detail)
                         } catch {
                             log.error(

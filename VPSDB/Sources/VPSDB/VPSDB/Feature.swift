@@ -86,11 +86,14 @@ private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
     .init(/\b3screen\b/.ignoresCase(), .screen3),
     .init(/\bfull dmd\b/.ignoresCase(), .fullDMD),
     .init(/\bfulldmd\b/.ignoresCase(), .fullDMD),
+    .init(/\bb2s ?pro\b/.ignoresCase(), .b2sPro),
 ]
 
 private let b2sCommentPatterns: [ScanPattern<String>] = [
     .init(/\balternate\b/.ignoresCase(), "Alternate"),
     .init(/\balt\b/.ignoresCase(), "Alternate"),
+    .init(/\breal DMD\b/.ignoresCase(), "Real DMD"),
+    .init(/\bslim LCD DMD\b/.ignoresCase(), "Real DMD"),
 ]
 
 public enum B2SFeature: String, Codable, Sendable, CaseIterable {
@@ -98,6 +101,7 @@ public enum B2SFeature: String, Codable, Sendable, CaseIterable {
     case screen3 = "3Screens"
     case fullDMD = "FullDMD"
     case inclTable = "incl. Table"
+    case b2sPro = "B2S PRO"
 
     public static func scan(_ text: String?) -> Set<B2SFeature> {
         guard let text else { return [] }
@@ -193,4 +197,3 @@ private let altSoundPatterns: [ScanPattern<String>] = [
 public func scanAltSoundText(_ text: (String?)...) -> String? {
     scanText(text, altSoundPatterns)
 }
-

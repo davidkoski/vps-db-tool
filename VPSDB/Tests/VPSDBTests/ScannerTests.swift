@@ -48,7 +48,7 @@ struct ScannerTests {
         #expect(detail.name == "Dogelon Mars Pinball")
         #expect(detail.version == "1.0")
         #expect(detail.author == "Cisano")
-        #expect(detail.date.timeIntervalSince1970 == 1_706_030_940)
+        #expect(detail.resolvedDate.timeIntervalSince1970 == 1_706_030_940)
         #expect((detail.text ?? "").hasPrefix("My first Pinball with simple"))
         #expect(detail.images.count == 1)
     }
@@ -63,9 +63,25 @@ struct ScannerTests {
         #expect(detail.name == "Cerberus")
         #expect(detail.version == "1.0")
         #expect(detail.author == "deadmanworking")
-        #expect(detail.date.timeIntervalSince1970 == 1_768_096_440)
+        #expect(detail.resolvedDate.timeIntervalSince1970 == 1_768_096_440)
         #expect((detail.text ?? "").hasPrefix("Cerberus wheel created from backglass"))
         #expect(detail.images.count == 1)
+    }
+
+    @Test func testVPF2() async throws {
+        // Posted by Conrado but author is fpozo45
+        let url = url("vpf-2.html")
+
+        let scanner = VPForumsScanner()
+        let detail = try scanner.scanDetail(
+            request: .test(.table), content: String(contentsOf: url, encoding: .utf8))!
+
+        #expect(detail.name == "Dragonette")
+        #expect(detail.version == "1.1")
+        #expect(detail.author == "Francisco")
+        #expect(detail.resolvedDate.timeIntervalSince1970 == 1_762_117_980)
+        #expect((detail.text ?? "").hasPrefix("1954 Gottlieb Dragonette"))
+        #expect(detail.images.count == 5)
     }
 
     @Test func testVPU() async throws {
@@ -78,7 +94,7 @@ struct ScannerTests {
         #expect(detail.name == "Jolly Park Oktoberfest oly")
         #expect(detail.version == "1.0.0")
         #expect(detail.author == "oly2")
-        #expect(detail.date.timeIntervalSince1970 == 1_706_377_662)
+        #expect(detail.resolvedDate.timeIntervalSince1970 == 1_706_377_662)
         #expect((detail.text ?? "").hasPrefix("First of all,"))
         #expect(detail.images.count == 3)
     }
@@ -142,13 +158,16 @@ struct ScannerTests {
             """
 
         let detail = try #require(
-            try YouTubeScanner().scanDetail(request: .test(.tutorial), content: html))
+            try YouTubeScanner().scanDetail(
+                request: .init(
+                    URL(string: "https://www.youtube.com/watch?v=afIOXq040dM")!, .tutorial),
+                content: html))
 
         #expect(detail.site == .youtube)
         #expect(detail.url.absoluteString == "https://www.youtube.com/watch?v=afIOXq040dM")
         #expect(detail.name == "Sharkey's Shootout pinball machine gameplay")
         #expect(detail.author == "AKM's Pinball Videos")
-        #expect(detail.date.timeIntervalSince1970 == 1_614_880_813)
+        #expect(detail.resolvedDate.timeIntervalSince1970 == 1_614_880_813)
         #expect(detail.text == "A tutorial")
         #expect(detail.images.count == 2)
         #expect(
@@ -166,7 +185,11 @@ struct ScannerTests {
             """
 
         let detail = try #require(
-            try WebPageScanner().scanDetail(request: .test(.tutorial), content: html))
+            try WebPageScanner().scanDetail(
+                request: .init(
+                    URL(string: "https://pinballprimer.github.io/alienpoker_G4yen.html")!, .tutorial
+                ),
+                content: html))
 
         #expect(detail.site == .pinballPrimer)
         #expect(detail.name == "Alien Poker - Pinball Primer")

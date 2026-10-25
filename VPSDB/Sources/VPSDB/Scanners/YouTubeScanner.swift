@@ -30,6 +30,18 @@ public struct YouTubeScanner: DetailScanner {
             page.attr("span[itemprop=author] link[itemprop=name]", "content")
             ?? page.meta("meta[name=author]")
 
+        let parsedDate = page.meta(
+            "meta[itemprop=datePublished]", "meta[property=article:published_time]",
+            "meta[property=article:modified_time]", "meta[itemprop=dateModified]"
+        ).flatMap(parseDate)
+
+        let date =
+            if let parsedDate {
+                DetailResult.DateKind.date(parsedDate)
+            } else {
+                DetailResult.DateKind.undated
+            }
+
         // the thumbnail is predictable from the id; og:image is usually the same image
         // at a different size
         var images = [URL]()
@@ -44,7 +56,7 @@ public struct YouTubeScanner: DetailScanner {
 
         return DetailResult(
             .detail,
-            url: url, kind: kind, name: page.title, author: author, date: .undated,
+            url: url, kind: kind, name: page.title, author: author, date: date,
             text: page.description, images: images)
     }
 }
