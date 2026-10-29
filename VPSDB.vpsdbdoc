@@ -1,4 +1,18 @@
 {
+  "suppressedChecks" : [
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "9pDvjPBe"
+    },
+    {
+      "checkId" : "synchronizeROMS",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "boSM_rZ9Or"
+    }
+  ],
   "suppressedURLs" : {
     "https://pinballnirvana.com/forums/resources/any.5131/" : {
       "version" : {
@@ -400,6 +414,11 @@
 
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8860/" : {
+      "permanent" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/humpty-dumpty-gottlieb-1947.6213/" : {
       "obsolete" : {
 
@@ -656,6 +675,11 @@
     "https://vpuniverse.com/files/file/27099-any/" : {
       "version" : {
         "parsed" : "1.0.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/27308-cheetah-2/" : {
+      "obsolete" : {
+
       }
     },
     "https://vpuniverse.com/files/file/27779-any/" : {
@@ -943,12 +967,27 @@
         "until" : "2026-11-14T04:18:22Z"
       }
     },
+    "https://vpuniverse.com/files/file/32450-any/" : {
+      "version" : {
+        "parsed" : "0_0"
+      }
+    },
     "https://vpuniverse.com/files/file/32528-any/" : {
       "missingGame" : {
         "falsePositives" : [
           "2896k22MAz"
         ],
         "name" : "The Jetsons"
+      }
+    },
+    "https://vpuniverse.com/files/file/32629-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/32676-any/" : {
+      "permanent" : {
+
       }
     },
     "https://vpuniverse.com/files/file/5257-grand-slam-gottlieb-1953/" : {
@@ -978,6 +1017,11 @@
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=16006" : {
       "obsolete" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=16038" : {
+      "permanent" : {
 
       }
     },
@@ -1011,6 +1055,16 @@
 
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17275" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17366" : {
+      "permanent" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=17373" : {
       "obsolete" : {
 
@@ -1026,9 +1080,29 @@
         "parsed" : "1.1"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17773" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17774" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17952" : {
+      "version" : {
+        "parsed" : "0.1.1"
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=17979" : {
       "version" : {
         "parsed" : "3.0.1"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18009" : {
+      "version" : {
+        "parsed" : "v1.1"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=18094" : {
@@ -1056,7 +1130,17 @@
         "parsed" : "2024"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18665" : {
+      "permanent" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=18867" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18987" : {
       "obsolete" : {
 
       }
@@ -1069,6 +1153,11 @@
         "name" : "Black Magic"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19177" : {
+      "obsolete" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19179" : {
       "obsolete" : {
 
@@ -1076,6 +1165,11 @@
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19379" : {
       "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19388" : {
+      "obsolete" : {
 
       }
     },
@@ -1171,8 +1265,8 @@
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19659" : {
-      "version" : {
-        "parsed" : "FizX3.3 V1.00"
+      "obsolete" : {
+
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19666" : {
@@ -1213,6 +1307,11 @@
         "name" : "COMICS"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19917" : {
+      "permanent" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19919" : {
       "version" : {
         "parsed" : "v100"
@@ -1226,6 +1325,11 @@
         "name" : "Blue Max"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19936" : {
+      "permanent" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19939" : {
       "version" : {
         "parsed" : "0.0"
@@ -1236,9 +1340,24 @@
 
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19955" : {
+      "permanent" : {
+
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19970" : {
+      "permanent" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=7377" : {
       "version" : {
         "parsed" : "FizX3.3 V1.00"
+      }
+    },
+    "https://www.vpforums.org/index.php?showtopic=55162" : {
+      "obsolete" : {
+
       }
     },
     "https://www.youtube.com/watch?v=-F3Tan2qhE0" : {
