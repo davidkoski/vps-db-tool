@@ -7,6 +7,12 @@
       "resourceId" : "9pDvjPBe"
     },
     {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "zWUdnhw4"
+    },
+    {
       "checkId" : "synchronizeROMS",
       "checkVersion" : 1,
       "kind" : "table",
@@ -464,6 +470,11 @@
         "parsed" : "1.0.9"
       }
     },
+    "https://vpuniverse.com/files/file/13391-any/" : {
+      "version" : {
+        "parsed" : "2"
+      }
+    },
     "https://vpuniverse.com/files/file/13638-any/" : {
       "version" : {
         "parsed" : "1.0.2"
@@ -477,6 +488,11 @@
     "https://vpuniverse.com/files/file/14807-any/" : {
       "permanent" : {
 
+      }
+    },
+    "https://vpuniverse.com/files/file/15511-any/" : {
+      "version" : {
+        "parsed" : "1.1"
       }
     },
     "https://vpuniverse.com/files/file/17202-any/" : {
@@ -548,6 +564,26 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/21614-any/" : {
+      "version" : {
+        "parsed" : "1.0.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/21628-any/" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/21761-any/" : {
+      "version" : {
+        "parsed" : "Vifico"
+      }
+    },
+    "https://vpuniverse.com/files/file/21901-any/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/22188-any/" : {
       "permanent" : {
 
@@ -603,6 +639,16 @@
         "name" : "James Bond 007"
       }
     },
+    "https://vpuniverse.com/files/file/24845-any/" : {
+      "version" : {
+        "parsed" : "1.0"
+      }
+    },
+    "https://vpuniverse.com/files/file/24845-wonderland/" : {
+      "obsolete" : {
+
+      }
+    },
     "https://vpuniverse.com/files/file/24855-any/" : {
       "obsolete" : {
 
@@ -634,9 +680,19 @@
         "name" : "Star Wars The Mandalorian"
       }
     },
+    "https://vpuniverse.com/files/file/25333-any/" : {
+      "version" : {
+        "parsed" : "4..0.0"
+      }
+    },
     "https://vpuniverse.com/files/file/25502-any/" : {
       "permanent" : {
 
+      }
+    },
+    "https://vpuniverse.com/files/file/25593-any/" : {
+      "version" : {
+        "parsed" : "2"
       }
     },
     "https://vpuniverse.com/files/file/25760-any/" : {
@@ -654,12 +710,36 @@
         "parsed" : "FizX3.3 V1.10"
       }
     },
+    "https://vpuniverse.com/files/file/26338-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Space Balls B2s with lighting effects (with DMD and without)"
+      }
+    },
+    "https://vpuniverse.com/files/file/26491-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Tremors"
+      }
+    },
     "https://vpuniverse.com/files/file/26843-any/" : {
       "missingGame" : {
         "falsePositives" : [
 
         ],
         "name" : "The Avengers Infinity Quest"
+      }
+    },
+    "https://vpuniverse.com/files/file/27020-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Lucky Card"
       }
     },
     "https://vpuniverse.com/files/file/27022-any/" : {
@@ -678,6 +758,11 @@
       }
     },
     "https://vpuniverse.com/files/file/27308-cheetah-2/" : {
+      "obsolete" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/27402-any/" : {
       "obsolete" : {
 
       }
@@ -731,6 +816,11 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/29179-any/" : {
+      "version" : {
+        "parsed" : "FizX3.3 V1.00"
+      }
+    },
     "https://vpuniverse.com/files/file/29542-any/" : {
       "permanent" : {
 
@@ -754,6 +844,14 @@
     "https://vpuniverse.com/files/file/30094-any/" : {
       "version" : {
         "parsed" : "FizX3.3 V1.00"
+      }
+    },
+    "https://vpuniverse.com/files/file/30165-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Hawaii 2"
       }
     },
     "https://vpuniverse.com/files/file/30280-any/" : {
@@ -1075,6 +1173,11 @@
         "parsed" : "v1.0"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=17527" : {
+      "obsolete" : {
+
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=17673" : {
       "version" : {
         "parsed" : "1.1"
@@ -1133,6 +1236,11 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=18665" : {
       "permanent" : {
 
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=18768" : {
+      "version" : {
+        "parsed" : "FizX3.3 V110"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=18867" : {
@@ -1307,6 +1415,11 @@
         "name" : "COMICS"
       }
     },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19835" : {
+      "version" : {
+        "parsed" : "1"
+      }
+    },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19917" : {
       "permanent" : {
 
@@ -1323,6 +1436,11 @@
 
         ],
         "name" : "Blue Max"
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19935" : {
+      "version" : {
+        "parsed" : "1"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=19936" : {
