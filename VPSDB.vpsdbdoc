@@ -210,6 +210,11 @@
         "parsed" : "2026-02-26"
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8468/" : {
+      "permanent" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/any.8520/" : {
       "version" : {
         "parsed" : "v1.0 2025-01-24"
@@ -1088,6 +1093,19 @@
 
       }
     },
+    "https://vpuniverse.com/files/file/32911-any/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://vpuniverse.com/files/file/32960-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Total Sickness ()"
+      }
+    },
     "https://vpuniverse.com/files/file/5257-grand-slam-gottlieb-1953/" : {
       "obsolete" : {
 
@@ -1466,6 +1484,11 @@
     "https://www.vpforums.org/index.php?app=downloads&showfile=19970" : {
       "permanent" : {
 
+      }
+    },
+    "https://www.vpforums.org/index.php?app=downloads&showfile=19973" : {
+      "version" : {
+        "parsed" : "0.1"
       }
     },
     "https://www.vpforums.org/index.php?app=downloads&showfile=7377" : {
