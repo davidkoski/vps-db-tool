@@ -24,7 +24,7 @@ extension GameResourceCommon {
             game: GameRef(game: game),
             urls: [Resource(url: detail.normalizedURL, broken: false)],
             authors: [db.matchAuthor(name: detail.author)],
-            version: canonicalVersion(detail.version)
+            version: cleanVersion(detail.version)
         )
     }
 }
@@ -32,6 +32,8 @@ extension GameResourceCommon {
 public protocol GameResource: Metadata, Equatable {
     var gameResource: GameResourceCommon { get set }
     var kind: GameResourceKind { get }
+
+    func matches(_ query: String) -> Bool
 }
 
 extension GameResource {
@@ -63,8 +65,27 @@ extension GameResource {
         gameResource.game.name
     }
 
+    public var vpsURL: URL {
+        URL(
+            string:
+                "https://virtualpinballspreadsheet.github.io/roms?game=\(gameId)&fileType=\(kind.rawValue)&fileId=\(id)"
+        )!
+    }
+
     func matchAuthor(_ name: String) -> Author? {
         gameResource.authors.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+    }
+
+    public func matches(_ query: String) -> Bool {
+        if id == query { return true }
+        if let url, url.description.lowercased().contains(query) { return true }
+        if let comment = gameResource.comment, comment.lowercased().contains(query) { return true }
+        if let version = gameResource.version, version.lowercased().contains(query) { return true }
+        return false
+    }
+
+    public func game(_ db: Database) -> Game? {
+        db.games[gameId]
     }
 }
 

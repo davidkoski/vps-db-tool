@@ -32,15 +32,29 @@ public struct Index<Element: Sendable & Metadata>: Sendable {
             }, uniquingKeysWith: { a, b in a })
     }
 
+    /// Replace the items of `old` with those of `new` (the same game, updated).
+    ///
+    /// Only removes items still in `old`'s game: an item moved to another
+    /// game (written first) keeps its id but has that game's ref, so it stays
+    /// indexed.  Relies on items' game refs matching their game -- see
+    /// ``Game/connectResources()``.
     public mutating func update(old: Game, new: Game, _ itemPath: KeyPath<Game, [Element]>) {
         // remove the old
-        let ids = old[keyPath: itemPath].map { $0.id }
-        all = all.filter { !ids.contains($0.id) }
+        let ids = Set(old[keyPath: itemPath].map { $0.id })
+        all = all.filter { !(ids.contains($0.id) && $0.gameId == old.id) }
 
         // add the new
         all.append(contentsOf: new[keyPath: itemPath])
 
         // reuild index
+        build(all, itemPath)
+    }
+
+    /// Remove the items of `old` (a game being deleted) -- not those moved to
+    /// another game, see ``update(old:new:_:)``.
+    public mutating func remove(old: Game, _ itemPath: KeyPath<Game, [Element]>) {
+        let ids = Set(old[keyPath: itemPath].map { $0.id })
+        all = all.filter { !(ids.contains($0.id) && $0.gameId == old.id) }
         build(all, itemPath)
     }
 
@@ -63,6 +77,11 @@ extension Index where Element == Game {
     public mutating func update(old: Game, new: Game) {
         byId[old.id] = nil
         byId[new.id] = new
+        all = Array(byId.values)
+    }
+
+    public mutating func remove(old: Game) {
+        byId[old.id] = nil
         all = Array(byId.values)
     }
 }

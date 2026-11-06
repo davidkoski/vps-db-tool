@@ -1,11 +1,11 @@
 import Foundation
 import OrderedCollections
 
-private struct ScanPattern<T: Sendable>: Sendable {
+public struct ScanPattern<T: Sendable>: Sendable {
     nonisolated(unsafe) let pattern: any RegexComponent
     let result: T
 
-    init(_ pattern: any RegexComponent, _ result: T) {
+    public init(_ pattern: any RegexComponent, _ result: T) {
         self.pattern = pattern
         self.result = result
     }
@@ -91,6 +91,7 @@ private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
 
 private let b2sCommentPatterns: [ScanPattern<String>] = [
     .init(/\balternate\b/.ignoresCase(), "Alternate"),
+    .init(/\balternative\b/.ignoresCase(), "Alternate"),
     .init(/\balt\b/.ignoresCase(), "Alternate"),
     .init(/\breal DMD\b/.ignoresCase(), "Real DMD"),
     .init(/\bslim LCD DMD\b/.ignoresCase(), "Real DMD"),
@@ -124,7 +125,7 @@ private func combine(_ pieces: [String?]) -> String? {
     return pieces.joined(separator: " ")
 }
 
-private func scanText(_ text: [String?], _ patterns: [ScanPattern<String>]) -> String? {
+public func scanText(_ text: [String?], _ patterns: [ScanPattern<String>]) -> String? {
     guard let text = combine(text) else { return nil }
 
     let result =
@@ -137,6 +138,18 @@ private func scanText(_ text: [String?], _ patterns: [ScanPattern<String>]) -> S
     } else {
         return OrderedSet(result).joined(separator: " ")
     }
+}
+
+public func scanText<T>(_ text: [String?], _ patterns: [ScanPattern<T>]) -> Set<T> {
+    guard let text = combine(text) else { return [] }
+
+    let result =
+        patterns
+        .filter { text.contains($0.pattern) }
+        .map { $0.result }
+        .set()
+
+    return result
 }
 
 private let wheelPatterns: [ScanPattern<String>] = [

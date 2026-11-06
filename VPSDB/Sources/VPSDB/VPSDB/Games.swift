@@ -7,8 +7,70 @@ public protocol HasScreenshot {
     var imgUrl: URL? { get }
 }
 
+/// Whether `string` is (only) a date, e.g. `2026-09-17` -- some resources
+/// are versioned by date.
+private func isVersionDate(_ string: String) -> Bool {
+    string.wholeMatch(of: /\d{4}-\d\d-\d\d/) != nil
+}
+
+/// The version string with the noise around the version number removed:
+/// physics versions, dates, "Version" / "v" prefixes, decimal commas.
+private func stripVersionNoise(_ string: String?) -> String {
+    (string ?? "")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+        // physics version, e.g. "FizX3.3 V1.10" (also misspelled "FixZ")
+        .replacing(/(?i)fi[xz][xz]\s*\d+(\.\d+)?/, with: " ")
+        // a release date next to the version
+        .replacing(/\d{4}-\d\d-\d\d/, with: " ")
+        // e.g. "Version2.0" -- otherwise the number follows a letter
+        .replacing(/(?i)version/, with: " ")
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+        .trimmingPrefix("v")
+        .trimmingPrefix("V")
+        // decimal comma: "1,0" (but not a list: "1.1, 2.0")
+        .replacing(/(\d),(\d)/, with: { "\($0.output.1).\($0.output.2)" })
+        .trimmingCharacters(in: .whitespacesAndNewlines)
+}
+
+/// The highest version number in `string` (already stripped of noise).
+private func highestVersion(_ string: String) -> ParsedVersion? {
+    // A number -- at the start, after a non-letter or after "v" (not inside a
+    // word like "B2S") -- with an optional suffix: a letter, possibly
+    // followed by digits, possibly after one space ("1.0a", "1.0b2", "1.105 b"),
+    // but not the start of a word ("1.0 WIP", "1.0 B2S").
+    string.matches(
+        of: /(?:^|[^a-zA-Z0-9.]|[vV])(\d+(?:\.\d+)*(?:\s?[a-zA-Z]\d*(?![a-zA-Z0-9]))?)/
+    )
+    .map { ParsedVersion(String($0.output.1)) }
+    .max()
+}
+
+/// Clean version of the version string -- what we are going to store with a
+/// GameResource.  The (highest) version number in the string, keeping the
+/// author's form apart from redundant zeros:
+///
+/// - `v1.01 PUP and Non-PUP` -> `1.01`
+/// - `RAMBO V2.0` -> `2.0`, `Version 2.00` -> `2.0`, `v2` -> `2`
+/// - `1.0.0` -> `1.0`, `Beta 1.1.0` -> `1.1`, `2.0.1` -> `2.0.1`, `1.10` -> `1.10`
+/// - `v1.1 & v2.0` -> `2.0` (several versions: the highest)
+/// - `1.0A` -> `1.0a`, `v1.105 b` -> `1.105b`, `2.0SE` -> `2.0`
+///
+/// A string that is only a date (`2026-09-17`) is kept whole; strings without
+/// a number (`Final`) are kept, less the noise.  See ``canonicalVersion(_:)``
+/// for comparing versions.
+public func cleanVersion(_ string: String?) -> String {
+    let trimmed = (string ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+    if isVersionDate(trimmed) {
+        return trimmed
+    }
+
+    let stripped = stripVersionNoise(trimmed)
+    return highestVersion(stripped)?.clean ?? stripped
+}
+
 /// Canonical form of a version scraped from a web page, for comparing
-/// versions: the (highest) version number in the string, e.g.
+/// versions -- lossy: ``cleanVersion(_:)`` without trailing `.0` components,
+/// so `2.0` == `2.00` == `2.0.0` == `2`, e.g.
 ///
 /// - `v1.01 PUP and Non-PUP` -> `1.01`
 /// - `RAMBO V2.0`, `Version 2.00`, `2` -> `2`
@@ -18,68 +80,64 @@ public protocol HasScreenshot {
 /// - `FizX3.3 V1.10` -> `1.10`, `FizX3.3 V1.00` -> `1`
 /// - `1.0a`, `1.0A` -> `1a`, `v1.105 b` -> `1.105b`, `1.0b2` -> `1b2`
 ///
-/// Trailing `.0` components are dropped so `2.0` == `2.0.0` == `2`.  A string
-/// that is only a date (`2026-09-17`) is kept whole; strings without a number
-/// fall back to stripping spaces and `v`.
+/// A string that is only a date (`2026-09-17`) is kept whole; strings without
+/// a number fall back to stripping spaces and `v`.
 public func canonicalVersion(_ string: String?) -> String {
-    let string = (string ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-
-    let date = /\d{4}-\d\d-\d\d/
-    if string.wholeMatch(of: date) != nil {
-        return string
+    let cleaned = cleanVersion(string)
+    if isVersionDate(cleaned) {
+        return cleaned
     }
 
-    let cleaned =
-        string
-        // e.g. "Version2.0" -- otherwise the number follows a letter
-        .replacing(/(?i)version/, with: " ")
-        // physics version, e.g. "FizX3.3 V1.10" (also misspelled "FixZ")
-        .replacing(/(?i)fi[xz][xz]\s*\d+(\.\d+)?/, with: " ")
-        // a release date next to the version
-        .replacing(date, with: " ")
-        // decimal comma: "1,0" (but not a list: "1.1, 2.0")
-        .replacing(/(\d),(\d)/, with: { "\($0.output.1).\($0.output.2)" })
-
-    // A number -- at the start, after a non-letter or after "v" (not inside a
-    // word like "B2S") -- with an optional suffix: a letter, possibly
-    // followed by digits, possibly after one space ("1.0a", "1.0b2", "1.105 b"),
-    // but not the start of a word ("1.0 WIP", "1.0 B2S").
-    let versions = cleaned.matches(
-        of: /(?:^|[^a-zA-Z0-9.]|[vV])(\d+(?:\.\d+)*(?:\s?[a-zA-Z]\d*(?![a-zA-Z0-9]))?)/
-    )
-    .map { ParsedVersion(String($0.output.1)) }
-
-    guard let highest = versions.max() else {
+    guard let version = highestVersion(cleaned) else {
         // no number, e.g. "Final", "WIP"
         return
-            string
+            cleaned
             .replacingOccurrences(of: "Version", with: "")
             .replacingOccurrences(of: "v", with: "")
             .replacingOccurrences(of: "V", with: "")
             .replacingOccurrences(of: " ", with: "")
     }
 
-    return highest.canonical
+    return version.canonical
 }
 
 /// A version number like `1.01`, `1.0a` or `1.0b2`, ordered numerically by
 /// component (`1.10` > `1.9`), then by suffix (none < `a` < `b`).
 private struct ParsedVersion: Comparable {
-    /// Lowercased, without spaces or trailing `.0` components: `1.0A` -> `1a`.
+    /// Lowercased, without spaces, all-zero components as one zero and
+    /// trailing zero components dropped down to two: `1.00 A` -> `1.0a`,
+    /// `1.0.0` -> `1.0` -- see ``cleanVersion(_:)``.
+    let clean: String
+
+    /// `clean` without trailing `.0` components: `1.0a` -> `1a` -- see
+    /// ``canonicalVersion(_:)``.
     let canonical: String
 
     let components: [Int]
     let suffix: String
 
     init(_ string: String) {
-        canonical = string.lowercased()
-            .filter { !$0.isWhitespace }
-            // trailing zero components, before an optional suffix
-            .replacing(/(\.0+)+(?=([a-z]\d*)?$)/, with: "")
+        let compact = string.lowercased().filter { !$0.isWhitespace }
+        let numeric = compact.prefix { $0.isNumber || $0 == "." }
+        suffix = String(compact.dropFirst(numeric.count))
 
-        let numeric = canonical.prefix { $0.isNumber || $0 == "." }
-        components = numeric.split(separator: ".").map { Int($0) ?? 0 }
-        suffix = String(canonical.dropFirst(numeric.count))
+        let parts = numeric.split(separator: ".", omittingEmptySubsequences: false)
+        components = parts.map { Int($0) ?? 0 }
+
+        // "00" -> "0", other components as written ("01", "10"), trailing
+        // zero components dropped down to two: "1.0.0" -> "1.0"
+        var cleanParts = parts.map { $0.allSatisfy { $0 == "0" } ? "0" : String($0) }
+        while cleanParts.count > 2, cleanParts.last == "0" {
+            cleanParts.removeLast()
+        }
+        clean = cleanParts.joined(separator: ".") + suffix
+
+        // drop trailing zero components (but keep the first)
+        var significant = Array(parts.map(String.init))
+        while significant.count > 1, significant.last!.allSatisfy({ $0 == "0" }) {
+            significant.removeLast()
+        }
+        canonical = significant.joined(separator: ".") + suffix
     }
 
     static func < (lhs: ParsedVersion, rhs: ParsedVersion) -> Bool {
@@ -164,6 +222,12 @@ public struct Table: GameResource, HasScreenshot, Sendable {
             imgUrl: nil)
     }
 
+    public mutating func didDecode(from decoder: any Decoder) throws {
+        if parentId?.isEmpty ?? false {
+            self.parentId = nil
+        }
+    }
+
     public func hasFeature(_ feature: TableFeature) -> Bool {
         features.contains(feature)
     }
@@ -177,6 +241,27 @@ public struct Table: GameResource, HasScreenshot, Sendable {
             set.remove(feature)
         }
         features = OrderedSet(TableFeature.allCases.filter { set.contains($0) })
+    }
+
+    public var isRoot: Bool {
+        get {
+            if let parentId {
+                parentId.caseInsensitiveCompare("root") == .orderedSame
+            } else {
+                false
+            }
+        }
+        set {
+            parentId = "root"
+        }
+    }
+
+    public func parent(_ db: Database) -> Table? {
+        if let parentId {
+            db.tables[parentId]
+        } else {
+            nil
+        }
     }
 }
 
@@ -446,31 +531,8 @@ public struct GameContainer: Decodable {
 
     public init(from decoder: any Decoder) throws {
         do {
-            func connect<T: GameResource>(_ game: inout Game, _ keyPath: WritableKeyPath<Game, [T]>)
-            {
-                let id = GameRef(id: game.id, name: game.name)
-                game[keyPath: keyPath] = game[keyPath: keyPath].map { i in
-                    var i = i
-                    i.gameResource.game = id
-                    return i
-                }
-            }
-
             var game = try Game(from: decoder)
-
-            connect(&game, \.tables)
-            connect(&game, \.backglasses)
-            connect(&game, \.tutorials)
-            connect(&game, \.roms)
-            connect(&game, \.pupPacks)
-            connect(&game, \.altColors)
-            connect(&game, \.altSounds)
-            connect(&game, \.sounds)
-            connect(&game, \.povs)
-            connect(&game, \.wheels)
-            connect(&game, \.toppers)
-            connect(&game, \.mediaPacks)
-            connect(&game, \.rules)
+            game.connectResources()
 
             self.game = game
         } catch {
@@ -576,8 +638,13 @@ public struct Game: Metadata, HasScreenshot, Identifiable, Sendable, CustomStrin
         manufacturer.shouldHaveIPDBEntry
     }
 
+    public var vpsURL: URL {
+        URL(string: "https://virtualpinballspreadsheet.github.io/?game=\(id)")!
+    }
+
     public func matches(_ query: String) -> Bool {
-        gameId == query || gameName.lowercased().contains(query)
+        gameId.lowercased() == query
+            || gameName.lowercased().contains(query)
             || manufacturer.rawValue.lowercased().contains(query)
             || (year?.description ?? "").contains(query)
             || designers.contains { $0.lowercased().contains(query) }
@@ -709,6 +776,65 @@ extension Game {
         case .rule: rules.removeAll { $0.id == id }
         case .sound: sounds.removeAll { $0.id == id }
         }
+    }
+
+    /// Add `resource` (of any kind) to this game, pointing its game ref here --
+    /// replaces a resource of the same kind with the same id.
+    public mutating func add(_ resource: any GameResource) {
+        var resource = resource
+        resource.gameResource.game = GameRef(game: self)
+        switch resource {
+        case let r as Table: upsert(r, at: \.tables)
+        case let r as B2S: upsert(r, at: \.backglasses)
+        case let r as Tutorial: upsert(r, at: \.tutorials)
+        case let r as ROM: upsert(r, at: \.roms)
+        case let r as PupPack: upsert(r, at: \.pupPacks)
+        case let r as AltColors: upsert(r, at: \.altColors)
+        case let r as AltSound: upsert(r, at: \.altSounds)
+        case let r as Sound: upsert(r, at: \.sounds)
+        case let r as POV: upsert(r, at: \.povs)
+        case let r as WheelArt: upsert(r, at: \.wheels)
+        case let r as Topper: upsert(r, at: \.toppers)
+        case let r as MediaPack: upsert(r, at: \.mediaPacks)
+        case let r as Rules: upsert(r, at: \.rules)
+        default: preconditionFailure("unknown resource type \(Swift.type(of: resource))")
+        }
+    }
+
+    /// Point every resource's game ref at this game -- the refs aren't stored
+    /// (they're implied by the containing game) and the indexes rely on them
+    /// (see ``Index/update(old:new:_:)``).
+    public mutating func connectResources() {
+        func connect<T: GameResource>(_ keyPath: WritableKeyPath<Game, [T]>) {
+            let ref = GameRef(game: self)
+            guard self[keyPath: keyPath].contains(where: { $0.gameResource.game != ref }) else {
+                return
+            }
+            self[keyPath: keyPath] = self[keyPath: keyPath].map { item in
+                var item = item
+                item.gameResource.game = ref
+                return item
+            }
+        }
+
+        connect(\.tables)
+        connect(\.backglasses)
+        connect(\.tutorials)
+        connect(\.roms)
+        connect(\.pupPacks)
+        connect(\.altColors)
+        connect(\.altSounds)
+        connect(\.sounds)
+        connect(\.povs)
+        connect(\.wheels)
+        connect(\.toppers)
+        connect(\.mediaPacks)
+        connect(\.rules)
+    }
+
+    /// Every resource of the game, all kinds.
+    public var allResources: [any GameResource] {
+        GameResourceKind.allCases.flatMap { self[$0] }
     }
 
     /// Replace the resource with the same id at `keyPath`, or append it if not present.

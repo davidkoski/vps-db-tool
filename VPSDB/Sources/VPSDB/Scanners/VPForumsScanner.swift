@@ -14,7 +14,7 @@ public struct VPForumsScanner {
     public init() {
     }
 
-    public let version = 1
+    public let version = 2
 }
 
 extension VPForumsScanner: ScanSources {
@@ -161,22 +161,11 @@ extension VPForumsScanner: DetailScanner {
 
             var author: String?
 
-            // <li><strong>Author(s):</strong>fpozo
-            let author0 = try html.select("strong.title:contains(Author)").first?.nextSibling()?
-                .outerHtml().trimmingCharacters(in: .whitespacesAndNewlines)
-
-            if let author0, !author0.isEmpty {
-                // foo (images)
-                // foo, bar
-                // foo & bar
-                author = String(author0.split(separator: " ")[0].split(separator: ", ")[0])
-            } else {
-                let author1 = try html.select(".name")
-                let author2 = try html.select(".ipsType_subtitle")
-                let authorElement = author1.isEmpty() ? author2 : author1
-                if !authorElement.isEmpty() {
-                    author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
-                }
+            let author1 = try html.select(".name")
+            let author2 = try html.select(".ipsType_subtitle")
+            let authorElement = author1.isEmpty() ? author2 : author1
+            if !authorElement.isEmpty() {
+                author = try authorElement[0].text(trimAndNormaliseWhitespace: true)
             }
 
             var text: String?
@@ -184,6 +173,10 @@ extension VPForumsScanner: DetailScanner {
             if !textElement.isEmpty() {
                 text = try textElement[0].text(trimAndNormaliseWhitespace: true)
             }
+
+            // <li><strong>Author(s):</strong>fpozo
+            let authorExtra = try html.select("strong.title:contains(Author)").first?.nextSibling()?
+                .outerHtml().trimmingCharacters(in: .whitespacesAndNewlines)
 
             let screenShotElement = try html.select(".screenshot")
             let images = try? screenShotElement.compactMap {
@@ -198,7 +191,7 @@ extension VPForumsScanner: DetailScanner {
                 author: author,
                 version: version,
                 date: .new(date),
-                text: text,
+                text: [text, authorExtra].compactMap { $0 }.joined(separator: "\n"),
                 images: images
             )
         }

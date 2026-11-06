@@ -114,6 +114,8 @@ public struct Database: Codable, Sendable {
 
         var new = game
         mutator(&new)
+        // the indexes rely on the refs (e.g. a resource added from another game)
+        new.connectResources()
 
         if new != game {
             if let lastCreatedAt = new.tables.map({ $0.createdAt }).max() {
@@ -141,6 +143,96 @@ public struct Database: Codable, Sendable {
             self.mediaPacks.update(old: game, new: new, \.mediaPacks)
             self.rules.update(old: game, new: new, \.rules)
         }
+    }
+
+    /// Delete the game (and its file) -- its resources go with it.
+    public mutating func remove(gameId: String) throws {
+        precondition(url != nil)
+        guard let game = games.byId[gameId] else { return }
+
+        let url = url!.appending(component: game.id).appendingPathExtension("json")
+        try FileManager.default.removeItem(at: url)
+
+        self.games.remove(old: game)
+        self.gamesByName = Dictionary(grouping: games.all, by: \.name)
+
+        self.tables.remove(old: game, \.tables)
+        self.backglasses.remove(old: game, \.backglasses)
+        self.tutorials.remove(old: game, \.tutorials)
+        self.roms.remove(old: game, \.roms)
+        self.pupPacks.remove(old: game, \.pupPacks)
+        self.altColors.remove(old: game, \.altColors)
+        self.altSounds.remove(old: game, \.altSounds)
+        self.sounds.remove(old: game, \.sounds)
+        self.povs.remove(old: game, \.povs)
+        self.wheels.remove(old: game, \.wheels)
+        self.toppers.remove(old: game, \.toppers)
+        self.mediaPacks.remove(old: game, \.mediaPacks)
+        self.rules.remove(old: game, \.rules)
+    }
+
+    /// Move a resource from one game to another.
+    ///
+    /// Writes the target first, so a failure part way leaves the resource in
+    /// both games rather than neither.
+    public mutating func move(
+        kind: GameResourceKind, id: String, from sourceId: String, to targetId: String
+    ) throws {
+        guard sourceId != targetId,
+            let source = games.byId[sourceId],
+            let resource = source[kind].first(where: { $0.id == id })
+        else { return }
+
+        try update(targetId) { game in
+            game.add(resource)
+        }
+        try update(sourceId) { game in
+            game.remove(kind: kind, id: id)
+        }
+    }
+
+    /// Move a resource out of its game into `newGame` (not yet in the db),
+    /// which is written with it.
+    ///
+    /// Writes the new game first, so a failure part way leaves the resource in
+    /// both games rather than neither.
+    public mutating func split(
+        kind: GameResourceKind, id: String, from sourceId: String, into newGame: Game
+    ) throws {
+        guard games.byId[newGame.id] == nil,
+            let source = games.byId[sourceId],
+            let resource = source[kind].first(where: { $0.id == id })
+        else { return }
+
+        try update(newGame) { game in
+            game.add(resource)
+        }
+        try update(sourceId) { game in
+            game.remove(kind: kind, id: id)
+        }
+    }
+
+    /// Merge game `sourceId` into `targetId`: its resources (and urls) move
+    /// to the target, then the source game is deleted.  The target's own
+    /// fields (name, manufacturer, ...) are kept.
+    ///
+    /// Writes the target first, so a failure part way leaves the resources in
+    /// both games rather than neither.
+    public mutating func merge(gameId sourceId: String, into targetId: String) throws {
+        guard sourceId != targetId,
+            let source = games.byId[sourceId],
+            games.byId[targetId] != nil
+        else { return }
+
+        try update(targetId) { game in
+            for resource in source.allResources {
+                game.add(resource)
+            }
+            for url in source.urls where !game.urls.contains(url) {
+                game.urls.append(url)
+            }
+        }
+        try remove(gameId: sourceId)
     }
 
     public func search(
@@ -177,6 +269,19 @@ public struct Database: Codable, Sendable {
                             }
                         )
                     }
+                }
+            }
+        }
+
+        if let kind, kind != .game {
+            let seen = result.map { $0.id }.set()
+            for item in self[kind].all {
+                guard let item = item as? (any GameResource) else { continue }
+                guard !seen.contains(item.id) else { continue }
+                if !seen.contains(item.id) && item.matches(lowercaseQuery),
+                    let game = item.game(self)
+                {
+                    result.append(.init(game: game, id: item.id, kind: kind))
                 }
             }
         }
