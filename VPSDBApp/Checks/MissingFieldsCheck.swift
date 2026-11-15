@@ -44,7 +44,8 @@ struct MissingFieldsCheck: ResourceCheck {
                 }
                 failures.append("\(url.host() ?? url.absoluteString): nothing new")
             } catch {
-                failures.append("\(url.host() ?? url.absoluteString): \(error.localizedDescription)")
+                failures.append(
+                    "\(url.host() ?? url.absoluteString): \(error.localizedDescription)")
             }
         }
         throw CheckError.noFix(failures.isEmpty ? "No URLs" : failures.joined(separator: "; "))

@@ -20,16 +20,18 @@ struct MissingURLCheck: ResourceCheck {
     func fix(_ item: CheckItem, context: CheckContext) async throws -> FixProposal? {
         guard let resource = context.resource(for: item) else { return nil }
         guard let game = context.game(for: item) else { return nil }
-        
+
         if resource.kind == .b2s {
             // these often go with the table
             if let resourceFirstAuthor = resource.gameResource.authors.first {
-                let tables = game.tables.filter { $0.gameResource.authors.first == resourceFirstAuthor }
-                
+                let tables = game.tables.filter {
+                    $0.gameResource.authors.first == resourceFirstAuthor
+                }
+
                 if tables.count == 1 {
                     return propose(resource, from: tables[0])
                 }
-                
+
                 if tables.count > 1 {
                     return proposeManual(resource)
                 } else {
@@ -40,7 +42,7 @@ struct MissingURLCheck: ResourceCheck {
                 if game.tables.count == 1 {
                     return propose(resource, from: game.tables[0])
                 }
-                
+
                 return proposeManual(resource)
             }
         }
@@ -52,7 +54,7 @@ struct MissingURLCheck: ResourceCheck {
     {
         var new = resource
         var changes = [ProposedChange]()
-        
+
         new.gameResource.urls = table.gameResource.urls
         for url in new.gameResource.urls {
             changes.append(.init(field: .urls, old: "empty", new: url.url.description))
@@ -60,13 +62,15 @@ struct MissingURLCheck: ResourceCheck {
 
         return FixProposal(resource: new, detail: nil, changes: changes)
     }
-    
+
     private func proposeManual<R: GameResource>(_ resource: R)
         -> FixProposal
     {
-        return FixProposal(resource: resource, detail: nil, changes: [
-            .init(field: .urls, old: "empty", new: "manual")
-        ])
+        return FixProposal(
+            resource: resource, detail: nil,
+            changes: [
+                .init(field: .urls, old: "empty", new: "manual")
+            ])
     }
 
 }

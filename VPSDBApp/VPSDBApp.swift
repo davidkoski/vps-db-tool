@@ -68,7 +68,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @State private var db: Database
     @State private var ipdb: IPDB
-    
+
     init() {
         _db = State(initialValue: try! Database.load(directory: AppSettings.shared.gamesURL))
 
@@ -77,10 +77,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             _ipdb = State(initialValue: IPDB())
         }
-        
+
         Task {
             do {
-                try await scanCache.load(url: AppSettings.shared.cacheURL.appending(path: "scanCache.json"))
+                try await scanCache.load(
+                    url: AppSettings.shared.cacheURL.appending(path: "scanCache.json"))
             } catch {
                 log.error("unable to load ScanCache: \(error)")
             }

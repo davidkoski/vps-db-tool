@@ -80,7 +80,8 @@ struct ResourceDetailView: View {
                         }
                         .keyboardShortcut("e", modifiers: .command)
                         .help("Edit (⌘E)")
-                        .disabled(route.kind == .game ? db.games[route.id] == nil : editTarget == nil)
+                        .disabled(
+                            route.kind == .game ? db.games[route.id] == nil : editTarget == nil)
                     }
                 }
             }
@@ -150,7 +151,8 @@ struct ResourceDetailView: View {
         case .game:
             found(db.games[id]) { game in
                 GameDetailView(game: game) { kind, resourceId in
-                    path.append(.resource(ResourceRoute(kind: kind, id: resourceId, gameId: game.id)))
+                    path.append(
+                        .resource(ResourceRoute(kind: kind, id: resourceId, gameId: game.id)))
                 }
             }
         case .table:

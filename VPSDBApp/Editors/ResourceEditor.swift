@@ -280,7 +280,8 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
                     MergeSuggestionSection(
                         newVersion: resource.wrappedValue.version,
                         newDate: resource.wrappedValue.createdAt,
-                        candidates: candidates) { other in
+                        candidates: candidates
+                    ) { other in
                         merge(resource.wrappedValue, into: other)
                     }
                 }
@@ -349,7 +350,8 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
     private func fetchExistingDetail() async {
         guard let detail else { return }
         do {
-            let fullDetail = try await detail.detailRequest.fetch(client: client, scanCache: scanCache)
+            let fullDetail = try await detail.detailRequest.fetch(
+                client: client, scanCache: scanCache)
             self.fullDetail = fullDetail
             self.text = trimText(fullDetail.text)
         } catch {
@@ -374,10 +376,11 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
         guard !isFinished else { return }
         do {
             log.info("merge \(resource.id) into \(other.id)")
-            let result = try ResourceCreation.merge(resource, into: other, game: primaryGame, db: &db)
+            let result = try ResourceCreation.merge(
+                resource, into: other, game: primaryGame, db: &db)
             isFinished = true
             log.info("merge done, calling onDone")
-            
+
             switch result {
             case .none: finish(.failed)
             case .add: finish(.ok)

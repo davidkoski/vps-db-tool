@@ -19,7 +19,7 @@ struct NoTableFormatCheck: ResourceCheck {
 
     func fix(_ item: CheckItem, context: CheckContext) async throws -> FixProposal? {
         guard let table = context.resource(for: item) as? VPSDB.Table else { return nil }
-        
+
         if table.tableFormat == nil {
             return FixProposal(
                 resource: table, detail: nil,
@@ -27,7 +27,7 @@ struct NoTableFormatCheck: ResourceCheck {
                     .init(field: .urls, old: "", new: "Set format")
                 ])
         }
-        
+
         return nil
     }
 }

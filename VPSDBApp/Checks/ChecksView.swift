@@ -320,7 +320,7 @@ struct ChecksView: View {
         guard let client, !fixing.contains(item.id) else { return }
 
         let context = CheckContext(db: db, settings: settings, client: client)
-        
+
         // e.g. fixed along with another resource of the same game
         guard item.stillApplies(context: context) else {
             navLog.info("NAV [\(kind)] checks fix \(item.id): no longer applies")

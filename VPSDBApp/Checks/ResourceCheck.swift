@@ -125,7 +125,9 @@ struct CheckItem: Identifiable {
     /// Whether the check still finds problems with the resource as currently
     /// in `db` -- `false` if it was fixed (or removed) since the check ran.
     func stillApplies(context: CheckContext) -> Bool {
-        guard let game = context.game(for: self), let resource = context.resource(for: self) else { return false }
+        guard let game = context.game(for: self), let resource = context.resource(for: self) else {
+            return false
+        }
         return !check.problems(resource, game: game, context: context).isEmpty
     }
 }

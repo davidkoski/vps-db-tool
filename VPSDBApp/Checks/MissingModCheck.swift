@@ -1,7 +1,7 @@
 import Foundation
+internal import OrderedCollections
 import SwiftUI
 import VPSDB
-internal import OrderedCollections
 
 private let commentPattern: [ScanPattern<MissingModCheck.Disposition>] = [
     .init(/retheme of/.ignoresCase(), .commentRetheme),
@@ -15,7 +15,7 @@ struct MissingModCheck: ResourceCheck {
     var kinds: Set<GameResourceKind> { [.table] }
     var supportsBulkApply: Bool { true }
     var version = 1
-    
+
     enum Disposition {
         case noAction
         case addMod
@@ -27,19 +27,20 @@ struct MissingModCheck: ResourceCheck {
         case probablyParent
         case brokenParent
     }
-    
+
     func determineFix(table: VPSDB.Table, game: Game, context: CheckContext) -> Disposition {
         var targetFeature: TableFeature
         var sure: Bool
-        
+
         if table.isRoot {
             return .noAction
         }
-        
+
         if table.parentId != nil {
             // has parent -- mod or retheme
             if let parentTable = table.parent(context.db),
-               let parentGame = parentTable.game(context.db) {
+                let parentGame = parentTable.game(context.db)
+            {
                 if parentGame.id != game.id {
                     // different game, should be a retheme
                     targetFeature = .retheme
@@ -53,12 +54,12 @@ struct MissingModCheck: ResourceCheck {
                 return .brokenParent
             }
         } else {
-            
+
             let commentFeatures = scanText([table.gameResource.comment], commentPattern)
             if let first = commentFeatures.first {
                 return first
             }
-            
+
             // no parent, if it has many authors it _might_ be a mod
             sure = false
             if table.gameResource.authors.count > 1 {
@@ -71,7 +72,7 @@ struct MissingModCheck: ResourceCheck {
                 return .noAction
             }
         }
-        
+
         if table.features.contains(targetFeature) {
             return sure ? .noAction : .probablyParent
         } else {
@@ -85,7 +86,7 @@ struct MissingModCheck: ResourceCheck {
 
     func problems(_ resource: any GameResource, game: Game, context: CheckContext) -> [String] {
         guard let table = resource as? VPSDB.Table else { return [] }
-        
+
         switch determineFix(table: table, game: game, context: context) {
         case .noAction: return []
         case .addMod: return ["Add Mod"]
@@ -102,28 +103,32 @@ struct MissingModCheck: ResourceCheck {
     func fix(_ item: CheckItem, context: CheckContext) async throws -> FixProposal? {
         guard let table = context.resource(for: item) as? VPSDB.Table else { return nil }
         guard let game = context.game(for: item) else { return nil }
-        
+
         func df(_ table: VPSDB.Table) -> String {
             table.features.map { $0.rawValue }.joined(separator: ", ")
         }
-        
+
         switch determineFix(table: table, game: game, context: context) {
         case .noAction: return nil
         case .addMod:
             var new = table
             new.features.remove(.retheme)
             new.features.append(.mod)
-            return .init(resource: new, detail: nil, changes: [
-                .init(field: .features, old: df(table), new: df(new))
-            ])
+            return .init(
+                resource: new, detail: nil,
+                changes: [
+                    .init(field: .features, old: df(table), new: df(new))
+                ])
         case .addRetheme:
             var new = table
             new.features.remove(.mod)
             new.features.append(.retheme)
-            return .init(resource: new, detail: nil, changes: [
-                .init(field: .features, old: df(table), new: df(new))
-            ])
-            
+            return .init(
+                resource: new, detail: nil,
+                changes: [
+                    .init(field: .features, old: df(table), new: df(new))
+                ])
+
         case .commentMod, .commentRetheme:
             return .init(resource: table, detail: nil, changes: [])
 

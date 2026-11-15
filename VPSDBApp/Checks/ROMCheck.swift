@@ -1,7 +1,7 @@
 import Foundation
+import Logging
 import SwiftUI
 import VPSDB
-import Logging
 
 private let log = Logger(label: "ROMCheck")
 
@@ -16,7 +16,7 @@ struct ROMTableCheck: ResourceCheck {
     func problems(_ resource: any GameResource, game: Game, context: CheckContext) -> [String] {
         guard game.roms.isEmpty else { return [] }
         guard let table = resource as? VPSDB.Table else { return [] }
-        
+
         let db = context.db
         if let parent = table.parent(db), let parentGame = parent.game(db) {
             if !parentGame.roms.isEmpty {
@@ -31,52 +31,58 @@ struct ROMTableCheck: ResourceCheck {
         guard let table = context.resource(for: item) as? VPSDB.Table else { return nil }
         guard let game = context.game(for: item) else { return nil }
         guard game.roms.isEmpty else { return nil }
-        
+
         let db = context.db
         guard let parent = table.parent(db), let parentGame = parent.game(db) else { return nil }
         guard !parentGame.roms.isEmpty else { return nil }
-                
-        return .custom(title: "Copy ROMs", apply: {
-            try Self.apply(env: $0, game: game, roms: parentGame.roms)
-        }) { env in
-            CopyROMView(target: game, source: parentGame, message: "Copy from \(parentGame.name)", env: env)
+
+        return .custom(
+            title: "Copy ROMs",
+            apply: {
+                try Self.apply(env: $0, game: game, roms: parentGame.roms)
+            }
+        ) { env in
+            CopyROMView(
+                target: game, source: parentGame, message: "Copy from \(parentGame.name)", env: env)
         }
     }
-    
+
     static func apply(env: CustomFixEnvironment, game: Game, roms: [ROM]) throws {
         try env.update(game.id) { game in
             game.roms = roms.map {
                 var new = $0
-                
+
                 new.id = newId()
                 new.gameResource.game = .init(game: game)
-                
+
                 return new
             }
         }
     }
 
     struct CopyROMView: View {
-        
+
         let target: Game
         let source: Game
-        
+
         let message: String
 
         let env: CustomFixEnvironment
-        
+
         var body: some View {
             VStack(alignment: .leading) {
-                Text("\(target.name) (\(target.manufacturer.rawValue) \((target.year ?? 0).description))")
+                Text(
+                    "\(target.name) (\(target.manufacturer.rawValue) \((target.year ?? 0).description))"
+                )
                 Text(message)
-                
+
                 Button("Apply", action: apply)
-                
+
                 Spacer()
             }
             .padding()
         }
-        
+
         func apply() {
             do {
                 try ROMTableCheck.apply(env: env, game: target, roms: source.roms)
@@ -99,7 +105,7 @@ struct SynchronizeROMSCheck: ResourceCheck {
 
     func gatherROMs(db: Database, versions: Set<String>) -> [ROM] {
         var versions = versions
-        
+
         // first gather the transitive closure of versions
         for rom in db.roms.all {
             if let version = rom.version, versions.contains(version) {
@@ -108,11 +114,11 @@ struct SynchronizeROMSCheck: ResourceCheck {
                 }
             }
         }
-        
+
         // now gather all the unique urls with those versions
         var result = [ROM]()
         var seen = Set<URL>()
-        
+
         for rom in db.roms.all {
             // some roms don't have a url so map all those to one
             if let version = rom.version, versions.contains(version) {
@@ -124,25 +130,25 @@ struct SynchronizeROMSCheck: ResourceCheck {
                 }
             }
         }
-        
+
         return result
     }
 
     func problems(_ resource: any GameResource, game: Game, context: CheckContext) -> [String] {
         // we can only gather roms if we already have roms
         guard !game.roms.isEmpty else { return [] }
-        
+
         // once per game, but we don't iterate games, we iterate tables
         if game.tables.first?.id != resource.id {
             return []
         }
-        
+
         let roms = gatherROMs(db: context.db, versions: game.roms.compactMap { $0.version }.set())
         if roms.count != game.roms.count {
             let name = roms.compactMap { $0.version }.sorted().first ?? "missing"
             return ["Gather roms \(game.roms.count) -> \(roms.count) (\(name))"]
         }
-        
+
         return []
     }
 
@@ -152,36 +158,41 @@ struct SynchronizeROMSCheck: ResourceCheck {
 
         let roms = gatherROMs(db: context.db, versions: game.roms.compactMap { $0.version }.set())
 
-        return .custom(title: "Gather ROMs", apply: { env in
-            try Self.apply(env: env, game: game, roms: roms)
-        }) { env in
+        return .custom(
+            title: "Gather ROMs",
+            apply: { env in
+                try Self.apply(env: env, game: game, roms: roms)
+            }
+        ) { env in
             CopyROMView(target: game, roms: roms, env: env)
         }
     }
-    
+
     static func apply(env: CustomFixEnvironment, game: Game, roms: [ROM]) throws {
         try env.update(game.id) { game in
             game.roms = roms.map {
                 var new = $0
-                
+
                 new.id = newId()
                 new.gameResource.game = .init(game: game)
-                
+
                 return new
             }
         }
     }
-    
+
     struct CopyROMView: View {
-        
+
         let target: Game
         let roms: [ROM]
-        
+
         let env: CustomFixEnvironment
-        
+
         var body: some View {
             VStack(alignment: .leading) {
-                Text("\(target.name) (\(target.manufacturer.rawValue) \((target.year ?? 0).description))")
+                Text(
+                    "\(target.name) (\(target.manufacturer.rawValue) \((target.year ?? 0).description))"
+                )
 
                 ForEach(roms, id: \.id) { rom in
                     HStack {
@@ -196,14 +207,14 @@ struct SynchronizeROMSCheck: ResourceCheck {
                     }
                     .bold(target.roms.contains { $0.version == rom.version })
                 }
-                
+
                 Button("Apply", action: apply)
-                
+
                 Spacer()
             }
             .padding()
         }
-        
+
         func apply() {
             Task {
                 do {

@@ -174,7 +174,8 @@ struct GameEditorView: View {
     private func splitView(_ splitting: Splitting, from game: Game) -> some View {
         NewGameView(
             sourceName: splitting.description, sourceURL: splitting.url,
-            prefill: "\(game.name) (\(game.manufacturer.rawValue)\(game.year.map { " \($0)" } ?? ""))",
+            prefill:
+                "\(game.name) (\(game.manufacturer.rawValue)\(game.year.map { " \($0)" } ?? ""))",
             ipdb: ipdb, db: db
         ) { newGame in
             split(splitting, from: game, into: newGame)
@@ -188,7 +189,8 @@ struct GameEditorView: View {
     }
 
     private func split(_ splitting: Splitting, from game: Game, into newGame: Game) {
-        log.info("split \(splitting.kind) \(splitting.id) from \(game.id) into new game \(newGame.id)")
+        log.info(
+            "split \(splitting.kind) \(splitting.id) from \(game.id) into new game \(newGame.id)")
         do {
             try db.split(kind: splitting.kind, id: splitting.id, from: game.id, into: newGame)
             error = nil

@@ -15,10 +15,11 @@ struct MissingImagesCheck: ResourceCheck {
     func problems(_ resource: any GameResource, game: Game, context: CheckContext) -> [String] {
         guard !resource.urls.isEmpty else { return [] }
         guard let resource = resource as? HasScreenshot else { return [] }
-        
+
         if let imageUrl = resource.imgUrl {
             if imageUrl.host() == "virtualpinballspreadsheet.github.io" {
-                let path = context.settings.imagesURL.appending(component: imageUrl.lastPathComponent)
+                let path = context.settings.imagesURL.appending(
+                    component: imageUrl.lastPathComponent)
                 if !((try? path.checkResourceIsReachable()) ?? false) {
                     return ["Image Missing"]
                 } else {
@@ -45,7 +46,8 @@ struct MissingImagesCheck: ResourceCheck {
                 let detail = try await request.fetch(client: context.client, scanCache: scanCache)
                 return .init(resource: resource, detail: detail, changes: [])
             } catch {
-                failures.append("\(url.host() ?? url.absoluteString): \(error.localizedDescription)")
+                failures.append(
+                    "\(url.host() ?? url.absoluteString): \(error.localizedDescription)")
             }
         }
         throw CheckError.noFix(failures.isEmpty ? "No URLs" : failures.joined(separator: "; "))

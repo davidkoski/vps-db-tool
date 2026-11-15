@@ -198,7 +198,7 @@ struct TableEditorView: View {
         var common = table.gameResource
         let comment = backglassComment.trimmingCharacters(in: .whitespacesAndNewlines)
         common.comment = comment.isEmpty ? nil : comment
-        
+
         // just use the first author from the table
         common.authors = common.authors.isEmpty ? [] : [common.authors[0]]
 

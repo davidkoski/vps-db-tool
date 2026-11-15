@@ -56,7 +56,9 @@ struct UpdatesView: View {
     /// The running scan -- cancelled when this view is removed for good
     /// (not when an editor is pushed on top of it).
     @State private var scanLifetime = TaskLifetime()
-    @State private var sortOrder = [KeyPathComparator(\UpdateItem.detail.resolvedDate, order: .reverse)]
+    @State private var sortOrder = [
+        KeyPathComparator(\UpdateItem.detail.resolvedDate, order: .reverse)
+    ]
 
     /// Push a fix screen.  Fixes start at this view (the stack's root) and
     /// push picker -> (new game) -> editor; ``finishFix()`` pops them all.
@@ -74,7 +76,8 @@ struct UpdatesView: View {
             return
         }
         log.warning("stale navigation path \(path.map(\.debugName)) -- resetting")
-        navLog.info("NAV [\(kind)] updates start \(route.tag) with stale path \(path.map(\.debugName))")
+        navLog.info(
+            "NAV [\(kind)] updates start \(route.tag) with stale path \(path.map(\.debugName))")
         path = [.view(route.tag) { self.destination(route) }]
     }
 
@@ -184,9 +187,12 @@ struct UpdatesView: View {
                     .help("Remove the selected items from the list (⌫)")
 
                 let shown = visibleItems.count
-                Text(shown == items.count ? "\(items.count) items" : "\(shown) of \(items.count) items")
-                    .foregroundStyle(.secondary)
-                    .monospacedDigit()
+                Text(
+                    shown == items.count
+                        ? "\(items.count) items" : "\(shown) of \(items.count) items"
+                )
+                .foregroundStyle(.secondary)
+                .monospacedDigit()
             }
 
             SwiftUI.Table(visibleItems, selection: $selection, sortOrder: $sortOrder) {
@@ -326,52 +332,52 @@ struct UpdatesView: View {
     /// The screen for a fix route -- pushed by ``show(_:)``.
     @ViewBuilder
     private func destination(_ route: FixRoute) -> some View {
-            switch route {
-            case .pickGame(let item, let client, let kind):
-                GamePickerView(
-                    db: db, detail: item.detail, candidates: item.gameIds.sorted(),
-                    allowsMultiple: editableType(for: kind)?.supportsMultipleGames ?? false
-                ) { games in
-                    show(.edit(EditTarget(item: item, games: games, client: client, kind: kind)))
-                } onNewGame: {
-                    show(.newGame(item, client, kind))
-                }
-            case .newGame(let item, let client, let kind):
-                NewGameView(detail: item.detail, ipdb: ipdb, db: db) { game in
-                    // not in the db yet -- saved along with the resource
-                    show(.edit(EditTarget(item: item, games: [game], client: client, kind: kind)))
-                }
-            case .editExisting(let item, let client, let resourceId):
-                existingEditor(item: item, client: client, resourceId: resourceId)
-            case .edit(let target):
-                editor(target)
-                    .toolbar {
-                        ToolbarItem(placement: .primaryAction) {
-                            Button("Change Game", systemImage: "arrow.triangle.swap") {
-                                // discards edits -- the editor is recreated for the new game
-                                changeGame(target)
-                            }
-                            .help("Choose a different game")
+        switch route {
+        case .pickGame(let item, let client, let kind):
+            GamePickerView(
+                db: db, detail: item.detail, candidates: item.gameIds.sorted(),
+                allowsMultiple: editableType(for: kind)?.supportsMultipleGames ?? false
+            ) { games in
+                show(.edit(EditTarget(item: item, games: games, client: client, kind: kind)))
+            } onNewGame: {
+                show(.newGame(item, client, kind))
+            }
+        case .newGame(let item, let client, let kind):
+            NewGameView(detail: item.detail, ipdb: ipdb, db: db) { game in
+                // not in the db yet -- saved along with the resource
+                show(.edit(EditTarget(item: item, games: [game], client: client, kind: kind)))
+            }
+        case .editExisting(let item, let client, let resourceId):
+            existingEditor(item: item, client: client, resourceId: resourceId)
+        case .edit(let target):
+            editor(target)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Button("Change Game", systemImage: "arrow.triangle.swap") {
+                            // discards edits -- the editor is recreated for the new game
+                            changeGame(target)
                         }
-                        let alternates = alternateKinds(target.kind)
-                        if !alternates.isEmpty {
-                            ToolbarItem(placement: .primaryAction) {
-                                Menu("Edit As", systemImage: "arrow.left.arrow.right") {
-                                    ForEach(alternates, id: \.self) { kind in
-                                        Button(kind.displayName) {
-                                            // recreated as the new kind (pushed --
-                                            // back returns to this editor)
-                                            show(.edit(target.with(kind: kind)))
-                                        }
+                        .help("Choose a different game")
+                    }
+                    let alternates = alternateKinds(target.kind)
+                    if !alternates.isEmpty {
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu("Edit As", systemImage: "arrow.left.arrow.right") {
+                                ForEach(alternates, id: \.self) { kind in
+                                    Button(kind.displayName) {
+                                        // recreated as the new kind (pushed --
+                                        // back returns to this editor)
+                                        show(.edit(target.with(kind: kind)))
                                     }
                                 }
-                                .help("Re-create as a different kind (miscategorized on the site)")
                             }
+                            .help("Re-create as a different kind (miscategorized on the site)")
                         }
                     }
-            }
+                }
+        }
     }
-    
+
     /// "Edit Existing" for a version update: open the editor on the existing
     /// resource (with the page's images / text) instead of updating the
     /// version automatically.  One item per existing resource if several.
@@ -429,18 +435,19 @@ struct UpdatesView: View {
     @ViewBuilder
     private func editor(_ target: EditTarget) -> some View {
         let onDone = { (disposition: ResourceEditorDisposition) in
-            let success = switch disposition {
-            case .ok, .replacedObsolete: true
-            case .failed: false
-            }
-            
+            let success =
+                switch disposition {
+                case .ok, .replacedObsolete: true
+                case .failed: false
+                }
+
             switch disposition {
             case .replacedObsolete(let url):
                 document.model.suppressedURLs[url] = .obsolete
             default:
                 break
             }
-            
+
             if success {
                 items = items.filter { $0 != target.item }
             }
@@ -460,7 +467,9 @@ struct UpdatesView: View {
         case .table:
             return [.pupPack]
         default:
-            let interchangeable: [GameResourceKind] = [.mediaPack, .pupPack, .wheelArt, .topper, .rule]
+            let interchangeable: [GameResourceKind] = [
+                .mediaPack, .pupPack, .wheelArt, .topper, .rule,
+            ]
             guard interchangeable.contains(kind) else { return [] }
             return interchangeable.filter { $0 != kind }
         }
@@ -513,7 +522,8 @@ struct UpdatesView: View {
                     do {
                         isFetching = true
                         defer { isFetching = false }
-                        let detail = try await item.detail.detailRequest.fetch(client: client, scanCache: scanCache)
+                        let detail = try await item.detail.detailRequest.fetch(
+                            client: client, scanCache: scanCache)
                         updated = detail.resolvedDate
                     } catch {
                         log.error("Unable to fetch \(item.detail.url): \(error)")
@@ -522,7 +532,7 @@ struct UpdatesView: View {
                 case .date(let date):
                     updated = date
                 }
-                
+
                 func update<T: GameResource>(_ item: T) -> T {
                     if fileIds.contains(item.id) {
                         var new = item
@@ -534,7 +544,7 @@ struct UpdatesView: View {
                         return item
                     }
                 }
-                
+
                 for gameId in item.gameIds {
                     switch kind {
                     case .table:
@@ -562,7 +572,7 @@ struct UpdatesView: View {
                         break
                     }
                 }
-                                
+
                 if fixed {
                     items = items.filter { $0 != item }
                 }
@@ -859,8 +869,9 @@ struct UpdatesView: View {
 #Preview {
     UpdatesView(
         document: VPSDBDocument(), db: .constant(Database()), ipdb: IPDB(), kind: .table,
-        path: .constant([]))
-        .environment(AppSettings(defaults: UserDefaults(suiteName: "preview")!))
+        path: .constant([])
+    )
+    .environment(AppSettings(defaults: UserDefaults(suiteName: "preview")!))
 }
 
 private func scan(
@@ -902,7 +913,7 @@ private func scan(
     }
 
     let maxAge = pages > 1 ? Duration.seconds(2 * 24 * 3600) : .seconds(12 * 3600)
-    
+
     return AsyncStream { continuation in
         let producer = Task {
             await withTaskGroup { group in
@@ -967,22 +978,24 @@ private final class TaskLifetime {
 private func missingItem(db: Database, detail: DetailResult) -> UpdateItem {
     let games = db.matchName(detail.name)
     let gameIds = games.map { $0.id }.set()
-    
-    let mergeActions = games
+
+    let mergeActions =
+        games
         .flatMap {
             $0.shouldMergeDetail(detail)
         }
-        
-    let fix: UpdateItem.Fix = if mergeActions.isEmpty {
-        .missing
-    } else if mergeActions.count > 1 {
-        .mergeMultiple
-    } else if mergeActions[0].1 == MergeURLAction.add {
-        .mergeURL
-    } else {
-        .replaceURL
-    }
-    
+
+    let fix: UpdateItem.Fix =
+        if mergeActions.isEmpty {
+            .missing
+        } else if mergeActions.count > 1 {
+            .mergeMultiple
+        } else if mergeActions[0].1 == MergeURLAction.add {
+            .mergeURL
+        } else {
+            .replaceURL
+        }
+
     return UpdateItem(detail: detail, gameIds: gameIds, fix: fix, db: db)
 }
 
@@ -994,7 +1007,7 @@ private func updateItem(
     if let match = db.existing(url: detail.url, kind: kind) {
         // existing file, check version
         guard let detailVersion = detail.version else { return nil }
-        
+
         // compare canonically (1.0 == 1.00), store / show the clean form
         let canonicalNewVersion = canonicalVersion(detailVersion)
         let newVersion = cleanVersion(detailVersion)

@@ -256,7 +256,7 @@ struct CompletingTextField: View {
 struct MergeSuggestionSection<Resource: GameResource>: View {
     let newVersion: String?
     let newDate: Date?
-    
+
     /// Existing items that may be the same release -- one section each.
     let candidates: [(Resource, MergeURLAction)]
     let onMerge: (Resource) -> Void
@@ -505,7 +505,9 @@ struct GameSummarySection: View {
             if let game {
                 HStack {
                     Link(destination: game.vpsURL) {
-                        Text("\(game.name) (\(game.manufacturer.rawValue) \((game.year ?? 0).description))")
+                        Text(
+                            "\(game.name) (\(game.manufacturer.rawValue) \((game.year ?? 0).description))"
+                        )
                     }
                     if let resource {
                         Spacer()
