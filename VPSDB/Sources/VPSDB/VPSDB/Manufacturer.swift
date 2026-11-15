@@ -63,6 +63,7 @@ public enum Manufacturer: String, Codable, Sendable, Equatable, CaseIterable {
     case jennings = "Jennings"
     case jocmatic = "Jocmatic"
     case joctronic = "Joctronic"
+    case jolotronics = "Jolotronics"
     case juegosPopulares = "Juegos Populares"
     case keeney = "Keeney"
     case komaya = "Komaya"
