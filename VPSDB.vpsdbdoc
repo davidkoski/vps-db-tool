@@ -4,7 +4,43 @@
       "checkId" : "missingMod",
       "checkVersion" : 1,
       "kind" : "table",
+      "resourceId" : "82hWxurqBC"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
       "resourceId" : "9pDvjPBe"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "OR0lT6Fx4Z"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "Qd2erca5lw"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "TApFsmzAzX"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "TLFl_QW6Gu"
+    },
+    {
+      "checkId" : "missingMod",
+      "checkVersion" : 1,
+      "kind" : "table",
+      "resourceId" : "kVk-WwfJ"
     },
     {
       "checkId" : "missingMod",
@@ -426,6 +462,26 @@
       }
     },
     "https://pinballnirvana.com/forums/resources/any.8860/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8864/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8867/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8869/" : {
+      "permanent" : {
+
+      }
+    },
+    "https://pinballnirvana.com/forums/resources/any.8871/" : {
       "permanent" : {
 
       }
@@ -1104,6 +1160,11 @@
 
         ],
         "name" : "Total Sickness ()"
+      }
+    },
+    "https://vpuniverse.com/files/file/33073-any/" : {
+      "version" : {
+        "parsed" : "1.0.8 Final (Rev 2051)(28dd6c3)"
       }
     },
     "https://vpuniverse.com/files/file/5257-grand-slam-gottlieb-1953/" : {
