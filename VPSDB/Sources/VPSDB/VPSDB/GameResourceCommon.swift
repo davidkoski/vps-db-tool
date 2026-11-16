@@ -34,6 +34,9 @@ public protocol GameResource: Metadata, Equatable {
     var kind: GameResourceKind { get }
 
     func matches(_ query: String) -> Bool
+
+    /// Build a new resource from a fully scanned detail page.
+    init(detail: DetailResult, game: Game, db: Database)
 }
 
 extension GameResource {

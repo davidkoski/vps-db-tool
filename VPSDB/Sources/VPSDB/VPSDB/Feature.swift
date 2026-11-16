@@ -92,6 +92,7 @@ private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
 private let b2sCommentPatterns: [ScanPattern<String>] = [
     .init(/\balternate\b/.ignoresCase(), "Alternate"),
     .init(/\balternative\b/.ignoresCase(), "Alternate"),
+    .init(/\balternatif\b/.ignoresCase(), "Alternate"),
     .init(/\balt\b/.ignoresCase(), "Alternate"),
     .init(/\breal DMD\b/.ignoresCase(), "Real DMD"),
     .init(/\bslim LCD DMD\b/.ignoresCase(), "Real DMD"),

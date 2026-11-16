@@ -435,6 +435,14 @@ public struct Sound: GameResource, Sendable {
 
     @CustomCoding(GameResourceCommonTransformer.self)
     public var gameResource: GameResourceCommon
+
+    public init(detail: DetailResult, game: Game, db: Database) {
+        self.init(
+            id: newId(),
+            gameResource: .init(
+                detail: detail, game: game, db: db,
+                comment: nil))
+    }
 }
 
 @Codable
@@ -640,6 +648,10 @@ public struct Game: Metadata, HasScreenshot, Identifiable, Sendable, CustomStrin
 
     public var vpsURL: URL {
         URL(string: "https://virtualpinballspreadsheet.github.io/?game=\(id)")!
+    }
+
+    public static var any: Game {
+        .init(name: "Placeholder")
     }
 
     public func matches(_ query: String) -> Bool {
@@ -909,7 +921,9 @@ extension Game: Comparable {
     }
 }
 
-public enum GameResourceKind: String, Codable, Sendable, Comparable, CaseIterable {
+public enum GameResourceKind: String, Codable, Sendable, Comparable, CaseIterable,
+    CodingKeyRepresentable
+{
     case game
     case table
     case b2s

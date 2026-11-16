@@ -19,11 +19,12 @@ struct ReportCommand: AsyncParsableCommand {
     @Option var scanCache: URL?
 
     @Option var output = URL(fileURLWithPath: "./report/index.html")
+    @Option var jsonOutput = URL(fileURLWithPath: "./report/index.json")
 
     mutating func run() async throws {
         let scans: [(GameResourceKind, Bool)] = [
             (.table, true),
-            (.b2s, false),
+            (.b2s, true),
             (.rom, false),
             (.pupPack, false),
             (.altColor, false),
@@ -36,6 +37,7 @@ struct ReportCommand: AsyncParsableCommand {
         ]
 
         var items = [Item]()
+        var actions = [GameResourceKind: [Action]]()
 
         // make sure these load cleanly
         _ = try await db.database()
@@ -50,8 +52,14 @@ struct ReportCommand: AsyncParsableCommand {
         for s in scans {
             log.info("BEGIN SCAN \(s.0) follow=\(s.1)")
             do {
-                let scanResults = try await scan(kind: s.0, follow: s.1, scanCache: scanCache)
+                let (scanResults, scanActions) =
+                    try await scan(kind: s.0, follow: s.1, scanCache: scanCache)
+
                 items.append(contentsOf: scanResults)
+                for (kind, list) in scanActions {
+                    actions[kind, default: []].append(contentsOf: list)
+                }
+
                 log.info("END SCAN \(s.0) ok")
             } catch {
                 log.error(
@@ -64,6 +72,7 @@ struct ReportCommand: AsyncParsableCommand {
 
         if !items.isEmpty {
             try Report().emit(items: items).write(to: output, atomically: true, encoding: .utf8)
+            try JSONEncoder().encode(actions).write(to: jsonOutput, options: .atomic)
         }
 
         await scanCache?.sweep()
@@ -72,7 +81,7 @@ struct ReportCommand: AsyncParsableCommand {
 
     private mutating func scan(
         kind: GameResourceKind, follow: Bool = false, scanCache: ScanCache?
-    ) async throws -> [Item] {
+    ) async throws -> (items: [Item], actions: [GameResourceKind: [Action]]) {
         let suppressedURLs = try db.suppressedURLs()
         let db = try await db.database()
 
@@ -122,6 +131,7 @@ struct ReportCommand: AsyncParsableCommand {
         }
 
         var result = [Item]()
+        var actions = [GameResourceKind: [Action]]()
 
         for item in details {
             if let reason = suppressedURLs[item.url] {
@@ -145,6 +155,17 @@ struct ReportCommand: AsyncParsableCommand {
                                 "version mismatch: \(canonicalVersion(file.version)) vs \(canonicalVersion(item.version))",
                             date: item.resolvedDate
                         ))
+
+                    actions[kind, default: []].append(
+                        .init(
+                            action: .update,
+                            message:
+                                "Version \(file.version ?? "<none>") to \(item.version ?? "<none>")",
+                            detail: item,
+                            game: game, db: db,
+                            gameResource: file as? any GameResource
+                        )
+                    )
                 } else {
                     // no version mismatch, nothing to report
                 }
@@ -157,12 +178,21 @@ struct ReportCommand: AsyncParsableCommand {
                         issue: "missing",
                         date: item.resolvedDate
                     ))
+
+                let games = db.matchName(item.name)
+
+                actions[kind, default: []].append(
+                    .init(
+                        action: .new, message: "Add", detail: item,
+                        game: games.count == 1 ? games.first : nil, db: db
+                    )
+                )
             }
         }
 
         log.info("SCAN END \(kind) result=\(result.count)")
 
-        return result
+        return (result, actions)
     }
 }
 
@@ -176,6 +206,79 @@ private struct Item: Comparable {
 
     static func < (lhs: Item, rhs: Item) -> Bool {
         lhs.date > rhs.date
+    }
+}
+
+struct AnyEncodableGameResource: Encodable, Sendable {
+    private let _encode: @Sendable (Encoder) throws -> Void
+
+    init(_ value: any (Encodable & Sendable)) {
+        _encode = { encoder in
+            try value.encode(to: encoder)
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        try _encode(encoder)
+    }
+}
+private struct Action: Encodable, Sendable {
+    enum Action: String, Codable {
+        case update
+        case new
+    }
+
+    let action: Action
+    let message: String
+    let detail: DetailResult
+
+    let gameId: String?
+    let kind: GameResourceKind
+    let id: String?
+    let file: AnyEncodableGameResource?
+
+    init(
+        action: Action, message: String, detail: DetailResult,
+        game: Game?, db: Database,
+        gameResource: any GameResource? = nil
+    ) {
+        self.action = action
+        self.message = message
+        self.detail = detail
+        self.gameId = game?.id
+        self.kind = detail.kind
+        self.id = gameResource?.id
+
+        switch kind {
+        case .game:
+            self.file = nil
+        case .table:
+            self.file = .init(Table(detail: detail, game: game ?? .any, db: db))
+        case .b2s:
+            self.file = .init(B2S(detail: detail, game: game ?? .any, db: db))
+        case .tutorial:
+            self.file = .init(Tutorial(detail: detail, game: game ?? .any, db: db))
+        case .rom:
+            self.file = .init(ROM(detail: detail, game: game ?? .any, db: db))
+        case .pupPack:
+            self.file = .init(PupPack(detail: detail, game: game ?? .any, db: db))
+        case .altColor:
+            self.file = .init(AltColors(detail: detail, game: game ?? .any, db: db))
+        case .altSound:
+            self.file = .init(AltSound(detail: detail, game: game ?? .any, db: db))
+        case .pov:
+            self.file = .init(POV(detail: detail, game: game ?? .any, db: db))
+        case .wheelArt:
+            self.file = .init(WheelArt(detail: detail, game: game ?? .any, db: db))
+        case .topper:
+            self.file = .init(Topper(detail: detail, game: game ?? .any, db: db))
+        case .mediaPack:
+            self.file = .init(MediaPack(detail: detail, game: game ?? .any, db: db))
+        case .rule:
+            self.file = .init(Rules(detail: detail, game: game ?? .any, db: db))
+        case .sound:
+            self.file = nil
+        }
     }
 }
 

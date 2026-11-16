@@ -92,6 +92,11 @@ public final class HTTPClient: Sendable {
 
         var request = HTTPClientRequest(url: url.description)
         request.headers = ["User-Agent": userAgent]
+        if url.host() == "www.youtube.com" {
+            request.headers = [
+                "Accept": " text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            ]
+        }
 
         var count = 0
         let retryMax = 3
