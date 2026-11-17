@@ -240,7 +240,7 @@ private struct Action: Encodable, Sendable {
     init(
         action: Action, message: String, detail: DetailResult,
         game: Game?, db: Database,
-        gameResource: any GameResource? = nil
+        gameResource: (any GameResource)? = nil
     ) {
         self.action = action
         self.message = message
