@@ -17,20 +17,29 @@ enum ResourceCreation {
         return (Resource(detail: fullDetail, game: game, db: db), fullDetail)
     }
 
-    /// Add (or replace) the resource on its game and write the game.
+    /// Add (or replace) the resource on its game and write the game --
+    /// removing `replacing` (e.g. the resource this was converted from) in
+    /// the same write.
     static func save<Resource: EditableGameResource>(
-        _ resource: Resource, game: Game, db: inout Database
+        _ resource: Resource, game: Game, replacing: ResourceReplacement? = nil,
+        db: inout Database
     ) throws {
         log.info("save \(Resource.kind) \(resource.id) for \(game.id)")
         try db.update(game) { game in
+            if let replacing {
+                log.info("replacing \(replacing.kind) \(replacing.id)")
+                game.removeResource(kind: replacing.kind, id: replacing.id)
+            }
             game.upsert(resource, at: Resource.gameKeyPath)
         }
     }
 
     /// Save the resource for each game: the first game gets the resource as is,
     /// the others a copy with a new id -- each with its own ``GameRef``.
+    /// `replacing` is removed from the first game.
     static func save<Resource: EditableGameResource>(
-        _ resource: Resource, games: [Game], db: inout Database
+        _ resource: Resource, games: [Game], replacing: ResourceReplacement? = nil,
+        db: inout Database
     ) throws {
         for (index, game) in games.enumerated() {
             var copy = resource
@@ -39,7 +48,7 @@ enum ResourceCreation {
                 copy.id = newId()
             }
             copy.gameResource.game = GameRef(game: game)
-            try save(copy, game: game, db: &db)
+            try save(copy, game: game, replacing: index == 0 ? replacing : nil, db: &db)
         }
     }
 

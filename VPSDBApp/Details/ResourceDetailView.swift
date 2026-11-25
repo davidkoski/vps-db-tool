@@ -56,6 +56,17 @@ struct ResourceDetailView: View {
     /// Editing in place (Edit on the detail view).
     @State private var isEditing = false
 
+    /// Editing the resource converted to another kind (Change Kind) -- kept
+    /// here rather than recomputed so the editor survives the save removing
+    /// the original.
+    @State private var conversion: Conversion?
+
+    private struct Conversion {
+        let kind: GameResourceKind
+        let resource: any GameResource
+        let game: Game
+    }
+
     var body: some View {
         Group {
             if route.editing || isEditing {
@@ -97,6 +108,42 @@ struct ResourceDetailView: View {
 
     private var editor: some View {
         editorContent
+            .toolbar {
+                if route.kind != .game, editTarget != nil || conversion != nil {
+                    ToolbarItem(placement: .primaryAction) {
+                        Menu("Change Kind", systemImage: "arrow.left.arrow.right") {
+                            ForEach(convertibleKinds, id: \.self) { kind in
+                                Button(kind.displayName) { convert(to: kind) }
+                            }
+                        }
+                        .help(
+                            "Move to a different kind, keeping the id -- discards unsaved edits")
+                    }
+                }
+            }
+    }
+
+    /// The kind being edited -- the converted kind, if any.
+    private var editingKind: GameResourceKind {
+        conversion?.kind ?? route.kind
+    }
+
+    /// Kinds the resource can be converted to (any other kind with an editor).
+    private var convertibleKinds: [GameResourceKind] {
+        GameResourceKind.allCases.filter { $0 != editingKind && editableType(for: $0) != nil }
+    }
+
+    /// Switch the editor to the resource rebuilt as `kind` -- always from
+    /// the original in the db (back to the original kind: no conversion).
+    private func convert(to kind: GameResourceKind) {
+        guard kind != route.kind else {
+            conversion = nil
+            return
+        }
+        guard let (resource, game) = editTarget,
+            let converted = convertResource(resource, to: kind, game: game, db: db)
+        else { return }
+        conversion = Conversion(kind: kind, resource: converted, game: game)
     }
 
     @ViewBuilder
@@ -105,6 +152,21 @@ struct ResourceDetailView: View {
         // onChange that sets `client`) never run and the view stays blank
         if route.kind == .game {
             GameEditorView(db: $db, gameId: route.id, path: $path)
+        } else if let conversion, let client {
+            KindEditorView(
+                db: $db, kind: conversion.kind, games: [conversion.game], client: client,
+                resource: conversion.resource
+            ) { disposition in
+                switch disposition {
+                case .ok, .replacedObsolete:
+                    exitEditor()
+                case .failed:
+                    break
+                }
+            }
+            .environment(
+                \.replacingResource, ResourceReplacement(kind: route.kind, id: route.id))
+            .id(conversion.kind)
         } else if let (resource, game) = editTarget, let client {
             KindEditorView(
                 db: $db, kind: route.kind, games: [game], client: client,

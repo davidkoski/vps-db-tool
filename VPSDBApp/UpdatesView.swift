@@ -121,8 +121,16 @@ struct UpdatesView: View {
         VStack(alignment: .leading) {
             HStack {
                 if canFetch {
-                    Button("Fetch", systemImage: "arrow.down.circle") { fetch() }
-                        .disabled(isFetching || client == nil)
+                    Button("Fetch", systemImage: "arrow.down.circle") {
+                        // option-click: refetch the index pages, bypassing the caches
+                        fetch(bypassCache: NSEvent.modifierFlags.contains(.option))
+                    }
+                    .disabled(isFetching || client == nil)
+                    .help("Fetch the list pages (⌥-click to bypass the cache)")
+                    .contextMenu {
+                        Button("Fetch") { fetch() }
+                        Button("Fetch Without Cache") { fetch(bypassCache: true) }
+                    }
                     if availableSites.count > 1 {
                         Picker("Sites", selection: $fetchSite) {
                             Text("All Sites").tag("")
@@ -843,7 +851,9 @@ struct UpdatesView: View {
         return false
     }
 
-    private func fetch() {
+    /// Scan the sites' list pages -- `bypassCache` refetches the list pages
+    /// rather than using the (http / scan) caches.
+    private func fetch(bypassCache: Bool = false) {
         guard let client, !isFetching else { return }
         isFetching = true
         items = []
@@ -856,7 +866,7 @@ struct UpdatesView: View {
 
             for await item in scan(
                 db: db, client: client, kind: kind, sites: fetchSites, pages: max(pages, 1),
-                suppress: document.model.suppressedURLs
+                suppress: document.model.suppressedURLs, bypassCache: bypassCache
             ) {
                 // keep the current sort order as items arrive
                 let index = items.firstIndex { sortsBefore(item, $0) }
@@ -880,7 +890,8 @@ private func scan(
     kind: GameResourceKind,
     sites: [Site],
     pages: Int,
-    suppress: [URL: SuppressionReason]
+    suppress: [URL: SuppressionReason],
+    bypassCache: Bool = false
 ) -> some AsyncSequence<UpdateItem, Never> {
 
     let hasVersion =
@@ -926,7 +937,8 @@ private func scan(
                             scanCache: scanCache,
                             requests: requests,
                             suppress: suppress,
-                            follow: followItem(_:))
+                            follow: followItem(_:),
+                            bypassCache: bypassCache)
 
                         for await item in stream {
                             continuation.yield(item)

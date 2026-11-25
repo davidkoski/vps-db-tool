@@ -182,6 +182,9 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
 
     @State private var resource: Resource?
 
+    /// Converting another resource to this kind -- removed on save.
+    @Environment(\.replacingResource) private var replacing
+
     /// Editing an existing resource (passed in) rather than creating one.
     private let isEditing: Bool
 
@@ -301,6 +304,16 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
                     .textSelection(.enabled)
             }
 
+            if let replacing, replacing.kind != Resource.kind {
+                Section {
+                    Label(
+                        "Converting from \(replacing.kind.displayName) -- saving replaces it",
+                        systemImage: "arrow.left.arrow.right"
+                    )
+                    .foregroundStyle(.orange)
+                }
+            }
+
             Section(Resource.kind.displayName) {
                 if Resource.hasVersion {
                     TextField("Version", text: common.version.orEmpty)
@@ -416,7 +429,8 @@ struct ResourceEditor<Resource: EditableGameResource, Fields: View>: View {
                 }
                 try await willSave(&resource)
                 let games = currentGames
-                try ResourceCreation.save(resource, games: games, db: &db)
+                try ResourceCreation.save(
+                    resource, games: games, replacing: replacing, db: &db)
                 try await didSave(resource, games)
                 isFinished = true
                 log.info("save \(resource.id) done, calling onDone")
