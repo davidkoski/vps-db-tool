@@ -21,6 +21,9 @@ private let tableFeaturePatterns: [ScanPattern<TableFeature>] = [
     .init(/fizx/.ignoresCase(), .fizX),
     .init(/\bBAM\b/, .bam),
     .init(/\bVPU Remix\b/, .patch),
+    .init(/\bchat ?gpt\b/.ignoresCase(), .genAI),
+    .init(/\bgenai\b/.ignoresCase(), .genAI),
+    .init(/\bai[ -]generated\b/.ignoresCase(), .genAI),
 ]
 
 private let tableCommentPatterns: [ScanPattern<String>] = [
@@ -63,6 +66,7 @@ public enum TableFeature: String, Codable, Sendable, Equatable, CaseIterable {
     case nFozzy = "nFozzy"
     case noROM = "no ROM"
     case vlm = "VLM"
+    case genAI = "GenAI"
 
     public static func scan(_ text: String?) -> Set<TableFeature> {
         guard let text else { return [] }
@@ -87,6 +91,9 @@ private let b2sFeaturePatterns: [ScanPattern<B2SFeature>] = [
     .init(/\bfull dmd\b/.ignoresCase(), .fullDMD),
     .init(/\bfulldmd\b/.ignoresCase(), .fullDMD),
     .init(/\bb2s ?pro\b/.ignoresCase(), .b2sPro),
+    .init(/\bchat ?gpt\b/.ignoresCase(), .genAI),
+    .init(/\bgenai\b/.ignoresCase(), .genAI),
+    .init(/\bai[ -]generated\b/.ignoresCase(), .genAI),
 ]
 
 private let b2sCommentPatterns: [ScanPattern<String>] = [
@@ -104,6 +111,7 @@ public enum B2SFeature: String, Codable, Sendable, CaseIterable {
     case fullDMD = "FullDMD"
     case inclTable = "incl. Table"
     case b2sPro = "B2S PRO"
+    case genAI = "GenAI"
 
     public static func scan(_ text: String?) -> Set<B2SFeature> {
         guard let text else { return [] }
