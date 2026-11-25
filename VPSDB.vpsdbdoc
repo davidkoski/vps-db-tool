@@ -486,6 +486,11 @@
 
       }
     },
+    "https://pinballnirvana.com/forums/resources/any.8875/" : {
+      "permanent" : {
+
+      }
+    },
     "https://pinballnirvana.com/forums/resources/humpty-dumpty-gottlieb-1947.6213/" : {
       "obsolete" : {
 
@@ -1165,6 +1170,22 @@
     "https://vpuniverse.com/files/file/33073-any/" : {
       "version" : {
         "parsed" : "1.0.8 Final (Rev 2051)(28dd6c3)"
+      }
+    },
+    "https://vpuniverse.com/files/file/33154-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Amber and Ginger Lynn - Pinball Rules"
+      }
+    },
+    "https://vpuniverse.com/files/file/33157-any/" : {
+      "missingGame" : {
+        "falsePositives" : [
+
+        ],
+        "name" : "Andromeda Tokyo 2074 - Pinball Rules"
       }
     },
     "https://vpuniverse.com/files/file/5257-grand-slam-gottlieb-1953/" : {
