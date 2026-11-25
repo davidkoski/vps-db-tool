@@ -41,7 +41,8 @@ public func gather(
                 var scanResult: ListResult
 
                 // we never cache (at the scanCache) the first page
-                if !bypassCache, request.page > 1, let cachedList = await scanCache?.get(request: request),
+                if !bypassCache, request.page > 1,
+                    let cachedList = await scanCache?.get(request: request),
                     !cachedList.isExpired(maxAge: maxAge),
                     let result = await cachedList.reconstitute(scanCache: scanCache)
                 {

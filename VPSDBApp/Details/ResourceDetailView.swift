@@ -165,7 +165,8 @@ struct ResourceDetailView: View {
                 }
             }
             .environment(
-                \.replacingResource, ResourceReplacement(kind: route.kind, id: route.id))
+                \.replacingResource, ResourceReplacement(kind: route.kind, id: route.id)
+            )
             .id(conversion.kind)
         } else if let (resource, game) = editTarget, let client {
             KindEditorView(
