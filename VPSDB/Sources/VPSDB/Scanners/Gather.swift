@@ -12,6 +12,9 @@ private let log = Logger(label: "Gather")
 ///   - requests: urls/pages to fetch
 ///   - suppress: suppress policy
 ///   - follow: follow detail url policy
+///   - bypassCache: refetch the list (index) pages, ignoring the http disk
+///     cache and the scanCache (results are still written to the caches).
+///     Detail pages still use the caches.
 /// - Returns: stream of list level detail results
 public func gather(
     client: HTTPClient,
@@ -19,7 +22,8 @@ public func gather(
     scanCache: ScanCache?,
     requests: [ListScanRequest],
     suppress: [URL: SuppressionReason],
-    follow: @escaping @Sendable (DetailResult) -> Bool
+    follow: @escaping @Sendable (DetailResult) -> Bool,
+    bypassCache: Bool = false
 ) -> AsyncStream<DetailResult> {
 
     return AsyncStream { continuation in
@@ -37,7 +41,7 @@ public func gather(
                 var scanResult: ListResult
 
                 // we never cache (at the scanCache) the first page
-                if request.page > 1, let cachedList = await scanCache?.get(request: request),
+                if !bypassCache, request.page > 1, let cachedList = await scanCache?.get(request: request),
                     !cachedList.isExpired(maxAge: maxAge),
                     let result = await cachedList.reconstitute(scanCache: scanCache)
                 {
@@ -45,7 +49,8 @@ public func gather(
 
                 } else {
                     do {
-                        let content = try await client.getString(request.url, maxAge: maxAge)
+                        let content = try await client.getString(
+                            request.url, bypassCache: bypassCache, maxAge: maxAge)
                         scanResult = try await request.scan(content: content)
 
                         // compare it to the cache -- if it is present but does not

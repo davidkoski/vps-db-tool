@@ -95,15 +95,10 @@ struct ReportCommand: AsyncParsableCommand {
                 }
             }
 
-            if let match = db.existing(url: item.normalizedURL, kind: kind),
-                let file = match.first, let game = db[file]
-            {
-                // if we matched an existing file and want to folow links
-                // to check version
-                return true
-            }
-
-            return false
+            // Follow the detail page for everything: existing files so we
+            // can check the version, and missing ones so the report actions
+            // have the full metadata (version, images, etc).
+            return true
         }
 
         let client = HTTPClient(cache: cache, throttle: .seconds(2))
